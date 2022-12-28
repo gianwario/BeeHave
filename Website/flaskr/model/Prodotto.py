@@ -11,3 +11,4 @@ class Prodotto(db.Model):
     prezzo = db.Column(db.Float, nullable=False)
     quantita = db.Column(db.Integer, nullable=False)
     apicoltore = db.Column(db.String(45), db.ForeignKey('apicoltore.email'), primary_key=True)
+    acquisto = db.relationship('Acquisto', backref='id_prodotto', lazy=True)
