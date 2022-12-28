@@ -2,7 +2,7 @@ from Website.flaskr import db
 
 
 class Alveare(db.Model):
-   id = db.Column(db.Integer, primary_key=True)
+   id = db.Column(db.Integer, primary_key=True, autoincrement=True)
    nome = db.Column(db.String(45),nullable=False)
    tipo_fiore = db.Column(db.String(45),nullable=False)
    produzione = db.Column(db.Integer, nullable=False)
