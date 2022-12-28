@@ -1,4 +1,4 @@
-from Website.flaskr import db
+from .. import db
 from sqlalchemy.sql import func
 
 class TicketAdozione(db.Model):

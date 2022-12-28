@@ -4,6 +4,7 @@ from sqlalchemy_utils import create_database, database_exists
 
 db=SQLAlchemy()
 
+
 """Inizializzazione"""
 def create_app():
     app = Flask(__name__)
@@ -15,7 +16,7 @@ def create_app():
 
     db.init_app(app)
 
-    from .model import Cliente, Acquisto, Alveare, Apicoltore, TicketAdozione, TicketAssistenza, Prodotto
+    from .model import Cliente, Apicoltore, Alveare, Prodotto, Acquisto, TicketAdozione, TicketAssistenza
 
     if not database_exists(app.config["SQLALCHEMY_DATABASE_URI"]):
         create_database(app.config["SQLALCHEMY_DATABASE_URI"])
@@ -27,3 +28,4 @@ def create_app():
             db.create_all()
 
     return app
+
