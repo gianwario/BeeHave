@@ -12,6 +12,6 @@ class Apicoltore(db.Model):
    telefono = db.Column(db.String(10),nullable=False)
    citta = db.Column(db.String(200), nullable=False)
    assistenza = db.Column(db.Boolean, nullable=False)
-   alveare = db.relationship('Alveare', backref='apicoltore',lazy=True)
+   alveare = db.relationship('Alveare', backref='apicoltore', lazy=True)
    prodotto = db.relationship('Prodotto', backref='apicoltore', lazy=True)
    ticket_assistenza = db.relationship('TicketAssistenza', backref='apicoltore', lazy=True)

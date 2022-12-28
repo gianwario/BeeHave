@@ -2,7 +2,6 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import create_engine
 
-DB_NAME= "beehave.db"
 db = SQLAlchemy()
 """Inizializzazione"""
 def create_app():
@@ -12,7 +11,7 @@ def create_app():
     app.config['SECRET_KEY'] = 'BEEHAVE'
     app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:root@localhost/beehavedb'
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-    create_database(app)
+    create_database()
     db.init_app(app)
 
     from . import model
@@ -22,8 +21,8 @@ def create_app():
 
     return app
 
-def create_database(app):
-    mysql_engine = create_engine('mysql://root:root@localhost')
+def create_database():
+    mysql_engine = create_engine(r'mysql://root:root@localhost')
     existing_databases = mysql_engine.execute("SHOW DATABASES;")
     existing_databases = [d[0] for d in existing_databases]
 
