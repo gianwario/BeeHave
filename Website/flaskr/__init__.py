@@ -22,7 +22,7 @@ def create_app():
     return app
 
 def create_database():
-    mysql_engine = create_engine(r'mysql://root:root@localhost')
+    mysql_engine = create_engine('mysql://root:root@localhost')
     existing_databases = mysql_engine.execute("SHOW DATABASES;")
     existing_databases = [d[0] for d in existing_databases]
 
