@@ -1,11 +1,12 @@
 from flask import Blueprint, request, redirect, url_for
 from werkzeug.security import check_password_hash
 from flask_login import login_user, logout_user
-from GestioneUtenteService import getApicoltoreByEmail, getClienteByEmail
-from ..Routes import views
+from Website.flaskr.gestione_utente.GestioneUtenteService import getApicoltoreByEmail, getClienteByEmail
+
+gu = Blueprint('gu', __name__)
 
 
-@views.route('/login', methods=['GET', 'POST'])
+@gu.route('/login', methods=['GET', 'POST'])
 def login():
     print('ciao')
     if request.method == 'POST':
@@ -21,7 +22,7 @@ def login():
     return redirect(url_for('home.html'))
 
 
-@views.route('/logout', methods=['GET', 'POST'])
+@gu.route('/logout', methods=['GET', 'POST'])
 def logout():
     logout_user()
     return redirect(url_for('home.html'))

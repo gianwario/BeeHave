@@ -18,9 +18,10 @@ def create_app():
     db.init_app(app)
 
     from .Routes import views
+    from .gestione_utente.GestioneUtenteController import gu
 
     app.register_blueprint(views, url_prefix='/')
-
+    app.register_blueprint(gu, url_prefix='/')
     from .model import Cliente, Apicoltore, Alveare, Prodotto, Acquisto, TicketAdozione, TicketAssistenza
 
     if not database_exists(app.config["SQLALCHEMY_DATABASE_URI"]):

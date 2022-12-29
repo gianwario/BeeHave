@@ -1,7 +1,7 @@
 from flask import render_template, Blueprint
 from flask import Blueprint
 
-views = Blueprint('views', 'views')
+views = Blueprint('views', __name__)
 
 
 @views.route('/')
