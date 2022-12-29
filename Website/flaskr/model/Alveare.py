@@ -14,5 +14,5 @@ class Alveare(db.Model):
    popolazione = db.Column(db.String(30),nullable=False)
    polline = db.Column(db.String(30),nullable=False)
    stato_cellette = db.Column(db.String(30),nullable=False)
-   apicoltore = db.Column(db.String(45), db.ForeignKey('apicoltore.email'))
+   apicoltore = db.Column(db.String(45), db.ForeignKey('apicoltore.email'), nullable=False)
    ticket_adozione = db.relationship('TicketAdozione', backref='id_alveare', lazy=True)

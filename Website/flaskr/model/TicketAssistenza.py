@@ -9,5 +9,5 @@ class TicketAssistenza(db.Model):
     nome = db.Column(db.String(45), nullable=False)
     descrizione = db.Column(db.String(200), nullable=False)
     data_inizio = db.Column(db.DateTime(timezone=True),default=func.now(), nullable=False)
-    data_archiviazione = db.Column(db.String(45))
+    data_archiviazione = db.Column(db.DateTime(timezone=True))
     stato = db.Column(db.String(45), nullable=False)
