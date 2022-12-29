@@ -1,6 +1,6 @@
-from Website.flaskr import db
-from flask_login import UserMixin
-class Cliente(db.Model, UserMixin):
+from .. import db
+
+class Cliente(db.Model):
    email = db.Column(db.String(45), primary_key=True)
    password = db.Column(db.String(300),nullable=False)
    nome = db.Column(db.String(45),nullable=False)

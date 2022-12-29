@@ -1,8 +1,8 @@
-from Website.flaskr import db
+from .. import db
 
 
 class Prodotto(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     nome = db.Column(db.String(45),nullable=False)
     descrizione = db.Column(db.String(200),nullable=False)
     localita = db.Column(db.String(45), nullable=False)

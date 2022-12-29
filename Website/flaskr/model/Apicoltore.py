@@ -1,4 +1,4 @@
-from Website.flaskr import db
+from .. import db
 
 
 class Apicoltore(db.Model):
