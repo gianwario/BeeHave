@@ -4,8 +4,8 @@ from sqlalchemy.sql import func
 
 class TicketAssistenza(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    email_cliente = db.Column(db.String(45), db.ForeignKey('cliente.email'), primary_key=True)
-    email_apicoltore = db.Column(db.String(45), db.ForeignKey('apicoltore.email'), primary_key=True)
+    id_cliente = db.Column(db.Integer, db.ForeignKey('cliente.id'), primary_key=True)
+    id_apicoltore = db.Column(db.Integer, db.ForeignKey('apicoltore.id'), primary_key=True)
     nome = db.Column(db.String(45), nullable=False)
     descrizione = db.Column(db.String(200), nullable=False)
     data_inizio = db.Column(db.DateTime(timezone=True),default=func.now(), nullable=False)

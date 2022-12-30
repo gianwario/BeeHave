@@ -10,6 +10,11 @@ def home():
     return render_template('home.html')
 
 
-@views.route('/loginpage')
-def login():
-    return render_template('login.html')
+@views.route('/login_apicoltore')
+def login_apicoltore():
+    return render_template('login_apicoltore.html')
+
+
+@views.route('/login_cliente')
+def login_cliente():
+    return render_template('login_cliente.html')

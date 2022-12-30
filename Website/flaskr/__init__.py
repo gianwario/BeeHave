@@ -1,4 +1,5 @@
 from flask import Flask
+from flask_login import LoginManager
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy_utils import create_database, database_exists
 
@@ -16,6 +17,9 @@ def create_app():
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
     db.init_app(app)
+
+    login_manager = LoginManager()
+    login_manager.init_app(app)
 
     from .Routes import views
     from .gestione_utente.GestioneUtenteController import gu
