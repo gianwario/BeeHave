@@ -1,5 +1,5 @@
 from .. import db
-
+from .Acquisto import Acquisto
 
 class Prodotto(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
@@ -10,5 +10,5 @@ class Prodotto(db.Model):
     tipologia = db.Column(db.String(45), nullable=False)
     prezzo = db.Column(db.Float, nullable=False)
     quantita = db.Column(db.Integer, nullable=False)
-    apicoltore = db.Column(db.String(45), db.ForeignKey('apicoltore.email'), nullable=False)
-    acquisto = db.relationship('Acquisto', backref='id_prodotto', lazy=True)
+    email_apicoltore = db.Column(db.String(45), db.ForeignKey('apicoltore.email'), nullable=False)
+    acquisto = db.relationship('Acquisto', backref='prodotto', lazy=True)

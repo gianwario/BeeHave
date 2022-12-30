@@ -1,5 +1,7 @@
 from .. import db
-
+from .Acquisto import Acquisto
+from .TicketAdozione import TicketAdozione
+from .TicketAssistenza import TicketAssistenza
 class Cliente(db.Model):
    email = db.Column(db.String(45), primary_key=True)
    password = db.Column(db.String(300),nullable=False)

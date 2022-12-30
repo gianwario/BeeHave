@@ -1,4 +1,7 @@
 from .. import db
+from .Alveare import Alveare
+from .TicketAssistenza import TicketAssistenza
+from .Prodotto import Prodotto
 
 
 class Apicoltore(db.Model):
