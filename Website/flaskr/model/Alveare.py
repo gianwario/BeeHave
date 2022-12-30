@@ -4,7 +4,7 @@ from .TicketAdozione import TicketAdozione
 class Alveare(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     nome = db.Column(db.String(45), nullable=False)
-    img_path = db.column(db.String(200), nullable=False)
+    img_path = db.Column(db.String(200), nullable=False)
     tipo_fiore = db.Column(db.String(45), nullable=False)
     produzione = db.Column(db.Integer, nullable=False)
     numero_api = db.Column(db.Integer, nullable=False)
