@@ -22,7 +22,7 @@
 
   {% for products in prods %}
     <tr>
-      <th scope="row"><img src="../static/images/honey_pot1.jpg" class="rounded mx-auto d-block" width="150" height="200"></th>
+      <th scope="row"><img src="../static/images/{{products.img_path[-14:]}}" class="rounded mx-auto d-block" width="150" height="200"></th>
       <td><h5>{{products.nome}}</h5>{{products.descrizione}}</td>
       <td>{{products.prezzo}}</td>
       <td><a href="#">Visualizza</a></td>
