@@ -1,5 +1,8 @@
 from flask import render_template, Blueprint
 
+from Website.flaskr.gestione_vendita.GestioneVenditaService import getTuttiProdotti
+from Website.flaskr.model.Prodotto import Prodotto
+
 views = Blueprint('views', __name__)
 
 
@@ -18,7 +21,8 @@ def loginpage():
 def sigup_ap():
     return render_template('registrazione_apicoltore.html')
 
+
 @views.route('/catalogo_prod')
 def mostra_prodotti():
-    return render_template('catalogo_prodotti.html')
-
+    prods = Prodotto.query.all()
+    return render_template('catalogo_prodotti.html', prods=prods)
