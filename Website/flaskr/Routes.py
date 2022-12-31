@@ -22,7 +22,7 @@ def sigup_ap():
     return render_template('registrazione_apicoltore.html')
 
 
-@views.route('/catalogo_prod')
+@views.route('/catalogo_prod', methods=['GET'])
 def mostra_prodotti():
-    prods = Prodotto.query.all()
+    prods = getTuttiProdotti()
     return render_template('catalogo_prodotti.html', prods=prods)

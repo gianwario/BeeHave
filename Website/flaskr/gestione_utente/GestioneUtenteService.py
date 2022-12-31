@@ -6,6 +6,8 @@ from .. import db
 def getApicoltoreByEmail(email):
     return Apicoltore.query.filter_by(email=email).first()
 
+def getApicoltoreById(id):
+    return Apicoltore.query.filter_by(id=id).first()
 
 def getClienteByEmail(email):
     return Cliente.query.filter_by(email=email).first()
