@@ -1,16 +1,18 @@
 <html>
     <head>
-        <link  rel="stylesheet" href="static/css/login.css">
-    {% extends "base.html"%}
+        <link  rel="stylesheet" href="{{url_for('static', filename='css/login.css')}}">
+        {% extends "base.html"%}
+        {% block title %}Login{% endblock %}
     </head>
     <body>
-    {% block title %}Login Apicoltore{% endblock %}
+
     {% block content %}
         <form action="/login" method="post">
             <label for="email">Email</label>
             <input name="email" type="email" required=true placeholder="Inserisci l'email"/>
             <label for="password">Password</label>
             <input name="password" type="password" required=true placeholder="Inserisci la password"/>
+
             <input type="submit" value="Accedi"/> <input type="reset" value="Cancella">
         </form>
     {% endblock %}
