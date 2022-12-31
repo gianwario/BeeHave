@@ -17,3 +17,8 @@ def loginpage():
 @views.route('/registrazione_apicoltore')
 def sigup_ap():
     return render_template('registrazione_apicoltore.html')
+
+@views.route('/catalogo_prod')
+def mostra_prodotti():
+    return render_template('catalogo_prodotti.html')
+
