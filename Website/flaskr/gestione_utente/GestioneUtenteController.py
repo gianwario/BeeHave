@@ -59,7 +59,7 @@ def registrazione_cliente():
         cap = request.form.get('cap')
         indirizzo = request.form.get('indirizzo')
         numtelefono = request.form.get('numtelefono')
-
+        """
         if not re.fullmatch(email_valida, email):
             flash("Il campo e-mail non è nel formato corretto.", category="errore")
         elif psw < 8:
@@ -71,15 +71,15 @@ def registrazione_cliente():
 
         elif not any(char in spec for char in psw) and any(char in num for char in psw):
             flash("Inserire nel campo password almeno un carattere speciale ed un numero.", category="errore")
-
-        else:
-            nuovo_cliente = Cliente(email=email, nome=nome, cognome=cognome,
-                                    password=generate_password_hash(psw, method='sha256'), indirizzo=indirizzo,
+        
+        else: """
+        nuovo_cliente = Cliente(email=email, nome=nome, cognome=cognome,
+                                password=generate_password_hash(psw, method='sha256'), indirizzo=indirizzo,
                                     citta=citta, cap=cap, telefono=numtelefono)
 
-            registra_cliente(nuovo_cliente)
+        registra_cliente(nuovo_cliente)
 
-            flash("Account creato con successo!", category="successo")
-            return redirect("home.html", )
+        flash("Account creato con successo!", category="successo")
+        return redirect("home.html", )
 
-    return render_template("sign_up.html")
+    return render_template("registrazione_cliente.html")
