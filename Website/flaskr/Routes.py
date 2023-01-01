@@ -14,6 +14,6 @@ def loginpage():
     return render_template('loginpage.html')
 
 
-@views.route('sign-up_client')
-def sigup_cl():
+@views.route('/registrazione_cl')
+def signup_cl():
     return render_template('registrazione_cliente.html')
