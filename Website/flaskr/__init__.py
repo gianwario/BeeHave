@@ -7,12 +7,13 @@ db = SQLAlchemy()
 
 """Inizializzazione"""
 
+
 def create_app():
     app = Flask(__name__)
 
     """chiave segreta per criptare cookies"""
     app.config['SECRET_KEY'] = 'BEEHAVE'
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:root@localhost/beehavedb'
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:rootroot@localhost/beehavedb'
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
     db.init_app(app)
@@ -24,7 +25,8 @@ def create_app():
 
     app.register_blueprint(views, url_prefix='/')
     app.register_blueprint(gu, url_prefix='/')
-    from .model import UtenteRegistrato, Cliente, Apicoltore, Alveare, Prodotto, Acquisto, TicketAdozione, TicketAssistenza
+    from .model import UtenteRegistrato, Cliente, Apicoltore, Alveare, Prodotto, Acquisto, TicketAdozione, \
+        TicketAssistenza
 
     if not database_exists(app.config["SQLALCHEMY_DATABASE_URI"]):
         create_database(app.config["SQLALCHEMY_DATABASE_URI"])
@@ -42,6 +44,5 @@ def create_app():
             return utente
         else:
             return Cliente.Cliente.query.get(email)
-
 
     return app

@@ -1,6 +1,6 @@
 import re
 from flask import Blueprint, request, session, flash, redirect, render_template
-from werkzeug.security import check_password_hash, generate_password_hash
+from werkzeug.security import generate_password_hash
 from flask_login import login_user, logout_user, login_required
 
 from Website.flaskr.Routes import home, loginpage
@@ -9,7 +9,7 @@ from Website.flaskr.model.Cliente import Cliente
 
 gu = Blueprint('gu', __name__)
 email_valida = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b'
-spec = "[@_!#$%^&*()<>?/'|}{~:]\""
+spec = "[@_!#$%^&*()<>?/'|\}{~:]"
 num = "0123456789"
 
 
@@ -62,7 +62,7 @@ def registrazione_cliente():
 
         if not re.fullmatch(email_valida, email):
             flash("Il campo e-mail non è nel formato corretto.", category="errore")
-        elif psw < 8:
+        elif psw.__len__() < 9:
             flash("La password deve contenere almeno 8 caratteri.", category="errore")
         elif not check_email_esistente(email):
             flash("L'indirizzo e-mail è già registrato.", category="errore")

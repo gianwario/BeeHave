@@ -15,5 +15,5 @@ def loginpage():
 
 
 @views.route('/registrazione_cl')
-def signup_cl():
+def sigup_cl(): #typo, da cambiare
     return render_template('registrazione_cliente.html')
