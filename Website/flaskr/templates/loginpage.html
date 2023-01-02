@@ -5,16 +5,16 @@
         {% block title %}Login{% endblock %}
     </head>
     <body>
-
     {% block content %}
-        <form action="/login" method="post">
-            <label for="email">Email</label>
-            <input name="email" type="email" required=true placeholder="Inserisci l'email"/>
-            <label for="password">Password</label>
-            <input name="password" type="password" required=true placeholder="Inserisci la password"/>
-
+    <div>
+        <form class="form_login" action="/login" method="post">
+            <label for="form_login_email">Email</label>
+            <input name="email" id="form_login_email" class="form_login_email" type="text" placeholder="Inserisci l'email" />
+            <label for="form_login_password">Password</label>
+            <input name="password" id="form_login_password" class="form_login_password" type="password" placeholder="Inserisci la password" />
             <input type="submit" value="Accedi"/> <input type="reset" value="Cancella">
         </form>
+    </div>
     {% endblock %}
     </body>
 </html>
