@@ -16,8 +16,13 @@ def home():
 def loginpage():
     return render_template('loginpage.html')
 
+@views.route('/catalogo_apicoltore')
+def catalogo_apicoltore():
+    return render_template('/catalogo_apicoltore.html')
 
-@views.route('/registrazione_apicoltore')
+@views.route('/inserimento_prodotto_page')
+def inserimento_prodotto_page():
+    return render_template('/inserimento_prodotto.html')@views.route('/registrazione_apicoltore')
 def sigup_ap():
     return render_template('registrazione_apicoltore.html')
 
