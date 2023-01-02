@@ -1,51 +1,86 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <script>
-        document.addEventListener("DOMContentLoaded", function() {
 
-var registrazione = document.createElement('div');
-registrazione.innerHTML = '<form action="/registrazione_ap" method="post">' +
-  '<div class="container">' +
-  '<h1>Registrazione</h1>' +
-  '<p>Compila i campi per completare la registrazione.</p>' +
-  '<hr>' +
-  '<label for="email"><b>Email</b></label>' +
-  '<input type="text" placeholder="Email" name="email" required>' +
-  '<label for="password"><b>Password</b></label>' +
-  '<input type="password" placeholder="Password" name="password" required>' +
-  '<label for="cpwd"><b>Ripeti Password</b></label>' +
-  '<input type="password" placeholder="Ripeti Password" name="cpwd" required>' +
-  '<label for="nome"><b>Nome</b></label>' +
-  '<input type="text" placeholder="Nome" name="nome" required>' +
-  '<label for="cognome"><b>Cognome</b></label>' +
-  '<input type="text" placeholder="Cognome" name="cognome" required>' +
-  '<label for="citta"><b>Citt&#224</b></label>' +
-  '<input type="text" placeholder="Citt&#224" name="citta" required>' +
-  '<label for="indirizzo"><b>Indirizzo</b></label>' +
-  '<input type="text" placeholder="Indirizzo" name="indirizzo" required>' +
-  '<label for="cap"><b>Cap</b></label>' +
-  '<input type="text" placeholder="Cap" name="cap" required>' +
-  '<label for="telefono"><b>Numero di Telefono</b></label>' +
-  '<input type="text" placeholder="Numero di telefono" name="telefono" required>' +
-  '<label for="assistenza"><b>Assistenza</b></label>' +
-  '<input type="text" placeholder="Assistenza" name="assistenza" required>' +
-  '<label for="descrizione"><b>Descrizione</b></label>' +
-  '<input type="text" placeholder="Descrizione" name="descrizione" required>' +
-  '</label>' +
-  '<p>Registrandoti, dichiari di aver letto ed accettato i nostri <a href="https://www.facebook.com/icompagnidimerende/" style="color:dodgerblue">Termini di servizio e privacy</a>.</p>' +
-  '<div class="clearfix">' +
-  '<button type="button" class="annullabtn">Annulla</button>' +
-  '<button type="submit" class="registrabtn">Registrati</button>' +
-  '</div>' +
-  '</div>' +
-  '</form>';
-document.body.appendChild(registrazione);
-});
-        </script>
+<link  rel="stylesheet" href="{{url_for('static', filename='css/reg.ap.css')}}">
+
     </head>
-    <body style="margin: 0;">
+   <body id="signup">
+  <main class="container">
+    <div class="back"></div>
+    <div class="brand">
 
-    </body>
+      <span class="copyright">
+
+        <img src="../static/images/reg_ap.webp"  title="Background Photo"></span>
+    </div>
+    <div class="formWrapper">
+      <div class="form">
+        <h2>Registrati come apicoltore</h2>
+        <form id="form" method="post" action="/registrazione_ap">
+          <div class="inputWrapper">
+            <input type="text" name="nome" id="nome" required />
+            <label for="nome">Nome</label>
+          </div>
+
+          <div class="inputWrapper">
+            <input type="text" name="cognome" id="cognome" required />
+            <label for="cognome">Cognome</label>
+          </div>
+
+          <div class="inputWrapper">
+            <input type="text" name="citta" id="citta" required />
+            <label for="citta">Città</label>
+          </div>
+
+          <div class="inputWrapper">
+            <input type="text" name="indirizzo" id="indirizzo" required />
+            <label for="indirizzo">Indirizzo</label>
+          </div>
+
+           <div class="inputWrapper">
+            <input type="text" name="cap" id="cap" required />
+            <label for="cap">CAP</label>
+          </div>
+
+          <div class="inputWrapper">
+            <input type="email" name="email" id="email" required />
+            <label for="email">Email</label>
+          </div>
+
+          <div class="inputWrapper">
+            <input type="text" name="telefono" id="telefono" required />
+            <label for="telefono">Numero di telefono</label>
+          </div>
+
+          <div class="inputWrapper">
+            <input type="text" name="assistenza" id="assistenza" required />
+            <label for="assistenza">Assistenza</label>
+          </div>
+
+           <div class="inputWrapper">
+            <input type="text" name="descrizione" id="descrizione" required />
+            <label for="descrizione">Descrizione</label>
+          </div>
+
+          <div class="inputWrapper">
+            <input type="password" name="password" id="password" required />
+            <label for="password">Password</label>
+          </div>
+
+          <div class="inputWrapper">
+            <input type="password" name="cpwd" id="cpwd" required />
+            <label for="cpwd">Confirm Password</label>
+          </div>
+
+        </form>
+        <input form="form" type="submit" name="register" id="register" value="REGISTER" />
+        <span id="login">Already a member? <a href="#" title="Login">Log in!</a></span>
+      </div>
+    </div>
+  </main>
+</body>
+
 
 </html>
+
