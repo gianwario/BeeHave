@@ -1,10 +1,83 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{%extends "base.html" %}
+{%block title%}Inserimento Prodotto{%endblock%}
 
-</body>
+{% block content%}
+        <form action="/inserimento_prodotto" method="post">
+            <h3 align="center">Login</h3>
+            <label for="nome">Nome</label>
+                <input
+                        name="nome"
+                        type="text"
+                        required=true
+                        placeholder="Inserisci nome"
+                />
+            <br>
+            <br>
+            <label for="descrizione">Descrizione</label>
+                <input
+                        name="descrizione"
+                        type="text" required=true
+                        placeholder="Inserisci descrizione"
+                />
+            <br>
+            <br>
+            <label for="nome">Località</label>
+                <input
+                        name="località"
+                        type="text"
+                        required=true
+                        placeholder="Inserisci località"
+                />
+            <br>
+            <br>
+            <label for="nome">Peso</label>
+                <input
+                        name="peso"
+                        type="number"
+                        required=true
+                        placeholder="Inserisci peso"
+                />
+            <br>
+            <br>
+            <label for="nome">Tipologia</label>
+                <input
+                        name="tipologia"
+                        type="text"
+                        required=true
+                        placeholder="Inserisci tipologia"
+                />
+            <br>
+            <br>
+            <label for="nome">Prezzo</label>
+                <input
+                        name="prezzo"
+                        type="number"
+                        required=true
+                        placeholder="Inserisci prezzo"
+                />
+            <br>
+            <br>
+            <label for="nome">Quantita</label>
+                <input
+                        name="quantita"
+                        type="number"
+                        required=true
+                        placeholder="Inserisci quantita"
+                />
+            <br>
+            <br>
+            <label for="nome">Apicoltore</label>
+                <input
+                        name="apicoltore"
+                        type="email"
+                        required=true
+                        placeholder="Inserisci apicoltore"
+                />
+            <br>
+            <br>
+            <input type="submit" value="Conferma inserimento"/> <input type="reset" value="Cancella">
+        </form>
+
+    {% endblock %}
+    </body>
 </html>
