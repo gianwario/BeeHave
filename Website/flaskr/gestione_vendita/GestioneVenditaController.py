@@ -1,4 +1,4 @@
-from flask import Blueprint, request, session
+from flask import Blueprint, request, session, flash
 from flask_login import current_user, login_required
 
 from Website.flaskr.Routes import catalogo_apicoltore
@@ -14,12 +14,27 @@ def inserimento_prodotto():
         nome = request.form.get('nome')
         descrizione = request.form.get('descrizione')
         localita = request.form.get('localita')
-        peso = request.form.get('peso')
+        peso = int(request.form.get('peso'))
         tipologia = request.form.get('tipologia')
-        prezzo = request.form.get('prezzo')
-        quantita = request.form.get('quantita')
-        apicoltore = current_user.id
+        prezzo = float(request.form.get('prezzo'))
+        quantita = int(request.form.get('quantita'))
+        apicoltore= current_user.id
 
-        inserisci_prodotto(nome, descrizione,localita,peso, tipologia,prezzo, quantita, apicoltore)
+        if (len(nome) > 30):
+            flash('Nome troppo lungo!', category='error')
+        elif (len(descrizione) > 200):
+            flash('Descrizione troppo lunga!', category='error')
+        elif (len(localita) > 40):
+            flash('Località invalida!', category='error')
+        elif (prezzo > 1000):
+            flash('Prezzo invalido!', category='error')
+        elif (len(tipologia) > 30):
+            flash('Nome tipologia lungo!', category='error')
+        elif (quantita> 1000000):
+            flash('Quantità invalida!', category='error')
+        else:
+            flash('Inserimento avvenuto con successo!', category='success')
+
+        inserisci_prodotto(nome, descrizione, localita, peso, tipologia, prezzo, quantita, apicoltore)
 
     return catalogo_apicoltore()
