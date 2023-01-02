@@ -101,3 +101,4 @@ def sigup():
         user=Apicoltore(nome=nome,cognome=cognome,indirizzo=indirizzo,citta=citta,cap=cap,telefono=telefono,descrizione=descrizione,email=email,assistenza=assistenza,password=generate_password_hash(pwd, method='sha256'))
         print(user.__dict__)
         registraApicoltore(user)
+        return home()

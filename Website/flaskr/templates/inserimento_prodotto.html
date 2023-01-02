@@ -2,7 +2,7 @@
 {%block title%}Inserimento Prodotto{%endblock%}
 
 {% block content%}
-        <form action="/inserimento_prodotto" method="post">
+        <form enctype="multipart/form-data" action="/inserimento_prodotto"  method="post">
             <h3 align="center">Inserimento prodotto</h3>
             <label for="nome">Inserire nome: </label>
                 <input
@@ -176,7 +176,9 @@
                         name="quantita"
                         type="number" required=true
                         placeholder="Inserisci quantit&#224"
-                />
+                /><br>
+            <label for="image">Carica immagine</label>
+            <input  id="image" accept="image/*" type="file" name="imagepath">
             <br>
             <br>
             <input type="submit" value="ConfermaInserimento"/> <input type="reset" value="Cancella">

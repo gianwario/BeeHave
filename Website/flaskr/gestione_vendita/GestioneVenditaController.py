@@ -1,9 +1,14 @@
-from flask import Blueprint, request, session, render_template
+from flask import Blueprint, request, session, render_template, flash
 from flask_login import current_user, login_required
+import shutil
+import os
+
+from werkzeug.utils import secure_filename
 
 from Website.flaskr.Routes import catalogo_apicoltore
 from Website.flaskr.gestione_utente.GestioneUtenteService import getApicoltoreById
 from Website.flaskr.gestione_vendita.GestioneVenditaService import inserisci_prodotto, getProdottoById
+from Website.flaskr.model.Prodotto import Prodotto
 
 gv = Blueprint('gv', __name__)
 
@@ -19,7 +24,12 @@ def inserimento_prodotto():
         tipologia = request.form.get('tipologia')
         prezzo = float(request.form.get('prezzo'))
         quantita = int(request.form.get('quantita'))
-        apicoltore= current_user.id
+        apicoltore = current_user.id
+
+        image = request.files['imagepath']
+        destination = r'C:\Users\Cosmo\OneDrive\Documents\GitHub\BeeHave\Website\flaskr\static\images'
+        image.save(os.path.join(destination, secure_filename(image.filename)))
+
 
         if (len(nome) > 30):
             flash('Nome troppo lungo!', category='error')
@@ -31,21 +41,21 @@ def inserimento_prodotto():
             flash('Prezzo invalido!', category='error')
         elif (len(tipologia) > 30):
             flash('Nome tipologia lungo!', category='error')
-        elif (quantita> 1000000):
+        elif (quantita > 1000000):
             flash('Quantità invalida!', category='error')
         else:
             flash('Inserimento avvenuto con successo!', category='success')
 
-        inserisci_prodotto(nome, descrizione, localita, peso, tipologia, prezzo, quantita, apicoltore)
-        prezzo = request.form.get('prezzo')
-        quantita = request.form.get('quantita')
-        apicoltore = current_user.id
-        inserisci_prodotto(nome, descrizione,localita,peso, tipologia,prezzo, quantita, apicoltore)
+        prod = Prodotto(nome=nome, descrizione=descrizione, localita=localita, peso=peso, img_path='ssd', prezzo=prezzo,
+                        quantita=quantita, id_apicoltore=apicoltore, tipologia=tipologia)
+
+        inserisci_prodotto(prod)
 
     return catalogo_apicoltore()
+
 
 @gv.route('/visualizza_prod/<int:prodotto_id>', methods=['POST', 'GET'])
 def info_articolo(prodotto_id):
     prod = getProdottoById(prodotto_id)
-    #apicoltore = getApicoltoreById(prod.id_apicoltore)
-    return render_template('informazioni_prodotto.html', prodotto=prod)
+    apicoltore = getApicoltoreById(prod.id_apicoltore)
+    return render_template('informazioni_prodotto.html', prodotto=prod, apicoltore=apicoltore)
