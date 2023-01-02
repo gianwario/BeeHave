@@ -1,8 +1,7 @@
 from flask import Blueprint, request, session, render_template, flash
 from flask_login import current_user, login_required
-import shutil
 import os
-
+from pathlib import Path
 from werkzeug.utils import secure_filename
 
 from Website.flaskr.Routes import catalogo_apicoltore
@@ -26,11 +25,6 @@ def inserimento_prodotto():
         quantita = int(request.form.get('quantita'))
         apicoltore = current_user.id
 
-        image = request.files['imagepath']
-        destination = r'C:\Users\Cosmo\OneDrive\Documents\GitHub\BeeHave\Website\flaskr\static\images'
-        image.save(os.path.join(destination, secure_filename(image.filename)))
-
-
         if (len(nome) > 30):
             flash('Nome troppo lungo!', category='error')
         elif (len(descrizione) > 200):
@@ -50,6 +44,12 @@ def inserimento_prodotto():
                         quantita=quantita, id_apicoltore=apicoltore, tipologia=tipologia)
 
         inserisci_prodotto(prod)
+
+        image = request.files['imagepath']
+        destination = r"C:\Users\Cosmo\OneDrive\Documents\GitHub\BeeHave\Website\flaskr\static\images"
+        nome_vasetto = 'honey_pot' + str(prod.id)
+        os.rename(destination + str(image.filename), destination + nome_vasetto)
+        image.save(os.path.join(destination, secure_filename(image.filename)))
 
     return catalogo_apicoltore()
 
