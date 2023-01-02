@@ -1,4 +1,4 @@
-from flask import Flask, session
+from flask import Flask
 from flask_login import LoginManager
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy_utils import create_database, database_exists
@@ -6,6 +6,7 @@ from sqlalchemy_utils import create_database, database_exists
 db = SQLAlchemy()
 
 """Inizializzazione"""
+
 
 def create_app():
     app = Flask(__name__)
@@ -42,6 +43,5 @@ def create_app():
             return utente
         else:
             return Cliente.Cliente.query.get(email)
-
 
     return app
