@@ -1,4 +1,3 @@
-
 from Website.flaskr.model.Prodotto import Prodotto
 from .. import db
 

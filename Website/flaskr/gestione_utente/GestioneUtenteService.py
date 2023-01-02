@@ -1,5 +1,3 @@
-from sqlalchemy.orm import session
-
 from Website.flaskr.model.Apicoltore import Apicoltore
 from Website.flaskr.model.Cliente import Cliente
 from .. import db
