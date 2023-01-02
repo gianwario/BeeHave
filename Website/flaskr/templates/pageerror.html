@@ -2,11 +2,12 @@
 <html lang="en">
 <head>
 
-<link  rel="stylesheet" href="404page.css" >
-
+<link  rel="stylesheet" href="{{url_for('static', filename='css/404page.css')}}">
+{% extends "base.html"%}
 </head>
-<body>
 
+<body>
+{% block content %}
 <section class="pageerror">
 
 	<div class="container">
@@ -33,6 +34,6 @@
 		</div>
 	</div>
 </section>
-
+{% endblock %}
 </body>
 </html>
