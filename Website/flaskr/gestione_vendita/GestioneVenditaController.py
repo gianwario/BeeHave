@@ -1,14 +1,15 @@
 from flask import Blueprint, request, session, render_template, flash
 from flask_login import current_user, login_required
 import os
+
 from werkzeug.utils import secure_filename
+from Website.flaskr import image_folder_absolute
 from Website.flaskr.Routes import catalogo_apicoltore
 from Website.flaskr.gestione_utente.GestioneUtenteService import getApicoltoreById
-from Website.flaskr.gestione_vendita.GestioneVenditaService import inserisci_prodotto, getProdottoById, updateImage
+from Website.flaskr.gestione_vendita.GestioneVenditaService import inserisci_prodotto, getProdottoById, updateImage, \
+    get_ProdottiByApicoltore
 from Website.flaskr.model.Prodotto import Prodotto
 
-# inserite i vostri path e mettete sotto commento il mio
-destination = r"C://Users//Cosmo//OneDrive//Documents//GitHub//BeeHave//Website//flaskr//static//images/"
 gv = Blueprint('gv', __name__)
 
 
@@ -47,8 +48,9 @@ def inserimento_prodotto():
 
         image = request.files['imagepath']
         nome_vasetto = 'honey_pot' + str(prod.id) + ".jpg"
-        image.save(os.path.join(destination, secure_filename(image.filename)))
-        os.rename(destination + str(image.filename), destination + nome_vasetto)
+        path_image = os.path.join(image_folder_absolute, secure_filename(image.filename))
+        image.save(path_image)
+        os.rename(path_image, os.path.join(image_folder_absolute, nome_vasetto))
         updateImage(prod.id, nome_vasetto)
         # TODO fixare formati immagini, non basta solo jpg
     return catalogo_apicoltore()
@@ -59,3 +61,11 @@ def info_articolo(prodotto_id):
     prod = getProdottoById(prodotto_id)
     apicoltore = getApicoltoreById(prod.id_apicoltore)
     return render_template('informazioni_prodotto.html', prodotto=prod, apicoltore=apicoltore)
+
+
+@gv.route('/visualizza_prodotti_vendita/<int:apicoltore_id>', methods=['POST', 'GET'])
+@login_required
+def mostra_articoli_inVendita(apicoltore_id):
+    if session['isApicoltore']:
+        prodotti_in_vendita = get_ProdottiByApicoltore(apicoltore_id)
+        return render_template('/catalogo_vendita.html', prodotti_in_vendita=prodotti_in_vendita)
