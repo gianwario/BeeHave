@@ -1,14 +1,14 @@
 from flask import Blueprint, request, session, render_template, flash
 from flask_login import current_user, login_required
 import os
-from pathlib import Path
 from werkzeug.utils import secure_filename
-
 from Website.flaskr.Routes import catalogo_apicoltore
 from Website.flaskr.gestione_utente.GestioneUtenteService import getApicoltoreById
-from Website.flaskr.gestione_vendita.GestioneVenditaService import inserisci_prodotto, getProdottoById
+from Website.flaskr.gestione_vendita.GestioneVenditaService import inserisci_prodotto, getProdottoById, updateImage
 from Website.flaskr.model.Prodotto import Prodotto
 
+# inserite i vostri path e mettete sotto commento il mio
+destination = r"C://Users//Cosmo//OneDrive//Documents//GitHub//BeeHave//Website//flaskr//static//images/"
 gv = Blueprint('gv', __name__)
 
 
@@ -46,10 +46,10 @@ def inserimento_prodotto():
         inserisci_prodotto(prod)
 
         image = request.files['imagepath']
-        destination = r"C:\Users\Cosmo\OneDrive\Documents\GitHub\BeeHave\Website\flaskr\static\images"
-        nome_vasetto = 'honey_pot' + str(prod.id)
-        os.rename(destination + str(image.filename), destination + nome_vasetto)
+        nome_vasetto = 'honey_pot' + str(prod.id) + ".jpg"
         image.save(os.path.join(destination, secure_filename(image.filename)))
+        os.rename(destination + str(image.filename), destination + nome_vasetto)
+        updateImage(prod.id, nome_vasetto)
 
     return catalogo_apicoltore()
 
