@@ -1,71 +1,47 @@
 <!DOCTYPE html>
-<html lang="it">
+<html lang="en">
+    <head>
+        <script>
+        document.addEventListener("DOMContentLoaded", function() {
 
-<head>
-<link  rel="stylesheet" href="flaskr/static/css/registrazione_cl.css">
-<title>{% block title %}Registrazione Cliente{% endblock %}</title>
-</head>
+var registrazione = document.createElement('div');
+registrazione.innerHTML = '<form action="/registrazione_cl" method="POST">' +
+  '<div class="container">' +
+  '<h1>Registrazione</h1>' +
+  '<p>Compila i campi per completare la registrazione.</p>' +
+  '<hr>' +
+  '<label for="email"><b>Email</b></label>' +
+  '<input type="text" placeholder="Email" name="email" required>' +
+  '<label for="psw"><b>Password</b></label>' +
+  '<input type="password" placeholder="Password" name="psw" required>' +
+  '<label for="psw-ripeti"><b>Ripeti Password</b></label>' +
+  '<input type="password" placeholder="Ripeti Password" name="psw-ripeti" required>' +
+  '<label for="nome"><b>Nome</b></label>' +
+  '<input type="text" placeholder="Nome" name="nome" required>' +
+  '<label for="cognome"><b>Cognome</b></label>' +
+  '<input type="text" placeholder="Cognome" name="cognome" required>' +
+  '<label for="citta"><b>Citt&#224</b></label>' +
+  '<input type="text" placeholder="Citt&#224" name="citta" required>' +
+  '<label for="indirizzo"><b>Indirizzo</b></label>' +
+  '<input type="text" placeholder="Indirizzo" name="indirizzo" required>' +
+  '<label for="cap"><b>Cap</b></label>' +
+  '<input type="text" placeholder="Cap" name="cap" required>' +
+  '<label for="numtelefono"><b>Numero di Telefono</b></label>' +
+  '<input type="text" placeholder="Numero di telefono" name="numtelefono" required>' +
+  '</label>' +
+  '<p>Registrandoti, dichiari di aver letto ed accettato i nostri <a href="https://www.facebook.com/icompagnidimerende/" style="color:dodgerblue">Termini di servizio e privacy</a>.</p>' +
+  '<div class="clearfix">' +
+  '<button type="button" class="annullabtn">Annulla</button>' +
+  '<button type="submit" class="registrabtn">Registrati</button>' +
+  '</div>' +
+  '</div>' +
+  '</form>';
+document.body.appendChild(registrazione);
+});
+        </script>
+    </head>
+    <body style="margin: 0;">
 
-<body>
-<div class="form_wrapper">
-  <div class="form_container">
-    <div class="title_container">
-      <h2>Registrazione Cliente</h2>
-    </div>
-    <div class="row clearfix">
-      <div class="">
-        <form action="/registrazione_cl" method="post">
-          <div class="input_field"> <span><i aria-hidden="true" class="fa fa-envelope"></i></span>
-            <input type="email" name="email" placeholder="Inserisci Email" required />
-          </div>
-          <div class="input_field"> <span><i aria-hidden="true" class="fa fa-lock"></i></span>
-            <input type="password" name="psw" placeholder="Inserisci Password" required />
-          </div>
-          <div class="input_field"> <span><i aria-hidden="true" class="fa fa-lock"></i></span>
-            <input type="password" name="psw-ripeti" placeholder="Reinserisci Password" required />
-          </div>
-          <div class="row clearfix">
-            <div class="col_half">
-              <div class="input_field"> <span><i aria-hidden="true" class="fa fa-user"></i></span>
-                <input type="text" name="nome" placeholder="Inserisci nome" />
-              </div>
-            </div>
-            <div class="col_half">
-              <div class="input_field"> <span><i aria-hidden="true" class="fa fa-user"></i></span>
-                <input type="text" name="cognome" placeholder="Inserisci cognome" required />
-              </div>
-            </div>
-            <div class="col_half">
-              <div class="input_field"> <span><i aria-hidden="true" class="fa fa-user"></i></span>
-                <input type="text" name="citta" placeholder="Inserisci citt&#224" required />
-              </div>
-            </div>
-            <div class="col_half">
-              <div class="input_field"> <span><i aria-hidden="true" class="fa fa-user"></i></span>
-                <input type="text" name="cap" placeholder="Inserisci codice postale" required />
-              </div>
-            </div>
-            <div class="col_half">
-              <div class="input_field"> <span><i aria-hidden="true" class="fa fa-user"></i></span>
-                <input type="text" name="indirizzo" placeholder="Inserisci indirizzo" required />
-              </div>
-            </div>
-            <div class="col_half">
-              <div class="input_field"> <span><i aria-hidden="true" class="fa fa-user"></i></span>
-                <input type="text" name="numtelefono" placeholder="Inserisci numero di telefono" required />
-              </div>
-            </div>
-          </div>
+    </body>
 
-            <div class="input_field checkbox_option">
-            	<input type="checkbox" id="cb1">
-    			<label for="cb1">Ho letto ed accettato i termini di servizio e privacy.</label>
-            </div>
-
-          <input class="button" type="submit" value="Registrati" />
-        </form>
-      </div>
-    </div>
-  </div>
-</div>
-</body>
+</html>

@@ -7,6 +7,10 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1" >
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+             integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"/>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+             crossorigin="anonymous" />
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
         <title>{% block title %}Title{% endblock %}</title>
@@ -27,12 +31,33 @@
       <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span>Area Utente</a>
        <ul class="dropdown-menu">
           <li><a href="#">Login</a></li>
-          <li><a href="{{url_for('views.signup_cl')}}">Registrazione Cliente</a></li>
+          <li><a href="{{url_for('views.sigup_cl')}}">Registrazione Cliente</a></li>
         </ul></li>
     </ul>
   </div>
 </nav>
     {% block content %}
+     {% with messages = get_flashed_messages(with_categories=true) %}
+     {% if messages %}
+        {% for category, message in messages %}
+        {% if category == 'errore' %}
+            <div class="alert alert-danger alter-dismissable fade show" role="alert">
+                {{ message }}
+                <button type="button" class="close" data-dismiss="alert">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        {% else %}
+            <div class="alert alert-success alter-dismissable fade show" role="alert">
+                {{ message }}
+                <button type="button" class="close" data-dismiss="alert">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        {% endif %}
+     {% endfor %}
+     {% endif %}
+     {% endwith %}
     {% endblock %}
     </body>
 </html>
