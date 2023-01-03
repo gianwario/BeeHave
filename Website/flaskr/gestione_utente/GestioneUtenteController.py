@@ -27,8 +27,7 @@ def login():
             else:
                 return loginpage()
         if user:
-            #if check_password_hash(user.password, pwd):
-            if user.password == pwd:
+            if check_password_hash(user.password, pwd):
                 login_user(user, remember=True)
                 flash('Login effettuato con successo!', category='success')
                 return home()
@@ -112,3 +111,4 @@ def controllo_pwd(pwd):
         return True
     else:
         return False
+
