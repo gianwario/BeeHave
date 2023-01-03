@@ -1,4 +1,5 @@
 from flask import render_template, Blueprint
+from flask_login import current_user
 
 from Website.flaskr.gestione_vendita.GestioneVenditaService import getTuttiProdotti, getProdottoById
 from Website.flaskr.model.Prodotto import Prodotto
@@ -12,9 +13,11 @@ def home():
     return render_template('home.html')
 
 
-@views.route('/loginpage')
-def loginpage():
-    return render_template('loginpage.html')
+@views.route('/login_page')
+def login_page():
+    if current_user.is_authenticated:
+        return home()
+    return render_template('login_page.html')
 
 
 @views.route('/catalogo_apicoltore')
@@ -24,6 +27,7 @@ def catalogo_apicoltore():
 
 @views.route('/inserimento_prodotto_page')
 def inserimento_prodotto_page():
+
     return render_template('inserimento_prodotto.html')
 
 
@@ -36,6 +40,4 @@ def sigup_ap():
 def mostra_prodotti():
     prods = getTuttiProdotti()
     return render_template('catalogo_prodotti.html', prods=prods)
-
-
 
