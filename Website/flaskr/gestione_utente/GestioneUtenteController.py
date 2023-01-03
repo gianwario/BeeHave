@@ -9,7 +9,8 @@ from Website.flaskr.gestione_utente.GestioneUtenteService import *
 from Website.flaskr.model.Apicoltore import Apicoltore
 
 gu = Blueprint('gu', __name__)
-
+spec = "[@_!#$%^&*()<>?/'|}{~:]"
+num = "0123456789"
 
 @gu.route('/login', methods=['GET', 'POST'])
 def login():
@@ -47,8 +48,6 @@ def logout():
 @gu.route('/registrazione_ap', methods=['GET', 'POST'])
 def sigup():
     if request.method == 'POST':
-        # global spec
-        # global num
         nome = request.form.get('nome')
         cognome = request.form.get('cognome')
         indirizzo = request.form.get('indirizzo')
@@ -90,8 +89,9 @@ def sigup():
             print("Password length has to be at least 8 characters", "error")
             return  # inserire pagine html di errore
 
-        # if not any(char in spec for char in pwd) and any(char in num for char in pwd):
-        # return False
+        if not controllo_pwd(pwd):
+            print("Password length has to be at least 8 characters", "error")
+            return  # inserire pagine html di errore
 
         if pwd != cpwd:
             print("Password and confirm password do not match", "error")
@@ -103,3 +103,14 @@ def sigup():
         print(user.__dict__)
         registraApicoltore(user)
         return home()
+
+def controllo_pwd(pwd):
+    spec_check = re.compile(spec)
+    num_check = re.compile(num)
+
+    if (spec_check.search(pwd) is None) and (num_check.search(pwd) is None):
+        return True
+    else:
+        return False
+
+        
