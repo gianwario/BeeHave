@@ -12,7 +12,10 @@ def updateImage(id, image):
     db.session.flush()
     db.session.commit()
 
-
+def deleteProdotto(prodotto):
+    prod = getProdottoById(prodotto.id)
+    prod.delete()
+    db.session.commit()
 def getTuttiProdotti():
     return Prodotto.query.all()
 

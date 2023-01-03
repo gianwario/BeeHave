@@ -7,7 +7,7 @@ from Website.flaskr.gestione_utente.GestioneUtenteService import getApicoltoreBy
 from Website.flaskr.gestione_vendita.GestioneVenditaService import inserisci_prodotto, getProdottoById, updateImage
 from Website.flaskr.model.Prodotto import Prodotto
 
-# inserite i vostri path e mettete sotto commento il mio
+# TODO inserite i vostri path e mettete sotto commento il mio
 destination = r"C://Users//Cosmo//OneDrive//Documents//GitHub//BeeHave//Website//flaskr//static//images/"
 gv = Blueprint('gv', __name__)
 
@@ -47,6 +47,8 @@ def inserimento_prodotto():
 
         image = request.files['imagepath']
         nome_vasetto = 'honey_pot' + str(prod.id) + ".jpg"
+        #absolute_path = os.path.dirname(image)
+        print(absolute_path)
         image.save(os.path.join(destination, secure_filename(image.filename)))
         os.rename(destination + str(image.filename), destination + nome_vasetto)
         updateImage(prod.id, nome_vasetto)
