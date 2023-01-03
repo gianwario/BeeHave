@@ -9,9 +9,9 @@
     {% block content %}
         <form action="/login" method="post">
             <label for="email">Email</label>
-            <input name="email" type="email" required=true placeholder="Inserisci l'email"/>
+            <input name="email" id="email" type="email" required=true placeholder="Inserisci l'email"/>
             <label for="password">Password</label>
-            <input name="password" type="password" required=true placeholder="Inserisci la password"/>
+            <input name="password" id="password" type="password" required=true placeholder="Inserisci la password"/>
 
             <input type="submit" value="Accedi"/> <input type="reset" value="Cancella">
         </form>
