@@ -40,6 +40,7 @@
 
                 {% if session['isApicoltore'] %}
                 <li><a href="{{url_for('views.inserimento_prodotto_page')}}">Inserisci prodotto</a></li>
+                 <a href="{{url_for('gv.mostra_articoli_inVendita', prodotti_in_vendita=current_user.id)}}">Visualizza</a>
                 {% endif %}
                 <li><a href="{{url_for('gu.logout')}}">Logout</a></li>
            {% endif %}

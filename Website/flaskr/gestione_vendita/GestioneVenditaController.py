@@ -7,7 +7,7 @@ from Website.flaskr import image_folder_absolute
 from Website.flaskr.Routes import catalogo_apicoltore
 from Website.flaskr.gestione_utente.GestioneUtenteService import getApicoltoreById
 from Website.flaskr.gestione_vendita.GestioneVenditaService import inserisci_prodotto, getProdottoById, updateImage, \
-    get_ProdottiByApicoltore
+    get_ProdottiByApicoltore, deleteProdotto
 from Website.flaskr.model.Prodotto import Prodotto
 
 gv = Blueprint('gv', __name__)
@@ -69,3 +69,10 @@ def mostra_articoli_inVendita(apicoltore_id):
     if session['isApicoltore']:
         prodotti_in_vendita = get_ProdottiByApicoltore(apicoltore_id)
         return render_template('/catalogo_vendita.html', prodotti_in_vendita=prodotti_in_vendita)
+
+@gv.route('/elimina_prodotto/<int:id_prodotto>', methods=['POST', 'GET'])
+@login_required
+def elimina_prodotto(id_prodotto):
+    if session['isApicoltore']:
+        deleteProdotto(id_prodotto)
+        return render_template('/catalogo_vendita.html')

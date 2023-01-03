@@ -16,7 +16,7 @@
       <th scope="col">Image</th>
       <th scope="col">Descrizione</th>
       <th scope="col">Prezzo</th>
-      <th scope="col">Funzione Generica</th>
+      <th scope="col">Elimina Articolo</th>
     </tr>
   </thead>
   <tbody>
@@ -26,7 +26,7 @@
       <th scope="row"><img src="../static/images/{{products.img_path}}" class="rounded mx-auto d-block" width="150" height="200"></th>
       <td><h5>{{products.nome}}</h5>{{products.descrizione}}</td>
       <td>{{products.prezzo}}</td>
-      <td><a href="{{url_for('gv.info_articolo', prodotto_id=products.id)}}">Visualizza</a></td>
+      <a href="{{url_for('gv.elimina_prodotto', id_prodotto=products.id)}}">Elimina</a>
     </tr>
     {% endfor %}
   </tbody>
