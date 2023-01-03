@@ -102,3 +102,4 @@ def sigup():
                           password=generate_password_hash(pwd, method='sha256'))
         print(user.__dict__)
         registraApicoltore(user)
+        return home()
