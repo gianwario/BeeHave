@@ -23,7 +23,7 @@ def login_page():
 
 @views.route('/catalogo_apicoltore')
 def catalogo_apicoltore():
-    return render_template('/catalogo_apicoltore.html')
+    return render_template('/catalogo_vendita.html')
 
 
 @views.route('/inserimento_prodotto_page')

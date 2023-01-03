@@ -26,7 +26,7 @@
       <th scope="row"><img src="../static/images/{{products.img_path}}" class="rounded mx-auto d-block" width="150" height="200"></th>
       <td><h5>{{products.nome}}</h5>{{products.descrizione}}</td>
       <td>{{products.prezzo}}</td>
-      <a href="{{url_for('gv.elimina_prodotto', id_prodotto=products.id)}}">Elimina</a>
+        <td><a href="{{url_for('gv.elimina_prodotto', id_prodotto=products.id, id_api=current_user.id)}}">Elimina</a></td>
     </tr>
     {% endfor %}
   </tbody>
