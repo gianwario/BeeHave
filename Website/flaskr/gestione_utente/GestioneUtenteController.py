@@ -17,11 +17,11 @@ def login():
     if request.method == 'POST':
         email = request.form.get('email')
         pwd = request.form.get('password')
-        user = getApicoltoreByEmail(email)
+        user = get_apicoltore_by_email(email)
         if user:
             session['isApicoltore'] = True
         else:
-            user = getClienteByEmail(email)
+            user = get_cliente_by_email(email)
             if user:
                 session['isApicoltore'] = False
             else:
@@ -101,7 +101,7 @@ def sigup():
                           descrizione=descrizione, email=email, assistenza=assistenza,
                           password=generate_password_hash(pwd, method='sha256'))
         print(user.__dict__)
-        registraApicoltore(user)
+        registra_apicoltore(user)
         return home()
 
 def controllo_pwd(pwd):
