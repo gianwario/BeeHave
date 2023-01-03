@@ -14,7 +14,7 @@
                 />
             <br>
             <br>
-        <label for="produzione">Inserire quantit&#224 di miele in grammi prodotto dall'alveare: </label> <br>
+        <label for="produzione">Inserire quantit&#224 di miele in grammi prodotto dall'alveare:</label> <br>
                 <input type="radio" id="produzione" name="produzione" value="500">
                 <label for="produzione">500</label><br>
                 <input type="radio" id="produzione2" name="produzione" value="1000">
@@ -27,6 +27,7 @@
         <br>
         <label for="numero_api">Inserire il numero di api:</label>
             <input
+                    required="true"
                     type="number"
                     id="numero_api"
                     name="numero_api"
@@ -42,6 +43,16 @@
                         type="text"
                         required=true
                         placeholder="Inserisci tipo miele"
+                />
+        <br>
+        <br>
+        <label for="prezzo">Inserire prezzo: </label>
+                <input
+                        id="prezzo"
+                        name="prezzo"
+                        type="number"
+                        required=true
+                        placeholder="Inserisci prezzo"
                 />
         <br>
         <br>
@@ -64,11 +75,11 @@
         <br>
         <label for="popolazione">Inserisci stato popolazione: </label> <br>
                 <input type="radio" id="popolazione" name="popolazione" value="scarso">
-                <label for="popolazione">scarsa</label><br>
+                <label for="popolazione">scarso</label><br>
                 <input type="radio" id="popolazione2" name="popolazione" value="medio">
-                <label for="popolazione">media</label><br>
+                <label for="popolazione">medio</label><br>
                 <input type="radio" id="popolazione3" name="popolazione" value="ottimo">
-                <label for="popolazione">ottima</label><br>
+                <label for="popolazione">ottimo</label><br>
         <br>
         <br>
         <label for="polline">Inserisci stato polline: </label> <br>

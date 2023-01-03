@@ -27,6 +27,11 @@ def inserimento_prodotto_page():
     return render_template('inserimento_prodotto.html')
 
 
+@views.route('/inserimento_alveare_page')
+def inserimento_alveare_page():
+    return render_template('inserimento_alveare.html')
+
+
 @views.route('/registrazione_apicoltore')
 def sigup_ap():
     return render_template('registrazione_apicoltore.html')
