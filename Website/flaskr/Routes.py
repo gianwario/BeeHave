@@ -1,4 +1,5 @@
 from flask import render_template, Blueprint
+from flask_login import login_required
 from flask_login import current_user
 
 from Website.flaskr.gestione_vendita.GestioneVenditaService import getTuttiProdotti, getProdottoById
@@ -34,6 +35,11 @@ def inserimento_prodotto_page():
 @views.route('/registrazione_apicoltore')
 def sigup_ap():
     return render_template('registrazione_apicoltore.html')
+@views.route('/areapersonale')
+@login_required
+def area_personale():
+
+    return render_template('areapersonale.html')
 
 
 @views.route('/catalogo_prod', methods=['GET'])
