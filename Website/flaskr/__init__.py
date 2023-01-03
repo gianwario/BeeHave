@@ -7,6 +7,7 @@ db = SQLAlchemy()
 
 """Inizializzazione"""
 
+
 def create_app():
     app = Flask(__name__)
 
@@ -21,9 +22,11 @@ def create_app():
 
     from .Routes import views
     from .gestione_utente.GestioneUtenteController import gu
+    from .gestione_vendita.GestioneVenditaController import gv
 
     app.register_blueprint(views, url_prefix='/')
     app.register_blueprint(gu, url_prefix='/')
+    app.register_blueprint(gv, url_prefix='/')
     from .model import UtenteRegistrato, Cliente, Apicoltore, Alveare, Prodotto, Acquisto, TicketAdozione, TicketAssistenza
 
     if not database_exists(app.config["SQLALCHEMY_DATABASE_URI"]):

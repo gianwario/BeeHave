@@ -6,6 +6,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1" >
+
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
@@ -18,9 +19,9 @@
       <a class="navbar-brand" href="#">BeeHave</a>
     </div>
     <ul class="nav navbar-nav">
-      <li class="active"><a href="#">Home</a></li>
+      <li class="active"><a href="{{url_for('views.home')}}">Home</a></li>
       <li><a href="#">Adotta Alveare</a></li>
-      <li><a href="#">Catalogo Prodotti</a></li>
+      <li><a href="{{url_for('views.mostra_prodotti')}}">Catalogo Prodotti</a></li>
       <li><a href="#">Chi siamo</a></li>
 
     </ul>
@@ -28,11 +29,20 @@
       <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span>Area Utente</a>
        <ul class="dropdown-menu">
 
-          <li><a href="{{url_for('views.loginpage')}}">Login</a></li>
-           <li><a href="{{url_for('views.sigup_ap')}}">Registra Apicoltore</a></li>
-           <li><a href="#">Registra Cliente</a></li>
-           <li><a href="{{url_for('views.area_personale')}}">Area Personale</a></li>
+           
+           {% if not current_user.is_authenticated %}
+                <li><a href="{{url_for('views.login_page')}}">Login</a></li>
+                <li><a href="{{url_for('views.sigup_ap')}}">Registra Apicoltore</a></li>
+                <li><a href="#">Registra Cliente</a></li>
 
+           {% else %}
+               <li><a href="{{url_for('views.area_personale')}}">Area Personale</a></li>
+
+                {% if session['isApicoltore'] %}
+                <li><a href="{{url_for('views.inserimento_prodotto_page')}}">Inserisci prodotto</a></li>
+                {% endif %}
+                <li><a href="{{url_for('gu.logout')}}">Logout</a></li>
+           {% endif %}
         </ul></li>
     </ul>
   </div>
