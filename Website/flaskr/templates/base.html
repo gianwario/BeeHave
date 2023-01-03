@@ -31,6 +31,7 @@
            <li><a href="{{url_for('views.loginpage')}}">Login</a></li>
            <li><a href="#">Registra Cliente</a></li>
            <li><a href="{{url_for('views.inserimento_prodotto_page')}}">Inserisci prodotto</a></li>
+           <li><a href="{{url_for('gv.mostra_articoli_inVendita', apicoltore_id=current_user.id)}}">Visualizza Prodotti In Vendita</a></li>
         </ul></li>
     </ul>
   </div>

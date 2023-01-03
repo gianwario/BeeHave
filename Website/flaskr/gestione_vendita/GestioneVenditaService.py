@@ -12,10 +12,13 @@ def updateImage(id, image):
     db.session.flush()
     db.session.commit()
 
+
 def deleteProdotto(prodotto):
     prod = getProdottoById(prodotto.id)
     prod.delete()
     db.session.commit()
+
+
 def getTuttiProdotti():
     return Prodotto.query.all()
 
@@ -23,3 +26,7 @@ def getTuttiProdotti():
 def inserisci_prodotto(prodotto):
     db.session.add(prodotto)
     db.session.commit()
+
+
+def get_ProdottiByApicoltore(apicoltore_id):
+    return Prodotto.query.filter_by(id_apicoltore=apicoltore_id).all()
