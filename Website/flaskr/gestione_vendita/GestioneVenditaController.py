@@ -50,7 +50,7 @@ def inserimento_prodotto():
         image.save(os.path.join(destination, secure_filename(image.filename)))
         os.rename(destination + str(image.filename), destination + nome_vasetto)
         updateImage(prod.id, nome_vasetto)
-
+        # TODO fixare formati immagini, non basta solo jpg
     return catalogo_apicoltore()
 
 
