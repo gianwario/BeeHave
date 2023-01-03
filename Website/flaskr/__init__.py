@@ -1,6 +1,6 @@
 import os.path
 
-from flask import Flask, session
+from flask import Flask
 from flask_login import LoginManager
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy_utils import create_database, database_exists
