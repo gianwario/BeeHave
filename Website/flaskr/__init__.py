@@ -1,12 +1,13 @@
-from flask import Flask
+import os.path
+
+from flask import Flask, session
 from flask_login import LoginManager
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy_utils import create_database, database_exists
 
 db = SQLAlchemy()
-
+image_folder_absolute = os.path.join(os.path.abspath(os.path.dirname(__file__)), os.path.join('static', 'images'))
 """Inizializzazione"""
-
 
 def create_app():
     app = Flask(__name__)
@@ -15,7 +16,6 @@ def create_app():
     app.config['SECRET_KEY'] = 'BEEHAVE'
     app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:root@localhost/beehavedb'
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-
     db.init_app(app)
 
     login_manager = LoginManager(app)
@@ -45,5 +45,6 @@ def create_app():
             return utente
         else:
             return Cliente.Cliente.query.get(email)
+
 
     return app
