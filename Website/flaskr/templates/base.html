@@ -44,6 +44,8 @@
                     <li><a href="{{url_for('views.inserimento_alveare_page')}}">Inserisci alveare</a></li>
                     <li><a href="{{url_for('gv.mostra_articoli_inVendita', apicoltore_id=current_user.id)}}">Visualizza
                         prodotti in vendita</a>
+                    <li><a href="{{url_for('ga.mostra_alveari_disponibili', apicoltore_id=current_user.id)}}">Visualizza
+                        alveari in affitto</a>
                     <li>
                         {% endif %}
                     <li><a href="{{url_for('gu.logout')}}">Logout</a></li>
