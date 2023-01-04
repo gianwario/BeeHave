@@ -19,7 +19,12 @@ def update_imgAlveare(id, img):
 
 
 def get_AlveariDisponibili(apicoltore_id):
-    return Alveare.query.filter_by(id_apicoltore=apicoltore_id).all()
+    lista = Alveare.query.filter_by(id_apicoltore=apicoltore_id).all()
+    for alveare in lista:
+        if alveare.percentuale_disponibile <= 0:
+            lista.remove(alveare)
+    return lista
+
 
 def get_Alveari():
     return Alveare.query.all()
