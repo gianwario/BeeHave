@@ -6,10 +6,6 @@ from flask_login import LoginManager
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy_utils import create_database, database_exists
 
-
-db = SQLAlchemy()
-
-
 db = SQLAlchemy()
 image_folder_absolute = os.path.join(os.path.abspath(os.path.dirname(__file__)), os.path.join('static', 'images'))
 """Inizializzazione"""
