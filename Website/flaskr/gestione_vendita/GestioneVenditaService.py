@@ -13,9 +13,9 @@ def updateImage(id, image):
     db.session.commit()
 
 
-def deleteProdotto(prodotto):
-    prod = getProdottoById(prodotto.id)
-    prod.delete()
+def deleteProdotto(prodotto_id):
+    prod = getProdottoById(prodotto_id)
+    db.session.delete(prod)
     db.session.commit()
 
 

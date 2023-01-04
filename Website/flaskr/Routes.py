@@ -20,18 +20,13 @@ def login_page():
         return home()
     return render_template('login_page.html')
 
-
-@views.route('/catalogo_apicoltore')
-def catalogo_apicoltore():
-    return render_template('/catalogo_apicoltore.html')
-
-
 @views.route('/inserimento_prodotto_page')
 def inserimento_prodotto_page():
-
     return render_template('inserimento_prodotto.html')
 
-
+@views.route('/registrazione_cl')
+def sigup_cl(): #typo, da cambiare
+    return render_template('registrazione_cliente.html')
 @views.route('/registrazione_apicoltore')
 def sigup_ap():
     return render_template('registrazione_apicoltore.html')

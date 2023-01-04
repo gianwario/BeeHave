@@ -143,6 +143,61 @@
           </div>
         </div>
       </div>
+
+          <div class="inputWrapper">
+            <input type="text" name="cognome" id="cognome" required="">
+            <label for="cognome">Cognome</label>
+          </div>
+
+          <div class="inputWrapper">
+            <input type="text" name="citta" id="citta" required="">
+            <label for="citta">Città</label>
+          </div>
+
+          <div class="inputWrapper">
+            <input type="text" name="indirizzo" id="indirizzo" required="">
+            <label for="indirizzo">Indirizzo</label>
+          </div>
+
+           <div class="inputWrapper">
+            <input type="text" name="cap" id="cap" required="">
+            <label for="cap">CAP</label>
+          </div>
+
+          <div class="inputWrapper">
+            <input type="email" name="email" id="email" required="">
+            <label for="email">Email</label>
+          </div>
+
+          <div class="inputWrapper">
+            <input type="text" name="telefono" id="telefono" required="">
+            <label for="telefono">Numero di telefono</label>
+          </div>
+          <div class="inputWrapper">
+            <input type="text" name="assistenza" id="assistenza" required="">
+            <label for="assistenza">Assistenza</label>
+          </div>
+           <div class="inputWrapper">
+            <input type="text" name="descrizione" id="descrizione" required="">
+            <label for="descrizione">Descrizione</label>
+          </div>
+
+          <div class="inputWrapper">
+            <input type="password" name="password" id="password" required="">
+            <label for="password">Password</label>
+          </div>
+
+          <div class="inputWrapper">
+            <input type="password" name="cpwd" id="cpwd" required="">
+            <label for="cpwd">Confirm Password</label>
+          </div>
+
+        </form>
+
+      <input form="form" type="submit" name="register" id="register" value="REGISTER">
+
+    <div class="form-footer">
+      <p>Already have an account? <a class="form-link" href="{{url_for('views.login_page')}}">Login</a></p>
     </div>
   </div>
 </section>
