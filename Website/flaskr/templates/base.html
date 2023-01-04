@@ -6,11 +6,8 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1" >
+
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-             integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"/>
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
-             crossorigin="anonymous" />
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
         <title>{% block title %}Title{% endblock %}</title>
@@ -22,7 +19,7 @@
       <a class="navbar-brand" href="#">BeeHave</a>
     </div>
     <ul class="nav navbar-nav">
-      <li class="active"><a href="#">Home</a></li>
+      <li class="active"><a href="{{url_for('views.home')}}">Home</a></li>
       <li><a href="#">Adotta Alveare</a></li>
       <li><a href="#">Catalogo Prodotti</a></li>
       <li><a href="#">Chi siamo</a></li>
@@ -30,8 +27,10 @@
     <ul class="nav navbar-nav navbar-right">
       <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span>Area Utente</a>
        <ul class="dropdown-menu">
-          <li><a href="#">Login</a></li>
-          <li><a href="{{url_for('views.sigup_cl')}}">Registrazione Cliente</a></li>
+          <li><a href="#">Registra Apicoltore</a></li>
+           <li><a href="#">Login</a></li>
+           <li><a href="{{url_for('views.sigup_cl')}}">Registra Cliente</a></li>
+           <li><a href="#">Inserisci prodotto</a></li>
         </ul></li>
     </ul>
   </div>
@@ -39,7 +38,7 @@
     {% block content %}
      {% with messages = get_flashed_messages(with_categories=true) %}
      {% if messages %}
-        {% for category, message in messages %}
+        {% for category, message in get_flashed_messages() %}
         {% if category == 'errore' %}
             <div class="alert alert-danger alter-dismissable fade show" role="alert">
                 {{ message }}

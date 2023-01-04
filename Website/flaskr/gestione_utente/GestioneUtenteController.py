@@ -59,16 +59,17 @@ def registrazione_cliente():
         numtelefono = request.form.get('numtelefono')
 
         if not (controllo_car_spec(psw) and controllo_num(psw)):
-            print("Inserire nel campo password almeno un carattere speciale ed un numero.")
+            flash("Inserire nel campo password almeno un carattere speciale ed un numero.", category="errore")
+            return sigup_cl()
 
         elif not re.fullmatch(email_valida, email):
-            print("Il campo e-mail non è nel formato corretto.")
+            flash("Il campo e-mail non è nel formato corretto.", category="errore")
         elif psw.__len__() < 8:
-            print("La password deve contenere almeno 8 caratteri.")
+            flash("La password deve contenere almeno 8 caratteri.", category="errore")
         elif not check_email_esistente(email):
-            print("L'indirizzo e-mail è già registrato.")
+            flash("L'indirizzo e-mail è già registrato.", category="errore")
         elif psw != ripeti_psw:
-            print("Ripeti_password non coincide con password.")
+            flash("Ripeti_password non coincide con password.", category="errore")
 
         else:
             nuovo_cliente = Cliente(email=email, nome=nome, cognome=cognome, password=generate_password_hash(psw,
@@ -79,6 +80,8 @@ def registrazione_cliente():
             return home()
 
     return sigup_cl()
+
+
 
 
 
