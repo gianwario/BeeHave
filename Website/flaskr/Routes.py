@@ -1,4 +1,4 @@
-from flask import render_template, Blueprint
+from flask import render_template, Blueprint, session
 from flask_login import login_required
 from flask_login import current_user
 
@@ -38,9 +38,9 @@ def sigup_ap():
 @views.route('/areapersonale')
 @login_required
 def area_personale():
-
-    return render_template('areapersonale.html')
-
+    if session['isApicoltore']:
+        return render_template('areapersonale.html')
+    return render_template('area_personale_cliente.html')
 
 @views.route('/catalogo_prod', methods=['GET'])
 def mostra_prodotti():
