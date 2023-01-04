@@ -43,6 +43,11 @@ def sigup_ap():
 def area_personale():
     return render_template('areapersonale.html')
 
+@views.route('/tester')
+def test_template():
+    alveari_disponibili = get_Alveari()
+    return render_template('test.html', alveari_disponibili=alveari_disponibili)
+
 
 @views.route('/catalogo_prod', methods=['GET'])
 def mostra_prodotti():
