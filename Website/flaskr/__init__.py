@@ -1,4 +1,7 @@
-from flask import Flask, session
+from flask import Flask, render_template
+import os.path
+
+
 from flask_login import LoginManager
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy_utils import create_database, database_exists
@@ -6,6 +9,9 @@ from sqlalchemy_utils import create_database, database_exists
 
 db = SQLAlchemy()
 
+
+db = SQLAlchemy()
+image_folder_absolute = os.path.join(os.path.abspath(os.path.dirname(__file__)), os.path.join('static', 'images'))
 """Inizializzazione"""
 
 def create_app():
@@ -15,7 +21,6 @@ def create_app():
     app.config['SECRET_KEY'] = 'BEEHAVE'
     app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:root@localhost/beehavedb'
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-
     db.init_app(app)
 
     login_manager = LoginManager(app)
@@ -48,5 +53,9 @@ def create_app():
         else:
             return Cliente.Cliente.query.get(email)
 
+    @app.errorhandler(404)
+    def page_not_found(e):
+        # note that we set the 404 status explicitly
+        return render_template('pageerror.html'), 404
 
     return app

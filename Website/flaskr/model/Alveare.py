@@ -6,6 +6,7 @@ class Alveare(db.Model):
     nome = db.Column(db.String(45), nullable=False)
     img_path = db.Column(db.String(200), nullable=False)
     tipo_fiore = db.Column(db.String(45), nullable=False)
+    prezzo = db.Column(db.Float, nullable=False)
     produzione = db.Column(db.Integer, nullable=False)
     numero_api = db.Column(db.Integer, nullable=False)
     tipo_miele = db.Column(db.String(100), nullable=False)
