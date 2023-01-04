@@ -11,8 +11,6 @@ from Website.flaskr.model.Cliente import Cliente
 gu = Blueprint('gu', __name__)
 email_valida = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b'
 
-
-
 from flask import Blueprint, request, session, flash
 from werkzeug.security import check_password_hash, generate_password_hash
 from flask_login import login_user, logout_user, login_required
@@ -42,8 +40,7 @@ def login():
                 return login_page()
         if user:
 
-            # if check_password_hash(user.password, pwd):
-            if user.password == pwd:
+            if check_password_hash(user.password, pwd):
 
                 login_user(user, remember=True)
                 flash('Login effettuato con successo!', category='success')
@@ -60,7 +57,6 @@ def login():
 def logout():
     logout_user()
     return home()
-
 
 
 @gu.route('/registrazione_cl', methods=['GET', 'POST'])
@@ -91,7 +87,8 @@ def registrazione_cliente():
 
         else:
             nuovo_cliente = Cliente(email=email, nome=nome, cognome=cognome, password=generate_password_hash(psw,
-                                    method='sha256'), indirizzo=indirizzo,citta=citta, cap=cap, telefono=numtelefono)
+                                                                                                             method='sha256'),
+                                    indirizzo=indirizzo, citta=citta, cap=cap, telefono=numtelefono)
 
             registra_cliente(nuovo_cliente)
             flash("Account creato con successo!", category="successo")
@@ -159,6 +156,7 @@ def sigup():
         registraApicoltore(user)
         return home()
 
+
 def controllo_pwd(pwd):
     spec_check = re.compile(spec)
     num_check = re.compile(num)
@@ -167,6 +165,3 @@ def controllo_pwd(pwd):
         return True
     else:
         return False
-
-        
-
