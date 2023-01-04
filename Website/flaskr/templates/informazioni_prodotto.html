@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    {% extends "base.html"%}
+    <link  rel="stylesheet" href="{{url_for('static', filename='css/info_prod.css')}}">
+
+    {% block title %}Informazioni{% endblock %}
+</head>
+<body>
+{% block content %}
+<div class="container mt-5 mb-5">
+    <div class="card">
+        <div class="row g-0">
+            <div class="col-md-6 border-end">
+                <div class="d-flex flex-column justify-content-center">
+                    <div class="main_image"><img src="../static/images/{{prodotto.img_path}}" id="main_product_image"
+                                                 width="350"></div>
+
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="p-3 right-side">
+                    <div class="d-flex justify-content-between align-items-center"><h3>{{prodotto.nome}}</h3>    <span
+                            class="heart"><i class='bx bx-heart'></i></span></div>
+                    <div class="mt-2 pr-3 content"><p>{{prodotto.descrizione}}</p></div>
+                    <p>Localitá di produzione: {{prodotto.localita}}</p>
+                    <h3>€{{prodotto.prezzo}}</h3>
+                    <div class="ratings d-flex flex-row align-items-center">
+                        <div class="d-flex flex-row"><i class='bx bxs-star'></i> <i class='bx bxs-star'></i> <i
+                                class='bx bxs-star'></i> <i class='bx bxs-star'></i> <i class='bx bx-star'></i></div>
+
+                        <span>Nome Apicoltore:{{apicoltore.nome}}</span><span>  Tipologia:{{prodotto.tipologia}}</span><span>  Peso:{{prodotto.peso}}</span><span>  Quantitá:{{prodotto.quantita}}</span></div>
+                    <div class="buttons d-flex flex-row mt-5 gap-3">
+                        <button class="btn btn-outline-dark">Compra</button>
+                        <button class="btn btn-dark">Aggiungi al Carrello</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{{current_user.nome}}
+{% endblock %}
+</body>
+</html>

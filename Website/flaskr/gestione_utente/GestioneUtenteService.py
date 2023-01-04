@@ -1,6 +1,7 @@
 from Website.flaskr import db
 from Website.flaskr.model.Apicoltore import Apicoltore
 from Website.flaskr.model.Cliente import Cliente
+from .. import db
 
 spec = ["$", "#", "@", "!", "*", "£", "%", "&", "/", "(", ")", "=", "|",
         "+", "-", "^", "_", "-", "?", ",", ":", ";", ".", "§", "°", "[", "]"]
@@ -9,6 +10,10 @@ numb = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
 
 def getApicoltoreByEmail(email):
     return Apicoltore.query.filter_by(email=email).first()
+
+
+def getApicoltoreById(id_api):
+    return Apicoltore.query.filter_by(id=id_api).first()
 
 
 def getClienteByEmail(email):
@@ -42,4 +47,8 @@ def controllo_num(psw):
 
 def registra_cliente(Cliente):
     db.session.add(Cliente)
+    db.session.commit()
+
+def registraApicoltore(utente):
+    db.session.add(utente)
     db.session.commit()

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+<link  rel="stylesheet" href="{{url_for('static', filename='css/reg.ap.css')}}">
+
+    </head>
+    <body >
+
+  <main class="container">
+   <div class="container">
+  <div class="image-wapper" style="background-image: url(https://images.unsplash.com/photo-1619457632358-702e130ceecc?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8YXBpY3VsdHVyYXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=800&q=60?auto=compress&amp;cs=tinysrgb&amp;w=1260&amp;h=750&amp;dpr=1)">
+    <h1>Registrati come apicoltore</h1>
+  </div>
+  <div class="form-wapper">
+    <div class="form-header">
+      <h2>Registrati</h2>
+      <p>Welcome to store name. Enter your personal details and start journey with us.</p>
+    </div>
+    <div class="form-body">
+      <form id="form" method="post" action="/registrazione_ap">
+          <div class="inputWrapper">
+            <input type="text" name="nome" id="nome" required>
+            <label for="nome">Nome</label>
+          </div>
+
+          <div class="inputWrapper">
+            <input type="text" name="cognome" id="cognome" required="">
+            <label for="cognome">Cognome</label>
+          </div>
+
+          <div class="inputWrapper">
+            <input type="text" name="citta" id="citta" required="">
+            <label for="citta">Città</label>
+          </div>
+
+          <div class="inputWrapper">
+            <input type="text" name="indirizzo" id="indirizzo" required="">
+            <label for="indirizzo">Indirizzo</label>
+          </div>
+
+           <div class="inputWrapper">
+            <input type="text" name="cap" id="cap" required="">
+            <label for="cap">CAP</label>
+          </div>
+
+          <div class="inputWrapper">
+            <input type="email" name="email" id="email" required="">
+            <label for="email">Email</label>
+          </div>
+
+          <div class="inputWrapper">
+            <input type="text" name="telefono" id="telefono" required="">
+            <label for="telefono">Numero di telefono</label>
+          </div>
+          <div class="inputWrapper">
+            <input type="text" name="assistenza" id="assistenza" required="">
+            <label for="assistenza">Assistenza</label>
+          </div>
+           <div class="inputWrapper">
+            <input type="text" name="descrizione" id="descrizione" required="">
+            <label for="descrizione">Descrizione</label>
+          </div>
+
+          <div class="inputWrapper">
+            <input type="password" name="password" id="password" required="">
+            <label for="password">Password</label>
+          </div>
+
+          <div class="inputWrapper">
+            <input type="password" name="cpwd" id="cpwd" required="">
+            <label for="cpwd">Confirm Password</label>
+          </div>
+
+        </form>
+
+      <input form="form" type="submit" name="register" id="register" value="REGISTER">
+
+    <div class="form-footer">
+      <p>Already have an account? <a class="form-link" href="{{url_for('views.login_page')}}">Login</a></p>
+    </div>
+  </div>
+</div>
+   </div>
+</main>
+
+</body>
+
+
+</html>
+
