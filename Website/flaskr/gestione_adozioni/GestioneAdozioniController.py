@@ -55,7 +55,8 @@ def inserimento_alveare():
             update_imgAlveare(alveare.id, nome_alv)
             # TODO fixare formati immagini, non basta solo jpg
             flash('Inserimento alveare avvenuto con successo!', category='success')
-            return mostra_alveari_disponibili(current_user.id)
+
+    return mostra_alveari_disponibili(current_user.id)
 
 
 @ga.route('/visualizza_alveari_disponibili/<int:apicoltore_id>', methods=['POST', 'GET'])

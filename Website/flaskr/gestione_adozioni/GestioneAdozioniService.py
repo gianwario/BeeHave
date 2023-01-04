@@ -21,5 +21,6 @@ def update_imgAlveare(id, img):
 def get_AlveariDisponibili(apicoltore_id):
     return Alveare.query.filter_by(id_apicoltore=apicoltore_id).all()
 
+
 def get_Alveari():
     return Alveare.query.all()

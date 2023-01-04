@@ -53,4 +53,4 @@ def mostra_prodotti():
 @views.route('/catalogo_alveari', methods=['GET'])
 def mostra_alveari():
     alveari_disponibili = get_Alveari()
-    return render_template('catalogo_prodotti.html', alveari_disponibili=alveari_disponibili)
+    return render_template('catalogo_alveari.html', alveari_disponibili=alveari_disponibili)
