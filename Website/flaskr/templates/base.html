@@ -3,73 +3,78 @@
 
 <!-- template di base per front end -->
 
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1" >
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-        <title>{% block title %}Title{% endblock %}</title>
-    </head>
-    <body>
-     <nav class="navbar navbar-inverse">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <a class="navbar-brand" href="#">BeeHave</a>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <title>{% block title %}Title{% endblock %}</title>
+</head>
+<body>
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">BeeHave</a>
+        </div>
+        <ul class="nav navbar-nav">
+            <li class="active"><a href="{{url_for('views.home')}}">Home</a></li>
+            <li><a href="{{url_for('views.mostra_alveari')}}">Adotta Alveare</a></li>
+            <li><a href="{{url_for('views.mostra_prodotti')}}">Catalogo Prodotti</a></li>
+            <li><a href="#">Chi siamo</a></li>
+
+
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><span
+                    class="glyphicon glyphicon-user"></span>Area Utente</a>
+                <ul class="dropdown-menu">
+
+                    {% if not current_user.is_authenticated %}
+                    <li><a href="{{url_for('views.login_page')}}">Login</a></li>
+                    <li><a href="{{url_for('views.sigup_ap')}}">Registra Apicoltore</a></li>
+                    <li><a href="{{url_for('views.sigup_cl')}}">Registra Cliente</a></li>
+
+                    {% else %}
+                    <li><a href="{{url_for('views.area_personale')}}">Area Personale</a></li>
+
+                    {% if session['isApicoltore'] %}
+                    <li><a href="{{url_for('views.inserimento_prodotto_page')}}">Inserisci prodotto</a></li>
+                    <li><a href="{{url_for('views.inserimento_alveare_page')}}">Inserisci alveare</a></li>
+                    <li><a href="{{url_for('gv.mostra_articoli_inVendita', apicoltore_id=current_user.id)}}">Visualizza
+                        prodotti in vendita</a>
+                    <li>
+                        {% endif %}
+                    <li><a href="{{url_for('gu.logout')}}">Logout</a></li>
+                    {% endif %}
+                </ul>
+            </li>
+        </ul>
     </div>
-    <ul class="nav navbar-nav">
-      <li class="active"><a href="{{url_for('views.home')}}">Home</a></li>
-      <li><a href="#">Adotta Alveare</a></li>
-      <li><a href="{{url_for('views.mostra_prodotti')}}">Catalogo Prodotti</a></li>
-      <li><a href="#">Chi siamo</a></li>
-
-
-    </ul>
-    <ul class="nav navbar-nav navbar-right">
-      <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span>Area Utente</a>
-       <ul class="dropdown-menu">
-
-           {% if not current_user.is_authenticated %}
-                <li><a href="{{url_for('views.login_page')}}">Login</a></li>
-                <li><a href="{{url_for('views.sigup_ap')}}">Registra Apicoltore</a></li>
-                <li><a href="{{url_for('views.sigup_cl')}}">Registra Cliente</a></li>
-
-           {% else %}
-               <li><a href="{{url_for('views.area_personale')}}">Area Personale</a></li>
-
-                {% if session['isApicoltore'] %}
-                <li><a href="{{url_for('views.inserimento_prodotto_page')}}">Inserisci prodotto</a></li>
-                 <li><a href="{{url_for('gv.mostra_articoli_inVendita', apicoltore_id=current_user.id)}}">Visualizza prodotti in vendita</a><li>
-                {% endif %}
-                <li><a href="{{url_for('gu.logout')}}">Logout</a></li>
-           {% endif %}
-        </ul></li>
-    </ul>
-  </div>
 </nav>
-    {% block content %}
-     {% with messages = get_flashed_messages(with_categories=true) %}
-     {% if messages %}
-        {% for category, message in get_flashed_messages() %}
-        {% if category == 'errore' %}
-            <div class="alert alert-danger alter-dismissable fade show" role="alert">
-                {{ message }}
-                <button type="button" class="close" data-dismiss="alert">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-        {% else %}
-            <div class="alert alert-success alter-dismissable fade show" role="alert">
-                {{ message }}
-                <button type="button" class="close" data-dismiss="alert">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-        {% endif %}
-     {% endfor %}
-     {% endif %}
-     {% endwith %}
-    {% endblock %}
-    </body>
+{% block content %}
+{% with messages = get_flashed_messages(with_categories=true) %}
+{% if messages %}
+{% for category, message in get_flashed_messages() %}
+{% if category == 'errore' %}
+<div class="alert alert-danger alter-dismissable fade show" role="alert">
+    {{ message }}
+    <button type="button" class="close" data-dismiss="alert">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+{% else %}
+<div class="alert alert-success alter-dismissable fade show" role="alert">
+    {{ message }}
+    <button type="button" class="close" data-dismiss="alert">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+{% endif %}
+{% endfor %}
+{% endif %}
+{% endwith %}
+{% endblock %}
+</body>
 </html>
