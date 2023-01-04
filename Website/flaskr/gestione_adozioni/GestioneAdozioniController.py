@@ -6,7 +6,8 @@ from werkzeug.utils import secure_filename
 
 from Website.flaskr import image_folder_absolute
 from Website.flaskr.Routes import inserimento_alveare_page
-from Website.flaskr.gestione_adozioni.GestioneAdozioniService import inserisci_alveare, update_imgAlveare
+from Website.flaskr.gestione_adozioni.GestioneAdozioniService import inserisci_alveare, update_imgAlveare, \
+    get_AlveariDisponibili
 from Website.flaskr.model.Alveare import Alveare
 
 ga = Blueprint('ga', __name__)
@@ -38,6 +39,7 @@ def inserimento_alveare():
         elif (prezzo > 1000):
             flash('Prezzo troppo alto!', category='error')
         else:
+            flash('Inserimento avvenuto con successo!', category='success')
 
             alveare = Alveare(nome=nome, produzione=produzione, numero_api=numero_api, tipo_miele=tipo_miele,
                               percentuale_disponibile=percentuale_disponibile,
@@ -45,17 +47,15 @@ def inserimento_alveare():
                               popolazione=popolazione, polline=polline,
                               stato_cellette=stato_cellette, id_apicoltore=apicoltore, img_path='value')
 
-            inserisci_alveare(alveare)
+        inserisci_alveare(alveare)
 
-            image = request.files['imagepath']
-            nome_alv = 'alveare' + str(alveare.id) + ".jpg"
-            path_image = os.path.join(image_folder_absolute, secure_filename(image.filename))
-            image.save(path_image)
-            os.rename(path_image, os.path.join(image_folder_absolute, nome_alv))
-            update_imgAlveare(alveare.id, nome_alv)
-            # TODO fixare formati immagini, non basta solo jpg
-            flash('Inserimento alveare avvenuto con successo!', category='success')
-
+        image = request.files['imagepath']
+        nome_alv = 'alveare' + str(alveare.id) + ".jpg"
+        path_image = os.path.join(image_folder_absolute, secure_filename(image.filename))
+        image.save(path_image)
+        os.rename(path_image, os.path.join(image_folder_absolute, nome_alv))
+        update_imgAlveare(alveare.id, nome_alv)
+        # TODO fixare formati immagini, non basta solo jpg
     return mostra_alveari_disponibili(current_user.id)
 
 
@@ -63,5 +63,5 @@ def inserimento_alveare():
 @login_required
 def mostra_alveari_disponibili(apicoltore_id):
     if session['isApicoltore']:
-        alveari_disponibili = mostra_alveari_disponibili(apicoltore_id)
+        alveari_disponibili = get_AlveariDisponibili(apicoltore_id)
         return render_template('/catalogo_alveari_disponibili.html', alveari_disponibili=alveari_disponibili)
