@@ -2,6 +2,7 @@ from flask import render_template, Blueprint
 from flask_login import login_required
 from flask_login import current_user
 
+from Website.flaskr.gestione_adozioni.GestioneAdozioniService import get_Alveari
 from Website.flaskr.gestione_vendita.GestioneVenditaService import getTuttiProdotti, getProdottoById
 from Website.flaskr.model.Prodotto import Prodotto
 
@@ -48,3 +49,8 @@ def mostra_prodotti():
     prods = getTuttiProdotti()
     return render_template('catalogo_prodotti.html', prods=prods)
 
+
+@views.route('/catalogo_alveari', methods=['GET'])
+def mostra_alveari():
+    alveari_disponibili = get_Alveari()
+    return render_template('catalogo_prodotti.html', alveari_disponibili=alveari_disponibili)

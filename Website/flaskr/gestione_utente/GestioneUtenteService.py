@@ -49,6 +49,7 @@ def registra_cliente(Cliente):
     db.session.add(Cliente)
     db.session.commit()
 
+
 def registraApicoltore(utente):
     db.session.add(utente)
     db.session.commit()
