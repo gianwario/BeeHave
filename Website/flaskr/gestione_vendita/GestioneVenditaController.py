@@ -4,7 +4,7 @@ import os
 
 from werkzeug.utils import secure_filename
 from Website.flaskr import image_folder_absolute
-from Website.flaskr.Routes import area_personale, home
+from Website.flaskr.Routes import area_personale, home, mostra_prodotti
 from Website.flaskr.gestione_utente.GestioneUtenteService import getApicoltoreById
 from Website.flaskr.gestione_vendita.GestioneVenditaService import inserisci_prodotto, getProdottoById, updateImage, \
     get_ProdottiByApicoltore, deleteProdotto, acquisto_prodotto
@@ -104,4 +104,4 @@ def acquista_prodotto():
 
         acquisto = Acquisto(id_cliente=id_cliente, id_prodotto=id_prodotto)
         acquisto_prodotto(acquisto, quantita)
-    return home()
+    return mostra_prodotti()
