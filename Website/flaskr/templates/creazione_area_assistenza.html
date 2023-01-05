@@ -9,7 +9,9 @@
         <form action="/crea_area_assistenza" method="post">
             <label for="descrizione">Descrizione</label>
             <textarea name="descrizione" id="descrizione" required placeholder="Inserisci la descrizione"></textarea>
-            <input type="submit" value="Crea"/> <input type="reset" value="Cancella">
+            <label for="assistenza">Dichiaro di apparire nella lista degli apicoltori che richiedono assistenza</label>
+                <input type="checkbox" id="assistenza" name="assistenza" required/>
+            <input type="submit" value="Crea"/> <input type="reset" value="Cancella"/>
         </form>
         {% endblock %}
     </body>
