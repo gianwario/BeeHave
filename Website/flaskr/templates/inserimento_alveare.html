@@ -1,0 +1,109 @@
+{%extends "base.html" %}
+{%block title%}Inserimento Prodotto{%endblock%}
+
+{% block content%}
+<form action="/inserimento_alveare" enctype="multipart/form-data" method="post">
+    <h3 align="center">Inserimento alveare</h3>
+    <label for="nome">Inserire nome: </label>
+    <input
+            id="nome"
+            name="nome"
+            type="text"
+            required=true
+            placeholder="Inserisci nome"
+    />
+    <br>
+    <br>
+    <label for="produzione">Inserire quantit&#224 di miele in grammi prodotto dall'alveare:</label> <br>
+    <input type="radio" id="produzione" name="produzione" value="500">
+    <label for="produzione">500</label><br>
+    <input type="radio" id="produzione2" name="produzione" value="1000">
+    <label for="produzione">1000</label><br>
+    <input type="radio" id="produzione3" name="produzione" value="1500">
+    <label for="produzione">1500</label><br>
+    <input type="radio" id="produzione4" name="produzione" value="2000">
+    <label for="produzione">2000</label>
+    <br>
+    <br>
+    <label for="numero_api">Inserire il numero di api:</label>
+    <input
+            required="true"
+            type="number"
+            id="numero_api"
+            name="numero_api"
+            min="500"
+            max="4000"
+            step="500"/>
+    <br>
+    <br>
+    <label for="tipo_miele">Inserire tipo miele: </label>
+    <input
+            id="tipo_miele"
+            name="tipo_miele"
+            type="text"
+            required=true
+            placeholder="Inserisci tipo miele"
+    />
+    <br>
+    <br>
+    <label for="prezzo">Inserire prezzo: </label>
+    <input
+            id="prezzo"
+            name="prezzo"
+            type="number"
+            required=true
+            placeholder="Inserisci prezzo"
+    />
+    <br>
+    <br>
+    <label for="covata_compatta">La covata è compatta?</label> <br>
+    <input type="radio" id="covata_compatta" name="covata_compatta" value="1">
+    <label for="covata_compatta">si</label><br>
+    <input type="radio" id="covata_compatta2" name="covata_compatta" value="0">
+    <label for="covata_compatta">no</label><br>
+    <br>
+    <br>
+    <label for="tipo_fiore">Inserire il nome del fiore impollinato: </label>
+    <input
+            id="tipo_fiore"
+            name="tipo_fiore"
+            type="text"
+            required=true
+            placeholder="Inserisci tipo fiore"
+    />
+    <br>
+    <br>
+    <label for="popolazione">Inserisci stato popolazione: </label> <br>
+    <input type="radio" id="popolazione" name="popolazione" value="scarso">
+    <label for="popolazione">scarso</label><br>
+    <input type="radio" id="popolazione2" name="popolazione" value="medio">
+    <label for="popolazione">medio</label><br>
+    <input type="radio" id="popolazione3" name="popolazione" value="ottimo">
+    <label for="popolazione">ottimo</label><br>
+    <br>
+    <br>
+    <label for="polline">Inserisci stato polline: </label> <br>
+    <input type="radio" id="polline" name="polline" value="scarso">
+    <label for="polline">scarso</label><br>
+    <input type="radio" id="polline2" name="polline" value="medio">
+    <label for="polline">medio</label><br>
+    <input type="radio" id="polline3" name="polline" value="ottimo">
+    <label for="polline">ottimo</label><br>
+    <br>
+    <br>
+    <label for="stato_cellette">Inserisci stato cellette: </label> <br>
+    <input type="radio" id="stato_cellette" name="stato_cellette" value="scarso">
+    <label for="stato_cellette">scarso</label><br>
+    <input type="radio" id="stato_cellette2" name="stato_cellette" value="medio">
+    <label for="stato_cellette">medio</label><br>
+    <input type="radio" id="stato_cellette3" name="stato_cellette" value="ottimo">
+    <label for="stato_cellette">ottimo</label><br>
+    <br>
+    <br>
+    <label for="image">Carica immagine</label>
+    <input id="image" accept="image/*" type="file" name="imagepath">
+    <br>
+    <br>
+    <input type="submit" value="Conferma Inserimento"/> <input type="reset" value="Cancella">
+</form>
+{% endblock %}

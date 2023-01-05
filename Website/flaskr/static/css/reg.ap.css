@@ -1,152 +1,29 @@
-html {
-  --main-color: #2c2ccc;
-  --main-color-hover: #2323a2;
-  --body-background: #f5f5f5;
-  --text-color: #333;
-  --box-bg-color: #fff;
-  --box-shadow-color: #e4e4e4;
-  --menu-active-bg: #f3f3ff;
-  --menu-active-border-color: var(--main-color);
-  --menu-badge-bg: #ff9f43;
-  --line-color: var(--body-background);
-  --scroll-bar-bg: var(--box-bg-color);
-  --scroll-bar-color: #ccc;
-  --success-color: #28c76f;
-  --danger-color: #ea5455;
-  --warning-color: #ff9f43;
-  --border-color: #ced4da;
-  --disable-text-color: #707070;
-}
 
-html.dark {
-  --main-color: #675ad0;
-  --main-color-hover: #877be6;
-  --body-background: #121212;
-  --box-bg-color: #1d1d1d;
-  --text-color: #e1e1e1;
-  --box-shadow-color: #0a0a0a;
-  --menu-active-bg: #3c3c3c;
-  --scroll-bar-bg: var(--box-bg-color);
-  --scroll-bar-color: #000;
-  --border-color: #707070;
-}
-
-::selection {
-  color: #fff;
-  background-color: var(--main-color);
-}
-
-::-moz-selection {
-  color: #fff;
-  background-color: var(--main-color);
-}
-
-* {
-  outline: none;
-  box-sizing: border-box;
-}
-
-html {
-  overflow-x: hidden;
-  scrollbar-color: var(--scroll-bar-color) var(--scroll-bar-bg);
-  scrollbar-width: thin;
-  font-size: 14px;
-}
-html::-webkit-scrollbar-track {
-  background-color: var(--scroll-bar-bg);
-  border-radius: 10px;
-}
-html::-webkit-scrollbar {
-  width: 10px;
-  height: 10px;
-  background-color: var(--scroll-bar-bg);
-}
-html::-webkit-scrollbar-thumb {
-  border-radius: 10px;
-  background-color: var(--scroll-bar-color);
-  border: 2px solid var(--scroll-bar-bg);
-}
-@media (min-width: 576px) {
-  html {
-    font-size: 16px;
-  }
-}
-@media (min-width: 992px) {
-  html {
-    font-size: 16px;
-  }
-}
-
-body {
-  margin: 0;
-  font-family: "Roboto Light", sans-serif;
-  padding: 15px;
-  background-color: var(--body-background);
-  color: var(--text-color);
-  min-height: 100vh;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -moz-box;
-  display: -ms-flexbox;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-@media (min-width: 576px) {
-  body {
-    padding: 20px;
-  }
-}
-@media (min-width: 992px) {
-  body {
-    padding: 30px;
-  }
-}
-
-a {
-  text-decoration: none;
-  color: var(--main-color);
-}
-a:hover {
-  color: var(--main-color-hover);
-}
 
 .container {
   width: 100%;
-  max-width: 800px;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -moz-box;
-  display: -ms-flexbox;
+
+margin:0;
+padding:0;
+position: relative;
+  display:flex;
+height: 100vh;
   display: flex;
-  background-color: var(--box-bg-color);
-  border-radius: 15px;
-  -webkit-box-shadow: 3px 3px 6px 0px var(--box-shadow-color);
-  -moz-box-shadow: 3px 3px 6px 0px var(--box-shadow-color);
-  -ms-box-shadow: 3px 3px 6px 0px var(--box-shadow-color);
-  -o-box-shadow: 3px 3px 6px 0px var(--box-shadow-color);
-  box-shadow: 3px 3px 6px 0px var(--box-shadow-color);
+  min-width: 900px;
+
+
   overflow: hidden;
-  flex-direction: column;
+
 }
-@media (min-width: 576px) {
-  .container {
-    flex-direction: row;
-  }
-}
-.container .image-wapper,
+
+.container .image-wapper
 .container .form-wapper {
   flex: 0 1 100%;
+
   max-width: 100%;
   padding: 50px 30px;
 }
-@media (min-width: 576px) {
-  .container .image-wapper,
-.container .form-wapper {
-    flex: 0 1 50%;
-    max-width: 50%;
-  }
-}
+
 .container .image-wapper {
   display: -webkit-box;
   display: -webkit-flex;
@@ -160,7 +37,8 @@ a:hover {
 }
 .container .image-wapper::before {
   content: "";
-  display: block;
+
+  display: flex;
   position: absolute;
   inset: 0;
   background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.7));
@@ -201,7 +79,7 @@ a:hover {
   padding: 0 10px;
   border-radius: 5px;
   border: 1px solid #707070;
-  color: var(--text-color);
+
   background-color: transparent;
 }
 .container .form-wapper .form-body .input-wrapper .icon {
@@ -237,21 +115,19 @@ a:hover {
 .container .form-wapper .form-body button {
   width: 100%;
   padding: 10px 1rem;
-  background-color: var(--main-color);
+
   border: unset;
   border-radius: 5px;
   color: #fff;
   font-size: 1rem;
   cursor: pointer;
 }
-.container .form-wapper .form-body button:hover {
-  background-color: var(--main-color-hover);
-}
+
 .container .form-wapper .form-footer p {
   font-size: 12px;
   margin: 0;
 }
 .container .form-wapper .form-footer p .icon i {
-  color: var(--main-color);
+
   vertical-align: middle;
 }
