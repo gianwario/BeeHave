@@ -89,7 +89,7 @@ def elimina_prodotto(id_prodotto, id_api):
 @gv.route('/acquista_prodotto', methods=['POST', 'GET'])
 @login_required
 def acquista_prodotto():
-    if request.method == 'POST':  # TODO Add session isCliente
+    if request.method == 'POST' and not session['isApicoltore']: 
         quantita = int(request.form.get('quantita_prod'))
         print(quantita)
         qnt_articolo = int(request.form.get('qnt_articolo'))
