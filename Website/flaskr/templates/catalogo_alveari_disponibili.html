@@ -36,7 +36,7 @@
                 <div class="card-body card-body-cascade text-center">
 
                     <!--Card Title-->
-                    <h4 class="card-title"><strong><a href="#">{{alveare.nome}}</a></strong></h4>
+                    <h4 class="card-title"><strong><a href="{{url_for('ga.informazioni_alveare', alveare_id=alveare.id)}}">{{alveare.nome}}</a></strong></h4>
 
                     <!-- Card Description-->
                     <p class="card-text">Descrizione generica
@@ -45,11 +45,11 @@
 
                     <p class="price">Prezzo: {{alveare.prezzo}}</p>
 
-                    <!--Card footer-->
+                    <!--Card footer
                     <div class="card-footer">
                         <p>Affitta</p>
                     </div>
-
+                        -->
 
                 </div>
             </div>

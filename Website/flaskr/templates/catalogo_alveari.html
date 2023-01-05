@@ -17,7 +17,7 @@
     <div class="row">
 
         {% for alveare in alveari_disponibili %}
-
+        {% if alveare.percentuale_disponibile>=25 %}
         <!--Card 1-->
         <div class="col-md-4">
             <div class="card card-cascade card-ecommerce wider shadow mb-5 ">
@@ -36,7 +36,7 @@
                 <div class="card-body card-body-cascade text-center">
 
                     <!--Card Title-->
-                    <h4 class="card-title"><strong><a href="#">{{alveare.nome}}</a></strong></h4>
+                    <h4 class="card-title"><strong><a href="{{url_for('ga.informazioni_alveare', alveare_id=alveare.id)}}">{{alveare.nome}}</a></strong></h4>
 
                     <!-- Card Description-->
                     <p class="card-text">Descrizione generica
@@ -45,15 +45,15 @@
 
                     <p class="price">Prezzo: {{alveare.prezzo}}</p>
 
-                    <!--Card footer-->
+                    <!--Card footer
                     <div class="card-footer">
                         <p>Affitta</p>
                     </div>
-
-
+                                -->
                 </div>
             </div>
         </div>
+        {% endif %}
         {% endfor %}
 
     </div>

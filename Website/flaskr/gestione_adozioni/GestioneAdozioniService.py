@@ -28,3 +28,16 @@ def get_AlveariDisponibili(apicoltore_id):
 
 def get_Alveari():
     return Alveare.query.all()
+
+
+def decrementa_percentuale(id_alveare, percentuale):
+    alveare = Alveare.query.filter_by(id=id_alveare).first()
+    alveare.percentuale_disponibile -= int(percentuale)
+    db.session.flush()
+    db.session.commit()
+
+
+def affitto_alveare(ticket, percentuale):
+    db.session.add(ticket)
+    db.session.commit()
+    decrementa_percentuale(ticket.id_alveare, percentuale)

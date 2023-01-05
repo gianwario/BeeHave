@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+
+    <link rel="stylesheet" href="{{url_for('static', filename='css/info_prod.css')}}">
+    {% extends "base.html"%}
+    {% block title %}Informazioni Alveare {% endblock %}
+
+</head>
+<body>
+{% block content %}
+<div class="container mt-5 mb-5">
+    <div class="card">
+        <div class="row g-0">
+            <div class="col-md-6 border-end">
+                <div class="d-flex flex-column justify-content-center">
+                    <div class="main_image"><img src="../static/images/{{alveare.img_path}}" id="main_product_image"
+                                                 width="350"></div>
+
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="p-3 right-side">
+                    <div class="d-flex justify-content-between align-items-center"><h3>{{alveare.nome}}</h3></div>
+                    <div class="mt-2 pr-3 content"><p>Numero Api:{{alveare.numero_api}}</p></div>
+                    <p>Tipo miele: {{alveare.tipo_miele}}</p>
+                    <h3>€{{alveare.prezzo}}</h3>
+                    <div class="ratings d-flex flex-row align-items-center">
+                        <div class="d-flex flex-row"><i class='bx bxs-star'></i> <i class='bx bxs-star'></i> <i
+                                class='bx bxs-star'></i> <i class='bx bxs-star'></i> <i class='bx bx-star'></i></div>
+
+                        <span>Nome Apicoltore:{{apicoltore.nome}}</span><span>  Popolazione:{{alveare.popolazione}}</span><span>  Polline:{{alveare.polline}}</span><span>  % Disponibile:{{alveare.percentuale_disponibile}}</span>
+                    </div>
+
+                    <div class="buttons d-flex flex-row mt-5 gap-3">
+                        <form action="/affitta_alveare" method="post">
+                            <label for="percentuale">Scegliere percentuale da adottare: </label> <br>
+                            <input type="radio" id="percentuale" name="disp" value="25">
+                            <label for="percentuale2">25%</label><br>
+                            <input type="radio" id="percentuale2" name="disp" value="50">
+                            <label for="percentuale3">50%</label><br>
+                            <input type="radio" id="percentuale3" name="disp" value="75">
+                            <label for="percentuale4">75%</label><br>
+                            <input type="radio" id="percentuale4" name="disp" value="100">
+                            <label for="percentuale4">100%</label>
+                            <br>
+                            <br>
+
+                            <label for="tempo">Scegliere Tempo di adozione: </label> <br>
+                            <input type="radio" id="tempo" name="tempo_adozione" value="3">
+                            <label for="tempo">3 Mesi</label><br>
+                            <input type="radio" id="tempo2" name="tempo_adozione" value="6">
+                            <label for="tempo">6 Mesi</label><br>
+                            <input type="radio" id="tempo3" name="tempo_adozione" value="9">
+                            <label for="tempo">9 Mesi</label><br>
+                            <input type="radio" id="tempo4" name="tempo_adozione" value="12">
+                            <label for="tempo">12 Mesi</label>
+                            <br>
+                            <br>
+                            <input type="hidden" name="percentuale_residua" value="{{alveare.percentuale_disponibile}}">
+                            <input type="hidden" name="id_alv" value="{{alveare.id}}">
+                            <!-- Controllo per far effettuare acquisto solo al cliente -->
+                            <input type="hidden" name="id_client" value="{{current_user.id}}">
+                            <button type="submit" value="acquista" class="btn btn-outline-dark">Adotta</button>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+</body>
+</html>

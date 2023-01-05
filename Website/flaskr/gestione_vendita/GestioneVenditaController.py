@@ -90,14 +90,9 @@ def elimina_prodotto(id_prodotto, id_api):
 def acquista_prodotto():
     if request.method == 'POST' and not session['isApicoltore']:
         quantita = int(request.form.get('quantita_prod'))
-        print(quantita)
         qnt_articolo = int(request.form.get('qnt_articolo'))
-        print(qnt_articolo)
         id_cliente = int(request.form.get('id_client'))
-        print(id_cliente)
-
         id_prodotto = int(request.form.get('id_prd'))
-        print(id_prodotto)
         if quantita <= qnt_articolo:
             flash('Quantitá non disponibile!', category='error')
 
