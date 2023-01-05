@@ -27,8 +27,8 @@ def check_email_esistente(email):
         return True
 
 
-def registra_cliente(Cliente):
-    db.session.add(Cliente)
+def registra_cliente(cliente):
+    db.session.add(cliente)
     db.session.commit()
 
 
