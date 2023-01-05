@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, session
 import os.path
 
 from flask_login import LoginManager
@@ -20,6 +20,7 @@ def create_app():
     db.init_app(app)
 
     login_manager = LoginManager(app)
+
 
     from .Routes import views
     from .gestione_utente.GestioneUtenteController import gu

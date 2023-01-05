@@ -32,7 +32,7 @@
            {% if not current_user.is_authenticated %}
                 <li><a class="dropdown-item" href="{{url_for('views.login_page')}}">Login</a></li>
                 <li><a class="dropdown-item" href="{{url_for('views.sigup_ap')}}">Registra Apicoltore</a></li>
-                <li><a class="dropdown-item" href="#">Registra Cliente</a></li>
+                <li><a class="dropdown-item" href="{{url_for('views.sigup_cl')}}">Registra Cliente</a></li>
 
            {% else %}
                <li><a class="dropdown-item" href="{{url_for('views.area_personale')}}">Area Personale</a></li>

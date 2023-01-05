@@ -53,7 +53,6 @@ def inserimento_prodotto():
         image.save(path_image)
         os.rename(path_image, os.path.join(image_folder_absolute, nome_vasetto))
         updateImage(prod.id, nome_vasetto)
-        # TODO fixare formati immagini, non basta solo jpg
     return mostra_articoli_inVendita(current_user.id)
 
 
@@ -89,7 +88,7 @@ def elimina_prodotto(id_prodotto, id_api):
 @gv.route('/acquista_prodotto', methods=['POST', 'GET'])
 @login_required
 def acquista_prodotto():
-    if request.method == 'POST' and not session['isApicoltore']: 
+    if request.method == 'POST' and not session['isApicoltore']:
         quantita = int(request.form.get('quantita_prod'))
         print(quantita)
         qnt_articolo = int(request.form.get('qnt_articolo'))
