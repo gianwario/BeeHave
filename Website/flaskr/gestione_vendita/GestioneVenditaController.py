@@ -5,7 +5,7 @@ import os
 from werkzeug.utils import secure_filename
 from Website.flaskr import image_folder_absolute
 from Website.flaskr.Routes import catalogo_apicoltore
-from Website.flaskr.gestione_utente.GestioneUtenteService import getApicoltoreById
+from Website.flaskr.gestione_utente.GestioneUtenteService import get_apicoltore_by_id
 from Website.flaskr.gestione_vendita.GestioneVenditaService import inserisci_prodotto, getProdottoById, updateImage, \
     get_ProdottiByApicoltore
 from Website.flaskr.model.Prodotto import Prodotto
@@ -59,7 +59,7 @@ def inserimento_prodotto():
 @gv.route('/visualizza_prod/<int:prodotto_id>', methods=['POST', 'GET'])
 def info_articolo(prodotto_id):
     prod = getProdottoById(prodotto_id)
-    apicoltore = getApicoltoreById(prod.id_apicoltore)
+    apicoltore = get_apicoltore_by_id(prod.id_apicoltore)
     return render_template('informazioni_prodotto.html', prodotto=prod, apicoltore=apicoltore)
 
 

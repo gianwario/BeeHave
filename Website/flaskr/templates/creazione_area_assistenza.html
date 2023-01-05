@@ -8,9 +8,8 @@
         {% block content %}
         <form action="/crea_area_assistenza" method="post">
             <label for="descrizione">Descrizione</label>
-            <textarea name="descrizione"  required placeholder="Inserisci la descrizione"/>
-
-            <input type="submit" value="Accedi"/> <input type="reset" value="Cancella">
+            <textarea name="descrizione" id="descrizione" required placeholder="Inserisci la descrizione"></textarea>
+            <input type="submit" value="Crea"/> <input type="reset" value="Cancella">
         </form>
         {% endblock %}
     </body>

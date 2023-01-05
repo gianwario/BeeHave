@@ -51,6 +51,11 @@ def create_app():
         else:
             return Cliente.Cliente.query.get(email)
 
+    @app.errorhandler(401)
+    def unauthorized_user(e):
+        # note that we set the 401 status explicitly
+        return render_template('login_page.html'), 401
+
     @app.errorhandler(404)
     def page_not_found(e):
         # note that we set the 404 status explicitly

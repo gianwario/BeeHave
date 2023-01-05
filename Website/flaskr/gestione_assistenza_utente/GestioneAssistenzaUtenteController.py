@@ -1,6 +1,7 @@
 from flask import Blueprint, request, flash, session
 
 from Website.flaskr.Routes import crea_area_assistenza_page, area_personale
+from Website.flaskr.gestione_assistenza_utente.GestioneAssistenzaUtenteService import inserisci_area_assistenza
 
 gau = Blueprint('gau', __name__)
 
@@ -13,6 +14,6 @@ def crea_area_assistenza():
             flash('La lunghezza della descrizione non è valida!', category='error')
             return crea_area_assistenza_page()
 
-        crea_area_assistenza(descrizione)
+        inserisci_area_assistenza(descrizione)
 
     return area_personale()

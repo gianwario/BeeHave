@@ -1,4 +1,4 @@
-from flask import render_template, Blueprint
+from flask import render_template, Blueprint, session
 from flask_login import login_required,current_user
 
 from Website.flaskr.gestione_vendita.GestioneVenditaService import getTuttiProdotti, getProdottoById
@@ -26,10 +26,11 @@ def catalogo_apicoltore():
 
 
 @views.route('/inserimento_prodotto_page')
+@login_required
 def inserimento_prodotto_page():
-
-    return render_template('inserimento_prodotto.html')
-
+    if session['isApicoltore']:
+        return render_template('inserimento_prodotto.html')
+    return home()
 
 @views.route('/registrazione_apicoltore')
 def sigup_ap():
@@ -37,7 +38,6 @@ def sigup_ap():
 @views.route('/areapersonale')
 @login_required
 def area_personale():
-
     return render_template('areapersonale.html')
 
 
@@ -50,5 +50,6 @@ def mostra_prodotti():
 @views.route('/crea_area_assistenza_page')
 @login_required
 def crea_area_assistenza_page():
-    return render_template('crea_area_assistenza.html')
-
+    if session['isApicoltore'] and not current_user.assistenza:
+        return render_template('creazione_area_assistenza.html')
+    return home()
