@@ -68,7 +68,7 @@ def info_articolo(prodotto_id):
 def mostra_articoli_inVendita(apicoltore_id):
     if session['isApicoltore']:
         prodotti_in_vendita = get_ProdottiByApicoltore(apicoltore_id)
-        return render_template('/catalogo_apicoltore.html', prodotti_in_vendita=prodotti_in_vendita)
+        return render_template('/catalogo_prodotti_apicoltore.html', prodotti_in_vendita=prodotti_in_vendita)
 
 
 @gv.route('/elimina_prodotto/<int:id_prodotto>/<int:id_api>', methods=['POST', 'GET'])
@@ -80,7 +80,7 @@ def elimina_prodotto(id_prodotto, id_api):
         os.remove(path)
         deleteProdotto(id_prodotto)
         # prodotti_in_vendita = get_ProdottiByApicoltore(id_api)
-        # return render_template('/catalogo_apicoltore.html', prodotti_in_vendita=prodotti_in_vendita)
+        # return render_template('/catalogo_prodotti_apicoltore.html', prodotti_in_vendita=prodotti_in_vendita)
         return area_personale()
         # TODO fix refresh page
 

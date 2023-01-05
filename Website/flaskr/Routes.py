@@ -61,10 +61,10 @@ def area_personale():
 
 @views.route('/catalogo_prod')
 def mostra_prodotti():
-    if not current_user.is_authenticated or not session['isApicoltore']:
+    #if not current_user.is_authenticated or not session['isApicoltore']:
         prods = getTuttiProdotti()
         return render_template('catalogo_prodotti.html', prods=prods)
-    return home()
+    #return home()
 
 
 @views.route('/crea_area_assistenza_page')
@@ -77,7 +77,7 @@ def crea_area_assistenza_page():
 
 @views.route('/catalogo_alveari', methods=['GET'])
 def mostra_alveari():
-    if not current_user.is_authenticated or not session['isApicoltore']:
+    #if not current_user.is_authenticated or not session['isApicoltore']:
         alveari_disponibili = get_Alveari()
         return render_template('catalogo_alveari.html', alveari_disponibili=alveari_disponibili)
-    return home()
+    #return home()
