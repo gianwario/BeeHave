@@ -4,7 +4,7 @@ import os
 
 from werkzeug.utils import secure_filename
 from Website.flaskr import image_folder_absolute
-from Website.flaskr.Routes import catalogo_apicoltore, area_personale, home, mostra_prodotti
+from Website.flaskr.Routes import area_personale, home, mostra_prodotti
 from Website.flaskr.gestione_utente.GestioneUtenteService import get_apicoltore_by_id
 from Website.flaskr.gestione_vendita.GestioneVenditaService import inserisci_prodotto, getProdottoById, updateImage, \
     get_ProdottiByApicoltore, deleteProdotto, acquisto_prodotto
