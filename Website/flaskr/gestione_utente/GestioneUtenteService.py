@@ -27,29 +27,11 @@ def check_email_esistente(email):
         return True
 
 
-def controllo_car_spec(psw):
-    for char in psw:
-        for symbol in spec:
-            if char == symbol:
-                return True
-
-    return False
-
-
-def controllo_num(psw):
-    for char in psw:
-        for num in numb:
-            if char == num:
-                return True
-
-    return False
-
-
 def registra_cliente(Cliente):
     db.session.add(Cliente)
     db.session.commit()
 
 
-def registraApicoltore(utente):
+def registra_apicoltore(utente):
     db.session.add(utente)
     db.session.commit()

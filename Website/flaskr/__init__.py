@@ -1,4 +1,4 @@
-from flask import Flask, render_template, session
+from flask import Flask, render_template
 import os.path
 
 from flask_login import LoginManager
@@ -21,7 +21,6 @@ def create_app():
 
     login_manager = LoginManager(app)
 
-
     from .Routes import views
     from .gestione_utente.GestioneUtenteController import gu
     from .gestione_vendita.GestioneVenditaController import gv
@@ -33,7 +32,8 @@ def create_app():
     app.register_blueprint(gv, url_prefix='/')
     app.register_blueprint(gau, url_prefix='/')
     app.register_blueprint(ga, url_prefix='/')
-    from .model import UtenteRegistrato, Cliente, Apicoltore, Alveare, Prodotto, Acquisto, TicketAdozione, TicketAssistenza
+    from .model import UtenteRegistrato, Cliente, Apicoltore, Alveare, Prodotto, Acquisto, TicketAdozione, \
+        TicketAssistenza
 
     if not database_exists(app.config["SQLALCHEMY_DATABASE_URI"]):
         create_database(app.config["SQLALCHEMY_DATABASE_URI"])

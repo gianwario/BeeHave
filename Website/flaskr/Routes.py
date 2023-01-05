@@ -46,7 +46,7 @@ def sigup_cl():  # typo, da cambiare
 
 @views.route('/registrazione_apicoltore')
 def sigup_ap():
-    if not current_user.is_authenticated:
+    if not current_user.is_authenticated :
         return render_template('registrazione_apicoltore.html')
     return home()
 
