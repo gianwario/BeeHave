@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-    {% extends "base.html"%}
-    <link rel="stylesheet" href="{{url_for('static', filename='css/info_prod.css')}}">
 
-    {% block title %}Informazioni{% endblock %}
+    <link rel="stylesheet" href="{{url_for('static', filename='css/info_prod.css')}}">
+    {% extends "base.html"%}
+    {% block title %}Informazioni Prodotto {% endblock %}
 </head>
 <body>
 {% block content %}
