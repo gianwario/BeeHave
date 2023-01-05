@@ -21,6 +21,7 @@
     <tbody>
 
     {% for products in prods %}
+    {% if products.quantita>0 %}
     <tr>
         <th scope="row"><img src="../static/images/{{products.img_path}}" class="rounded mx-auto d-block" width="150"
                              height="200"></th>
@@ -28,6 +29,8 @@
         <td>{{products.prezzo}}</td>
         <td><a href="{{url_for('gv.info_articolo', prodotto_id=products.id)}}">Visualizza</a></td>
     </tr>
+    {% else %}
+    {% endif %}
     {% endfor %}
     </tbody>
 </table>
