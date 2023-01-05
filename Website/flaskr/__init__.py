@@ -25,13 +25,14 @@ def create_app():
     from .gestione_utente.GestioneUtenteController import gu
     from .gestione_vendita.GestioneVenditaController import gv
     from .gestione_assistenza_utente.GestioneAssistenzaUtenteController import gau
+    from .gestione_adozioni.GestioneAdozioniController import ga
 
     app.register_blueprint(views, url_prefix='/')
     app.register_blueprint(gu, url_prefix='/')
     app.register_blueprint(gv, url_prefix='/')
     app.register_blueprint(gau, url_prefix='/')
-    from .model import UtenteRegistrato, Cliente, Apicoltore, Alveare, Prodotto, Acquisto, TicketAdozione, \
-        TicketAssistenza
+    app.register_blueprint(ga, url_prefix='/')
+    from .model import UtenteRegistrato, Cliente, Apicoltore, Alveare, Prodotto, Acquisto, TicketAdozione, TicketAssistenza
 
     if not database_exists(app.config["SQLALCHEMY_DATABASE_URI"]):
         create_database(app.config["SQLALCHEMY_DATABASE_URI"])

@@ -4,10 +4,11 @@ import os
 
 from werkzeug.utils import secure_filename
 from Website.flaskr import image_folder_absolute
-from Website.flaskr.Routes import catalogo_apicoltore
+from Website.flaskr.Routes import catalogo_apicoltore, area_personale, home, mostra_prodotti
 from Website.flaskr.gestione_utente.GestioneUtenteService import get_apicoltore_by_id
 from Website.flaskr.gestione_vendita.GestioneVenditaService import inserisci_prodotto, getProdottoById, updateImage, \
-    get_ProdottiByApicoltore
+    get_ProdottiByApicoltore, deleteProdotto, acquisto_prodotto
+from Website.flaskr.model.Acquisto import Acquisto
 from Website.flaskr.model.Prodotto import Prodotto
 
 gv = Blueprint('gv', __name__)
@@ -53,7 +54,7 @@ def inserimento_prodotto():
         os.rename(path_image, os.path.join(image_folder_absolute, nome_vasetto))
         updateImage(prod.id, nome_vasetto)
         # TODO fixare formati immagini, non basta solo jpg
-    return catalogo_apicoltore()
+    return mostra_articoli_inVendita(current_user.id)
 
 
 @gv.route('/visualizza_prod/<int:prodotto_id>', methods=['POST', 'GET'])
@@ -68,4 +69,39 @@ def info_articolo(prodotto_id):
 def mostra_articoli_inVendita(apicoltore_id):
     if session['isApicoltore']:
         prodotti_in_vendita = get_ProdottiByApicoltore(apicoltore_id)
-        return render_template('/catalogo_vendita.html', prodotti_in_vendita=prodotti_in_vendita)
+        return render_template('/catalogo_apicoltore.html', prodotti_in_vendita=prodotti_in_vendita)
+
+
+@gv.route('/elimina_prodotto/<int:id_prodotto>/<int:id_api>', methods=['POST', 'GET'])
+@login_required
+def elimina_prodotto(id_prodotto, id_api):
+    if session['isApicoltore']:
+        prod = getProdottoById(id_prodotto)
+        path = os.path.join(image_folder_absolute, prod.img_path)
+        os.remove(path)
+        deleteProdotto(id_prodotto)
+        # prodotti_in_vendita = get_ProdottiByApicoltore(id_api)
+        # return render_template('/catalogo_apicoltore.html', prodotti_in_vendita=prodotti_in_vendita)
+        return area_personale()
+        # TODO fix refresh page
+
+
+@gv.route('/acquista_prodotto', methods=['POST', 'GET'])
+@login_required
+def acquista_prodotto():
+    if request.method == 'POST':  # TODO Add session isCliente
+        quantita = int(request.form.get('quantita_prod'))
+        print(quantita)
+        qnt_articolo = int(request.form.get('qnt_articolo'))
+        print(qnt_articolo)
+        id_cliente = int(request.form.get('id_client'))
+        print(id_cliente)
+
+        id_prodotto = int(request.form.get('id_prd'))
+        print(id_prodotto)
+        if quantita <= qnt_articolo:
+            flash('Quantitá non disponibile!', category='error')
+
+        acquisto = Acquisto(id_cliente=id_cliente, id_prodotto=id_prodotto)
+        acquisto_prodotto(acquisto, quantita)
+    return mostra_prodotti()
