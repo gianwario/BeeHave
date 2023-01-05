@@ -6,8 +6,6 @@ from flask_login import LoginManager
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy_utils import create_database, database_exists
 
-
-
 db = SQLAlchemy()
 image_folder_absolute = os.path.join(os.path.abspath(os.path.dirname(__file__)), os.path.join('static', 'images'))
 """Inizializzazione"""
@@ -26,10 +24,12 @@ def create_app():
     from .Routes import views
     from .gestione_utente.GestioneUtenteController import gu
     from .gestione_vendita.GestioneVenditaController import gv
+    from .gestione_adozioni.GestioneAdozioniController import ga
 
     app.register_blueprint(views, url_prefix='/')
     app.register_blueprint(gu, url_prefix='/')
     app.register_blueprint(gv, url_prefix='/')
+    app.register_blueprint(ga, url_prefix='/')
     from .model import UtenteRegistrato, Cliente, Apicoltore, Alveare, Prodotto, Acquisto, TicketAdozione, TicketAssistenza
 
     if not database_exists(app.config["SQLALCHEMY_DATABASE_URI"]):
