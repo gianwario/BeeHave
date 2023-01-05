@@ -1,25 +1,17 @@
 import re
 
 from flask import Blueprint, request, session, flash
-from werkzeug.security import generate_password_hash
+from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import login_user, logout_user, login_required
 
 from Website.flaskr.Routes import home, login_page, sigup_cl
 from Website.flaskr.gestione_utente.GestioneUtenteService import *
 from Website.flaskr.model.Cliente import Cliente
-
-gu = Blueprint('gu', __name__)
-email_valida = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b'
-
-from flask import Blueprint, request, session, flash
-from werkzeug.security import check_password_hash, generate_password_hash
-from flask_login import login_user, logout_user, login_required
-
-from Website.flaskr.Routes import home, login_page
-from Website.flaskr.gestione_utente.GestioneUtenteService import *
 from Website.flaskr.model.Apicoltore import Apicoltore
 
 gu = Blueprint('gu', __name__)
+
+email_valida = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b'
 spec = "[@_!#$%^&*()<>?/'|}{~:]"
 num = "0123456789"
 
@@ -29,11 +21,11 @@ def login():
     if request.method == 'POST':
         email = request.form.get('email')
         pwd = request.form.get('password')
-        user = getApicoltoreByEmail(email)
+        user = get_apicoltore_by_email(email)
         if user:
             session['isApicoltore'] = True
         else:
-            user = getClienteByEmail(email)
+            user = get_cliente_by_email(email)
             if user:
                 session['isApicoltore'] = False
             else:
@@ -42,7 +34,7 @@ def login():
 
             if check_password_hash(user.password, pwd):
 
-                login_user(user, remember=True)
+                login_user(user)
                 flash('Login effettuato con successo!', category='success')
                 return home()
             else:
@@ -74,8 +66,6 @@ def registrazione_cliente():
 
         if not (controllo_car_spec(psw) and controllo_num(psw)):
             flash("Inserire nel campo password almeno un carattere speciale ed un numero.", category="errore")
-            return sigup_cl()
-
         elif not re.fullmatch(email_valida, email):
             flash("Il campo e-mail non è nel formato corretto.", category="errore")
         elif psw.__len__() < 8:
@@ -86,8 +76,7 @@ def registrazione_cliente():
             flash("Ripeti_password non coincide con password.", category="errore")
 
         else:
-            nuovo_cliente = Cliente(email=email, nome=nome, cognome=cognome, password=generate_password_hash(psw,
-                                                                                                             method='sha256'),
+            nuovo_cliente = Cliente(email=email, nome=nome, cognome=cognome, password=generate_password_hash(psw, method='sha256'),
                                     indirizzo=indirizzo, citta=citta, cap=cap, telefono=numtelefono)
 
             registra_cliente(nuovo_cliente)
@@ -112,8 +101,6 @@ def sigup():
         pwd = request.form.get('password')
         cpwd = request.form.get('cpwd')
 
-
-      
         if not 0 < nome.__len__() < 45:
             print("Nome length has to be at last 30 characters", "error")
             return  # inserire pagine html di errore
@@ -155,9 +142,24 @@ def sigup():
         user = Apicoltore(nome=nome, cognome=cognome, indirizzo=indirizzo, citta=citta, cap=cap, telefono=telefono,
                           descrizione=descrizione, email=email, assistenza=assistenza,
                           password=generate_password_hash(pwd, method='sha256'))
-        print(user.__dict__)
-        registraApicoltore(user)
+
+        registra_apicoltore(user)
         return home()
 
 
+def controllo_car_spec(psw):
+    for char in psw:
+        for symbol in spec:
+            if char == symbol:
+                return True
 
+    return False
+
+
+def controllo_num(psw):
+    for char in psw:
+        for num in numb:
+            if char == num:
+                return True
+
+    return False
