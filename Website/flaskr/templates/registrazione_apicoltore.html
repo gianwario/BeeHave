@@ -78,128 +78,96 @@
 
         <div class="card bg-glass">
           <div class="card-body px-4 py-5 px-md-5">
-            <form>
+
+              <form id="form" method="post" action="/registrazione_ap">
               <!-- 2 column grid layout with text inputs for the first and last names -->
               <div class="row">
                 <div class="col-md-6 mb-4">
                   <div class="form-outline">
-                    <input type="text" id="form3Example1" class="form-control" />
-                    <label class="form-label" for="form3Example1">First name</label>
+                    <input type="text" name="nome" id="nome" class="form-control" required/>
+                    <label class="form-label" for="nome">Nome</label>
                   </div>
                 </div>
                 <div class="col-md-6 mb-4">
                   <div class="form-outline">
-                    <input type="text" id="form3Example2" class="form-control" />
-                    <label class="form-label" for="form3Example2">Last name</label>
+                    <input type="text" name="cognome" id="cognome" class="form-control"required />
+                    <label class="form-label" for="cognome">Cognome</label>
                   </div>
                 </div>
               </div>
+            <div class="row">
+                <div class="col-md-6 mb-4">
+                  <div class="form-outline">
+                    <input type="text" name="citta" id="citta" class="form-control"required />
+                    <label class="form-label" for="citta">Città</label>
+                  </div>
+                </div>
+                <div class="col-md-6 mb-4">
+                  <div class="form-outline">
+                    <input type="text" name="indirizzo"id="indirizzo" class="form-control" required/>
+                    <label class="form-label" for="indirizzo">Indirizzo</label>
+                  </div>
+                </div>
+              </div>
+            <div class="row">
+                <div class="col-md-6 mb-4">
+                  <div class="form-outline">
+                    <input type="text" name="cap" id="cap" class="form-control" required/>
+                    <label class="form-label" for="cap">CAP</label>
+                  </div>
+                </div>
+                <div class="col-md-6 mb-4">
+                  <div class="form-outline">
+                    <input type="text" name="telefono"id="telefono" class="form-control" required/>
+                    <label class="form-label" for="telefono">Numero di Telefono</label>
+                  </div>
+                </div>
+              </div>
+             <div class="col-md-6 mb-4">
+                  <div class="form-outline">
+                    <input type="text" name="assistenza"id="assistenza" class="form-control" required/>
+                    <label class="form-label" for="telefono">Assistenza</label>
+                  </div>
+             </div>
+
+            <div class="col-md-6 mb-4">
+                  <div class="form-outline">
+                    <input type="text" name="descrizione"id="descrizione" class="form-control"required />
+                    <label class="form-label" for="telefono">Descrizione</label>
+                  </div>
+                </div>
+
 
               <!-- Email input -->
               <div class="form-outline mb-4">
-                <input type="email" id="form3Example3" class="form-control" />
-                <label class="form-label" for="form3Example3">Email address</label>
+                <input type="email" name="email"id="email" class="form-control" required/>
+                <label class="form-label" for="email">Email address</label>
               </div>
 
               <!-- Password input -->
               <div class="form-outline mb-4">
-                <input type="password" id="form3Example4" class="form-control" />
-                <label class="form-label" for="form3Example4">Password</label>
+                <input type="password" name="password"id="password" class="form-control" required/>
+                <label class="form-label" for="password">Password</label>
+              </div>
+            <div class="form-outline mb-4">
+                <input type="password" name="cpwd"id="cpwd" class="form-control"required />
+                <label class="form-label" for="cpwd">ConfirmPassword</label>
               </div>
 
-              <!-- Checkbox -->
-              <div class="form-check d-flex justify-content-center mb-4">
-                <input class="form-check-input me-2" type="checkbox" value="" id="form2Example33" checked />
-                <label class="form-check-label" for="form2Example33">
-                  Subscribe to our newsletter
-                </label>
-              </div>
 
-              <!-- Submit button -->
-              <button type="submit" class="btn btn-primary btn-block mb-4">
-                Sign up
-              </button>
 
-              <!-- Register buttons -->
-              <div class="text-center">
-                <p>or sign up with:</p>
-                <button type="button" class="btn btn-link btn-floating mx-1">
-                  <i class="fab fa-facebook-f"></i>
-                </button>
 
-                <button type="button" class="btn btn-link btn-floating mx-1">
-                  <i class="fab fa-google"></i>
-                </button>
 
-                <button type="button" class="btn btn-link btn-floating mx-1">
-                  <i class="fab fa-twitter"></i>
-                </button>
-
-                <button type="button" class="btn btn-link btn-floating mx-1">
-                  <i class="fab fa-github"></i>
-                </button>
-              </div>
+                <div class="form-footer">
+                    <p>Already have an account? <a class="form-link" href="{{url_for('views.login_page')}}">Login</a></p>
+                </div>
             </form>
-          </div>
+              <input form="form" type="submit" name="register" id="register" value="REGISTER">
         </div>
-      </div>
-
-          <div class="inputWrapper">
-            <input type="text" name="cognome" id="cognome" required="">
-            <label for="cognome">Cognome</label>
-          </div>
-
-          <div class="inputWrapper">
-            <input type="text" name="citta" id="citta" required="">
-            <label for="citta">Città</label>
-          </div>
-
-          <div class="inputWrapper">
-            <input type="text" name="indirizzo" id="indirizzo" required="">
-            <label for="indirizzo">Indirizzo</label>
-          </div>
-
-           <div class="inputWrapper">
-            <input type="text" name="cap" id="cap" required="">
-            <label for="cap">CAP</label>
-          </div>
-
-          <div class="inputWrapper">
-            <input type="email" name="email" id="email" required="">
-            <label for="email">Email</label>
-          </div>
-
-          <div class="inputWrapper">
-            <input type="text" name="telefono" id="telefono" required="">
-            <label for="telefono">Numero di telefono</label>
-          </div>
-          <div class="inputWrapper">
-            <input type="text" name="assistenza" id="assistenza" required="">
-            <label for="assistenza">Assistenza</label>
-          </div>
-           <div class="inputWrapper">
-            <input type="text" name="descrizione" id="descrizione" required="">
-            <label for="descrizione">Descrizione</label>
-          </div>
-
-          <div class="inputWrapper">
-            <input type="password" name="password" id="password" required="">
-            <label for="password">Password</label>
-          </div>
-
-          <div class="inputWrapper">
-            <input type="password" name="cpwd" id="cpwd" required="">
-            <label for="cpwd">Confirm Password</label>
-          </div>
-
-        </form>
-
-      <input form="form" type="submit" name="register" id="register" value="REGISTER">
-
-    <div class="form-footer">
-      <p>Already have an account? <a class="form-link" href="{{url_for('views.login_page')}}">Login</a></p>
     </div>
   </div>
+</div>
+</div>
 </section>
 <!-- Section: Design Block -->
 {% endblock %}
@@ -207,4 +175,5 @@
 
 
 </html>
+
 
