@@ -15,6 +15,8 @@ def get_apicoltore_by_email(email):
 def get_apicoltore_by_id(id_api):
     return Apicoltore.query.filter_by(id=id_api).first()
 
+def get_cliente_by_id(id_cliente):
+    return Cliente.query.filter_by(id=id_cliente).first()
 
 def get_cliente_by_email(email):
     return Cliente.query.filter_by(email=email).first()

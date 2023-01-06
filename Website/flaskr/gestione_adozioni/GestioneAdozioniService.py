@@ -53,4 +53,5 @@ def getAlveari_fromApicoltore(apicoltore_id):
 
 
 def getTicket_adozione(apicoltore_id):
+    return db.session.query(TicketAdozione, Alveare).join(Alveare).filter_by(id_apicoltore=apicoltore_id).all()
 
