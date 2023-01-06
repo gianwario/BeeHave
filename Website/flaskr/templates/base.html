@@ -49,8 +49,11 @@
                         Alveare</a></li>
                     <li><a class="dropdown-item"
                            href="{{url_for('ga.mostra_alveari_disponibili', apicoltore_id=current_user.id)}}">Mostra
+                        tutti i tuoi
                         Alveari disponibili</a></li>
-                    <li><a class="dropdown-item" href="#">Mostra Alveari adottati</a></li>
+                    <li><a class="dropdown-item"
+                           href="{{url_for('ga.mostra_alveari_affittati', apicoltore_id=current_user.id)}}">Mostra
+                        Alveari affittati</a></li>
                     <li><a class="dropdown-item"
                            href="{{url_for('gv.mostra_articoli_inVendita', apicoltore_id=current_user.id)}}">Mostra
                         Prodotti in vendita</a></li>

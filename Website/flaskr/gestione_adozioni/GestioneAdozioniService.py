@@ -1,5 +1,9 @@
+from sqlalchemy.orm import query
+
 from Website.flaskr import db
 from Website.flaskr.model.Alveare import Alveare
+from Website.flaskr.model.Apicoltore import Apicoltore
+from Website.flaskr.model.TicketAdozione import TicketAdozione
 
 
 def inserisci_alveare(alveare):
@@ -41,3 +45,13 @@ def affitto_alveare(ticket, percentuale):
     db.session.add(ticket)
     db.session.commit()
     decrementa_percentuale(ticket.id_alveare, percentuale)
+    # TODO eventualmente considerare di restituire la % allo scadere del tempo
+
+
+def getAlveari_fromApicoltore(apicoltore_id):
+    return Alveare.query.filter_by(id_apicoltore=apicoltore_id).all()
+
+
+def getTicket_adozione(apicoltore_id):
+    return db.session.query(TicketAdozione, Alveare).join(Alveare).filter_by(id_apicoltore=apicoltore_id).all()
+

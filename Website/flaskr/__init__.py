@@ -32,6 +32,7 @@ def create_app():
     app.register_blueprint(gv, url_prefix='/')
     app.register_blueprint(gau, url_prefix='/')
     app.register_blueprint(ga, url_prefix='/')
+
     from .model import UtenteRegistrato, Cliente, Apicoltore, Alveare, Prodotto, Acquisto, TicketAdozione, \
         TicketAssistenza
 

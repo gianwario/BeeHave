@@ -8,8 +8,8 @@ from datetime import date
 from Website.flaskr import image_folder_absolute
 from Website.flaskr.Routes import inserimento_alveare_page, mostra_alveari
 from Website.flaskr.gestione_adozioni.GestioneAdozioniService import inserisci_alveare, update_imgAlveare, \
-    get_AlveariDisponibili, get_alveareById, affitto_alveare
-from Website.flaskr.gestione_utente.GestioneUtenteService import get_apicoltore_by_id
+    get_AlveariDisponibili, get_alveareById, affitto_alveare, get_Alveari, getTicket_adozione
+from Website.flaskr.gestione_utente.GestioneUtenteService import get_apicoltore_by_id, get_cliente_by_id
 from Website.flaskr.model.TicketAdozione import TicketAdozione
 from Website.flaskr.model.Alveare import Alveare
 
@@ -91,7 +91,17 @@ def affitta_alveare():
             flash('Quantitá non disponibile!', category='error')
 
         ticket = TicketAdozione(id_cliente=id_cliente, id_alveare=id_alveare, percentuale_adozione=percentuale,
-                                data_inizio_adozione=date.today(), tempo_adozione=tempo_adozione)
-        # TODO aggiungere data
+                                data_inizio_adozione=datetime.date.today(), tempo_adozione=tempo_adozione)
         affitto_alveare(ticket, percentuale)
         return mostra_alveari()
+
+@ga.route('/alveari_affittati/<int:apicoltore_id>', methods=['GET'])
+def mostra_alveari_affittati(apicoltore_id):
+    lista_clienti = []
+    #if not current_user.is_authenticated or not session['isApicoltore']:
+    alveari_affittati = getTicket_adozione(apicoltore_id)
+    for x in alveari_affittati:
+        lista_clienti.append(get_cliente_by_id(x.TicketAdozione.id_cliente))
+
+    return render_template('alveari_affittati.html', alveari_affittati=alveari_affittati, lista_clienti=lista_clienti)
+    #return home()
