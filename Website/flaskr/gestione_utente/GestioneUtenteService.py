@@ -51,7 +51,6 @@ def modifica_profilo_personale(uid, nome, cognome, email, numtelefono):
         cliente.cognome = cognome
         cliente.email = email
         cliente.telefono = numtelefono
-        print("cl_successo_datiperso")
         db.session.commit()
 
 
@@ -71,5 +70,19 @@ def modifica_residenza(uid, citta, cap, indirizzo):
         cliente.citta = citta
         cliente.cap = cap
         cliente.indirizzo = indirizzo
-        print("ap_successo_residenz")
+        db.session.commit()
+
+
+def modifica_password_db(uid, psw):
+    cliente = Cliente.query.filter_by(id=uid).first()
+    if not cliente:
+        apicoltore = Apicoltore.query.filter_by(id=uid).first()
+        if not apicoltore:
+            print("Errore comunicazione con db")
+            return  #
+        else:
+            apicoltore.password = psw
+            db.session.commit()
+    else:
+        cliente.password = psw
         db.session.commit()

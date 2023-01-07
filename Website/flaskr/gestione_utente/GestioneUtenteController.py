@@ -1,4 +1,5 @@
 import re
+import sys
 
 from Website.flaskr.Routes import home, login_page, sigup_cl
 
@@ -6,7 +7,7 @@ from flask import Blueprint, request, session, flash, g
 from werkzeug.security import check_password_hash, generate_password_hash
 from flask_login import login_user, logout_user, login_required, current_user
 
-from Website.flaskr.Routes import home, login_page, area_personale, modifica_dati
+from Website.flaskr.Routes import home, login_page, area_personale, modifica_dati_pers, modifica_psw
 from Website.flaskr.gestione_utente.GestioneUtenteService import *
 from Website.flaskr.model.Apicoltore import Apicoltore
 
@@ -165,24 +166,22 @@ def modifica_dati_personali():
             nome = current_user.nome
         if not cognome:
             cognome = current_user.cognome
+        if not check_email_esistente(email):
+            flash("Errore, email già esistente.", category="errore")
+            return modifica_dati_pers()
         if not email:
             email = current_user.email
-        if not check_email_esistente(email):
-            print("Errore, email già esistente.")
-            return modifica_dati()
         if not re.fullmatch(email_valida, email):
-            print("Errore, email non nel formato corretto.")
-            return modifica_dati()
+            flash("Errore, email non nel formato corretto.", category="errore")
+            return modifica_dati_pers()
         if not numtelefono:
             numtelefono = current_user.telefono
 
         modifica_profilo_personale(g.user, nome, cognome, email, numtelefono)
 
-        print("Modifica avvenuta con successo!")
+        flash("Modifica password avvenuta con successo!", category="successo")
         return area_personale()
 
-    print("Errore nella richiesta, riprovare o contattare l'assistenza.")
-    return area_personale()
 
 
 @gu.route('/modifica_indirizzo', methods=['GET', 'POST'])
@@ -201,11 +200,38 @@ def modifica_indirizzo():
             indirizzo = current_user.indirizzo
 
         modifica_residenza(g.user, citta, cap, indirizzo)
-        print("Modifica indirizzo avvenuta con successo!")
+        flash("Modifica password avvenuta con successo!", category="successo")
         return area_personale()
 
-    print("Errore nella richiesta, riprovare o contattare l'assistenza.")
-    return area_personale()
+
+@gu.route('/modifica_password', methods=['GET', 'POST'])
+@login_required
+def modifica_password():
+    if request.method == 'POST':
+        g.user = current_user.get_id()
+        psw = request.form.get('nuova_psw')
+        ripeti_psw = request.form.get('nuova_ripeti_psw')
+
+        if psw.__len__() < 8:
+            flash("La password deve contenere almeno 8 caratteri.", category="errore")
+            return modifica_psw()
+
+        if psw != ripeti_psw:
+            flash("Ripeti_password non coincide con password.", category="errore")
+            return modifica_psw()
+
+        if not (controllo_car_spec(psw) and controllo_num(psw)):
+            flash("Inserire nel campo password almeno un carattere speciale ed un numero.", category="errore")
+            return modifica_psw()
+
+        psw = generate_password_hash(psw, method='sha256')
+        modifica_password_db(g.user, psw)
+        flash("Modifica password avvenuta con successo!", category="successo")
+        return area_personale()
+
+
+
+
 
 def controllo_car_spec(psw):
     for char in psw:

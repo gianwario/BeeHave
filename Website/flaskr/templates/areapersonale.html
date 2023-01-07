@@ -24,7 +24,17 @@
           <ul class="nav nav-pills nav-stacked">
               <li class="active"><a href="#"> <i class="fa fa-user"></i> Profile</a></li>
               <li><a href="#"> <i class="fa fa-calendar"></i> Richieste di assistenza <span class="label label-warning pull-right r-activity">9</span></a></li>
-              <li><a href="{{url_for('views.modifica_dati')}}"> <i class="fa fa-edit"></i> Modifica profilo</a></li>
+              <li><div class="dropdown">
+                      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          Modifica Account
+                      </button>
+                      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                          <span><a class="dropdown-item" href="{{url_for('views.modifica_dati_pers')}}">Modifica Dati Personali </a></span>
+                          <span><a class="dropdown-item" href="{{url_for('views.modifica_residenza')}}">Modifica Indirizzo </a></span>
+                          <span><a class="dropdown-item" href="{{url_for('views.modifica_psw')}}">Modifica Password</a></span>
+                      </div>
+              </div>
+              </li>
           </ul>
       </div>
   </div>
