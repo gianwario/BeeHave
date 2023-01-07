@@ -1,27 +1,20 @@
 import re
 
-from flask import Blueprint, request, session, flash
-from werkzeug.security import generate_password_hash
-from flask_login import login_user, logout_user, login_required
-
 from Website.flaskr.Routes import home, login_page, sigup_cl
-from Website.flaskr.gestione_utente.GestioneUtenteService import *
-from Website.flaskr.model.Cliente import Cliente
 
-gu = Blueprint('gu', __name__)
-email_valida = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b'
-
-from flask import Blueprint, request, session, flash
+from flask import Blueprint, request, session, flash, g
 from werkzeug.security import check_password_hash, generate_password_hash
-from flask_login import login_user, logout_user, login_required
+from flask_login import login_user, logout_user, login_required, current_user
 
-from Website.flaskr.Routes import home, login_page
+from Website.flaskr.Routes import home, login_page, area_personale, modifica_dati
 from Website.flaskr.gestione_utente.GestioneUtenteService import *
 from Website.flaskr.model.Apicoltore import Apicoltore
 
 gu = Blueprint('gu', __name__)
-spec = "[@_!#$%^&*()<>?/'|}{~:]"
-num = "0123456789"
+email_valida = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b'
+spec = ["$", "#", "@", "!", "*", "£", "%", "&", "/", "(", ")", "=", "|",
+        "+", "-", "^", "_", "-", "?", ",", ":", ";", ".", "§", "°", "[", "]"]
+numb = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
 
 
 @gu.route('/login', methods=['GET', 'POST'])
@@ -32,10 +25,12 @@ def login():
         user = getApicoltoreByEmail(email)
         if user:
             session['isApicoltore'] = True
+
         else:
             user = getClienteByEmail(email)
             if user:
                 session['isApicoltore'] = False
+
             else:
                 return login_page()
         if user:
@@ -74,7 +69,6 @@ def registrazione_cliente():
 
         if not (controllo_car_spec(psw) and controllo_num(psw)):
             flash("Inserire nel campo password almeno un carattere speciale ed un numero.", category="errore")
-            return sigup_cl()
 
         elif not re.fullmatch(email_valida, email):
             flash("Il campo e-mail non è nel formato corretto.", category="errore")
@@ -141,9 +135,9 @@ def sigup():
             print("Password length has to be at least 8 characters", "error")
             return  # inserire pagine html di errore
 
-        if not controllo_pwd(pwd):
-            print("Password length has to be at least 8 characters", "error")
-            return  # inserire pagine html di errore
+        if not (controllo_car_spec(pwd) and controllo_num(pwd)):
+            flash("Inserire nel campo password almeno un carattere speciale ed un numero.", "error")
+            return
 
         if pwd != cpwd:
             print("Password and confirm password do not match", "error")
@@ -157,11 +151,75 @@ def sigup():
         return home()
 
 
-def controllo_pwd(pwd):
-    spec_check = re.compile(spec)
-    num_check = re.compile(num)
+@gu.route('/modifica_dati_personali', methods=['GET', 'POST'])
+@login_required
+def modifica_dati_personali():
+    if request.method == 'POST':
+        g.user = current_user.get_id()
+        nome = request.form.get('nuovo_nome')
+        cognome = request.form.get('nuovo_cognome')
+        email = request.form.get('nuova_email')
+        numtelefono = request.form.get('nuovo_numtelefono')
 
-    if (spec_check.search(pwd) is None) and (num_check.search(pwd) is None):
-        return True
-    else:
-        return False
+        if not nome:
+            nome = current_user.nome
+        if not cognome:
+            cognome = current_user.cognome
+        if not email:
+            email = current_user.email
+        if not check_email_esistente(email):
+            print("Errore, email già esistente.")
+            return modifica_dati()
+        if not re.fullmatch(email_valida, email):
+            print("Errore, email non nel formato corretto.")
+            return modifica_dati()
+        if not numtelefono:
+            numtelefono = current_user.telefono
+
+        modifica_profilo_personale(g.user, nome, cognome, email, numtelefono)
+
+        print("Modifica avvenuta con successo!")
+        return area_personale()
+
+    print("Errore nella richiesta, riprovare o contattare l'assistenza.")
+    return area_personale()
+
+
+@gu.route('/modifica_indirizzo', methods=['GET', 'POST'])
+@login_required
+def modifica_indirizzo():
+    if request.method == 'POST':
+        g.user = current_user.get_id()
+        citta = request.form.get('nuova_citta')
+        cap = request.form.get('nuovo_cap')
+        indirizzo = request.form.get('nuova_indirizzo')
+        if not citta:
+            citta = current_user.citta
+        if not cap:
+            cap = current_user.cap
+        if not indirizzo:
+            indirizzo = current_user.indirizzo
+
+        modifica_residenza(g.user, citta, cap, indirizzo)
+        print("Modifica indirizzo avvenuta con successo!")
+        return area_personale()
+
+    print("Errore nella richiesta, riprovare o contattare l'assistenza.")
+    return area_personale()
+
+def controllo_car_spec(psw):
+    for char in psw:
+        for symbol in spec:
+            if char == symbol:
+                return True
+
+    return False
+
+
+def controllo_num(psw):
+    for char in psw:
+        for num in numb:
+            if char == num:
+                return True
+
+    return False

@@ -17,7 +17,7 @@ def create_app():
 
     """chiave segreta per criptare cookies"""
     app.config['SECRET_KEY'] = 'BEEHAVE'
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:root@localhost/beehavedb'
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:rootroot@localhost/beehavedb'
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     db.init_app(app)
 

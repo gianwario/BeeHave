@@ -51,7 +51,7 @@
     {% block content %}
      {% with messages = get_flashed_messages(with_categories=true) %}
      {% if messages %}
-        {% for category, message in get_flashed_messages() %}
+        {% for message in get_flashed_messages() %}
         {% if category == 'errore' %}
             <div class="alert alert-danger alter-dismissable fade show" role="alert">
                 {{ message }}

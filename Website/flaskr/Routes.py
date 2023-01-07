@@ -20,16 +20,22 @@ def login_page():
         return home()
     return render_template('login_page.html')
 
+
 @views.route('/inserimento_prodotto_page')
 def inserimento_prodotto_page():
     return render_template('inserimento_prodotto.html')
 
+
 @views.route('/registrazione_cl')
-def sigup_cl(): #typo, da cambiare
+def sigup_cl():  # typo, da cambiare
     return render_template('registrazione_cliente.html')
+
+
 @views.route('/registrazione_apicoltore')
 def sigup_ap():
     return render_template('registrazione_apicoltore.html')
+
+
 @views.route('/areapersonale')
 @login_required
 def area_personale():
@@ -41,3 +47,8 @@ def mostra_prodotti():
     prods = getTuttiProdotti()
     return render_template('catalogo_prodotti.html', prods=prods)
 
+
+@views.route('/modifica_dati_personali')
+@login_required
+def modifica_dati():
+    return render_template("modifica_dati_utente.html")
