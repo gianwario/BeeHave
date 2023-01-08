@@ -1,13 +1,10 @@
 import re
-import sys
-
-from Website.flaskr.Routes import home, login_page, sigup_cl
 
 from flask import Blueprint, request, session, flash, g
 from werkzeug.security import check_password_hash, generate_password_hash
 from flask_login import login_user, logout_user, login_required, current_user
 
-from Website.flaskr.Routes import home, login_page, area_personale, modifica_dati_pers, modifica_psw
+from Website.flaskr.Routes import home, login_page, area_personale, modifica_dati_pers, modifica_psw, sigup_cl
 from Website.flaskr.gestione_utente.GestioneUtenteService import *
 from Website.flaskr.model.Apicoltore import Apicoltore
 
@@ -23,12 +20,12 @@ def login():
     if request.method == 'POST':
         email = request.form.get('email')
         pwd = request.form.get('password')
-        user = getApicoltoreByEmail(email)
+        user = get_apicoltore_by_email(email)
         if user:
             session['isApicoltore'] = True
 
         else:
-            user = getClienteByEmail(email)
+            user = get_cliente_by_email(email)
             if user:
                 session['isApicoltore'] = False
 
@@ -38,7 +35,7 @@ def login():
 
             if check_password_hash(user.password, pwd):
 
-                login_user(user, remember=True)
+                login_user(user)
                 flash('Login effettuato con successo!', category='success')
                 return home()
             else:
@@ -70,7 +67,6 @@ def registrazione_cliente():
 
         if not (controllo_car_spec(psw) and controllo_num(psw)):
             flash("Inserire nel campo password almeno un carattere speciale ed un numero.", category="errore")
-
         elif not re.fullmatch(email_valida, email):
             flash("Il campo e-mail non è nel formato corretto.", category="errore")
         elif psw.__len__() < 8:
@@ -81,8 +77,8 @@ def registrazione_cliente():
             flash("Ripeti_password non coincide con password.", category="errore")
 
         else:
-            nuovo_cliente = Cliente(email=email, nome=nome, cognome=cognome, password=generate_password_hash(psw,
-                                                                                                             method='sha256'),
+            nuovo_cliente = Cliente(email=email, nome=nome, cognome=cognome,
+                                    password=generate_password_hash(psw, method='sha256'),
                                     indirizzo=indirizzo, citta=citta, cap=cap, telefono=numtelefono)
 
             registra_cliente(nuovo_cliente)
@@ -129,27 +125,30 @@ def sigup():
         if not 0 < descrizione.__len__() < 200:
             print("Descrizione length has to be at last 200 characters", "error")
             return  # inserire pagine html di errore
-        if not re.fullmatch('^[A-z0-9._%+-]+@[A-z0-9.-]+\\.[A-z]{2,10}$', email):
+        if not check_email_esistente(email):
             print("Invalid email", "error")
             return  # inserire pagine html di errore
+
         if not pwd.__len__() < 9:
             print("Password length has to be at least 8 characters", "error")
             return  # inserire pagine html di errore
 
         if not (controllo_car_spec(pwd) and controllo_num(pwd)):
             flash("Inserire nel campo password almeno un carattere speciale ed un numero.", "error")
-            return
+            return  # inserire pagine html di errore
 
         if pwd != cpwd:
             print("Password and confirm password do not match", "error")
-            return  # inserire pagine html di errore
+            return  #
 
         user = Apicoltore(nome=nome, cognome=cognome, indirizzo=indirizzo, citta=citta, cap=cap, telefono=telefono,
                           descrizione=descrizione, email=email, assistenza=assistenza,
                           password=generate_password_hash(pwd, method='sha256'))
-        print(user.__dict__)
-        registraApicoltore(user)
+
+        registra_apicoltore(user)
         return home()
+
+    return home()
 
 
 @gu.route('/modifica_dati_personali', methods=['GET', 'POST'])
@@ -181,7 +180,6 @@ def modifica_dati_personali():
 
         flash("Modifica password avvenuta con successo!", category="successo")
         return area_personale()
-
 
 
 @gu.route('/modifica_indirizzo', methods=['GET', 'POST'])
@@ -228,9 +226,6 @@ def modifica_password():
         modifica_password_db(g.user, psw)
         flash("Modifica password avvenuta con successo!", category="successo")
         return area_personale()
-
-
-
 
 
 def controllo_car_spec(psw):

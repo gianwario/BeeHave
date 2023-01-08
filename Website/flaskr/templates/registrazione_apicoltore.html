@@ -1,90 +1,179 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-<link  rel="stylesheet" href="{{url_for('static', filename='css/reg.ap.css')}}">
+        <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1">
+{% extends "base.html"%}
+ {% block title %}Registrazione{% endblock %}
 
     </head>
     <body >
+ {% block content %}
+ <!-- Section: Design Block -->
+<section class="background-radial-gradient overflow-hidden">
+  <style>
+    .selector-for-some-widget {
+    box-sizing: content-box;
+    }
+    .background-radial-gradient {
+      background-color: hsl(218, 41%, 15%);
+      background-image: radial-gradient(650px circle at 0% 0%,
+          hsl(218, 41%, 35%) 15%,
+          hsl(218, 41%, 30%) 35%,
+          hsl(218, 41%, 20%) 75%,
+          hsl(218, 41%, 19%) 80%,
+          transparent 100%),
+        radial-gradient(1250px circle at 100% 100%,
+          hsl(218, 41%, 45%) 15%,
+          hsl(218, 41%, 30%) 35%,
+          hsl(218, 41%, 20%) 75%,
+          hsl(218, 41%, 19%) 80%,
+          transparent 100%);
+    }
 
-  <main class="container">
-   <div class="container">
-  <div class="image-wapper" style="background-image: url(https://images.unsplash.com/photo-1619457632358-702e130ceecc?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8YXBpY3VsdHVyYXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=800&q=60?auto=compress&amp;cs=tinysrgb&amp;w=1260&amp;h=750&amp;dpr=1)">
-    <h1>Registrati come apicoltore</h1>
-  </div>
-  <div class="form-wapper">
-    <div class="form-header">
-      <h2>Registrati</h2>
-      <p>Welcome to store name. Enter your personal details and start journey with us.</p>
-    </div>
-    <div class="form-body">
-      <form id="form" method="post" action="/registrazione_ap">
-          <div class="inputWrapper">
-            <input type="text" name="nome" id="nome" required>
-            <label for="nome">Nome</label>
-          </div>
+    #radius-shape-1 {
 
-          <div class="inputWrapper">
-            <input type="text" name="cognome" id="cognome" required="">
-            <label for="cognome">Cognome</label>
-          </div>
+      height: 220px;
+      width: 220px;
+      top: -60px;
+      left: -130px;
+      background: radial-gradient(#44006b, #ad1fff);
+      overflow: hidden;
+    }
 
-          <div class="inputWrapper">
-            <input type="text" name="citta" id="citta" required="">
-            <label for="citta">Città</label>
-          </div>
+    #radius-shape-2 {
+      border-radius: 38% 62% 63% 37% / 70% 33% 67% 30%;
+      bottom: -60px;
+      right: -110px;
+      width: 300px;
+      height: 300px;
+      background: radial-gradient(#44006b, #ad1fff);
+      overflow: hidden;
+    }
 
-          <div class="inputWrapper">
-            <input type="text" name="indirizzo" id="indirizzo" required="">
-            <label for="indirizzo">Indirizzo</label>
-          </div>
+    .bg-glass {
+      background-color: hsla(0, 0%, 100%, 0.9) !important;
+      backdrop-filter: saturate(200%) blur(25px);
+    }
+  </style>
 
-           <div class="inputWrapper">
-            <input type="text" name="cap" id="cap" required="">
-            <label for="cap">CAP</label>
-          </div>
+  <div class="container px-4 py-5 px-md-5 text-center text-lg-start my-5">
+    <div class="row gx-lg-5 align-items-center mb-5">
+      <div class="col-lg-6 mb-5 mb-lg-0" style="z-index: 10">
+        <h1 class="my-5 display-5 fw-bold ls-tight" style="color: hsl(218, 81%, 95%)">
+          The best offer <br />
+          <span style="color: hsl(218, 81%, 75%)">for your business</span>
+        </h1>
+        <p class="mb-4 opacity-70" style="color: hsl(218, 81%, 85%)">
+          Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+          Temporibus, expedita iusto veniam atque, magni tempora mollitia
+          dolorum consequatur nulla, neque debitis eos reprehenderit quasi
+          ab ipsum nisi dolorem modi. Quos?
+        </p>
+      </div>
 
-          <div class="inputWrapper">
-            <input type="email" name="email" id="email" required="">
-            <label for="email">Email</label>
-          </div>
+      <div class="col-lg-6 mb-5 mb-lg-0 position-relative">
+        <div id="radius-shape-1" class="position-absolute rounded-circle shadow-5-strong"></div>
+        <div id="radius-shape-2" class="position-absolute shadow-5-strong"></div>
 
-          <div class="inputWrapper">
-            <input type="text" name="telefono" id="telefono" required="">
-            <label for="telefono">Numero di telefono</label>
-          </div>
-          <div class="inputWrapper">
-            <input type="text" name="assistenza" id="assistenza" required="">
-            <label for="assistenza">Assistenza</label>
-          </div>
-           <div class="inputWrapper">
-            <input type="text" name="descrizione" id="descrizione" required="">
-            <label for="descrizione">Descrizione</label>
-          </div>
+        <div class="card bg-glass">
+          <div class="card-body px-4 py-5 px-md-5">
 
-          <div class="inputWrapper">
-            <input type="password" name="password" id="password" required="">
-            <label for="password">Password</label>
-          </div>
+              <form id="form" method="post" action="/registrazione_ap">
+              <!-- 2 column grid layout with text inputs for the first and last names -->
+              <div class="row">
+                <div class="col-md-6 mb-4">
+                  <div class="form-outline">
+                    <input type="text" name="nome" id="nome" class="form-control" required/>
+                    <label class="form-label" for="nome">Nome</label>
+                  </div>
+                </div>
+                <div class="col-md-6 mb-4">
+                  <div class="form-outline">
+                    <input type="text" name="cognome" id="cognome" class="form-control"required />
+                    <label class="form-label" for="cognome">Cognome</label>
+                  </div>
+                </div>
+              </div>
+            <div class="row">
+                <div class="col-md-6 mb-4">
+                  <div class="form-outline">
+                    <input type="text" name="citta" id="citta" class="form-control"required />
+                    <label class="form-label" for="citta">Città</label>
+                  </div>
+                </div>
+                <div class="col-md-6 mb-4">
+                  <div class="form-outline">
+                    <input type="text" name="indirizzo"id="indirizzo" class="form-control" required/>
+                    <label class="form-label" for="indirizzo">Indirizzo</label>
+                  </div>
+                </div>
+              </div>
+            <div class="row">
+                <div class="col-md-6 mb-4">
+                  <div class="form-outline">
+                    <input type="text" name="cap" id="cap" class="form-control" required/>
+                    <label class="form-label" for="cap">CAP</label>
+                  </div>
+                </div>
+                <div class="col-md-6 mb-4">
+                  <div class="form-outline">
+                    <input type="text" name="telefono"id="telefono" class="form-control" required/>
+                    <label class="form-label" for="telefono">Numero di Telefono</label>
+                  </div>
+                </div>
+              </div>
+             <div class="col-md-6 mb-4">
+                  <div class="form-outline">
+                    <input type="text" name="assistenza"id="assistenza" class="form-control" required/>
+                    <label class="form-label" for="telefono">Assistenza</label>
+                  </div>
+             </div>
 
-          <div class="inputWrapper">
-            <input type="password" name="cpwd" id="cpwd" required="">
-            <label for="cpwd">Confirm Password</label>
-          </div>
+            <div class="col-md-6 mb-4">
+                  <div class="form-outline">
+                    <input type="text" name="descrizione"id="descrizione" class="form-control"required />
+                    <label class="form-label" for="telefono">Descrizione</label>
+                  </div>
+                </div>
 
-        </form>
 
-      <input form="form" type="submit" name="register" id="register" value="REGISTER">
+              <!-- Email input -->
+              <div class="form-outline mb-4">
+                <input type="email" name="email"id="email" class="form-control" required/>
+                <label class="form-label" for="email">Email address</label>
+              </div>
 
-    <div class="form-footer">
-      <p>Already have an account? <a class="form-link" href="{{url_for('views.login_page')}}">Login</a></p>
+              <!-- Password input -->
+              <div class="form-outline mb-4">
+                <input type="password" name="password"id="password" class="form-control" required/>
+                <label class="form-label" for="password">Password</label>
+              </div>
+            <div class="form-outline mb-4">
+                <input type="password" name="cpwd"id="cpwd" class="form-control"required />
+                <label class="form-label" for="cpwd">ConfirmPassword</label>
+              </div>
+
+
+
+
+
+                <div class="form-footer">
+                    <p>Already have an account? <a class="form-link" href="{{url_for('views.login_page')}}">Login</a></p>
+                </div>
+            </form>
+              <input form="form" type="submit" name="register" id="register" value="REGISTER">
+        </div>
     </div>
   </div>
 </div>
-   </div>
-</main>
-
+</div>
+</section>
+<!-- Section: Design Block -->
+{% endblock %}
 </body>
 
 
 </html>
+
 

@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-    {% extends "base.html"%}
-    <link  rel="stylesheet" href="{{url_for('static', filename='css/info_prod.css')}}">
 
-    {% block title %}Informazioni{% endblock %}
+    <link rel="stylesheet" href="{{url_for('static', filename='css/info_prod.css')}}">
+    {% extends "base.html"%}
+    {% block title %}Informazioni Prodotto {% endblock %}
 </head>
 <body>
 {% block content %}
@@ -20,8 +20,7 @@
             </div>
             <div class="col-md-6">
                 <div class="p-3 right-side">
-                    <div class="d-flex justify-content-between align-items-center"><h3>{{prodotto.nome}}</h3>    <span
-                            class="heart"><i class='bx bx-heart'></i></span></div>
+                    <div class="d-flex justify-content-between align-items-center"><h3>{{prodotto.nome}}</h3>    </div>
                     <div class="mt-2 pr-3 content"><p>{{prodotto.descrizione}}</p></div>
                     <p>Localitá di produzione: {{prodotto.localita}}</p>
                     <h3>€{{prodotto.prezzo}}</h3>
@@ -29,10 +28,28 @@
                         <div class="d-flex flex-row"><i class='bx bxs-star'></i> <i class='bx bxs-star'></i> <i
                                 class='bx bxs-star'></i> <i class='bx bxs-star'></i> <i class='bx bx-star'></i></div>
 
-                        <span>Nome Apicoltore:{{apicoltore.nome}}</span><span>  Tipologia:{{prodotto.tipologia}}</span><span>  Peso:{{prodotto.peso}}</span><span>  Quantitá:{{prodotto.quantita}}</span></div>
+                        <span>Nome Apicoltore:{{apicoltore.nome}}</span><span>  Tipologia:{{prodotto.tipologia}}</span><span>  Peso:{{prodotto.peso}}</span><span>  Quantitá:{{prodotto.quantita}}</span>
+                    </div>
+
                     <div class="buttons d-flex flex-row mt-5 gap-3">
-                        <button class="btn btn-outline-dark">Compra</button>
-                        <button class="btn btn-dark">Aggiungi al Carrello</button>
+                        <form action="/acquista_prodotto" method="post">
+                            <label for="seleziona_qnt">Inserire Quantitá</label>
+                            <input
+                                    required="true"
+                                    type="number"
+                                    id="seleziona_qnt"
+                                    name="quantita_prod"
+                                    min="1"
+                                    value="1"
+                                    max="{{prodotto.quantita}}"
+                            />
+                            <input type="hidden" name="qnt_articolo" value="{{prodotto.quantita}}">
+                            <input type="hidden" name="id_prd" value="{{prodotto.id}}">
+
+                            <!-- Controllo per far effettuare acquisto solo al cliente -->
+                            <input type="hidden" name="id_client" value="{{current_user.id}}">
+                            <button type="submit" value="acquista" class="btn btn-outline-dark">Compra</button>
+                        </form>
                     </div>
 
                 </div>
@@ -40,7 +57,7 @@
         </div>
     </div>
 </div>
-{{current_user.nome}}
+
 {% endblock %}
 </body>
 </html>

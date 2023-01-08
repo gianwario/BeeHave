@@ -1,18 +1,21 @@
-from Website.flaskr import db
 from Website.flaskr.model.Apicoltore import Apicoltore
 from Website.flaskr.model.Cliente import Cliente
 from .. import db
 
 
-def getApicoltoreByEmail(email):
+def get_apicoltore_by_email(email):
     return Apicoltore.query.filter_by(email=email).first()
 
 
-def getApicoltoreById(id_api):
+def get_apicoltore_by_id(id_api):
     return Apicoltore.query.filter_by(id=id_api).first()
 
 
-def getClienteByEmail(email):
+def get_cliente_by_id(id_cliente):
+    return Cliente.query.filter_by(id=id_cliente).first()
+
+
+def get_cliente_by_email(email):
     return Cliente.query.filter_by(email=email).first()
 
 
@@ -23,23 +26,23 @@ def check_email_esistente(email):
         return True
 
 
-def registra_cliente(Cliente):
-    db.session.add(Cliente)
+def registra_cliente(cliente):
+    db.session.add(cliente)
     db.session.commit()
 
 
-def registraApicoltore(utente):
+def registra_apicoltore(utente):
     db.session.add(utente)
     db.session.commit()
 
 
 def modifica_profilo_personale(uid, nome, cognome, email, numtelefono):
-    cliente = Cliente.query.filter_by(id=uid).first()
+    cliente = get_cliente_by_id(uid)
     if not cliente:
-        apicoltore = Apicoltore.query.filter_by(id=uid).first()
+        apicoltore = get_apicoltore_by_id(uid)
         if not apicoltore:
             print("Errore comunicazione con db")
-            return  ###
+            return  #
         else:
             apicoltore.nome = nome
             apicoltore.cognome = cognome
@@ -55,9 +58,9 @@ def modifica_profilo_personale(uid, nome, cognome, email, numtelefono):
 
 
 def modifica_residenza(uid, citta, cap, indirizzo):
-    cliente = Cliente.query.filter_by(id=uid).first()
+    cliente = get_cliente_by_id(uid)
     if not cliente:
-        apicoltore = Apicoltore.query.filter_by(id=uid).first()
+        apicoltore = get_apicoltore_by_id(uid)
         if not apicoltore:
             print("Errore comunicazione con db")
             return  #
@@ -74,9 +77,9 @@ def modifica_residenza(uid, citta, cap, indirizzo):
 
 
 def modifica_password_db(uid, psw):
-    cliente = Cliente.query.filter_by(id=uid).first()
+    cliente = get_cliente_by_id(uid)
     if not cliente:
-        apicoltore = Apicoltore.query.filter_by(id=uid).first()
+        apicoltore = get_apicoltore_by_id(uid)
         if not apicoltore:
             print("Errore comunicazione con db")
             return  #
