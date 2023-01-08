@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  {% extends "base.html"%}
+        {% block title %}Modifica Informazioni Personali{% endblock %}
+</head>
+
+<body>
+{% block content %}
+<div class="container bootstrap snippets bootdey">
+    <h1 class="text-primary">Modifica Profilo</h1>
+      <hr>
+	<div class="row">
+      <div class="col-md-3">
+        <div class="text-center">
+          <img src="https://bootdey.com/img/Content/avatar/avatar7.png" class="avatar img-circle img-thumbnail" alt="avatar">
+        </div>
+      </div>
+
+      <!-- edit form column -->
+      <div class="col-md-9 personal-info">
+        <h3>Informazioni Personali</h3>
+
+        <form class="form-horizontal" action="/modifica_dati_personali" method="POST">
+          <div class="form-group">
+            <label class="col-lg-3 control-label">Nome:</label>
+            <div class="col-lg-8">
+              <input name="nuovo_nome" placeholder={{current_user.nome}} class="form-control"  type="text">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-lg-3 control-label">Cognome:</label>
+            <div class="col-lg-8">
+              <input name="nuovo_cognome" placeholder={{current_user.cognome}} class="form-control"  type="text">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-lg-3 control-label">Email:</label>
+            <div class="col-lg-8">
+              <input name="nuova_email" placeholder={{current_user.email}} class="form-control"  type="text">
+            </div>
+          </div><div class="form-group">
+            <label class="col-lg-3 control-label">Telefono:</label>
+            <div class="col-lg-8">
+              <input name="nuovo_numtelefono" placeholder={{current_user.telefono}} class="form-control"  type="text">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-md-4 control-label"></label>
+            <div class="col-md-4"><br>
+                <button type="submit" class="btn btn-warning" >Conferma Modifiche <span class="glyphicon glyphicon-ok-sign"></span></button>
+                <a href="{{url_for('views.area_personale')}}">
+                <button type="button" class="btn btn-secondary btn-sm">Annulla <span class="glyphicon glyphicon-remove"></span></button>
+                </a>
+            </div>
+          </div>
+        </form>
+      </div>
+  </div>
+</div>
+<hr>
+{% endblock %}
+</body>
+</html>

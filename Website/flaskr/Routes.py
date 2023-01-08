@@ -66,7 +66,22 @@ def mostra_prodotti():
     return render_template('catalogo_prodotti.html', prods=prods)
 
 
-# return home()
+@views.route('/modifica_dati_personali')
+@login_required
+def modifica_dati_pers():
+    return render_template("modifica_dati_utente.html")
+
+
+@views.route('/modifica_residenza')
+@login_required
+def modifica_residenza():
+    return render_template("modifica_residenza.html")
+
+
+@views.route('/modifica_password')
+@login_required
+def modifica_psw():
+    return render_template("modifica_password.html")
 
 
 @views.route('/crea_area_assistenza_page')

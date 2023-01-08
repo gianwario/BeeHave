@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  {% extends "base.html"%}
+        {% block title %}Modifica Indirizzo{% endblock %}
+</head>
+
+<body>
+{% block content %}
+<div class="container bootstrap snippets bootdey">
+    <h1 class="text-primary">Modifica Profilo</h1>
+      <hr>
+	<div class="row">
+      <div class="col-md-3">
+        <div class="text-center">
+          <img src="https://www.freepnglogos.com/uploads/house-png/house-png-images-cliparts-icons-and-png-backgrounds-21.png"
+               class="avatar img-circle img-thumbnail" alt="residence">
+        </div>
+      </div>
+
+
+      <div class="col-md-9 personal-info">
+
+        <h3>Indirizzo di residenza</h3>
+
+        <form class="form-horizontal" action="/modifica_residenza" method="POST">
+          <div class="form-group">
+            <label class="col-lg-3 control-label">Citt&#224:</label>
+            <div class="col-lg-8">
+              <input name="nuova_citta" placeholder={{current_user.citta}} class="form-control"  type="text">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-lg-3 control-label">Cap:</label>
+            <div class="col-lg-8">
+              <input name="nuovo_cap" placeholder={{current_user.cap}} class="form-control"  type="text">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-lg-3 control-label">Indirizzo:</label>
+            <div class="col-lg-8">
+              <input name="nuovo_indirizzo" placeholder={{current_user.indirizzo}} class="form-control"  type="text">
+              <!-- Placeholder Non visualizza intero indirizzo, ma si ferma agli spazi bianchi -->
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-md-4 control-label"></label>
+            <div class="col-md-4"><br>
+                <button type="submit" class="btn btn-warning" >Conferma Modifiche <span class="glyphicon glyphicon-ok-sign"></span></button>
+                <a href="{{url_for('views.area_personale')}}">
+                <button type="button" class="btn btn-secondary btn-sm">Annulla <span class="glyphicon glyphicon-remove"></span></button>
+                </a>
+            </div>
+          </div>
+        </form>
+      </div>
+  </div>
+</div>
+<hr>
+{% endblock %}
+</body>
+</html>
