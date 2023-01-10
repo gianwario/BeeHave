@@ -15,7 +15,7 @@ def create_app():
 
     """chiave segreta per criptare cookies"""
     app.config['SECRET_KEY'] = 'BEEHAVE'
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:root@localhost/beehavedb'
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:rootroot@localhost/beehavedb'
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     db.init_app(app)
 
@@ -32,6 +32,7 @@ def create_app():
     app.register_blueprint(gv, url_prefix='/')
     app.register_blueprint(gau, url_prefix='/')
     app.register_blueprint(ga, url_prefix='/')
+
     from .model import UtenteRegistrato, Cliente, Apicoltore, Alveare, Prodotto, Acquisto, TicketAdozione, \
         TicketAssistenza
 

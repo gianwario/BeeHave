@@ -49,8 +49,11 @@
                         Alveare</a></li>
                     <li><a class="dropdown-item"
                            href="{{url_for('ga.mostra_alveari_disponibili', apicoltore_id=current_user.id)}}">Mostra
+                        tutti i tuoi
                         Alveari disponibili</a></li>
-                    <li><a class="dropdown-item" href="#">Mostra Alveari adottati</a></li>
+                    <li><a class="dropdown-item"
+                           href="{{url_for('ga.mostra_alveari_affittati', apicoltore_id=current_user.id)}}">Mostra
+                        Alveari affittati</a></li>
                     <li><a class="dropdown-item"
                            href="{{url_for('gv.mostra_articoli_inVendita', apicoltore_id=current_user.id)}}">Mostra
                         Prodotti in vendita</a></li>
@@ -103,6 +106,7 @@
                         <li><a href="">Chi siamo</a></li>
                     </ul>
                 </div>
+
             </div>
 
             <div class="col-lg-3">
@@ -132,7 +136,7 @@
             <div class="col-lg-4">
                 <div class="">
                     <h6 class="footer-heading text-uppercase text-white">Contact Us</h6>
-                    <p class="contact-info mt-4">Contact us if need help withanything</p>
+                    <p class="contact-info mt-4">Contact us if you need help withanything</p>
                     <p class="contact-info">+01 123-456-7890</p>
 
                 </div>
