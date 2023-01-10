@@ -7,7 +7,7 @@ from werkzeug.utils import secure_filename
 from Website.flaskr import image_folder_absolute
 from Website.flaskr.Routes import inserimento_alveare_page
 from Website.flaskr.gestione_adozioni.GestioneAdozioniService import inserisci_alveare, update_imgAlveare, \
-    get_AlveariDisponibili
+    get_AlveariDisponibili, update_Stato
 from Website.flaskr.model.Alveare import Alveare
 
 ga = Blueprint('ga', __name__)
@@ -65,3 +65,14 @@ def mostra_alveari_disponibili(apicoltore_id):
     if session['isApicoltore']:
         alveari_disponibili = get_AlveariDisponibili(apicoltore_id)
         return render_template('/catalogo_alveari_disponibili.html', alveari_disponibili=alveari_disponibili)
+
+
+@ga.route('/modifica_stato_alveare/<int:alveare_id>', methods=['POST, GET'])
+def modifica_stato_alv(alveare_id):
+    covata_compatta = int(request.form.get('covata_compatta'))
+    popolazione = request.form.get('popolazione')
+    polline = request.form.get('polline')
+    stato_cellette = request.form.get('stato_cellette')
+    update_Stato(alveare_id, covata_compatta, popolazione, polline, stato_cellette)
+    flash('Stato alveare aggiornato correttamente', category='success')
+    return render_template('/catalogo_alveari_disponibili.html')

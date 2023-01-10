@@ -82,3 +82,7 @@ def mostra_alveari():
         return render_template('catalogo_alveari.html', alveari_disponibili=alveari_disponibili)
     #return home()
 
+@views.route('/modifica_stato_alveare/<int:alveare_id>')
+@login_required
+def modifica_stato(alveare_id):
+    return render_template('modifica_stato_alveare.html',alveare_id=alveare_id)
