@@ -4,7 +4,8 @@ from flask import Blueprint, request, session, flash, g
 from werkzeug.security import check_password_hash, generate_password_hash
 from flask_login import login_user, logout_user, login_required, current_user
 
-from Website.flaskr.Routes import home, area_personale, modifica_dati_pers, modifica_psw, sigup_cl, login_page
+from Website.flaskr.Routes import home, area_personale, modifica_dati_pers, modifica_psw, login_page, \
+    registrazione_apicoltore_page
 from Website.flaskr.gestione_utente.GestioneUtenteService import *
 from Website.flaskr.model.Apicoltore import Apicoltore
 
@@ -66,7 +67,7 @@ def registrazione_cliente():
             flash("Inserire nel campo password almeno un carattere speciale ed un numero.", category="errore")
         elif not re.fullmatch(email_valida, email):
             flash("Il campo e-mail non è nel formato corretto.", category="errore")
-        elif psw.__len__() < 8:
+        elif len(psw) < 8:
             flash("La password deve contenere almeno 8 caratteri.", category="errore")
         elif not check_email_esistente(email):
             flash("L'indirizzo e-mail è già registrato.", category="errore")
@@ -86,7 +87,7 @@ def registrazione_cliente():
 
 
 @gu.route('/registrazione_ap', methods=['GET', 'POST'])
-def sigup():
+def registra_apicoltore():
     if request.method == 'POST':
         nome = request.form.get('nome')
         cognome = request.form.get('cognome')
@@ -100,50 +101,46 @@ def sigup():
         pwd = request.form.get('password')
         cpwd = request.form.get('cpwd')
 
-        if not 0 < nome.__len__() < 45:
-            print("Nome length has to be at last 30 characters", "error")
-            return  # inserire pagine html di errore
-        if not 0 < cognome.__len__() < 45:
-            print("Cognome length has to be at last 30 characters", "error")
-            return  # inserire pagine html di errore
+        if not 0 < len(nome) < 45:
+            flash("Nome non valido", "error")
+            return  registrazione_apicoltore_page()
+        if not 0 < len(cognome) < 45:
+            print("Cognome non valido", "error")
+            return  registrazione_apicoltore_page()
 
-        if not 0 < indirizzo.__len__() < 45:
-            print("Indirizzo length has to be at last 30 characters ", "error")
-            return  # inserire pagine html di errore
-        if not 0 < citta.__len__() < 200:
-            print("Città length has to be at last 30 characters", "error")
-            return  # inserire pagine html di errore
-        if not cap.__len__() >= 5:
-            print("cap length has to be at last 5 numbers", "error")
-            return  # inserire pagine html di errore
-        if not 0 < telefono.__len__() < 11:
-            print("Telefono length has to be at last 9 numbers", "error")
-            return  # inserire pagine html di errore
-        if not 0 < descrizione.__len__() < 200:
-            print("Descrizione length has to be at last 200 characters", "error")
-            return  # inserire pagine html di errore
+        if not 0 < len(indirizzo) < 45:
+            print("Indirizzo non valido", "error")
+            return  registrazione_apicoltore_page()
+        if not 0 < len(citta) < 200:
+            print("Città non valida", "error")
+            return  registrazione_apicoltore_page()
+        if not len(cap) >= 5:
+            print("CAP non valido", "error")
+            return  registrazione_apicoltore_page()
+        if not 0 < len(telefono) < 11:
+            print("Numero telefono non valido", "error")
+            return  registrazione_apicoltore_page()
         if not check_email_esistente(email):
-            print("Invalid email", "error")
-            return  # inserire pagine html di errore
+            print("Email già esistente", "error")
+            return  registrazione_apicoltore_page()
 
-        if not pwd.__len__() < 9:
-            print("Password length has to be at least 8 characters", "error")
-            return  # inserire pagine html di errore
+        if not len(pwd) < 8:
+            print("Lunghezza password deve essere almeno 8 caratteri", "error")
+            return  registrazione_apicoltore_page()
 
         if not (controllo_car_spec(pwd) and controllo_num(pwd)):
             flash("Inserire nel campo password almeno un carattere speciale ed un numero.", "error")
-            return  # inserire pagine html di errore
+            return  registrazione_apicoltore_page()
 
         if pwd != cpwd:
-            print("Password and confirm password do not match", "error")
-            return  #
+            print("Password e Conferma Password non combaciano", "error")
+            return  registrazione_apicoltore_page()
 
         user = Apicoltore(nome=nome, cognome=cognome, indirizzo=indirizzo, citta=citta, cap=cap, telefono=telefono,
                           descrizione=descrizione, email=email, assistenza=assistenza,
                           password=generate_password_hash(pwd, method='sha256'))
 
         registra_apicoltore(user)
-        return home()
 
     return home()
 
