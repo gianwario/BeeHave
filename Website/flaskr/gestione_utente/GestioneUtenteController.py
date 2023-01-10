@@ -80,6 +80,7 @@ def registrazione_cliente():
 
             registra_cliente(nuovo_cliente)
             flash("Account creato con successo!", category="successo")
+            login_user(nuovo_cliente)
             return home()
 
     return sigup_cl()
@@ -140,6 +141,7 @@ def sigup():
                          assistenza=0, email=email, password=generate_password_hash(pwd, method='sha256'))
 
         registra_apicoltore(user)
+        login_user(user)
         return home()
 
     return home()
