@@ -141,7 +141,8 @@ header .container .showcase p {
 }
 header .container .showcase button {
   margin-top: 1rem;
-  background-color: #000;
+  background-color: black;
+  opacity: 70%;
   color: #fff;
   border: none;
   outline: none;
@@ -170,7 +171,7 @@ header .video-container::after {
   left: 0;
   height: 100%;
   width: 100%;
-  background-color: rgba(0, 0, 0, 0.82);
+  background-color: rgba(0, 0, 0, 0.60);
 }
 
   header .container .showcase {

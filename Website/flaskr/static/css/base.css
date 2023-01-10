@@ -1,0 +1,191 @@
+   @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap");
+* {
+  box-sizing: border-box;
+  font-family: "Montserrat", sans-serif;
+}
+
+body {
+  margin: 0;
+  overflow-x: hidden;
+}
+
+header {
+  min-height: 100vh;
+  position: relative;
+}
+header .container {
+  max-width: 1368px;
+  margin: 0 auto;
+  padding: 1rem 2rem;
+}
+header .container .navbar {
+  min-height: 10vh;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+header .container .navbar .logo {
+  font-size: 2.25rem;
+  text-decoration: none;
+  text-transform: uppercase;
+  color: #fff;
+  font-weight: 700;
+}
+header .container .navbar .nav-links {
+  display: flex;
+  align-items: center;
+}
+header .container .navbar .nav-links li {
+  list-style-type: none;
+}
+header .container .navbar .nav-links li a {
+  text-decoration: none;
+  color: #fff;
+  margin: 0 1.25rem;
+  font-weight: 500;
+  font-size: 1.05rem;
+  position: relative;
+}
+header .container .navbar .nav-links li a::after {
+  position: absolute;
+  content: "";
+  background-color: #fff;
+  bottom: -5px;
+  left: 0;
+  width: 0%;
+  height: 3px;
+  transition: 0.3s ease all;
+}
+header .container .navbar .nav-links li a:hover::after {
+  width: 100%;
+}
+header .container .navbar .nav-links button {
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 0.75rem 1rem;
+  margin: 0 1rem;
+  border-radius: 6px;
+  background: transparent;
+  border: 2px solid #fff;
+  color: #fff;
+  font-weight: 500;
+}
+header .container .navbar i {
+  display: none;
+  color: #fff;
+  cursor: pointer;
+}
+header .container .showcase {
+  min-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  width: 35rem;
+}
+header .container .showcase h1 {
+  color: #fff;
+  font-size: 2.5rem;
+  margin-bottom: 0;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+header .container .showcase p {
+  margin-top: 0;
+  color: #fff;
+  font-weight: 500;
+  line-height: 1.4;
+  font-size: 0.9rem;
+  width: 30rem;
+}
+header .container .showcase button {
+  margin-top: 1rem;
+  background-color: #000;
+  color: #fff;
+  border: none;
+  outline: none;
+  padding: 1rem 1.5rem;
+  font-size: 0.9rem;
+  border-radius: 6px;
+  cursor: pointer;
+}
+header .video-container {
+  z-index: -1;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+}
+header .video-container video {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+header .video-container::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.82);
+}
+
+@media (max-width: 850px) {
+  header .container .navbar .nav-links {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: #fff;
+    height: 100%;
+    width: 225px;
+    margin: 0;
+    padding: 0;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    transform: translateX(-100%);
+    transition: 0.4s ease all;
+    z-index: 10;
+  }
+  header .container .navbar .nav-links li a {
+    color: #000;
+  }
+  header .container .navbar .nav-links li a::after {
+    background-color: #000;
+  }
+  header .container .navbar .nav-links button {
+    border-color: #000;
+    color: #000;
+    padding: 0.75rem 1.5rem;
+  }
+  header .container .navbar .nav-links.active {
+    transform: translateX(0%);
+  }
+  header .container .navbar i {
+    display: block;
+  }
+  header .container .showcase {
+    min-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    text-align: center;
+  }
+  header .container .showcase h1 {
+    font-size: 2.25rem;
+  }
+}
+@media (max-width: 500px) {
+  header .container .showcase h1 {
+    font-size: 2.1rem;
+  }
+  header .container .showcase p {
+    font-size: 0.85rem;
+    width: 300px;
+  }
+}
