@@ -1,8 +1,8 @@
 from flask import render_template, Blueprint, session
 from flask_login import login_required, current_user
 
-from Website.flaskr.gestione_adozioni.GestioneAdozioniService import get_Alveari, get_alveareById, getTicket_adozione
-from Website.flaskr.gestione_vendita.GestioneVenditaService import getTuttiProdotti, getProdottoById
+from Website.flaskr.gestione_adozioni.GestioneAdozioniService import get_alveari, get_alveare_by_id, get_ticket_adozione
+from Website.flaskr.gestione_vendita.GestioneVenditaService import get_tutti_prodotti, get_prodotto_by_id
 from Website.flaskr.model.Prodotto import Prodotto
 
 views = Blueprint('views', __name__)
@@ -61,9 +61,10 @@ def area_personale():
 
 @views.route('/catalogo_prod')
 def mostra_prodotti():
-    # if not current_user.is_authenticated or not session['isApicoltore']:
-    prods = getTuttiProdotti()
-    return render_template('catalogo_prodotti.html', prods=prods)
+    if not current_user.is_authenticated or not session['isApicoltore']:
+        prods = get_tutti_prodotti()
+        return render_template('catalogo_prodotti.html', prods=prods)
+    return render_template('catalogo_prodotti_apicoltore.html')
 
 
 @views.route('/modifica_dati_personali')
@@ -95,6 +96,6 @@ def crea_area_assistenza_page():
 @views.route('/catalogo_alveari', methods=['GET'])
 def mostra_alveari():
     # if not current_user.is_authenticated or not session['isApicoltore']:
-    alveari_disponibili = get_Alveari()
+    alveari_disponibili = get_alveari()
     return render_template('catalogo_alveari.html', alveari_disponibili=alveari_disponibili)
 # return home()

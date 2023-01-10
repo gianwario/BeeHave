@@ -20,21 +20,26 @@
                 <div class="col-md-4 inputGroupContainer">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                        <input name="email" placeholder="Email" class="form-control" type="text" required>
+                        <input name="email" placeholder="Email" {% if email %} value={{email}} {% endif %} class="form-control" type="text" required>
                     </div>
                 </div>
             </div>
-
             <div class="form-group">
                 <label class="col-md-4 control-label">Password</label>
                 <div class="col-md-4 inputGroupContainer">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                        <input name="password" placeholder="Password" class="form-control" type="password" required>
+                        <input name="password" placeholder="Password" {% if password %} value={{password}} {% endif %}  class="form-control" type="password" required>
                     </div>
                 </div>
             </div>
-
+            {% with messages = get_flashed_messages(category_filter=["error"]) %}
+                {% if messages %}
+                    {% for message in messages %}
+                    <p style="color:red">{{ message }}</p>
+                    {% endfor %}
+              {% endif %}
+            {% endwith %}
             <div class="form-group">
                 <label class="col-md-4 control-label"></label>
                 <div class="col-md-4"><br>
@@ -43,6 +48,11 @@
                     <button type="submit" class="btn btn-warning">Accedi<span class="glyphicon glyphicon-send"></span>
                     </button>
                 </div>
+            <div class="form-footer" style="text-align: center">
+                <p>Non hai ancora un account?</p>
+                <p><a class="form-link"  style="color: darkorange" href="{{url_for('views.registrazione_apicoltore_page')}}">Registrati come apicoltore</a></p>
+                <p><a class="form-link"  style="color: darkorange" href="{{url_for('views.registrazione_cliente_page')}}">Registrati come cliente</a></p>
+            </div>
             </div>
         </fieldset>
     </form>

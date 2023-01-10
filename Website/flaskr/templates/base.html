@@ -69,21 +69,6 @@
 </div>
 </nav>
 
-{% with messages = get_flashed_messages(with_categories=true) %}
-{% if messages %}
-{% for category, message in messages %}
-{% if category == 'error' %}
-<div class="alert alert-danger alter-dismissable fade show" role="alert">
-    {{ message }}
-</div>
-{% else %}
-<div class="alert alert-success alter-success fade show" role="alert">
-    {{ message }}
-</div>
-{% endif %}
-{% endfor %}
-{% endif %}
-{% endwith %}
 {% block content %}
 {% endblock %}
 
