@@ -127,7 +127,7 @@ def sigup():
             print("Invalid email", "error")
             return  # inserire pagine html di errore
 
-        if not pwd.__len__() < 9:
+        if  pwd.__len__() < 8:
             print("Password length has to be at least 8 characters", "error")
             return  # inserire pagine html di errore
 
