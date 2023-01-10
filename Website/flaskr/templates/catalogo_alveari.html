@@ -3,54 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="{{url_for('static', filename='css/e-commerce_card.css')}}">
+    {% extends "base.html"%}
+    {% block title %}Catalogo Alveari{% endblock %}
 </head>
 <body>
 
 {% block content %}
-<nav class="navbar navbar-inverse">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <a class="navbar-brand" href="#">BeeHave</a>
-        </div>
-        <ul class="nav navbar-nav">
-            <li class="active"><a href="{{url_for('views.home')}}">Home</a></li>
-            <li><a href="{{url_for('views.mostra_alveari')}}">Adotta Alveare</a></li>
-            <li><a href="{{url_for('views.mostra_prodotti')}}">Catalogo Prodotti</a></li>
-            <li><a href="#">Chi siamo</a></li>
-
-
-        </ul>
-        <ul class="nav navbar-nav navbar-right">
-            <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><span
-                    class="glyphicon glyphicon-user"></span>Area Utente</a>
-                <ul class="dropdown-menu">
-
-                    {% if not current_user.is_authenticated %}
-                    <li><a href="{{url_for('views.login_page')}}">Login</a></li>
-                    <li><a href="{{url_for('views.sigup_ap')}}">Registra Apicoltore</a></li>
-                    <li><a href="{{url_for('views.sigup_cl')}}">Registra Cliente</a></li>
-
-                    {% else %}
-                    <li><a href="{{url_for('views.area_personale')}}">Area Personale</a></li>
-
-                    {% if session['isApicoltore'] %}
-                    <li><a href="{{url_for('views.inserimento_prodotto_page')}}">Inserisci prodotto</a></li>
-                    <li><a href="{{url_for('views.inserimento_alveare_page')}}">Inserisci alveare</a></li>
-                    <li><a href="{{url_for('gv.mostra_articoli_inVendita', apicoltore_id=current_user.id)}}">Visualizza
-                        prodotti in vendita</a>
-                    <li>
-                        {% endif %}
-                    <li><a href="{{url_for('gu.logout')}}">Logout</a></li>
-                    {% endif %}
-                </ul>
-            </li>
-        </ul>
-    </div>
-</nav>
 <!--For Page-->
 <div class="page">
 
@@ -58,7 +17,7 @@
     <div class="row">
 
         {% for alveare in alveari_disponibili %}
-
+        {% if alveare.percentuale_disponibile>=25 %}
         <!--Card 1-->
         <div class="col-md-4">
             <div class="card card-cascade card-ecommerce wider shadow mb-5 ">
@@ -77,7 +36,7 @@
                 <div class="card-body card-body-cascade text-center">
 
                     <!--Card Title-->
-                    <h4 class="card-title"><strong><a href="#">{{alveare.nome}}</a></strong></h4>
+                    <h4 class="card-title"><strong><a href="{{url_for('ga.informazioni_alveare', alveare_id=alveare.id)}}">{{alveare.nome}}</a></strong></h4>
 
                     <!-- Card Description-->
                     <p class="card-text">Descrizione generica
@@ -86,15 +45,15 @@
 
                     <p class="price">Prezzo: {{alveare.prezzo}}</p>
 
-                    <!--Card footer-->
+                    <!--Card footer
                     <div class="card-footer">
                         <p>Affitta</p>
                     </div>
-
-
+                                -->
                 </div>
             </div>
         </div>
+        {% endif %}
         {% endfor %}
 
     </div>

@@ -3,7 +3,7 @@
 <head>
     <link rel="stylesheet" href="{{url_for('static', filename='css/registrazione_cl.css')}}">
     <script src="{{url_for('static', filename='js/registrazione_cl.js')}}"></script>
-    {% extends "base.html"%}
+    {% extends "base.html" %}
 </head>
 <body>
 {% block content %}
@@ -116,16 +116,12 @@
             <p>Registrandoti, dichiari di aver letto ed accettato i nostri <a href="#" style="color:dodgerblue">Termini
                 di servizio e privacy</a>.</p>
 
-            <div class="alert alert-success" role="alert" id="success_message">Successo!
-                <i class="glyphicon glyphicon-thumbs-up"></i> Successo!
-            </div>
-
             <!-- Button -->
             <div class="form-group">
                 <label class="col-md-4 control-label"></label>
                 <div class="col-md-4"><br>
-                    <button type="button" class="annullabtn">Annulla<span class="glyphicon glyphicon-remove"></span>
-                    </button>
+                    <button type="button" class="annullabtn">Annulla<span
+                            class="glyphicon glyphicon-remove"></span></button>
                     <button type="submit" class="btn btn-warning">Registrati<span
                             class="glyphicon glyphicon-send"></span></button>
                 </div>
