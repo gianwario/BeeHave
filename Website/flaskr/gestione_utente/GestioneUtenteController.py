@@ -79,14 +79,16 @@ def registrazione_cliente():
                                     indirizzo=indirizzo, citta=citta, cap=cap, telefono=numtelefono)
 
             registra_cliente(nuovo_cliente)
-            flash("Account creato con successo!", category="successo")
+            flash("Account creato con successo!", category="success")
+            session['isApicoltore'] = False
+            login_user(nuovo_cliente)
             return home()
 
     return registrazione_cliente_page()
 
 
 @gu.route('/registrazione_ap', methods=['GET', 'POST'])
-def registra_apicoltore():
+def registrazione_apicoltore():
     if request.method == 'POST':
         nome = request.form.get('nome')
         cognome = request.form.get('cognome')
@@ -121,7 +123,7 @@ def registra_apicoltore():
             flash("Email già esistente", category="error")
             return  registrazione_apicoltore_page()
 
-        if not len(pwd) < 8:
+        if len(pwd) < 8:
             flash("Lunghezza password deve essere almeno 8 caratteri", category="error")
             return  registrazione_apicoltore_page()
 
@@ -138,7 +140,8 @@ def registra_apicoltore():
                           password=generate_password_hash(pwd, method='sha256'))
 
         registra_apicoltore(user)
-
+        session['isApicoltore']=True
+        login_user(user)
     return home()
 
 
