@@ -113,7 +113,7 @@ def sigup():
         cpwd = request.form.get('cpwd')
 
 
-      
+
         if not 0 < nome.__len__() < 45:
             print("Nome length has to be at last 30 characters", "error")
             return  # inserire pagine html di errore
