@@ -129,7 +129,7 @@ def sigup():
             print("Invalid email", "error")
             return  # inserire pagine html di errore
 
-        if not pwd.__len__() < 9:
+        if pwd.__len__() < 8:
             print("Password length has to be at least 8 characters", "error")
             return  # inserire pagine html di errore
 
@@ -166,19 +166,19 @@ def modifica_dati_personali():
         if not cognome:
             cognome = current_user.cognome
         if not check_email_esistente(email):
-            flash("Errore, email già esistente.", category="errore")
+            flash("Errore, email già esistente.", category="error")
             return modifica_dati_pers()
         if not email:
             email = current_user.email
         if not re.fullmatch(email_valida, email):
-            flash("Errore, email non nel formato corretto.", category="errore")
+            flash("Errore, email non nel formato corretto.", category="error")
             return modifica_dati_pers()
         if not numtelefono:
             numtelefono = current_user.telefono
 
         modifica_profilo_personale(g.user, nome, cognome, email, numtelefono)
 
-        flash("Modifica password avvenuta con successo!", category="successo")
+        flash("Modifica password avvenuta con successo!", category="success")
         return area_personale()
 
 
@@ -211,15 +211,15 @@ def modifica_password():
         ripeti_psw = request.form.get('nuova_ripeti_psw')
 
         if psw.__len__() < 8:
-            flash("La password deve contenere almeno 8 caratteri.", category="errore")
+            flash("La password deve contenere almeno 8 caratteri.", category="error")
             return modifica_psw()
 
         if psw != ripeti_psw:
-            flash("Ripeti_password non coincide con password.", category="errore")
+            flash("Ripeti_password non coincide con password.", category="error")
             return modifica_psw()
 
         if not (controllo_car_spec(psw) and controllo_num(psw)):
-            flash("Inserire nel campo password almeno un carattere speciale ed un numero.", category="errore")
+            flash("Inserire nel campo password almeno un carattere speciale ed un numero.", category="error")
             return modifica_psw()
 
         psw = generate_password_hash(psw, method='sha256')
