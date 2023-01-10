@@ -64,15 +64,15 @@ def registrazione_cliente():
         numtelefono = request.form.get('numtelefono')
 
         if not (controllo_car_spec(psw) and controllo_num(psw)):
-            flash("Inserire nel campo password almeno un carattere speciale ed un numero.", category="errore")
+            flash("Inserire nel campo password almeno un carattere speciale ed un numero.", category="error")
         elif not re.fullmatch(email_valida, email):
-            flash("Il campo e-mail non è nel formato corretto.", category="errore")
+            flash("Il campo e-mail non è nel formato corretto.", category="error")
         elif len(psw) < 8:
-            flash("La password deve contenere almeno 8 caratteri.", category="errore")
+            flash("La password deve contenere almeno 8 caratteri.", category="error")
         elif not check_email_esistente(email):
-            flash("L'indirizzo e-mail è già registrato.", category="errore")
+            flash("L'indirizzo e-mail è già registrato.", category="error")
         elif psw != ripeti_psw:
-            flash("Ripeti_password non coincide con password.", category="errore")
+            flash("Ripeti_password non coincide con password.", category="error")
 
         else:
             nuovo_cliente = Cliente(email=email, nome=nome, cognome=cognome,
@@ -102,42 +102,42 @@ def registra_apicoltore():
         cpwd = request.form.get('cpwd')
 
         if not 0 < len(nome) < 45:
-            flash("Nome non valido", "error")
+            flash("Nome non valido", category="error")
             return  registrazione_apicoltore_page()
         if not 0 < len(cognome) < 45:
-            print("Cognome non valido", "error")
+            flash("Cognome non valido", category="error")
             return  registrazione_apicoltore_page()
 
         if not 0 < len(indirizzo) < 45:
-            print("Indirizzo non valido", "error")
+            flash("Indirizzo non valido", category="error")
             return  registrazione_apicoltore_page()
         if not 0 < len(citta) < 200:
-            print("Città non valida", "error")
+            flash("Città non valida", category="error")
             return  registrazione_apicoltore_page()
         if not len(cap) >= 5:
-            print("CAP non valido", "error")
+            flash("CAP non valido", category="error")
             return  registrazione_apicoltore_page()
         if not 0 < len(telefono) < 11:
-            print("Numero telefono non valido", "error")
+            flash("Numero telefono non valido", category="error")
             return  registrazione_apicoltore_page()
         if not check_email_esistente(email):
-            print("Email già esistente", "error")
+            flash("Email già esistente", category="error")
             return  registrazione_apicoltore_page()
 
         if not len(pwd) < 8:
-            print("Lunghezza password deve essere almeno 8 caratteri", "error")
+            flash("Lunghezza password deve essere almeno 8 caratteri", category="error")
             return  registrazione_apicoltore_page()
 
         if not (controllo_car_spec(pwd) and controllo_num(pwd)):
-            flash("Inserire nel campo password almeno un carattere speciale ed un numero.", "error")
+            flash("Inserire nel campo password almeno un carattere speciale ed un numero.", category="error")
             return  registrazione_apicoltore_page()
 
         if pwd != cpwd:
-            print("Password e Conferma Password non combaciano", "error")
+            flash("Password e Conferma Password non combaciano", category="error")
             return  registrazione_apicoltore_page()
 
         user = Apicoltore(nome=nome, cognome=cognome, indirizzo=indirizzo, citta=citta, cap=cap, telefono=telefono,
-                          descrizione=descrizione, email=email, assistenza=assistenza,
+                           email=email, assistenza=0,
                           password=generate_password_hash(pwd, method='sha256'))
 
         registra_apicoltore(user)
