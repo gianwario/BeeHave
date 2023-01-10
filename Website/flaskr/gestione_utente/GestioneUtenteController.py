@@ -5,7 +5,7 @@ from werkzeug.security import check_password_hash, generate_password_hash
 from flask_login import login_user, logout_user, login_required, current_user
 
 from Website.flaskr.Routes import home, area_personale, modifica_dati_pers, modifica_psw, login_page, \
-    registrazione_apicoltore_page
+    registrazione_apicoltore_page, registrazione_cliente_page
 from Website.flaskr.gestione_utente.GestioneUtenteService import *
 from Website.flaskr.model.Apicoltore import Apicoltore
 
@@ -13,7 +13,6 @@ gu = Blueprint('gu', __name__)
 email_valida = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b'
 spec = ["$", "#", "@", "!", "*", "£", "%", "&", "/", "(", ")", "=", "|",
         "+", "-", "^", "_", "-", "?", ",", ":", ";", ".", "§", "°", "[", "]"]
-numb = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
 
 
 @gu.route('/login', methods=['GET', 'POST'])
@@ -63,13 +62,13 @@ def registrazione_cliente():
         indirizzo = request.form.get('indirizzo')
         numtelefono = request.form.get('numtelefono')
 
-        if not (controllo_car_spec(psw) and controllo_num(psw)):
+        if not (controllo_caratteri_speciali(psw) and controllo_numeri(psw)):
             flash("Inserire nel campo password almeno un carattere speciale ed un numero.", category="error")
         elif not re.fullmatch(email_valida, email):
             flash("Il campo e-mail non è nel formato corretto.", category="error")
         elif len(psw) < 8:
             flash("La password deve contenere almeno 8 caratteri.", category="error")
-        elif not check_email_esistente(email):
+        elif not controlla_email_esistente(email):
             flash("L'indirizzo e-mail è già registrato.", category="error")
         elif psw != ripeti_psw:
             flash("Ripeti_password non coincide con password.", category="error")
@@ -80,15 +79,16 @@ def registrazione_cliente():
                                     indirizzo=indirizzo, citta=citta, cap=cap, telefono=numtelefono)
 
             registra_cliente(nuovo_cliente)
-            flash("Account creato con successo!", category="successo")
+            flash("Account creato con successo!", category="success")
+            session['isApicoltore'] = False
             login_user(nuovo_cliente)
             return home()
 
-    return sigup_cl()
+    return registrazione_cliente_page()
 
 
 @gu.route('/registrazione_ap', methods=['GET', 'POST'])
-def registra_apicoltore():
+def registrazione_apicoltore():
     if request.method == 'POST':
         nome = request.form.get('nome')
         cognome = request.form.get('cognome')
@@ -119,15 +119,18 @@ def registra_apicoltore():
         if not 0 < len(telefono) < 11:
             flash("Numero telefono non valido", category="error")
             return  registrazione_apicoltore_page()
-        if not check_email_esistente(email):
+        if not controlla_email_esistente(email):
             flash("Email già esistente", category="error")
             return  registrazione_apicoltore_page()
         if pwd.__len__() < 8:
             print("Password length has to be at least 8 characters", "error")
             return  # inserire pagine html di errore
 
+        if len(pwd) < 8:
+            flash("Lunghezza password deve essere almeno 8 caratteri", category="error")
+            return  registrazione_apicoltore_page()
 
-        if not (controllo_car_spec(pwd) and controllo_num(pwd)):
+        if not (controllo_caratteri_speciali(pwd) and controllo_numeri(pwd)):
             flash("Inserire nel campo password almeno un carattere speciale ed un numero.", category="error")
             return  registrazione_apicoltore_page()
 
@@ -140,8 +143,8 @@ def registra_apicoltore():
                           password=generate_password_hash(pwd, method='sha256'))
 
         registra_apicoltore(user)
+        session['isApicoltore']=True
         login_user(user)
-
     return home()
 
 
@@ -159,8 +162,8 @@ def modifica_dati_personali():
             nome = current_user.nome
         if not cognome:
             cognome = current_user.cognome
-        if not check_email_esistente(email):
-            flash("Errore, email già esistente.", category="error")
+        if not controlla_email_esistente(email):
+            flash("Errore, email già esistente.", category="errore")
             return modifica_dati_pers()
         if not email:
             email = current_user.email
@@ -172,8 +175,9 @@ def modifica_dati_personali():
 
         modifica_profilo_personale(g.user, nome, cognome, email, numtelefono)
 
-        flash("Modifica password avvenuta con successo!", category="success")
-        return area_personale()
+        flash("Modifica password avvenuta con successo!", category="successo")
+
+    return area_personale()
 
 
 @gu.route('/modifica_indirizzo', methods=['GET', 'POST'])
@@ -193,7 +197,8 @@ def modifica_indirizzo():
 
         modifica_residenza(g.user, citta, cap, indirizzo)
         flash("Modifica password avvenuta con successo!", category="successo")
-        return area_personale()
+
+    return area_personale()
 
 
 @gu.route('/modifica_password', methods=['GET', 'POST'])
@@ -204,37 +209,35 @@ def modifica_password():
         psw = request.form.get('nuova_psw')
         ripeti_psw = request.form.get('nuova_ripeti_psw')
 
-        if psw.__len__() < 8:
-            flash("La password deve contenere almeno 8 caratteri.", category="error")
+        if len(psw) < 8:
+            flash("La password deve contenere almeno 8 caratteri.", category="errore")
             return modifica_psw()
 
         if psw != ripeti_psw:
             flash("Ripeti_password non coincide con password.", category="error")
             return modifica_psw()
 
-        if not (controllo_car_spec(psw) and controllo_num(psw)):
-            flash("Inserire nel campo password almeno un carattere speciale ed un numero.", category="error")
+        if not (controllo_caratteri_speciali(psw) and controllo_numeri(psw)):
+            flash("Inserire nel campo password almeno un carattere speciale ed un numero.", category="errore")
             return modifica_psw()
 
         psw = generate_password_hash(psw, method='sha256')
         modifica_password_db(g.user, psw)
         flash("Modifica password avvenuta con successo!", category="successo")
-        return area_personale()
+
+    return area_personale()
 
 
-def controllo_car_spec(psw):
+def controllo_caratteri_speciali(psw):
     for char in psw:
         for symbol in spec:
             if char == symbol:
                 return True
-
     return False
 
 
-def controllo_num(psw):
+def controllo_numeri(psw):
     for char in psw:
-        for num in numb:
-            if char == num:
-                return True
-
+        if char.isdigit():
+            return True
     return False
