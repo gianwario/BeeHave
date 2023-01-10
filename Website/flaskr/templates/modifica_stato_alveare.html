@@ -1,10 +1,9 @@
-!DOCTYPE html>
 <html>
 <head>
 
     <meta charset="UTF-8">
      <meta name="viewport" content="width=device-width, initial-scale=1">
-        {%extends "base.html" %}
+        {% extends "base.html" %}
     {%block title%}Modifica Stato Alveare{%endblock%}
 </head>
 <body>
@@ -13,6 +12,7 @@
 
                <form action="/modifica_stato_alveare" enctype="multipart/form-data" method="post">
 
+                   <input type="hidden" name="alveare_id" value="{{alveare_id}}">
                    <label for="covata_compatta">La covata è compatta?</label><br>
                     <input type="radio" id="covata_compatta" name="covata_compatta" value="1">
                     <label for="covata_compatta">si</label>

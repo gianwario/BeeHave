@@ -75,14 +75,14 @@ def crea_area_assistenza_page():
     return home()
 
 
-@views.route('/catalogo_alveari', methods=['GET'])
+@views.route('/catalogo_alveari')
 def mostra_alveari():
     #if not current_user.is_authenticated or not session['isApicoltore']:
         alveari_disponibili = get_Alveari()
         return render_template('catalogo_alveari.html', alveari_disponibili=alveari_disponibili)
     #return home()
 
-@views.route('/modifica_stato_alveare/<int:alveare_id>')
+@views.route('/modifica_stato_alveare_page/<int:alveare_id>')
 @login_required
 def modifica_stato(alveare_id):
     return render_template('modifica_stato_alveare.html',alveare_id=alveare_id)
