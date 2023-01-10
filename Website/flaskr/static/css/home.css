@@ -6,7 +6,7 @@
   grid-template-columns: 2fr 3fr;
   grid-auto-rows: 400px;
   justify-content: center;
-  border-bottom: 2px solid #ddd;
+
 }
 
 .hero-image {
@@ -29,15 +29,6 @@
   font-size: 1.2rem;
 }
 
-.info button {
-  width: 140px;
-  height: 32px;
-  color: #333;
-  font-weight: bolder;
-  background-color: #fb8c00;
-  border: none;
-  border-radius: 20px;
-}
 
 /* --- dishes grid with five dishes --- */
 
