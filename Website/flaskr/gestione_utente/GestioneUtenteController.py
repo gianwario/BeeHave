@@ -4,7 +4,7 @@ from flask import Blueprint, request, session, flash, g
 from werkzeug.security import check_password_hash, generate_password_hash
 from flask_login import login_user, logout_user, login_required, current_user
 
-from Website.flaskr.Routes import home, login_page, area_personale, modifica_dati_pers, modifica_psw, sigup_cl
+from Website.flaskr.Routes import home, area_personale, modifica_dati_pers, modifica_psw, sigup_cl, login_page
 from Website.flaskr.gestione_utente.GestioneUtenteService import *
 from Website.flaskr.model.Apicoltore import Apicoltore
 
@@ -28,9 +28,6 @@ def login():
             user = get_cliente_by_email(email)
             if user:
                 session['isApicoltore'] = False
-
-            else:
-                return login_page()
         if user:
 
             if check_password_hash(user.password, pwd):
@@ -97,11 +94,11 @@ def sigup():
         citta = request.form.get('citta')
         cap = request.form.get('cap')
         telefono = request.form.get('telefono')
-        descrizione = request.form.get('descrizione')
-        assistenza = bool(request.form.get('assistenza'))
         email = request.form.get('email')
         pwd = request.form.get('password')
         cpwd = request.form.get('cpwd')
+
+
 
         if not 0 < nome.__len__() < 45:
             print("Nome length has to be at last 30 characters", "error")
@@ -122,9 +119,7 @@ def sigup():
         if not 0 < telefono.__len__() < 11:
             print("Telefono length has to be at last 9 numbers", "error")
             return  # inserire pagine html di errore
-        if not 0 < descrizione.__len__() < 200:
-            print("Descrizione length has to be at last 200 characters", "error")
-            return  # inserire pagine html di errore
+
         if not check_email_esistente(email):
             print("Invalid email", "error")
             return  # inserire pagine html di errore
@@ -142,8 +137,7 @@ def sigup():
             return  #
 
         user = Apicoltore(nome=nome, cognome=cognome, indirizzo=indirizzo, citta=citta, cap=cap, telefono=telefono,
-                          descrizione=descrizione, email=email, assistenza=assistenza,
-                          password=generate_password_hash(pwd, method='sha256'))
+                         assistenza=0, email=email, password=generate_password_hash(pwd, method='sha256'))
 
         registra_apicoltore(user)
         return home()
