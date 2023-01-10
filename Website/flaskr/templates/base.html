@@ -74,25 +74,20 @@
 {% block content %}
 {% with messages = get_flashed_messages(with_categories=true) %}
 {% if messages %}
-{% for category, message in get_flashed_messages() %}
-{% if category == 'errore' %}
+{% for category, message in messages %}
+{% if category == 'error' %}
 <div class="alert alert-danger alter-dismissable fade show" role="alert">
     {{ message }}
-    <button type="button" class="close" data-dismiss="alert">
-        <span aria-hidden="true">&times;</span>
-    </button>
 </div>
 {% else %}
-<div class="alert alert-success alter-dismissable fade show" role="alert">
+<div class="alert alert-success alter-success fade show" role="alert">
     {{ message }}
-    <button type="button" class="close" data-dismiss="alert">
-        <span aria-hidden="true">&times;</span>
-    </button>
 </div>
 {% endif %}
 {% endfor %}
 {% endif %}
 {% endwith %}
+{% block content %}
 {% endblock %}
 
 <footer class="section bg-footer ">
@@ -127,7 +122,7 @@
                 <div class="">
                     <h6 class="footer-heading text-uppercase text-white">Help</h6>
                     <ul class="list-unstyled footer-link mt-4">
-                        <li><a href="{{url_for('views.sigup_ap')}}">Sign Up </a></li>
+                        <li><a href="{{url_for('views.registrazione_apicoltore_page')}}">Sign Up </a></li>
                         <li><a href="{{url_for('views.login_page')}}">Login</a></li>
                         <li><a href="">Terms of Services</a></li>
                         <li><a href="">Privacy Policy</a></li>
