@@ -4,7 +4,7 @@ from flask import Blueprint, request, session, flash, g
 from werkzeug.security import check_password_hash, generate_password_hash
 from flask_login import login_user, logout_user, login_required, current_user
 
-from Website.flaskr.Routes import home, login_page, area_personale, modifica_dati_pers, modifica_psw, sigup_cl
+from Website.flaskr.Routes import home, area_personale, modifica_dati_pers, modifica_psw, sigup_cl, login_page
 from Website.flaskr.gestione_utente.GestioneUtenteService import *
 from Website.flaskr.model.Apicoltore import Apicoltore
 
@@ -28,9 +28,6 @@ def login():
             user = get_cliente_by_email(email)
             if user:
                 session['isApicoltore'] = False
-
-            else:
-                return login_page()
         if user:
 
             if check_password_hash(user.password, pwd):
