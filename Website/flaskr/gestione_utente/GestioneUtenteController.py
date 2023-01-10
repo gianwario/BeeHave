@@ -97,8 +97,6 @@ def sigup():
         citta = request.form.get('citta')
         cap = request.form.get('cap')
         telefono = request.form.get('telefono')
-        descrizione = request.form.get('descrizione')
-        assistenza = bool(request.form.get('assistenza'))
         email = request.form.get('email')
         pwd = request.form.get('password')
         cpwd = request.form.get('cpwd')
@@ -124,9 +122,7 @@ def sigup():
         if not 0 < telefono.__len__() < 11:
             print("Telefono length has to be at last 9 numbers", "error")
             return  # inserire pagine html di errore
-        if not 0 < descrizione.__len__() < 200:
-            print("Descrizione length has to be at last 200 characters", "error")
-            return  # inserire pagine html di errore
+
         if not check_email_esistente(email):
             print("Invalid email", "error")
             return  # inserire pagine html di errore
@@ -144,8 +140,7 @@ def sigup():
             return  #
 
         user = Apicoltore(nome=nome, cognome=cognome, indirizzo=indirizzo, citta=citta, cap=cap, telefono=telefono,
-                          descrizione=descrizione, email=email, assistenza=assistenza,
-                          password=generate_password_hash(pwd, method='sha256'))
+                         assistenza=0, email=email, password=generate_password_hash(pwd, method='sha256'))
 
         registra_apicoltore(user)
         return home()
