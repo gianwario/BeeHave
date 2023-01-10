@@ -6,8 +6,8 @@ from werkzeug.utils import secure_filename
 from Website.flaskr import image_folder_absolute
 from Website.flaskr.Routes import area_personale, mostra_prodotti
 from Website.flaskr.gestione_utente.GestioneUtenteService import get_apicoltore_by_id
-from Website.flaskr.gestione_vendita.GestioneVenditaService import inserisci_prodotto, get_prodotto_by_id, aggiorna_immagine, \
-    get_prodotti_by_apicoltore, cancella_prodotto, acquisto_prodotto
+from Website.flaskr.gestione_vendita.GestioneVenditaService import inserisci_prodotto, get_prodotto_by_id, \
+    aggiorna_immagine, get_prodotti_by_apicoltore, cancella_prodotto, acquisto_prodotto
 from Website.flaskr.model.Acquisto import Acquisto
 from Website.flaskr.model.Prodotto import Prodotto
 

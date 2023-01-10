@@ -6,7 +6,7 @@ from flask_login import login_required, current_user
 from werkzeug.utils import secure_filename
 from datetime import date
 from Website.flaskr import image_folder_absolute
-from Website.flaskr.Routes import inserimento_alveare_page, mostra_alveari
+from Website.flaskr.Routes import inserimento_alveare_page, mostra_alveari, home
 from Website.flaskr.gestione_adozioni.GestioneAdozioniService import inserisci_alveare, update_img_alveare, \
     get_alveari_disponibili, get_alveare_by_id, affitto_alveare, get_alveari, get_ticket_adozione
 from Website.flaskr.gestione_utente.GestioneUtenteService import get_apicoltore_by_id, get_cliente_by_id
@@ -77,9 +77,9 @@ def informazioni_alveare(alveare_id):
     return render_template('informazioni_alveare.html', alveare=alveare, apicoltore=apicoltore)
 
 
-@ga.route('/affitta_alveare', methods=['POST', 'GET'])
+@ga.route('/adotta_alveare', methods=['POST', 'GET'])
 @login_required
-def affitta_alveare():
+def adotta_alveare():
     if request.method == 'POST' and not session['isApicoltore']:
         percentuale = int(request.form.get('disp'))
         id_alveare = int(request.form.get('id_alv'))
@@ -95,13 +95,14 @@ def affitta_alveare():
         affitto_alveare(ticket, percentuale)
         return mostra_alveari()
 
-@ga.route('/alveari_affittati/<int:apicoltore_id>', methods=['GET'])
-def mostra_alveari_affittati(apicoltore_id):
-    lista_clienti = []
-    #if not current_user.is_authenticated or not session['isApicoltore']:
-    alveari_affittati = get_ticket_adozione(apicoltore_id)
-    for x in alveari_affittati:
-        lista_clienti.append(get_cliente_by_id(x.TicketAdozione.id_cliente))
+@ga.route('/alveari_adottati/<int:apicoltore_id>', methods=['GET'])
+@login_required
+def mostra_alveari_adottati(apicoltore_id):
+    if not session['isApicoltore']:
+        lista_clienti = []
+        alveari_adottati = get_ticket_adozione(apicoltore_id)
+        for x in alveari_adottati:
+            lista_clienti.append(get_cliente_by_id(x.TicketAdozione.id_cliente))
 
-    return render_template('alveari_affittati.html', alveari_affittati=alveari_affittati, lista_clienti=lista_clienti)
-    #return home()
+        return render_template('alveari_adottati.html', alveari_adottati=alveari_adottati, lista_clienti=lista_clienti)
+    return home()
