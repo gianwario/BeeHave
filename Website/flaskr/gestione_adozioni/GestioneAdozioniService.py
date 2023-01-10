@@ -30,6 +30,11 @@ def get_Alveari():
     return Alveare.query.all()
 
 
+def get_AlveariByApicoltore(id_apicoltore):
+    lista = Alveare.query.filter_by(id_apicoltore=id_apicoltore).all()
+    return lista
+
+
 def decrementa_percentuale(id_alveare, percentuale):
     alveare = Alveare.query.filter_by(id=id_alveare).first()
     alveare.percentuale_disponibile -= int(percentuale)

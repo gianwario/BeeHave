@@ -1,16 +1,13 @@
-import datetime
 import os
 
 from flask import Blueprint, request, session, flash, render_template
 from flask_login import login_required, current_user
 from werkzeug.utils import secure_filename
-from datetime import date
+
 from Website.flaskr import image_folder_absolute
-from Website.flaskr.Routes import inserimento_alveare_page, mostra_alveari
+from Website.flaskr.Routes import inserimento_alveare_page
 from Website.flaskr.gestione_adozioni.GestioneAdozioniService import inserisci_alveare, update_imgAlveare, \
-    get_AlveariDisponibili, get_alveareById, affitto_alveare
-from Website.flaskr.gestione_utente.GestioneUtenteService import get_apicoltore_by_id
-from Website.flaskr.model.TicketAdozione import TicketAdozione
+    get_AlveariDisponibili
 from Website.flaskr.model.Alveare import Alveare
 
 ga = Blueprint('ga', __name__)
@@ -68,30 +65,3 @@ def mostra_alveari_disponibili(apicoltore_id):
     if session['isApicoltore']:
         alveari_disponibili = get_AlveariDisponibili(apicoltore_id)
         return render_template('/catalogo_alveari_disponibili.html', alveari_disponibili=alveari_disponibili)
-
-
-@ga.route('/informazioni_alveare/<int:alveare_id>', methods=['POST', 'GET'])
-def informazioni_alveare(alveare_id):
-    alveare = get_alveareById(alveare_id)
-    apicoltore = get_apicoltore_by_id(alveare.id_apicoltore)
-    return render_template('informazioni_alveare.html', alveare=alveare, apicoltore=apicoltore)
-
-
-@ga.route('/affitta_alveare', methods=['POST', 'GET'])
-@login_required
-def affitta_alveare():
-    if request.method == 'POST' and not session['isApicoltore']:
-        percentuale = int(request.form.get('disp'))
-        id_alveare = int(request.form.get('id_alv'))
-        percentuale_residua = int(request.form.get('percentuale_residua'))
-        id_cliente = int(request.form.get('id_client'))
-        tempo_adozione = int(request.form.get('tempo_adozione'))
-
-        if percentuale > percentuale_residua:
-            flash('Quantitá non disponibile!', category='error')
-
-        ticket = TicketAdozione(id_cliente=id_cliente, id_alveare=id_alveare, percentuale_adozione=percentuale,
-                                data_inizio_adozione=date.today(), tempo_adozione=tempo_adozione)
-        # TODO aggiungere data
-        affitto_alveare(ticket, percentuale)
-        return mostra_alveari()
