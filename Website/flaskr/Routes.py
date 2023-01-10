@@ -38,7 +38,7 @@ def inserimento_alveare_page():
 
 
 @views.route('/registrazione_cliente')
-def registrazione_cliente_page():  # typo, da cambiare
+def registrazione_cliente_page():
     if not current_user.is_authenticated:
         return render_template('registrazione_cliente.html')
     return home()
@@ -59,7 +59,7 @@ def area_personale():
     return render_template('area_personale_cliente.html')
 
 
-@views.route('/catalogo_prod')
+@views.route('/catalogo_prodotti')
 def mostra_prodotti():
     if not current_user.is_authenticated or not session['isApicoltore']:
         prods = get_tutti_prodotti()
@@ -93,7 +93,7 @@ def crea_area_assistenza_page():
     return home()
 
 
-@views.route('/catalogo_alveari', methods=['GET'])
+@views.route('/catalogo_alveari')
 def mostra_alveari():
     # if not current_user.is_authenticated or not session['isApicoltore']:
     alveari_disponibili = get_alveari()
