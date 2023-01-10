@@ -95,8 +95,6 @@ def registra_apicoltore():
         citta = request.form.get('citta')
         cap = request.form.get('cap')
         telefono = request.form.get('telefono')
-        descrizione = request.form.get('descrizione')
-        assistenza = bool(request.form.get('assistenza'))
         email = request.form.get('email')
         pwd = request.form.get('password')
         cpwd = request.form.get('cpwd')
