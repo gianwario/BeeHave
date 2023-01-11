@@ -53,7 +53,7 @@
                         tutti i tuoi
                         Alveari disponibili</a></li>
                     <li><a class="dropdown-item"
-                           href="{{url_for('ga.mostra_alveari_affittati', apicoltore_id=current_user.id)}}">Mostra
+                           href="{{url_for('ga.mostra_alveari_adottati', apicoltore_id=current_user.id)}}">Mostra
                         Alveari affittati</a></li>
                     <li><a class="dropdown-item"
                            href="{{url_for('gv.mostra_articoli_in_vendita', apicoltore_id=current_user.id)}}">Mostra
@@ -74,8 +74,8 @@
 
                 {% if not current_user.is_authenticated %}
                 <li><a class="dropdown-item" href="{{url_for('views.login_page')}}">Login</a></li>
-                <li><a class="dropdown-item" href="{{url_for('views.sigup_ap')}}">Registra Apicoltore</a></li>
-                <li><a class="dropdown-item" href="{{url_for('views.sigup_cl')}}">Registra Cliente</a></li>
+                <li><a class="dropdown-item" href="{{url_for('views.registrazione_apicoltore_page')}}">Registra Apicoltore</a></li>
+                <li><a class="dropdown-item" href="{{url_for('views.registrazione_cliente_page')}}">Registra Cliente</a></li>
 
                 {% else %}
                 <li><a class="dropdown-item" href="{{url_for('views.area_personale')}}">Area Personale</a></li>
@@ -90,10 +90,10 @@
                     tutti i tuoi
                     Alveari disponibili</a></li>
                 <li><a class="dropdown-item"
-                       href="{{url_for('ga.mostra_alveari_affittati', apicoltore_id=current_user.id)}}">Mostra
+                       href="{{url_for('ga.mostra_alveari_adottati', apicoltore_id=current_user.id)}}">Mostra
                     Alveari affittati</a></li>
                 <li><a class="dropdown-item"
-                       href="{{url_for('gv.mostra_articoli_inVendita', apicoltore_id=current_user.id)}}">Mostra
+                       href="{{url_for('gv.mostra_articoli_in_vendita', apicoltore_id=current_user.id)}}">Mostra
                     Prodotti in vendita</a></li>
                 {% endif %}
                 <li><a class="dropdown-item" href="{{url_for('gu.logout')}}">Logout</a></li>
