@@ -1,4 +1,5 @@
 import os
+from datetime import datetime
 
 from flask import Blueprint, request, session, flash, render_template
 from flask_login import login_required, current_user
@@ -6,7 +7,7 @@ from werkzeug.utils import secure_filename
 
 from Website.flaskr import image_folder_absolute
 from Website.flaskr.Routes import inserimento_alveare_page, mostra_alveari
-from Website.flaskr.gestione_adozioni.GestioneAdozioniService import inserisci_alveare, update_imgAlveare, get_AlveariDisponibili, get_alveareById, affitto_alveare, get_Alveari, getTicket_adozione, update_Stato
+from Website.flaskr.gestione_adozioni.GestioneAdozioniService import inserisci_alveare, update_img_alveare, get_alveari_disponibili, get_alveare_by_id, affitto_alveare, get_alveari, get_ticket_adozione, update_Stato
 
 from Website.flaskr.Routes import inserimento_alveare_page, mostra_alveari, home
 from Website.flaskr.gestione_adozioni.GestioneAdozioniService import inserisci_alveare, update_img_alveare, \
@@ -70,7 +71,7 @@ def inserimento_alveare():
 def mostra_alveari_disponibili():
     if session['isApicoltore']:
 
-        alveari_disponibili = get_AlveariDisponibili(current_user.id)
+        alveari_disponibili = get_alveari_disponibili(current_user.id)
         return render_template('/catalogo_alveari_disponibili.html', alveari_disponibili=alveari_disponibili)
 
 
@@ -128,7 +129,7 @@ def mostra_alveari_adottati(apicoltore_id):
             lista_clienti.append(get_cliente_by_id(x.TicketAdozione.id_cliente))
 
 
-    return render_template('alveari_affittati.html', alveari_affittati=alveari_affittati, lista_clienti=lista_clienti)
+    return render_template('alveari_adottati.html', alveari_affittati=alveari_affittati, lista_clienti=lista_clienti)
     #return home()
 
 
