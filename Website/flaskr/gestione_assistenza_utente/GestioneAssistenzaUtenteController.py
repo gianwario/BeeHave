@@ -1,11 +1,9 @@
-import datetime
-
 from flask import Blueprint, request, flash, session
 from flask_login import login_required
 
-from Website.flaskr.Routes import crea_area_assistenza_page, area_personale, home
+from Website.flaskr.Routes import crea_area_assistenza_page, area_personale, home, richiesta_assistenza_page
 from Website.flaskr.gestione_assistenza_utente.GestioneAssistenzaUtenteService import inserisci_area_assistenza, \
-    controlla_apicoltore
+    controlla_apicoltore, richiedi_assistenza
 
 gau = Blueprint('gau', __name__)
 
@@ -24,7 +22,8 @@ def crea_area_assistenza():
 
     return area_personale()
 
-@gau.route('/richiesta_assistenza', methods=['GET','POST'])
+
+@gau.route('/richiesta_assistenza', methods=['GET', 'POST'])
 @login_required
 def richiesta_assistenza():
     if request.method == 'POST' and not session['isApicoltore']:

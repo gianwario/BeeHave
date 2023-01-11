@@ -1,10 +1,8 @@
 from flask import render_template, Blueprint, session
 from flask_login import login_required, current_user
 
-from Website.flaskr.gestione_adozioni.GestioneAdozioniService import get_alveari, get_alveare_by_id, get_ticket_adozione
-from Website.flaskr.gestione_vendita.GestioneVenditaService import get_tutti_prodotti, get_prodotto_by_id, \
-    get_prodotti_by_apicoltore
-from Website.flaskr.model.Prodotto import Prodotto
+from Website.flaskr.gestione_adozioni.GestioneAdozioniService import get_alveari
+from Website.flaskr.gestione_vendita.GestioneVenditaService import get_tutti_prodotti, get_prodotti_by_apicoltore
 
 views = Blueprint('views', __name__)
 
@@ -65,7 +63,7 @@ def mostra_prodotti():
     if not current_user.is_authenticated or not session['isApicoltore']:
         prodotti = get_tutti_prodotti()
         return render_template('catalogo_prodotti.html', prodotti=prodotti)
-    prodotti=get_prodotti_by_apicoltore()
+    prodotti = get_prodotti_by_apicoltore()
     return render_template('catalogo_prodotti_apicoltore.html', prodotti_in_vendita=prodotti)
 
 
@@ -101,6 +99,7 @@ def mostra_alveari():
         alveari_disponibili = get_alveari()
         return render_template('catalogo_alveari.html', alveari_disponibili=alveari_disponibili)
     return render_template('alveari_adottati.html')
+
 
 @views.route('/richiesta_assistenza_page')
 @login_required
