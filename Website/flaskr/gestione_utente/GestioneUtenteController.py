@@ -102,39 +102,39 @@ def registrazione_apicoltore():
 
         if not 0 < len(nome) <= 45:
             flash("Nome non valido", category="error")
-            return registrazione_apicoltore_page()
+            return modifica_dati_utente_page()
         if not 0 < len(cognome) <= 45:
             flash("Cognome non valido", category="error")
-            return registrazione_apicoltore_page()
+            return modifica_dati_utente_page()
         if not 0 < len(indirizzo) <= 50:
             flash("Indirizzo non valido", category="error")
-            return registrazione_apicoltore_page()
+            return modifica_dati_utente_page()
         if not 0 < len(citta) <= 45:
             flash("Città non valida", category="error")
-            return registrazione_apicoltore_page()
+            return modifica_dati_utente_page()
         if not 0 < len(cap) <= 5:
             flash("CAP non valido", category="error")
-            return registrazione_apicoltore_page()
+            return modifica_dati_utente_page()
         if not 0 < len(telefono) <= 10:
             flash("Numero telefono non valido", category="error")
-            return registrazione_apicoltore_page()
+            return modifica_dati_utente_page()
         if not 0 < len(email) <= 45:
             flash("Email non valida", category="error")
             return registrazione_apicoltore_page()
         if not controlla_email_esistente(email):
             flash("Email già esistente", category="error")
-            return registrazione_apicoltore_page()
+            return modifica_dati_utente_page()
         if len(pwd) < 8:
             flash("Lunghezza password deve essere almeno 8 caratteri", category="error")
-            return registrazione_apicoltore_page()
+            return modifica_dati_utente_page()
 
         if not (controllo_caratteri_speciali(pwd) and controllo_numeri(pwd)):
             flash("Inserire nel campo password almeno un carattere speciale ed un numero", category="error")
-            return registrazione_apicoltore_page()
+            return modifica_dati_utente_page()
 
         if pwd != cpwd:
             flash("Password e Conferma Password non combaciano", category="error")
-            return registrazione_apicoltore_page()
+            return modifica_dati_utente_page()
 
         user = Apicoltore(nome=nome, cognome=cognome, indirizzo=indirizzo, citta=citta, cap=cap, telefono=telefono,
                           email=email, assistenza=0,

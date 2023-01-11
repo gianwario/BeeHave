@@ -106,6 +106,7 @@ def mostra_lista_assistenti():
         return render_template('lista_assistenti.html', assistenti=assistenti)
     return home()
 
+
 @views.route('/modifica_stato_alveare_page/<int:alveare_id>')
 @login_required
 def modifica_stato(alveare_id):
