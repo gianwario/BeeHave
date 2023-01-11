@@ -2,7 +2,8 @@ from flask import render_template, Blueprint, session
 from flask_login import login_required, current_user
 
 from Website.flaskr.gestione_adozioni.GestioneAdozioniService import get_alveari, get_alveare_by_id, get_ticket_adozione
-from Website.flaskr.gestione_vendita.GestioneVenditaService import get_tutti_prodotti, get_prodotto_by_id
+from Website.flaskr.gestione_vendita.GestioneVenditaService import get_tutti_prodotti, get_prodotto_by_id, \
+    get_prodotti_by_apicoltore
 from Website.flaskr.model.Prodotto import Prodotto
 
 views = Blueprint('views', __name__)
@@ -62,9 +63,10 @@ def area_personale():
 @views.route('/catalogo_prodotti')
 def mostra_prodotti():
     if not current_user.is_authenticated or not session['isApicoltore']:
-        prods = get_tutti_prodotti()
-        return render_template('catalogo_prodotti.html', prods=prods)
-    return render_template('catalogo_prodotti_apicoltore.html')
+        prodotti = get_tutti_prodotti()
+        return render_template('catalogo_prodotti.html', prodotti=prodotti)
+    prodotti=get_prodotti_by_apicoltore()
+    return render_template('catalogo_prodotti_apicoltore.html', prodotti_in_vendita=prodotti)
 
 
 @views.route('/modifica_dati_personali')
@@ -95,7 +97,14 @@ def crea_area_assistenza_page():
 
 @views.route('/catalogo_alveari')
 def mostra_alveari():
-    # if not current_user.is_authenticated or not session['isApicoltore']:
-    alveari_disponibili = get_alveari()
-    return render_template('catalogo_alveari.html', alveari_disponibili=alveari_disponibili)
-# return home()
+    if not current_user.is_authenticated or not session['isApicoltore']:
+        alveari_disponibili = get_alveari()
+        return render_template('catalogo_alveari.html', alveari_disponibili=alveari_disponibili)
+    return render_template('alveari_adottati.html')
+
+@views.route('/richiesta_assistenza_page')
+@login_required
+def richiesta_assistenza_page():
+    if not session['isApicoltore']:
+        return render_template('richiedi_area_assistenza.html')
+    return home()
