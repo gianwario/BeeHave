@@ -42,7 +42,7 @@ def modifica_profilo_personale(uid, nome, cognome, email, numtelefono):
         apicoltore = get_apicoltore_by_id(uid)
         if not apicoltore:
             print("Errore comunicazione con db")
-            return  #
+            return # errore comunicazione con db
         else:
             apicoltore.nome = nome
             apicoltore.cognome = cognome

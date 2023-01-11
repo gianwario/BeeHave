@@ -12,7 +12,6 @@ gu = Blueprint('gu', __name__)
 email_valida = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b'
 spec = ["$", "#", "@", "!", "*", "£", "%", "&", "/", "(", ")", "=", "|",
         "+", "-", "^", "_", "-", "?", ",", ":", ";", ".", "§", "°", "[", "]"]
-numb = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
 
 
 @gu.route('/login', methods=['GET', 'POST'])
@@ -56,22 +55,26 @@ def registrazione_cliente():
         nome = request.form.get('nome')
         cognome = request.form.get('cognome')
         psw = request.form.get('psw')
-        ripeti_psw = request.form.get('psw-ripeti')
+        conferma_psw = request.form.get('conferma_psw')
         citta = request.form.get('citta')
         cap = request.form.get('cap')
         indirizzo = request.form.get('indirizzo')
         numtelefono = request.form.get('numtelefono')
 
         if not (controllo_car_spec(psw) and controllo_num(psw)):
-            flash("Inserire nel campo password almeno un carattere speciale ed un numero.", category="errore")
+            flash("Inserire nel campo password almeno un carattere speciale ed un numero.", category="error")
+
         elif not re.fullmatch(email_valida, email):
-            flash("Il campo e-mail non è nel formato corretto.", category="errore")
+            flash("Il campo e-mail non è nel formato corretto.", category="error")
+
         elif psw.__len__() < 8:
-            flash("La password deve contenere almeno 8 caratteri.", category="errore")
+            flash("La password deve contenere almeno 8 caratteri.", category="error")
+
         elif not check_email_esistente(email):
-            flash("L'indirizzo e-mail è già registrato.", category="errore")
-        elif psw != ripeti_psw:
-            flash("Ripeti_password non coincide con password.", category="errore")
+            flash("L'indirizzo e-mail è già registrato.", category="error")
+
+        elif psw != conferma_psw:
+            flash("Conferma Password non coincide con password.", category="error")
 
         else:
             nuovo_cliente = Cliente(email=email, nome=nome, cognome=cognome,
@@ -79,7 +82,7 @@ def registrazione_cliente():
                                     indirizzo=indirizzo, citta=citta, cap=cap, telefono=numtelefono)
 
             registra_cliente(nuovo_cliente)
-            flash("Account creato con successo!", category="successo")
+            flash("Account creato con successo!", category="success")
             login_user(nuovo_cliente)
             return home()
 
@@ -99,52 +102,43 @@ def sigup():
         pwd = request.form.get('password')
         cpwd = request.form.get('cpwd')
 
-
-
         if not 0 < nome.__len__() < 45:
-            print("Nome length has to be at last 30 characters", "error")
-            return  # inserire pagine html di errore
+            flash("Nome length has to be at last 30 characters", category="error")
+
         if not 0 < cognome.__len__() < 45:
-            print("Cognome length has to be at last 30 characters", "error")
-            return  # inserire pagine html di errore
+            flash("Cognome length has to be at last 30 characters", category="error")
 
         if not 0 < indirizzo.__len__() < 45:
-            print("Indirizzo length has to be at last 30 characters ", "error")
-            return  # inserire pagine html di errore
+            flash("Indirizzo length has to be at last 30 characters ", category="error")
+
         if not 0 < citta.__len__() < 200:
-            print("Città length has to be at last 30 characters", "error")
-            return  # inserire pagine html di errore
+            flash("Città length has to be at last 30 characters", category="error")
+
         if not cap.__len__() >= 5:
-            print("cap length has to be at last 5 numbers", "error")
-            return  # inserire pagine html di errore
+            flash("cap length has to be at last 5 numbers", category="error")
+
         if not 0 < telefono.__len__() < 11:
-            print("Telefono length has to be at last 9 numbers", "error")
-            return  # inserire pagine html di errore
-
+            flash("Telefono length has to be at last 9 numbers", category="error")
         if not check_email_esistente(email):
-            print("Invalid email", "error")
-            return  # inserire pagine html di errore
-
+            flash("Invalid email", category="error")
         if pwd.__len__() < 8:
-            print("Password length has to be at least 8 characters", "error")
-            return  # inserire pagine html di errore
+            flash("Password length has to be at least 8 characters", category="error")
 
         if not (controllo_car_spec(pwd) and controllo_num(pwd)):
-            flash("Inserire nel campo password almeno un carattere speciale ed un numero.", "error")
-            return  # inserire pagine html di errore
+            flash("Inserire nel campo password almeno un carattere speciale ed un numero.", category="error")
 
         if pwd != cpwd:
-            print("Password and confirm password do not match", "error")
-            return  #
+            flash("Password e Conferma Passowrd non corrispondono.", category="error")
 
         user = Apicoltore(nome=nome, cognome=cognome, indirizzo=indirizzo, citta=citta, cap=cap, telefono=telefono,
-                         assistenza=0, email=email, password=generate_password_hash(pwd, method='sha256'))
+                          assistenza=0, email=email, password=generate_password_hash(pwd, method='sha256'))
 
         registra_apicoltore(user)
+        flash("Account creato con successo!", category="success")
         login_user(user)
         return home()
 
-    return home()
+    return sigup()
 
 
 @gu.route('/modifica_dati_personali', methods=['GET', 'POST'])
@@ -168,14 +162,14 @@ def modifica_dati_personali():
             email = current_user.email
         if not re.fullmatch(email_valida, email):
             flash("Errore, email non nel formato corretto.", category="error")
-            return modifica_dati_pers()
         if not numtelefono:
             numtelefono = current_user.telefono
 
         modifica_profilo_personale(g.user, nome, cognome, email, numtelefono)
 
         flash("Modifica password avvenuta con successo!", category="success")
-        return area_personale()
+
+    return area_personale()
 
 
 @gu.route('/modifica_indirizzo', methods=['GET', 'POST'])
@@ -194,8 +188,8 @@ def modifica_indirizzo():
             indirizzo = current_user.indirizzo
 
         modifica_residenza(g.user, citta, cap, indirizzo)
-        flash("Modifica password avvenuta con successo!", category="successo")
-        return area_personale()
+        flash("Modifica password avvenuta con successo!", category="success")
+    return area_personale()
 
 
 @gu.route('/modifica_password', methods=['GET', 'POST'])
@@ -208,20 +202,17 @@ def modifica_password():
 
         if psw.__len__() < 8:
             flash("La password deve contenere almeno 8 caratteri.", category="error")
-            return modifica_psw()
 
         if psw != ripeti_psw:
             flash("Ripeti_password non coincide con password.", category="error")
-            return modifica_psw()
 
         if not (controllo_car_spec(psw) and controllo_num(psw)):
             flash("Inserire nel campo password almeno un carattere speciale ed un numero.", category="error")
-            return modifica_psw()
 
         psw = generate_password_hash(psw, method='sha256')
         modifica_password_db(g.user, psw)
-        flash("Modifica password avvenuta con successo!", category="successo")
-        return area_personale()
+        flash("Modifica password avvenuta con successo!", category="success")
+    return area_personale()
 
 
 def controllo_car_spec(psw):
@@ -235,8 +226,7 @@ def controllo_car_spec(psw):
 
 def controllo_num(psw):
     for char in psw:
-        for num in numb:
-            if char == num:
-                return True
+        if char.isdigit():
+            return True
 
     return False

@@ -1,9 +1,9 @@
 from flask import render_template, Blueprint, session
 from flask_login import login_required, current_user
 
-from Website.flaskr.gestione_adozioni.GestioneAdozioniService import get_Alveari, get_alveareById, getTicket_adozione
-from Website.flaskr.gestione_vendita.GestioneVenditaService import getTuttiProdotti, getProdottoById
-from Website.flaskr.model.Prodotto import Prodotto
+from Website.flaskr.gestione_adozioni.GestioneAdozioniService import get_Alveari
+from Website.flaskr.gestione_vendita.GestioneVenditaService import getTuttiProdotti
+
 
 views = Blueprint('views', __name__)
 
