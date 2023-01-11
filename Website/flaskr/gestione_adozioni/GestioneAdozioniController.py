@@ -7,6 +7,11 @@ from werkzeug.utils import secure_filename
 from Website.flaskr import image_folder_absolute
 from Website.flaskr.Routes import inserimento_alveare_page, mostra_alveari
 from Website.flaskr.gestione_adozioni.GestioneAdozioniService import inserisci_alveare, update_imgAlveare, get_AlveariDisponibili, get_alveareById, affitto_alveare, get_Alveari, getTicket_adozione, update_Stato
+
+from Website.flaskr.Routes import inserimento_alveare_page, mostra_alveari, home
+from Website.flaskr.gestione_adozioni.GestioneAdozioniService import inserisci_alveare, update_img_alveare, \
+    get_alveari_disponibili, get_alveare_by_id, affitto_alveare, get_alveari, get_ticket_adozione
+
 from Website.flaskr.gestione_utente.GestioneUtenteService import get_apicoltore_by_id, get_cliente_by_id
 from Website.flaskr.model.TicketAdozione import TicketAdozione
 from Website.flaskr.model.Alveare import Alveare
@@ -55,7 +60,7 @@ def inserimento_alveare():
         path_image = os.path.join(image_folder_absolute, secure_filename(image.filename))
         image.save(path_image)
         os.rename(path_image, os.path.join(image_folder_absolute, nome_alv))
-        update_imgAlveare(alveare.id, nome_alv)
+        update_img_alveare(alveare.id, nome_alv)
         # TODO fixare formati immagini, non basta solo jpg
     return mostra_alveari_disponibili()
 
@@ -64,6 +69,7 @@ def inserimento_alveare():
 @login_required
 def mostra_alveari_disponibili():
     if session['isApicoltore']:
+
         alveari_disponibili = get_AlveariDisponibili(current_user.id)
         return render_template('/catalogo_alveari_disponibili.html', alveari_disponibili=alveari_disponibili)
 
@@ -83,6 +89,20 @@ def modifica_stato_alveare():
     return mostra_alveari()
 
 def affitta_alveare():
+        alveari_disponibili = get_alveari_disponibili(apicoltore_id)
+        return render_template('/catalogo_alveari_disponibili.html', alveari_disponibili=alveari_disponibili)
+
+
+@ga.route('/informazioni_alveare/<int:alveare_id>', methods=['POST', 'GET'])
+def informazioni_alveare(alveare_id):
+    alveare = get_alveare_by_id(alveare_id)
+    apicoltore = get_apicoltore_by_id(alveare.id_apicoltore)
+    return render_template('informazioni_alveare.html', alveare=alveare, apicoltore=apicoltore)
+
+
+@ga.route('/adotta_alveare', methods=['POST', 'GET'])
+@login_required
+def adotta_alveare():
     if request.method == 'POST' and not session['isApicoltore']:
         percentuale = int(request.form.get('disp'))
         id_alveare = int(request.form.get('id_alv'))
@@ -98,14 +118,18 @@ def affitta_alveare():
         affitto_alveare(ticket, percentuale)
         return mostra_alveari()
 
-@ga.route('/alveari_affittati/<int:apicoltore_id>', methods=['GET'])
-def mostra_alveari_affittati(apicoltore_id):
-    lista_clienti = []
-    #if not current_user.is_authenticated or not session['isApicoltore']:
-    alveari_affittati = getTicket_adozione(apicoltore_id)
-    for x in alveari_affittati:
-        lista_clienti.append(get_cliente_by_id(x.TicketAdozione.id_cliente))
+@ga.route('/alveari_adottati/<int:apicoltore_id>', methods=['GET'])
+@login_required
+def mostra_alveari_adottati(apicoltore_id):
+    if not session['isApicoltore']:
+        lista_clienti = []
+        alveari_adottati = get_ticket_adozione(apicoltore_id)
+        for x in alveari_adottati:
+            lista_clienti.append(get_cliente_by_id(x.TicketAdozione.id_cliente))
+
 
     return render_template('alveari_affittati.html', alveari_affittati=alveari_affittati, lista_clienti=lista_clienti)
     #return home()
+
+
 

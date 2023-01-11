@@ -1,8 +1,5 @@
-from sqlalchemy.orm import query
-
 from Website.flaskr import db
 from Website.flaskr.model.Alveare import Alveare
-from Website.flaskr.model.Apicoltore import Apicoltore
 from Website.flaskr.model.TicketAdozione import TicketAdozione
 
 
@@ -11,18 +8,18 @@ def inserisci_alveare(alveare):
     db.session.commit()
 
 
-def get_alveareById(id):
+def get_alveare_by_id(id):
     return Alveare.query.filter_by(id=id).first()
 
 
-def update_imgAlveare(id, img):
-    alveare = get_alveareById(id)
+def update_img_alveare(id, img):
+    alveare = get_alveare_by_id(id)
     alveare.img_path = str(img)
     db.session.flush()
     db.session.commit()
 
 
-def get_AlveariDisponibili(apicoltore_id):
+def get_alveari_disponibili(apicoltore_id):
     lista = Alveare.query.filter_by(id_apicoltore=apicoltore_id).all()
     for alveare in lista:
         if alveare.percentuale_disponibile <= 0:
@@ -30,7 +27,7 @@ def get_AlveariDisponibili(apicoltore_id):
     return lista
 
 
-def get_Alveari():
+def get_alveari():
     return Alveare.query.all()
 
 
@@ -62,11 +59,11 @@ def update_Stato(id, covata_compatta, popolazione, polline, stato_cellette):
     # TODO eventualmente considerare di restituire la % allo scadere del tempo
 
 
-def getAlveari_fromApicoltore(apicoltore_id):
+def get_alveari_from_apicoltore(apicoltore_id):
     return Alveare.query.filter_by(id_apicoltore=apicoltore_id).all()
 
 
-def getTicket_adozione(apicoltore_id):
+def get_ticket_adozione(apicoltore_id):
     return db.session.query(TicketAdozione, Alveare).join(Alveare).filter_by(id_apicoltore=apicoltore_id).all()
 
 

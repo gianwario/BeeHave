@@ -19,7 +19,7 @@ def get_cliente_by_email(email):
     return Cliente.query.filter_by(email=email).first()
 
 
-def check_email_esistente(email):
+def controlla_email_esistente(email):
     if Cliente.query.filter_by(email=email).first():
         return False
     else:
