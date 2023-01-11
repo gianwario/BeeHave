@@ -10,3 +10,7 @@ def inserisci_area_assistenza(descrizione, assistenza):
     apicoltore.assistenza = assistenza
     db.session.add(apicoltore)
     db.session.commit()
+
+def get_assistenti():
+    return Apicoltore.query.filter_by(assistenza=1).all()
+

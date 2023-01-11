@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% extends "base.html"%}
+    {% block title %}Lista Assistenti{% endblock %}
+</head>
+<body>
+{% block content %}
+{% for assistente in assistenti %}
+<div class="row p-5">
+    <div class="col-xl-6 mb-4">
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div class="d-flex align-items-center">
+                        <img
+                                src="../static/images/expert.png"
+                                alt=""
+                                style="width: 45px; height: 45px"
+                                class="rounded-circle"
+                        />
+                        <div class="ms-3">
+                            <p class="fw-bold mb-1">{{assistente.nome}} {{assistente.cognome}}</p>
+                            <p class="text-muted mb-0">{{assistente.email}}</p>
+                            <p class="text-muted mb-0">{{assistente.descrizione}}</p>
+                        </div>
+                    </div>
+                    <span class="badge rounded-pill badge-success">Active</span>
+                </div>
+            </div>
+            <div
+                    class="card-footer border-0 bg-light p-2 d-flex justify-content-around"
+            >
+                <a
+                        class="btn btn-link m-0 text-reset"
+                        href="#"
+                        role="button"
+                        data-ripple-color="primary"
+                >Messaggia<i class="fas fa-envelope ms-2"></i
+                ></a>
+
+            </div>
+        </div>
+    </div>
+</div>
+{% endfor %}
+{% endblock %}
+</body>
+</html>

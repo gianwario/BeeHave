@@ -1,7 +1,8 @@
 from flask import Blueprint, request, flash, session
 
-from Website.flaskr.Routes import crea_area_assistenza_page, area_personale
-from Website.flaskr.gestione_assistenza_utente.GestioneAssistenzaUtenteService import inserisci_area_assistenza
+from Website.flaskr.Routes import crea_area_assistenza_page, area_personale, mostra_lista_assistenti
+from Website.flaskr.gestione_assistenza_utente.GestioneAssistenzaUtenteService import inserisci_area_assistenza, \
+    get_assistenti
 
 gau = Blueprint('gau', __name__)
 
@@ -18,3 +19,4 @@ def crea_area_assistenza():
         inserisci_area_assistenza(descrizione, assistenza)
 
     return area_personale()
+
