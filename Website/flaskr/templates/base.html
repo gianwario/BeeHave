@@ -37,8 +37,8 @@
 
                     {% if not current_user.is_authenticated %}
                     <li><a class="dropdown-item" href="{{url_for('views.login_page')}}">Login</a></li>
-                    <li><a class="dropdown-item" href="{{url_for('views.sigup_ap')}}">Registra Apicoltore</a></li>
-                    <li><a class="dropdown-item" href="{{url_for('views.sigup_cl')}}">Registra Cliente</a></li>
+                    <li><a class="dropdown-item" href="{{url_for('views.registrazione_apicoltore_page')}}">Registra Apicoltore</a></li>
+                    <li><a class="dropdown-item" href="{{url_for('views.registrazione_cliente_page')}}">Registra Cliente</a></li>
 
                     {% else %}
                     <li><a class="dropdown-item" href="{{url_for('views.area_personale')}}">Area Personale</a></li>
@@ -124,7 +124,7 @@
                 <div class="">
                     <h6 class="footer-heading text-uppercase text-white">Help</h6>
                     <ul class="list-unstyled footer-link mt-4">
-                        <li><a href="{{url_for('views.sigup_ap')}}">Sign Up </a></li>
+                        <li><a href="{{url_for('views.registrazione_apicoltore_page')}}">Sign Up </a></li>
                         <li><a href="{{url_for('views.login_page')}}">Login</a></li>
                         <li><a href="">Terms of Services</a></li>
                         <li><a href="">Privacy Policy</a></li>

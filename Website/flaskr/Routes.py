@@ -37,15 +37,15 @@ def inserimento_alveare_page():
     return home()
 
 
-@views.route('/registrazione_cl')
-def sigup_cl():  # typo, da cambiare
+@views.route('/registrazione_cliente')
+def registrazione_cliente_page():  # typo, da cambiare
     if not current_user.is_authenticated:
         return render_template('registrazione_cliente.html')
     return home()
 
 
 @views.route('/registrazione_apicoltore')
-def sigup_ap():
+def registrazione_apicoltore_page():
     if not current_user.is_authenticated:
         return render_template('registrazione_apicoltore.html')
     return home()

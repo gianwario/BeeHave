@@ -4,7 +4,8 @@ from flask import Blueprint, request, session, flash, g
 from werkzeug.security import check_password_hash, generate_password_hash
 from flask_login import login_user, logout_user, login_required, current_user
 
-from Website.flaskr.Routes import home, area_personale, modifica_dati_pers, modifica_psw, sigup_cl, login_page
+from Website.flaskr.Routes import home, area_personale, modifica_dati_pers, login_page, \
+    registrazione_apicoltore_page, registrazione_cliente_page
 from Website.flaskr.gestione_utente.GestioneUtenteService import *
 from Website.flaskr.model.Apicoltore import Apicoltore
 
@@ -63,19 +64,14 @@ def registrazione_cliente():
 
         if not (controllo_car_spec(psw) and controllo_num(psw)):
             flash("Inserire nel campo password almeno un carattere speciale ed un numero.", category="error")
-
         elif not re.fullmatch(email_valida, email):
             flash("Il campo e-mail non è nel formato corretto.", category="error")
-
-        elif psw.__len__() < 8:
+        elif len(psw) < 8:
             flash("La password deve contenere almeno 8 caratteri.", category="error")
-
         elif not check_email_esistente(email):
             flash("L'indirizzo e-mail è già registrato.", category="error")
-
         elif psw != conferma_psw:
-            flash("Conferma Password non coincide con password.", category="error")
-
+            flash("Ripeti_password non coincide con password.", category="error")
         else:
             nuovo_cliente = Cliente(email=email, nome=nome, cognome=cognome,
                                     password=generate_password_hash(psw, method='sha256'),
@@ -86,11 +82,11 @@ def registrazione_cliente():
             login_user(nuovo_cliente)
             return home()
 
-    return sigup_cl()
+    return registrazione_cliente_page()
 
 
 @gu.route('/registrazione_ap', methods=['GET', 'POST'])
-def sigup():
+def registra_apicoltore():
     if request.method == 'POST':
         nome = request.form.get('nome')
         cognome = request.form.get('cognome')
@@ -102,43 +98,43 @@ def sigup():
         pwd = request.form.get('password')
         cpwd = request.form.get('cpwd')
 
-        if not 0 < nome.__len__() < 45:
-            flash("Nome length has to be at last 30 characters", category="error")
-
-        if not 0 < cognome.__len__() < 45:
-            flash("Cognome length has to be at last 30 characters", category="error")
-
-        if not 0 < indirizzo.__len__() < 45:
-            flash("Indirizzo length has to be at last 30 characters ", category="error")
-
-        if not 0 < citta.__len__() < 200:
-            flash("Città length has to be at last 30 characters", category="error")
-
-        if not cap.__len__() >= 5:
-            flash("cap length has to be at last 5 numbers", category="error")
-
-        if not 0 < telefono.__len__() < 11:
-            flash("Telefono length has to be at last 9 numbers", category="error")
+        if not 0 < len(nome) < 45:
+            flash("Nome non valido", category="error")
+            return  registrazione_apicoltore_page()
+        if not 0 < len(cognome) < 45:
+            flash("Cognome non valido", category="error")
+            return  registrazione_apicoltore_page()
+        if not 0 < len(indirizzo) < 45:
+            flash("Indirizzo non valido", category="error")
+            return  registrazione_apicoltore_page()
+        if not 0 < len(citta) < 200:
+            flash("Città non valida", category="error")
+            return  registrazione_apicoltore_page()
+        if not len(cap) >= 5:
+            flash("CAP non valido", category="error")
+            return  registrazione_apicoltore_page()
+        if not 0 < len(telefono) < 11:
+            flash("Numero telefono non valido", category="error")
+            return  registrazione_apicoltore_page()
         if not check_email_esistente(email):
-            flash("Invalid email", category="error")
+            flash("Email già esistente", category="error")
+            return  registrazione_apicoltore_page()
         if pwd.__len__() < 8:
             flash("Password length has to be at least 8 characters", category="error")
-
         if not (controllo_car_spec(pwd) and controllo_num(pwd)):
             flash("Inserire nel campo password almeno un carattere speciale ed un numero.", category="error")
-
         if pwd != cpwd:
             flash("Password e Conferma Passowrd non corrispondono.", category="error")
 
         user = Apicoltore(nome=nome, cognome=cognome, indirizzo=indirizzo, citta=citta, cap=cap, telefono=telefono,
-                          assistenza=0, email=email, password=generate_password_hash(pwd, method='sha256'))
-
+                          email=email, assistenza=0,
+                          password=generate_password_hash(pwd, method='sha256'))
+        
         registra_apicoltore(user)
         flash("Account creato con successo!", category="success")
         login_user(user)
-        return home()
 
-    return sigup()
+    return registrazione_apicoltore_page()()
 
 
 @gu.route('/modifica_dati_personali', methods=['GET', 'POST'])
