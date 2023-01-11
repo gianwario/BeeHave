@@ -129,7 +129,7 @@ def registra_apicoltore():
         user = Apicoltore(nome=nome, cognome=cognome, indirizzo=indirizzo, citta=citta, cap=cap, telefono=telefono,
                           email=email, assistenza=0,
                           password=generate_password_hash(pwd, method='sha256'))
-        
+
         registra_apicoltore(user)
         flash("Account creato con successo!", category="success")
         login_user(user)
