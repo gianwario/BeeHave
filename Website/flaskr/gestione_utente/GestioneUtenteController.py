@@ -4,7 +4,7 @@ from flask import Blueprint, request, session, flash, g
 from werkzeug.security import check_password_hash, generate_password_hash
 from flask_login import login_user, logout_user, login_required, current_user
 
-from Website.flaskr.Routes import home, area_personale, modifica_dati_utente_page, login_page, \
+from Website.flaskr.Routes import home, area_personale, modifica_dati_pers, modifica_psw, login_page, \
     registrazione_apicoltore_page, registrazione_cliente_page
 from Website.flaskr.gestione_utente.GestioneUtenteService import *
 from Website.flaskr.model.Apicoltore import Apicoltore
@@ -100,65 +100,100 @@ def registrazione_apicoltore():
         pwd = request.form.get('password')
         cpwd = request.form.get('cpwd')
 
-        if not 0 < len(nome) <= 45:
+        if not 0 < len(nome) < 45:
             flash("Nome non valido", category="error")
-            return registrazione_apicoltore_page()
-        if not 0 < len(cognome) <= 45:
+            return  registrazione_apicoltore_page()
+        if not 0 < len(cognome) < 45:
             flash("Cognome non valido", category="error")
-            return registrazione_apicoltore_page()
-        if not 0 < len(indirizzo) <= 50:
+            return  registrazione_apicoltore_page()
+
+        if not 0 < len(indirizzo) < 45:
             flash("Indirizzo non valido", category="error")
-            return registrazione_apicoltore_page()
-        if not 0 < len(citta) <= 45:
+            return  registrazione_apicoltore_page()
+        if not 0 < len(citta) < 200:
             flash("Città non valida", category="error")
-            return registrazione_apicoltore_page()
-        if not 0 < len(cap) <= 5:
+            return  registrazione_apicoltore_page()
+        if not len(cap) >= 5:
             flash("CAP non valido", category="error")
-            return registrazione_apicoltore_page()
-        if not 0 < len(telefono) <= 10:
+            return  registrazione_apicoltore_page()
+        if not 0 < len(telefono) < 11:
             flash("Numero telefono non valido", category="error")
-            return registrazione_apicoltore_page()
-        if not 0 < len(email) <= 45:
-            flash("Email non valida", category="error")
-            return registrazione_apicoltore_page()
+            return  registrazione_apicoltore_page()
         if not controlla_email_esistente(email):
             flash("Email già esistente", category="error")
-            return registrazione_apicoltore_page()
+            return  registrazione_apicoltore_page()
+        if pwd.__len__() < 8:
+            print("Password length has to be at least 8 characters", "error")
+            return  # inserire pagine html di errore
+
         if len(pwd) < 8:
             flash("Lunghezza password deve essere almeno 8 caratteri", category="error")
-            return registrazione_apicoltore_page()
+            return  registrazione_apicoltore_page()
 
         if not (controllo_caratteri_speciali(pwd) and controllo_numeri(pwd)):
-            flash("Inserire nel campo password almeno un carattere speciale ed un numero", category="error")
-            return registrazione_apicoltore_page()
+            flash("Inserire nel campo password almeno un carattere speciale ed un numero.", category="error")
+            return  registrazione_apicoltore_page()
 
         if pwd != cpwd:
             flash("Password e Conferma Password non combaciano", category="error")
-            return registrazione_apicoltore_page()
+            return  registrazione_apicoltore_page()
 
         user = Apicoltore(nome=nome, cognome=cognome, indirizzo=indirizzo, citta=citta, cap=cap, telefono=telefono,
-                          email=email, assistenza=0,
+                           email=email, assistenza=0,
                           password=generate_password_hash(pwd, method='sha256'))
 
         registra_apicoltore(user)
-        session['isApicoltore'] = True
+        session['isApicoltore']=True
         login_user(user)
     return home()
 
 
-@gu.route('/modifica_dati_utente', methods=['GET', 'POST'])
+@gu.route('/modifica_dati_personali', methods=['GET', 'POST'])
 @login_required
-def modifica_dati_utente():
+def modifica_dati_personali():
     if request.method == 'POST':
+        g.user = current_user.get_id()
         nome = request.form.get('nuovo_nome')
         cognome = request.form.get('nuovo_cognome')
         email = request.form.get('nuova_email')
-        telefono = request.form.get('nuovo_numtelefono')
+        numtelefono = request.form.get('nuovo_numtelefono')
+
+        if not nome:
+            nome = current_user.nome
+        if not cognome:
+            cognome = current_user.cognome
+        if not controlla_email_esistente(email):
+            flash("Errore, email già esistente.", category="errore")
+            return modifica_dati_pers()
+        if not email:
+            email = current_user.email
+        if not re.fullmatch(email_valida, email):
+            flash("Errore, email non nel formato corretto.", category="error")
+            return modifica_dati_pers()
+        if not numtelefono:
+            numtelefono = current_user.telefono
+
+        modifica_profilo_personale(g.user, nome, cognome, email, numtelefono)
+
+        flash("Modifica password avvenuta con successo!", category="successo")
+
+    return area_personale()
+
+
+@gu.route('/modifica_indirizzo', methods=['GET', 'POST'])
+@login_required
+def modifica_indirizzo():
+    if request.method == 'POST':
+        g.user = current_user.get_id()
         citta = request.form.get('nuova_citta')
         cap = request.form.get('nuovo_cap')
-        indirizzo = request.form.get('nuovo_indirizzo')
-        pwd = request.form.get('nuova_psw')
-        cpwd = request.form.get('nuova_ripeti_psw')
+        indirizzo = request.form.get('nuova_indirizzo')
+        if not citta:
+            citta = current_user.citta
+        if not cap:
+            cap = current_user.cap
+        if not indirizzo:
+            indirizzo = current_user.indirizzo
 
         if not 0 < len(nome) < 45:
             flash("Nome non valido", category="error")
@@ -196,7 +231,32 @@ def modifica_dati_utente():
                 return modifica_dati_utente_page()
         modifica_profilo_personale(nome, cognome, email, telefono, citta, cap, indirizzo, pwd)
 
-        flash("Modifica dati utente avvenuta con successo!", category="success")
+    return area_personale()
+
+
+@gu.route('/modifica_password', methods=['GET', 'POST'])
+@login_required
+def modifica_password():
+    if request.method == 'POST':
+        g.user = current_user.get_id()
+        psw = request.form.get('nuova_psw')
+        ripeti_psw = request.form.get('nuova_ripeti_psw')
+
+        if len(psw) < 8:
+            flash("La password deve contenere almeno 8 caratteri.", category="errore")
+            return modifica_psw()
+
+        if psw != ripeti_psw:
+            flash("Ripeti_password non coincide con password.", category="error")
+            return modifica_psw()
+
+        if not (controllo_caratteri_speciali(psw) and controllo_numeri(psw)):
+            flash("Inserire nel campo password almeno un carattere speciale ed un numero.", category="errore")
+            return modifica_psw()
+
+        psw = generate_password_hash(psw, method='sha256')
+        modifica_password_db(g.user, psw)
+        flash("Modifica password avvenuta con successo!", category="successo")
 
     return area_personale()
 
