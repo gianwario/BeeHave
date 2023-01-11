@@ -88,7 +88,9 @@
 }
 
 
-@media screen and (max-width: 800px) .light{
+@media screen and (max-width: 800px) {
+
+
   .hero {
     grid-template-columns: minmax(300px, 500px);
   }
@@ -105,8 +107,9 @@
     margin: 0 14%;
     grid-template-columns: repeat(auto-fit, minmax(75px, 120px));
   }
-}
 
+
+}
 header .container .showcase {
   min-height: 80vh;
   display: flex;

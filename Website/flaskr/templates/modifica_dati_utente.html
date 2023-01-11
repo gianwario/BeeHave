@@ -75,6 +75,13 @@
               <input name="nuova_ripeti_psw" placeholder="Conferma password" class="form-control"  type="password">
             </div>
           </div>
+           {% with messages = get_flashed_messages(category_filter=["error"]) %}
+                                {% if messages %}
+                                    {% for message in messages %}
+                                    <p style="color:red">{{ message }}</p>
+                                    {% endfor %}
+                                {% endif %}
+                            {% endwith %}
           <div class="form-group">
             <label class="col-md-4 control-label"></label>
             <div class="col-md-4"><br>
