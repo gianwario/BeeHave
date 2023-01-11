@@ -1,13 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link  rel="stylesheet" href="{{url_for('static', filename='css/areautente.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/areautente.css')}}">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
   {% extends "base.html"%}
         {% block title %}Area Personale{% endblock %}
+
+
+
 </head>
 <body>
  {% block content %}
-<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+<br><br><br>
+ <!-- Latest compiled and minified CSS -->
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
 <div class="container bootstrap snippets bootdey">
 <div class="row">
 
@@ -34,6 +48,8 @@
 
           <div class="panel-body bio-graph-info">
               <h1>I tuoi dati</h1>
+              <br><br>
+
               <div class="row">
                   <div class="bio-row">
                       <p><span>Nome </span>: {{current_user.nome}}</p>
@@ -57,6 +73,16 @@
                       <p><span>Numero di telefono </span>: {{current_user.telefono}}</p>
                   </div>
 
+                  <br><br>
+
+                  <ul class="nav nav-pills nav-stacked">
+              <div class="dropdown">
+                  <button class="botton"type="submit">Modifica account</button>
+
+              </div>
+                     </ul>
+
+                  <br><br>
               </div>
           </div>
       </div>
@@ -64,6 +90,7 @@
   </div>
 </div>
 </div>
+
 {% endblock %}
 </body>
 
