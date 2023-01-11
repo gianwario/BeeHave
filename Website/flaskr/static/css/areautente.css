@@ -1,4 +1,14 @@
-
+body {
+    color: #797979;
+    background: #f1f2f7;
+    font-family: 'Open Sans', sans-serif;
+    padding: 0px !important;
+    margin: 0px !important;
+    font-size: 13px;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-font-smoothing: antialiased;
+}
 
 .profile-nav, .profile-info{
     margin-top:30px;
@@ -45,9 +55,6 @@
     border-bottom: 1px solid #ebeae6;
     margin-top: 0;
     line-height: 30px;
-    vertical-align: middle;
-
-
 }
 
 .profile-nav ul > li:last-child {
@@ -65,20 +72,17 @@
     background: #f8f7f5 !important;
     border-left: 5px solid #fbc02d;
     color: #89817f !important;
-
 }
 
 .profile-nav ul > li:last-child > a:last-child {
     border-radius: 0 0 4px 4px;
     -webkit-border-radius: 0 0 4px 4px;
-
 }
 
 .profile-nav ul > li > a > i{
     font-size: 16px;
     padding-right: 10px;
     color: #bcb3aa;
-
 }
 
 .r-activity {
@@ -114,19 +118,6 @@
     -webkit-border-radius: 4px 4px 0 0;
     font-size: 16px;
     font-weight: 300;
-}
-.botton{
-    margin-top: 1rem;
-  background-color:orange;
-  opacity: 90%;
-  color: #fff;
-  border: none;
-  outline: none;
-  padding: 1rem 1.5rem;
-  font-size:  12px;
-  border-radius: 6px;
-  cursor: pointer;
-
 }
 
 .bio-graph-info {
@@ -216,14 +207,12 @@ ul.summary-list {
     padding-left:0 ;
     width: 100%;
     margin-bottom: 0;
-
 }
 
 ul.summary-list > li {
     display: inline-block;
     width: 19.5%;
     text-align: center;
-
 }
 
 ul.summary-list > li > a > i {
