@@ -2,6 +2,7 @@ from flask import render_template, Blueprint, session
 from flask_login import login_required, current_user
 
 from Website.flaskr.gestione_adozioni.GestioneAdozioniService import get_alveari, get_alveare_by_id, get_ticket_adozione
+from Website.flaskr.gestione_assistenza_utente.GestioneAssistenzaUtenteService import get_assistenti
 from Website.flaskr.gestione_vendita.GestioneVenditaService import get_tutti_prodotti, get_prodotto_by_id
 from Website.flaskr.model.Prodotto import Prodotto
 
@@ -99,3 +100,9 @@ def mostra_alveari():
     alveari_disponibili = get_alveari()
     return render_template('catalogo_alveari.html', alveari_disponibili=alveari_disponibili)
 # return home()
+
+@views.route('/lista_assistenti')
+def mostra_lista_assistenti():
+    #if not session['isApicoltore']:
+    assistenti = get_assistenti()
+    return render_template('lista_assistenti.html', assistenti=assistenti)
