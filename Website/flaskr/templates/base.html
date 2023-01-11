@@ -43,9 +43,48 @@
                 <li><a class="dropdown-item" href="{{url_for('gu.logout')}}">Logout</a></li>
            {% endif %}
         </ul>
+
       </li>
     </ul>
   </div>
+
+        <ul class="navbar-nav">
+            <li class="nav-item dropdown">
+                <a aria-expanded="false" id="navbarDropdown" role="button" href="#" class="nav-link dropdown-toggle"
+                   data-bs-toggle="dropdown"><span class="glyphicon glyphicon-user"></span>Area Utente</a>
+                <ul aria-labelledby="navbarDropdown" class="dropdown-menu">
+
+
+                    {% if not current_user.is_authenticated %}
+                    <li><a class="dropdown-item" href="{{url_for('views.login_page')}}">Login</a></li>
+                    <li><a class="dropdown-item" href="{{url_for('views.registrazione_apicoltore_page')}}">Registra Apicoltore</a></li>
+                    <li><a class="dropdown-item" href="{{url_for('views.registrazione_cliente_page')}}">Registra Cliente</a></li>
+
+                    {% else %}
+                    <li><a class="dropdown-item" href="{{url_for('views.area_personale')}}">Area Personale</a></li>
+
+                    {% if session['isApicoltore'] %}
+                    <li><a class="dropdown-item" href="{{url_for('views.inserimento_prodotto_page')}}">Inserisci
+                        Prodotto</a></li>
+                    <li><a class="dropdown-item" href="{{url_for('views.inserimento_alveare_page')}}">Inserisci
+                        Alveare</a></li>
+                    <li><a class="dropdown-item"
+                           href="{{url_for('ga.mostra_alveari_disponibili', apicoltore_id=current_user.id)}}">Mostra
+                        tutti i tuoi
+                        Alveari disponibili</a></li>
+                    <li><a class="dropdown-item"
+                           href="{{url_for('ga.mostra_alveari_affittati', apicoltore_id=current_user.id)}}">Mostra
+                        Alveari affittati</a></li>
+                    <li><a class="dropdown-item"
+                           href="{{url_for('gv.mostra_articoli_inVendita', apicoltore_id=current_user.id)}}">Mostra
+                        Prodotti in vendita</a></li>
+                    {% endif %}
+                    <li><a class="dropdown-item" href="{{url_for('gu.logout')}}">Logout</a></li>
+                    {% endif %}
+                </ul>
+            </li>
+        </ul>
+    </div>
 
 </nav>
   </div>
@@ -68,6 +107,39 @@
                 <button type="button" class="close" data-dismiss="alert">
                     <span aria-hidden="true">&times;</span>
                 </button>
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+{% if messages %}
+{% for category, message in messages %}
+{% if category == 'error' %}
+<div class="alert alert-danger alter-dismissable fade show" role="alert">
+    {{ message }}
+</div>
+{% else %}
+<div class="alert alert-success alter-success fade show" role="alert">
+    {{ message }}
+</div>
+{% endif %}
+{% endfor %}
+{% endif %}
+{% endwith %}
+{% block content %}
+{% endblock %}
+
+<footer class="section bg-footer ">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="">
+                    <h6 class="footer-heading text-uppercase text-white">Information</h6>
+                    <ul class="list-unstyled footer-link mt-4">
+                        <li><a href="{{url_for('views.home')}}">Home</a></li>
+                        <li><a href="">Adotta Alveare</a></li>
+                        <li><a href="">Catalogo Prodotti</a></li>
+                        <li><a href="">Chi siamo</a></li>
+                    </ul>
+                </div>
+
             </div>
         {% else %}
             <div class="alert alert-success alter-dismissable fade show" role="alert">
@@ -81,6 +153,7 @@
      {% endif %}
      {% endwith %}
     {% endblock %}
+
 
 <footer class="section bg-footer">
   <div class="container">
@@ -108,6 +181,25 @@
           </ul>
         </div>
       </div>
+
+            <div class="col-lg-2">
+                <div class="">
+                    <h6 class="footer-heading text-uppercase text-white">Help</h6>
+                    <ul class="list-unstyled footer-link mt-4">
+                        <li><a href="{{url_for('views.registrazione_apicoltore_page')}}">Sign Up </a></li>
+                        <li><a href="{{url_for('views.login_page')}}">Login</a></li>
+                        <li><a href="">Terms of Services</a></li>
+                        <li><a href="">Privacy Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <div class="">
+                    <h6 class="footer-heading text-uppercase text-white">Contact Us</h6>
+                    <p class="contact-info mt-4">Contact us if you need help withanything</p>
+                    <p class="contact-info">+01 123-456-7890</p>
+
 
       <div class="col-lg-2">
         <div class="">

@@ -25,19 +25,67 @@
   }
 
     </style>
+  <style>
+    .selector-for-some-widget {
+    box-sizing: content-box;
+    }
+    .background-radial-gradient {
+   background-image: url("https://images.unsplash.com/photo-1590334280249-a8f0c9f46a1b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8YXBpY3VsdHVyYXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=900&q=60");
 
-  <div class="container px-4 py-5 px-md-5 text-center text-lg-start my-5">
-    <div class="row gx-lg-5 align-items-center mb-5">
+        background-size:cover;
+
+    }
+input[type=button], input[type=submit], input[type=reset] {
+  background-color: orange;
+  opacity: 70%;
+  border: none;
+  border-radius: 10px 10px 10px 10px;
+  color: white;
+  padding: 7px 50px;
+  text-decoration: none;
+  margin: 4px 2px;
+  cursor: pointer;
+
+}
+    .bg-glass {
+      background-color: hsla(0, 0%, 100%, 0.9) !important;
+
+      backdrop-filter: saturate(600%) blur(25px);
+
+
+
+    }
+
+
+    #radius-shape-1 {
+      height: 220px;
+      width: 220px;
+      top: -60px;
+      left: -130px;
+      overflow: hidden;
+    }
+
+    #radius-shape-2 {
+      border-radius: 38% 62% 63% 37% / 70% 33% 67% 30%;
+      bottom: -60px;
+      right: -110px;
+      width: 300px;
+      height: 300px;
+      overflow: hidden;
+    }
+  </style>
+
+
+  <div class="container px-4 py-5 px-md-5 text-hight text-lg-start my-5">
+    <div class="row gx-lg-5 align-items-high mb-5">
       <div class="col-lg-6 mb-5 mb-lg-0" style="z-index: 10">
-        <h1 class="my-5 display-5 fw-bold ls-tight" style="color: hsl(218, 81%, 95%)">
-          The best offer <br />
-          <span style="color: hsl(218, 81%, 75%)">for your business</span>
+        <h1 class="my-5 display-5 fw-bold ls-tight" style="color:black">
+          Sei un apicoltore? <br />
+          <span style="color: hsl(25, 100%, 55%)">Vuoi entrare a far parte del team di BeeHave?</span>
         </h1>
-        <p class="mb-4 opacity-70" style="color: hsl(218, 81%, 85%)">
-          Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-          Temporibus, expedita iusto veniam atque, magni tempora mollitia
-          dolorum consequatur nulla, neque debitis eos reprehenderit quasi
-          ab ipsum nisi dolorem modi. Quos?
+        <p class="mb-4 opacity-70" style="color: white">
+          Ti diamo la possibilità di partecipare attivamente al nostro movimento
+          mettendo a disposizione della comunità le tue competenze.
         </p>
       </div>
 
@@ -45,94 +93,83 @@
         <div id="radius-shape-1" class="position-absolute rounded-circle shadow-5-strong"></div>
         <div id="radius-shape-2" class="position-absolute shadow-5-strong"></div>
 
-        <div class="card bg-glass">
-          <div class="card-body px-4 py-5 px-md-5">
+        <div class="card bg-glass" >
+          <div class="card-body px-4 py-5 px-md-5" >
 
               <form id="form" method="post" action="/registrazione_ap">
-              <!-- 2 column grid layout with text inputs for the first and last names -->
+
               <div class="row">
                 <div class="col-md-6 mb-4">
                   <div class="form-outline">
-                    <input type="text" name="nome" id="nome" class="form-control" required/>
-                    <label class="form-label" for="nome">Nome</label>
+                    <input type="text" name="nome" id="nome" class="form-control "placeholder="Nome" required/>
+                    <label class="form-label" for="nome"></label>
                   </div>
                 </div>
                 <div class="col-md-6 mb-4">
                   <div class="form-outline">
-                    <input type="text" name="cognome" id="cognome" class="form-control"required />
-                    <label class="form-label" for="cognome">Cognome</label>
+                    <input type="text" name="cognome" id="cognome" class="form-control"placeholder="Cognome"required />
+                    <label class="form-label" for="cognome"></label>
                   </div>
                 </div>
               </div>
             <div class="row">
                 <div class="col-md-6 mb-4">
                   <div class="form-outline">
-                    <input type="text" name="citta" id="citta" class="form-control"required />
-                    <label class="form-label" for="citta">Città</label>
+                    <input type="text" name="citta" id="citta" class="form-control"placeholder="Città"required />
+                    <label class="form-label" for="citta"></label>
                   </div>
                 </div>
                 <div class="col-md-6 mb-4">
                   <div class="form-outline">
-                    <input type="text" name="indirizzo"id="indirizzo" class="form-control" required/>
-                    <label class="form-label" for="indirizzo">Indirizzo</label>
+                    <input type="text" name="indirizzo"id="indirizzo" class="form-control" placeholder="Indirizzo"required/>
+                    <label class="form-label" for="indirizzo"></label>
                   </div>
                 </div>
               </div>
             <div class="row">
                 <div class="col-md-6 mb-4">
                   <div class="form-outline">
-                    <input type="text" name="cap" id="cap" class="form-control" required/>
-                    <label class="form-label" for="cap">CAP</label>
+                    <input type="text" name="cap" id="cap" class="form-control" placeholder="CAP"required/>
+                    <label class="form-label" for="cap"></label>
                   </div>
                 </div>
                 <div class="col-md-6 mb-4">
                   <div class="form-outline">
-                    <input type="text" name="telefono"id="telefono" class="form-control" required/>
-                    <label class="form-label" for="telefono">Numero di Telefono</label>
+                    <input type="text" name="telefono"id="telefono" class="form-control" placeholder="Numero di telefono"required/>
+                    <label class="form-label" for="telefono"> </label>
                   </div>
                 </div>
               </div>
-             <div class="col-md-6 mb-4">
-                  <div class="form-outline">
-                    <input type="text" name="assistenza"id="assistenza" class="form-control" required/>
-                    <label class="form-label" for="telefono">Assistenza</label>
-                  </div>
-             </div>
-
-            <div class="col-md-6 mb-4">
-                  <div class="form-outline">
-                    <input type="text" name="descrizione"id="descrizione" class="form-control"required />
-                    <label class="form-label" for="telefono">Descrizione</label>
-                  </div>
-                </div>
-
 
               <!-- Email input -->
               <div class="form-outline mb-4">
-                <input type="email" name="email"id="email" class="form-control" required/>
-                <label class="form-label" for="email">Email address</label>
+                <input type="email" name="email"id="email" class="form-control"  placeholder="Email address"required/>
+                <label class="form-label" for="email"></label>
               </div>
 
               <!-- Password input -->
               <div class="form-outline mb-4">
-                <input type="password" name="password"id="password" class="form-control" required/>
-                <label class="form-label" for="password">Password</label>
+                <input type="password" name="password"id="password" class="form-control" placeholder="Password"required/>
+                <label class="form-label" for="password"></label>
               </div>
             <div class="form-outline mb-4">
-                <input type="password" name="cpwd"id="cpwd" class="form-control"required />
-                <label class="form-label" for="cpwd">ConfirmPassword</label>
+                <input type="password" name="cpwd"id="cpwd" class="form-control"placeholder="Confirm password"required />
+                <label class="form-label" for="cpwd"></label>
               </div>
 
 
 
 
 
-                <div class="form-footer">
-                    <p>Already have an account? <a class="form-link" href="{{url_for('views.login_page')}}">Login</a></p>
+                <div class="form-footer" style="text-align: center">
+                    <p  >Already have an account? <a class="form-link"  style="color: darkorange" href="{{url_for('views.login_page')}}">Login</a></p>
                 </div>
             </form>
-              <input form="form" type="submit" name="register" id="register" value="REGISTER">
-        </div>
+              <div style="text-align: center">
+
+              <input form="form" type="submit" name="register" id="register" value="REGISTRATI">
+                 </div>
+              </div>
     </div>
   </div>
 </div>
@@ -144,5 +181,3 @@
 
 
 </html>
-
-

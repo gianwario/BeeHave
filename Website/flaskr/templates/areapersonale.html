@@ -1,72 +1,81 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" href="{{url_for('static', filename='css/areautente.css')}}">
-    {% extends "base.html"%}
-    {% block title %}Login{% endblock %}
+    <link  rel="stylesheet" href="{{url_for('static', filename='css/areautente.css')}}">
+  {% extends "base.html"%}
+        {% block title %}Area Personale{% endblock %}
 </head>
 <body>
-{% block content %}
+ {% block content %}
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
 <div class="container bootstrap snippets bootdey">
-    <div class="row">
+<div class="row">
 
-        <div class="profile-nav col-md-3">
-            <div class="panel">
-                <div class="user-heading round">
-                    <a href="#">
-                        <img src="../static/images/um1.webp" alt="">
-                    </a>
-                    <h1>{{current_user.nome}}</h1>
-                    <p>{{current_user.email}}</p>
-                </div>
+  <div class="profile-nav col-md-3">
+      <div class="panel">
+          <div class="user-heading round">
+              <a href="#">
+                  <img src="../static/images/um1.webp" alt="">
+              </a>
+              <h1>{{current_user.nome}}</h1>
+              <p>{{current_user.email}}</p>
+          </div>
 
-                <ul class="nav nav-pills nav-stacked">
-                    <li class="active"><a href="#"> <i class="fa fa-user"></i> Profile</a></li>
-                    <li><a href="{{url_for('views.crea_area_assistenza_page')}}"> <i class="fa fa-calendar"></i> Richieste di assistenza <span
-                            class="label label-warning pull-right r-activity">9</span></a></li>
-                    <li><a href="#"> <i class="fa fa-edit"></i> Modifica profilo</a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="profile-info col-md-9">
+          <ul class="nav nav-pills nav-stacked">
+              <li class="active"><a href="#"> <i class="fa fa-user"></i> Profile</a></li>
+              <li><a href="#"> <i class="fa fa-calendar"></i> Visualizza le tue richieste di assistenza <span class="label label-warning pull-right r-activity">9</span></a></li>
+              <ul class="nav nav-pills nav-stacked">
+              <div class="dropdown">
+                  <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                      Modifica Account
+                  </a>
+                  <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                      <li><a class="dropdown-item" href="{{url_for('views.modifica_dati_pers')}}">Modifica Dati Personali </a></li>
+                      <li><a class="dropdown-item" href="{{url_for('views.modifica_residenza')}}">Modifica Indirizzo </a></li>
+                      <li><a class="dropdown-item" href="{{url_for('views.modifica_psw')}}">Modifica Password</a></li>
+                  </ul>
+              </div>
+          </ul>
+          </ul>
+      </div>
+  </div>
+  <div class="profile-info col-md-9">
 
-            <div class="panel">
-                <div class="bio-graph-heading">
-                    {{current_user.descrizione}}
-                </div>
-                <div class="panel-body bio-graph-info">
-                    <h1>I tuoi dati</h1>
-                    <div class="row">
-                        <div class="bio-row">
-                            <p><span>Nome </span>: {{current_user.nome}}</p>
-                        </div>
-                        <div class="bio-row">
-                            <p><span>Cognome </span>: {{current_user.cognome}}</p>
-                        </div>
-                        <div class="bio-row">
-                            <p><span>Città </span>: {{current_user.citta}}</p>
-                        </div>
-                        <div class="bio-row">
-                            <p><span>Indirizzo</span>: {{current_user.indirizzo}}</p>
-                        </div>
-                        <div class="bio-row">
-                            <p><span>CAP </span>: {{current_user.cap}}</p>
-                        </div>
-                        <div class="bio-row">
-                            <p><span>Email </span>: {{current_user.email}}</p>
-                        </div>
-                        <div class="bio-row">
-                            <p><span>Numero di telefono </span>: {{current_user.telefono}}</p>
-                        </div>
+      <div class="panel">
 
-                    </div>
-                </div>
-            </div>
+          <div class="panel-body bio-graph-info">
+              <h1>I tuoi dati</h1>
+              <div class="row">
+                  <div class="bio-row">
+                      <p><span>Nome </span>: {{current_user.nome}}</p>
+                  </div>
+                  <div class="bio-row">
+                      <p><span>Cognome </span>: {{current_user.cognome}}</p>
+                  </div>
+                  <div class="bio-row">
+                      <p><span>Città </span>: {{current_user.citta}}</p>
+                  </div>
+                  <div class="bio-row">
+                      <p><span>Indirizzo</span>: {{current_user.indirizzo}}</p>
+                  </div>
+                  <div class="bio-row">
+                      <p><span>CAP </span>: {{current_user.cap}}</p>
+                  </div>
+                  <div class="bio-row">
+                      <p><span>Email </span>: {{current_user.email}}</p>
+                  </div>
+                  <div class="bio-row">
+                      <p><span>Numero di telefono </span>: {{current_user.telefono}}</p>
+                  </div>
 
-        </div>
-    </div>
+              </div>
+          </div>
+      </div>
+
+  </div>
+</div>
 </div>
 {% endblock %}
 </body>
+
 </html>

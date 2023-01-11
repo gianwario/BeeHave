@@ -1,7 +1,7 @@
 from flask import render_template, Blueprint, session
 from flask_login import login_required, current_user
 
-from Website.flaskr.gestione_adozioni.GestioneAdozioniService import get_Alveari, get_alveareById
+from Website.flaskr.gestione_adozioni.GestioneAdozioniService import get_Alveari, get_alveareById, getTicket_adozione
 from Website.flaskr.gestione_vendita.GestioneVenditaService import getTuttiProdotti, getProdottoById
 from Website.flaskr.model.Prodotto import Prodotto
 
@@ -37,15 +37,15 @@ def inserimento_alveare_page():
     return home()
 
 
-@views.route('/registrazione_cl')
-def sigup_cl():  # typo, da cambiare
+@views.route('/registrazione_cliente')
+def registrazione_cliente_page():  # typo, da cambiare
     if not current_user.is_authenticated:
         return render_template('registrazione_cliente.html')
     return home()
 
 
 @views.route('/registrazione_apicoltore')
-def sigup_ap():
+def registrazione_apicoltore_page():
     if not current_user.is_authenticated:
         return render_template('registrazione_apicoltore.html')
     return home()
@@ -61,10 +61,27 @@ def area_personale():
 
 @views.route('/catalogo_prod')
 def mostra_prodotti():
-    #if not current_user.is_authenticated or not session['isApicoltore']:
-        prods = getTuttiProdotti()
-        return render_template('catalogo_prodotti.html', prods=prods)
-    #return home()
+    # if not current_user.is_authenticated or not session['isApicoltore']:
+    prods = getTuttiProdotti()
+    return render_template('catalogo_prodotti.html', prods=prods)
+
+
+@views.route('/modifica_dati_personali')
+@login_required
+def modifica_dati_pers():
+    return render_template("modifica_dati_utente.html")
+
+
+@views.route('/modifica_residenza')
+@login_required
+def modifica_residenza():
+    return render_template("modifica_residenza.html")
+
+
+@views.route('/modifica_password')
+@login_required
+def modifica_psw():
+    return render_template("modifica_password.html")
 
 
 @views.route('/crea_area_assistenza_page')
@@ -86,3 +103,8 @@ def mostra_alveari():
 @login_required
 def modifica_stato(alveare_id):
     return render_template('modifica_stato_alveare.html',alveare_id=alveare_id)
+    # if not current_user.is_authenticated or not session['isApicoltore']:
+    alveari_disponibili = get_Alveari()
+    return render_template('catalogo_alveari.html', alveari_disponibili=alveari_disponibili)
+# return home()
+
