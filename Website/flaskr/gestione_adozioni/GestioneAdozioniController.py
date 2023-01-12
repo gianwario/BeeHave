@@ -4,14 +4,14 @@ import os
 from flask import Blueprint, request, session, flash, render_template
 from flask_login import login_required, current_user
 from werkzeug.utils import secure_filename
-from datetime import date
+
 from Website.flaskr import image_folder_absolute
-from Website.flaskr.Routes import inserimento_alveare_page, mostra_alveari, home
+from Website.flaskr.Routes import mostra_alveari, home
 from Website.flaskr.gestione_adozioni.GestioneAdozioniService import inserisci_alveare, update_img_alveare, \
-    get_alveari_disponibili, get_alveare_by_id, affitto_alveare, get_alveari, get_ticket_adozione
+    get_alveari_disponibili, get_alveare_by_id, affitto_alveare, get_ticket_adozione
 from Website.flaskr.gestione_utente.GestioneUtenteService import get_apicoltore_by_id, get_cliente_by_id
-from Website.flaskr.model.TicketAdozione import TicketAdozione
 from Website.flaskr.model.Alveare import Alveare
+from Website.flaskr.model.TicketAdozione import TicketAdozione
 
 ga = Blueprint('ga', __name__)
 
@@ -94,6 +94,7 @@ def adotta_alveare():
                                 data_inizio_adozione=datetime.date.today(), tempo_adozione=tempo_adozione)
         affitto_alveare(ticket, percentuale)
         return mostra_alveari()
+
 
 @ga.route('/alveari_adottati/<int:apicoltore_id>', methods=['GET'])
 @login_required

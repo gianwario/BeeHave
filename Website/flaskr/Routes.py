@@ -94,7 +94,7 @@ def mostra_alveari():
 @login_required
 def richiesta_assistenza_page(id_apicoltore):
     if not session['isApicoltore']:
-        return render_template('richiedi_assistenza.html',id_apicoltore=id_apicoltore)
+        return render_template('richiedi_assistenza.html', id_apicoltore=id_apicoltore)
     return home()
 
 

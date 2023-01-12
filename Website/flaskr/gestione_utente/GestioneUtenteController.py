@@ -1,8 +1,8 @@
 import re
 
-from flask import Blueprint, request, session, flash, g
-from werkzeug.security import check_password_hash, generate_password_hash
-from flask_login import login_user, logout_user, login_required, current_user
+from flask import Blueprint, request, flash
+from flask_login import login_user, logout_user, login_required
+from werkzeug.security import check_password_hash
 
 from Website.flaskr.Routes import home, area_personale, modifica_dati_utente_page, login_page, \
     registrazione_apicoltore_page, registrazione_cliente_page
