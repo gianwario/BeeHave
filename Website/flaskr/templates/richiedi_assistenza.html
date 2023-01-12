@@ -11,6 +11,7 @@
                 <fieldset>
                     <legend><h2><b>Richiesta Assistenza</b></h2></legend>
                     <br>
+                    <input type="hidden" value='{{id_apicoltore}}' name="id_apicoltore">
                     <div class="form-group">
                         <label class="col-md-4 control-label" for="nome">Nome</label>
                         <div class="col-md-4 inputGroupContainer">
@@ -27,10 +28,15 @@
                             </div>
                         </div>
                     </div>
+                    {% with messages = get_flashed_messages(category_filter=["error"]) %}
+                    {% if messages %}
+                    <p style="color:red">{{ messages[0] }}</p>
+                    {% endif %}
+                    {% endwith %}
                     <div class="form-group">
                         <label class="col-md-4 control-label"></label>
                         <div class="col-md-4"><br>
-                            <button type="button" class="annullabtn">Annulla<span class="glyphicon glyphicon-remove"></span>
+                            <button type="button" class="annullabtn"><a style="text-decoration: none; color:black " href="{{url_for('views.mostra_lista_assistenti')}}">Annulla<span class="glyphicon glyphicon-remove"></span></a>
                             </button>
                             <button type="submit" class="btn btn-warning">Richiedi<span class="glyphicon glyphicon-send"></span>
                             </button>

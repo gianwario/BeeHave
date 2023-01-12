@@ -6,16 +6,12 @@ from flask_login import login_required, current_user
 from werkzeug.utils import secure_filename
 
 from Website.flaskr import image_folder_absolute
-from Website.flaskr.Routes import inserimento_alveare_page, mostra_alveari
-from Website.flaskr.gestione_adozioni.GestioneAdozioniService import inserisci_alveare, update_img_alveare, get_alveari_disponibili, get_alveare_by_id, affitto_alveare, get_alveari, get_ticket_adozione, update_Stato
-
-from Website.flaskr.Routes import inserimento_alveare_page, mostra_alveari, home
+from Website.flaskr.Routes import mostra_alveari, home
 from Website.flaskr.gestione_adozioni.GestioneAdozioniService import inserisci_alveare, update_img_alveare, \
-    get_alveari_disponibili, get_alveare_by_id, affitto_alveare, get_alveari, get_ticket_adozione
-
+    get_alveari_disponibili, get_alveare_by_id, affitto_alveare, get_ticket_adozione
 from Website.flaskr.gestione_utente.GestioneUtenteService import get_apicoltore_by_id, get_cliente_by_id
-from Website.flaskr.model.TicketAdozione import TicketAdozione
 from Website.flaskr.model.Alveare import Alveare
+from Website.flaskr.model.TicketAdozione import TicketAdozione
 
 ga = Blueprint('ga', __name__)
 
@@ -119,6 +115,7 @@ def adotta_alveare():
         affitto_alveare(ticket, percentuale)
         return mostra_alveari()
 
+
 @ga.route('/alveari_adottati/<int:apicoltore_id>', methods=['GET'])
 @login_required
 def mostra_alveari_adottati(apicoltore_id):
@@ -128,9 +125,5 @@ def mostra_alveari_adottati(apicoltore_id):
         for x in alveari_adottati:
             lista_clienti.append(get_cliente_by_id(x.TicketAdozione.id_cliente))
 
-
-    return render_template('alveari_adottati.html', alveari_affittati=alveari_affittati, lista_clienti=lista_clienti)
-    #return home()
-
-
-
+        return render_template('alveari_adottati.html', alveari_adottati=alveari_adottati, lista_clienti=lista_clienti)
+    return home()

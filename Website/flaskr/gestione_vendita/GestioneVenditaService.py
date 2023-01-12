@@ -1,3 +1,5 @@
+from flask_login import current_user
+
 from Website.flaskr.model.Prodotto import Prodotto
 from .. import db
 
@@ -35,8 +37,8 @@ def decrementa_quantita(id_prodotto, qnt):
     db.session.commit()
 
 
-def get_prodotti_by_apicoltore(apicoltore_id):
-    return Prodotto.query.filter_by(id_apicoltore=apicoltore_id).all()
+def get_prodotti_by_apicoltore():
+    return Prodotto.query.filter_by(id_apicoltore=current_user.id).all()
 
 
 def acquisto_prodotto(acquisto, qnt):
