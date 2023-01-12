@@ -4,10 +4,10 @@ import os
 
 from werkzeug.utils import secure_filename
 from Website.flaskr import image_folder_absolute
-from Website.flaskr.Routes import area_personale, home, mostra_prodotti
+from Website.flaskr.Routes import area_personale, mostra_prodotti
 from Website.flaskr.gestione_utente.GestioneUtenteService import get_apicoltore_by_id
-from Website.flaskr.gestione_vendita.GestioneVenditaService import inserisci_prodotto, getProdottoById, updateImage, \
-    get_ProdottiByApicoltore, deleteProdotto, acquisto_prodotto
+from Website.flaskr.gestione_vendita.GestioneVenditaService import inserisci_prodotto, get_prodotto_by_id, \
+    aggiorna_immagine, get_prodotti_by_apicoltore, cancella_prodotto, acquisto_prodotto
 from Website.flaskr.model.Acquisto import Acquisto
 from Website.flaskr.model.Prodotto import Prodotto
 
@@ -27,17 +27,17 @@ def inserimento_prodotto():
         quantita = int(request.form.get('quantita'))
         apicoltore = current_user.id
 
-        if (len(nome) > 30):
+        if len(nome) > 30:
             flash('Nome troppo lungo!', category='error')
-        elif (len(descrizione) > 200):
+        elif len(descrizione) > 200:
             flash('Descrizione troppo lunga!', category='error')
-        elif (len(localita) > 40):
+        elif len(localita) > 40:
             flash('Località invalida!', category='error')
-        elif (prezzo > 1000):
+        elif prezzo > 1000:
             flash('Prezzo invalido!', category='error')
-        elif (len(tipologia) > 30):
+        elif len(tipologia) > 30:
             flash('Nome tipologia lungo!', category='error')
-        elif (quantita > 1000000):
+        elif quantita > 1000000:
             flash('Quantità invalida!', category='error')
         else:
             flash('Inserimento avvenuto con successo!', category='success')
@@ -52,22 +52,22 @@ def inserimento_prodotto():
         path_image = os.path.join(image_folder_absolute, secure_filename(image.filename))
         image.save(path_image)
         os.rename(path_image, os.path.join(image_folder_absolute, nome_vasetto))
-        updateImage(prod.id, nome_vasetto)
-    return mostra_articoli_inVendita(current_user.id)
+        aggiorna_immagine(prod.id, nome_vasetto)
+    return mostra_articoli_in_vendita(current_user.id)
 
 
 @gv.route('/visualizza_prod/<int:prodotto_id>', methods=['POST', 'GET'])
 def info_articolo(prodotto_id):
-    prod = getProdottoById(prodotto_id)
+    prod = get_prodotto_by_id(prodotto_id)
     apicoltore = get_apicoltore_by_id(prod.id_apicoltore)
     return render_template('informazioni_prodotto.html', prodotto=prod, apicoltore=apicoltore)
 
 
 @gv.route('/visualizza_prodotti_vendita/<int:apicoltore_id>', methods=['POST', 'GET'])
 @login_required
-def mostra_articoli_inVendita(apicoltore_id):
+def mostra_articoli_in_vendita(apicoltore_id):
     if session['isApicoltore']:
-        prodotti_in_vendita = get_ProdottiByApicoltore(apicoltore_id)
+        prodotti_in_vendita = get_prodotti_by_apicoltore(apicoltore_id)
         return render_template('/catalogo_prodotti_apicoltore.html', prodotti_in_vendita=prodotti_in_vendita)
 
 
@@ -75,11 +75,11 @@ def mostra_articoli_inVendita(apicoltore_id):
 @login_required
 def elimina_prodotto(id_prodotto, id_api):
     if session['isApicoltore']:
-        prod = getProdottoById(id_prodotto)
+        prod = get_prodotto_by_id(id_prodotto)
         path = os.path.join(image_folder_absolute, prod.img_path)
         os.remove(path)
-        deleteProdotto(id_prodotto)
-        # prodotti_in_vendita = get_ProdottiByApicoltore(id_api)
+        cancella_prodotto(id_prodotto)
+        # prodotti_in_vendita = get_prodotti_by_apicoltore(id_api)
         # return render_template('/catalogo_prodotti_apicoltore.html', prodotti_in_vendita=prodotti_in_vendita)
         return area_personale()
         # TODO fix refresh page
@@ -93,9 +93,9 @@ def acquista_prodotto():
         qnt_articolo = int(request.form.get('qnt_articolo'))
         id_cliente = int(request.form.get('id_client'))
         id_prodotto = int(request.form.get('id_prd'))
-        if quantita <= qnt_articolo:
+        if quantita > qnt_articolo:
             flash('Quantitá non disponibile!', category='error')
 
-        acquisto = Acquisto(id_cliente=id_cliente, id_prodotto=id_prodotto)
+        acquisto = Acquisto(id_cliente=id_cliente, id_prodotto=id_prodotto, quantita=quantita)
         acquisto_prodotto(acquisto, quantita)
     return mostra_prodotti()
