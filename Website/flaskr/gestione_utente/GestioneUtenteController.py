@@ -159,8 +159,8 @@ def modifica_dati_utente():
         citta = request.form.get('nuova_citta')
         cap = request.form.get('nuovo_cap')
         indirizzo = request.form.get('nuovo_indirizzo')
-        pwd = request.form.get('nuova_psw')
-        cpwd = request.form.get('nuova_ripeti_psw')
+        psw = request.form.get('nuova_psw')
+        ripeti_psw = request.form.get('nuova_ripeti_psw')
 
         if not 0 < len(nome) < 45:
             flash("Nome non valido", category="error")
@@ -186,23 +186,22 @@ def modifica_dati_utente():
         elif not controlla_email_esistente(email) and email != current_user.email:
             flash("Email già esistente", category="error")
             return modifica_dati_utente_page()
-        elif pwd != '':
-            if len(pwd) < 8:
+        elif psw != '':
+            if len(psw) < 8:
                 flash("Lunghezza password deve essere almeno 8 caratteri", category="error")
                 return modifica_dati_utente_page()
-            if not (controllo_caratteri_speciali(pwd) and controllo_numeri(pwd)):
+            if not (controllo_caratteri_speciali(psw) and controllo_numeri(psw)):
                 flash("Inserire nel campo password almeno un carattere speciale ed un numero", category="error")
                 return modifica_dati_utente_page()
-            if pwd != cpwd:
+            if psw != ripeti_psw:
                 flash("Password e Conferma Password non combaciano", category="error")
         else:
         
-        modifica_profilo_personale(nome, cognome, email, telefono, citta, cap, indirizzo, pwd)
-
-        flash("Modifica dati utente avvenuta con successo!", category="success")
-        return area_personale()
+            modifica_profilo_personale(nome, cognome, email, telefono, citta, cap, indirizzo, psw)
+            flash("Modifica dati utente avvenuta con successo!", category="success")
+            return area_personale()
         
-return modifica_dati_utente_page()
+    return modifica_dati_utente_page()
 
 
 def controllo_caratteri_speciali(psw):

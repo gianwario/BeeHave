@@ -40,7 +40,6 @@ def registra_apicoltore(utente):
     db.session.commit()
 
 
-
 def modifica_profilo_personale(nome, cognome, email, telefono, citta, cap, indirizzo, pwd):
     if session['isApicoltore']:
         utente = get_apicoltore_by_id(current_user.id)
