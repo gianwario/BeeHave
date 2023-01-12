@@ -31,7 +31,7 @@
 
                         <span>Nome Apicoltore:{{apicoltore.nome}}</span><span>  Popolazione:{{alveare.popolazione}}</span><span>  Polline:{{alveare.polline}}</span><span>  % Disponibile:{{alveare.percentuale_disponibile}}</span>
                     </div>
-
+                    {%if current_user.is_authenticated and not session['isApicoltore'] %}
                     <div class="buttons d-flex flex-row mt-5 gap-3">
                         <form action="/affitta_alveare" method="post">
                             {% if alveare.percentuale_disponibile >= 25 %}
@@ -71,7 +71,14 @@
                             <button type="submit" value="acquista" class="btn btn-outline-dark">Adotta</button>
                         </form>
                     </div>
-
+                    {%else%}
+                    <br><br>
+                    <form action="{{url_for('views.modifica_stato', alveare_id=alveare.id)}}">
+                          <button type="submit">
+                            Modifica Stato
+                          </button>
+                        </form>
+                    {% endif %}
                 </div>
             </div>
         </div>

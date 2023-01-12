@@ -66,12 +66,14 @@ body {
     -webkit-border-radius: 0;
     color: #89817f;
     border-left: 5px solid #fff;
+
 }
 
 .profile-nav ul > li > a:hover, .profile-nav ul > li > a:focus, .profile-nav ul li.active  a {
     background: #f8f7f5 !important;
     border-left: 5px solid #fbc02d;
     color: #89817f !important;
+
 }
 
 .profile-nav ul > li:last-child > a:last-child {
@@ -392,8 +394,7 @@ background:#eee;
     z-index: 1;
     border-radius: 15px 15px 0 0;
     margin: 0 auto;
-    padding: 30px 30px 0 30px;
-    background-color: #3f43fd;
+
     overflow: hidden;
 }
 .single_advisor_profile .advisor_thumb::after {
@@ -430,7 +431,7 @@ background:#eee;
 }
 .single_advisor_profile .advisor_thumb .social-info a:hover,
 .single_advisor_profile .advisor_thumb .social-info a:focus {
-    color: #3f43fd;
+    color: orange;
 }
 .single_advisor_profile .advisor_thumb .social-info a:last-child {
     padding-right: 0;
@@ -444,6 +445,7 @@ background:#eee;
     transition-duration: 500ms;
     border-radius: 0 0 15px 15px;
     background-color: #ffffff;
+
 }
 .single_advisor_profile .single_advisor_details_info::after {
     -webkit-transition-duration: 500ms;
@@ -452,7 +454,7 @@ background:#eee;
     z-index: 1;
     width: 50px;
     height: 3px;
-    background-color: #3f43fd;
+    background-color: orange;
     content: "";
     top: 12px;
     right: 30px;
@@ -480,7 +482,7 @@ background:#eee;
 }
 .single_advisor_profile:hover .advisor_thumb::after,
 .single_advisor_profile:focus .advisor_thumb::after {
-    background-color: #070a57;
+    background-color: orange;
 }
 .single_advisor_profile:hover .advisor_thumb .social-info a,
 .single_advisor_profile:focus .advisor_thumb .social-info a {
@@ -494,7 +496,7 @@ background:#eee;
 }
 .single_advisor_profile:hover .single_advisor_details_info,
 .single_advisor_profile:focus .single_advisor_details_info {
-    background-color: #070a57;
+    background-color: orange;
 }
 .single_advisor_profile:hover .single_advisor_details_info::after,
 .single_advisor_profile:focus .single_advisor_details_info::after {

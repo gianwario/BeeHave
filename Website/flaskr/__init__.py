@@ -47,11 +47,12 @@ def create_app():
 
     @login_manager.user_loader
     def user_loader(email):
-        utente = Apicoltore.Apicoltore.query.get(email)
+        utente = Apicoltore.Apicoltore.query.filter_by(email=email).first()
         if utente:
             return utente
         else:
-            return Cliente.Cliente.query.get(email)
+            return Cliente.Cliente.query.filter_by(email=email).first()
+
 
     @app.errorhandler(401)
     def unauthorized_user(e):

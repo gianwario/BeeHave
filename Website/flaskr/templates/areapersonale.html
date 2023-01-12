@@ -1,13 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link  rel="stylesheet" href="{{url_for('static', filename='css/areautente.css')}}">
-  {% extends "base.html"%}
+    <link rel="stylesheet" href="{{url_for('static', filename='css/areautente.css')}}">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+
+    {% extends "base.html"%}
         {% block title %}Area Personale{% endblock %}
+
+
+
 </head>
 <body>
  {% block content %}
-<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+<br><br><br>
+ <!-- Latest compiled and minified CSS -->
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
 <div class="container bootstrap snippets bootdey">
 <div class="row">
 
@@ -23,7 +38,7 @@
 
           <ul class="nav nav-pills nav-stacked">
               <li class="active"><a href="#"> <i class="fa fa-user"></i> Profile</a></li>
-              <li><a href="{{url_for('views.crea_area_assistenza_page')}}"> <i class="fa fa-calendar"></i> Visualizza le tue richieste di assistenza <span class="label label-warning pull-right r-activity">9</span></a></li>
+              <li><a href="{{url_for('views.crea_area_assistenza_page')}}"> <i class="fa fa-calendar"></i> {% if current_user.assistenza%} Visualizza le tue richieste di assistenza <span class="label label-warning pull-right r-activity">{{ticket}} </span>{%else%}Crea area assistenza{%endif%}  </a></li>
               <li><a href="{{url_for('views.modifica_dati_utente_page')}}"> <i class="fa fa-user"></i> Modifica Account</a></li>
           </ul>
       </div>
@@ -34,6 +49,8 @@
 
           <div class="panel-body bio-graph-info">
               <h1>I tuoi dati</h1>
+              <br><br>
+
               <div class="row">
                   <div class="bio-row">
                       <p><span>Nome </span>: {{current_user.nome}}</p>
@@ -73,6 +90,7 @@
 <br><br>
  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
 
+
 <div class="container">
         <div class="row justify-content-center">
 
@@ -82,68 +100,29 @@
 <br><br>
           </div>
         </div>
+
         <div class="row">
+    {% for alveare in alveari %}
           <!-- Single Advisor-->
           <div class="col-12 col-sm-6 col-lg-3">
             <div class="single_advisor_profile wow fadeInUp" data-wow-delay="0.2s" style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;">
               <!-- Team Thumb-->
-              <div class="advisor_thumb"><img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="">
+              <div class="advisor_thumb"><img src="../static/images/{{alveare.img_path}}" alt="">
                 <!-- Social Info-->
-                <div class="social-info"><a href="#"><i class="fa fa-facebook"></i></a><a href="#"><i class="fa fa-twitter"></i></a><a href="#"><i class="fa fa-linkedin"></i></a></div>
+
               </div>
               <!-- Team Details-->
               <div class="single_advisor_details_info">
-                <h6>Samantha Sarah</h6>
-                <p class="designation">Founder &amp; CEO</p>
+                <h4 class="card-title"><strong><a href="{{url_for('ga.informazioni_alveare', alveare_id=alveare.id)}}">{{alveare.nome}}</a></strong></h4>
+                <br>
+                  <p class="price">Prezzo: €{{alveare.prezzo}}</p>
               </div>
             </div>
           </div>
-          <!-- Single Advisor-->
-          <div class="col-12 col-sm-6 col-lg-3">
-            <div class="single_advisor_profile wow fadeInUp" data-wow-delay="0.3s" style="visibility: visible; animation-delay: 0.3s; animation-name: fadeInUp;">
-              <!-- Team Thumb-->
-              <div class="advisor_thumb"><img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="">
-                <!-- Social Info-->
-                <div class="social-info"><a href="#"><i class="fa fa-facebook"></i></a><a href="#"><i class="fa fa-twitter"></i></a><a href="#"><i class="fa fa-linkedin"></i></a></div>
-              </div>
-              <!-- Team Details-->
-              <div class="single_advisor_details_info">
-                <h6>Nazrul Islam</h6>
-                <p class="designation">UI Designer</p>
-              </div>
-            </div>
-          </div>
-          <!-- Single Advisor-->
-          <div class="col-12 col-sm-6 col-lg-3">
-            <div class="single_advisor_profile wow fadeInUp" data-wow-delay="0.4s" style="visibility: visible; animation-delay: 0.4s; animation-name: fadeInUp;">
-              <!-- Team Thumb-->
-              <div class="advisor_thumb"><img src="https://bootdey.com/img/Content/avatar/avatar6.png" alt="">
-                <!-- Social Info-->
-                <div class="social-info"><a href="#"><i class="fa fa-facebook"></i></a><a href="#"><i class="fa fa-twitter"></i></a><a href="#"><i class="fa fa-linkedin"></i></a></div>
-              </div>
-              <!-- Team Details-->
-              <div class="single_advisor_details_info">
-                <h6>Riyadh Khan</h6>
-                <p class="designation">Developer</p>
-              </div>
-            </div>
-          </div>
-          <!-- Single Advisor-->
-          <div class="col-12 col-sm-6 col-lg-3">
-            <div class="single_advisor_profile wow fadeInUp" data-wow-delay="0.5s" style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInUp;">
-              <!-- Team Thumb-->
-              <div class="advisor_thumb"><img src="https://bootdey.com/img/Content/avatar/avatar2.png" alt="">
-                <!-- Social Info-->
-                <div class="social-info"><a href="#"><i class="fa fa-facebook"></i></a><a href="#"><i class="fa fa-twitter"></i></a><a href="#"><i class="fa fa-linkedin"></i></a></div>
-              </div>
-              <!-- Team Details-->
-              <div class="single_advisor_details_info">
-                <h6>Niloy Islam</h6>
-                <p class="designation">Marketing Manager</p>
-              </div>
-            </div>
-          </div>
+             {%endfor%}
+       </div>
         </div>
+
       </div>
 {% endblock %}
 </body>
