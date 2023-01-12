@@ -8,12 +8,12 @@ def inserisci_alveare(alveare):
     db.session.commit()
 
 
-def get_alveare_by_id(id):
-    return Alveare.query.filter_by(id=id).first()
+def get_alveare_by_id(alveare_id):
+    return Alveare.query.filter_by(id=alveare_id).first()
 
 
-def update_img_alveare(id, img):
-    alveare = get_alveare_by_id(id)
+def update_img_alveare(alveare_id, img):
+    alveare = get_alveare_by_id(alveare_id)
     alveare.img_path = str(img)
     db.session.flush()
     db.session.commit()
