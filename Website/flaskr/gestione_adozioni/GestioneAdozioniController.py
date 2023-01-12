@@ -58,6 +58,7 @@ def inserimento_alveare():
         image.save(path_image)
         os.rename(path_image, os.path.join(image_folder_absolute, nome_alv))
         update_img_alveare(alveare.id, nome_alv)
+        # TODO fixare formati immagini, non basta solo jpg
     return mostra_alveari_disponibili(current_user.id)
 
 
