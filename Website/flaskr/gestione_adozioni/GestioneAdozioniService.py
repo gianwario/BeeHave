@@ -48,7 +48,7 @@ def affitto_alveare(ticket, percentuale):
     db.session.commit()
     decrementa_percentuale(ticket.id_alveare, percentuale)
 
-def update_Stato(id, covata_compatta, popolazione, polline, stato_cellette):
+def update_stato(id, covata_compatta, popolazione, polline, stato_cellette):
     alveare=get_alveare_by_id(id);
     alveare.covata_compatta=covata_compatta
     alveare.popolazione=popolazione
