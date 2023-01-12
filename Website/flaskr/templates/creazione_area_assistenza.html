@@ -1,42 +1,49 @@
 <!DOCTYPE html>
 <html lang="it">
-    <head>
-        {% extends "base.html" %}
+<head>
+    {% extends "base.html" %}
+    <title>
         {% block title %}Creazione Area Assistenza{% endblock %}
-    </head>
-    <body>
-        {% block content %}
-        <div class="container">
-            <form class="well form-horizontal" action="/crea_area_assistenza" method="POST" id="contact_form">
-                <fieldset>
-                    <legend><h2><b>Crea Area Assistenza</b></h2></legend>
-                    <br>
-                    <div class="form-group">
-                        <label class="col-md-4 control-label" for="descrizione">Descrizione</label>
-                        <div class="col-md-4 inputGroupContainer">
-                            <div class="input-group">
-                                <textarea name="descrizione" id="descrizione" class="form-control" required placeholder="Inserisci la descrizione"></textarea>
-                            </div>
-                        </div>
+    </title>
+</head>
+<body>
+{% block content %}
+<div class="container">
+    <form class="well form-horizontal" action="/crea_area_assistenza" method="POST" id="contact_form">
+        <fieldset>
+            <legend><h2><b>Crea Area Assistenza</b></h2></legend>
+            <br>
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="descrizione">Descrizione</label>
+                <div class="col-md-4 inputGroupContainer">
+                    <div class="input-group">
+                        <textarea name="descrizione" id="descrizione" class="form-control" required
+                                  placeholder="Inserisci la descrizione"></textarea>
                     </div>
-                    <div class="form-group">
-                        <label class="col-md-4 control-label" for="assistenza">Dichiaro di apparire nella lista degli apicoltori che richiedono assistenza</label>
-                        <div class="col-md-4 inputGroupContainer">
-                            <div class="input-group">
-                                 <input type="checkbox" id="assistenza" name="assistenza" required/>
-                            </div>
-                        </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="assistenza">Dichiaro di apparire nella lista degli apicoltori
+                    che richiedono assistenza</label>
+                <div class="col-md-4 inputGroupContainer">
+                    <div class="input-group">
+                        <input type="checkbox" id="assistenza" name="assistenza" required/>
                     </div>
-                    <div class="form-group">
-                        <label class="col-md-4 control-label"></label>
-                        <div class="col-md-4"><br>
-                            <button type="button" class="annullabtn"><a style="text-decoration: none; color:black " href="{{url_for('views.area_personale')}}">Annulla<span class="glyphicon glyphicon-remove"></span></a></button>
-                            <button type="submit" class="btn btn-warning">Crea<span class="glyphicon glyphicon-send"></span></button>
-                        </div>
-                    </div>
-                </fieldset>
-            </form>
-        </div>
-        {% endblock %}
-    </body>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-4 control-label"></label>
+                <div class="col-md-4"><br>
+                    <button type="button" class="annullabtn"><a style="text-decoration: none; color:black "
+                                                                href="{{url_for('views.area_personale')}}">Annulla<span
+                            class="glyphicon glyphicon-remove"></span></a></button>
+                    <button type="submit" class="btn btn-warning">Crea<span class="glyphicon glyphicon-send"></span>
+                    </button>
+                </div>
+            </div>
+        </fieldset>
+    </form>
+</div>
+{% endblock %}
+</body>
 </html>
