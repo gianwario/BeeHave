@@ -1,0 +1,17 @@
+
+n
+>Website/flaskr/gestione_adozioni/GestioneAdozioniController.py,8\2\8223d7e0e23e3f08c7daca255d1d5f86754d00ad
+k
+;Website/flaskr/gestione_adozioni/GestioneAdozioniService.py,5\0\50e0c64df469b99691fa3efb34bdc5d3fdb4c6bd
+|
+LWebsite/flaskr/gestione_assistenza_utente/GestioneAssistenzaUtenteService.py,7\8\78a9bab0b136c95f6e8738081bb22dbef78d3e5c
+
+OWebsite/flaskr/gestione_assistenza_utente/GestioneAssistenzaUtenteController.py,d\3\d368693fb83510303fa1debd57b21e334b896e65
+j
+:Website/flaskr/gestione_utente/GestioneUtenteController.py,4\6\4614244b3438c9b432ad7648a49ca9bda1d7287e
+g
+7Website/flaskr/gestione_utente/GestioneUtenteService.py,d\c\dcad328cdcc3f63fb8078cdff0ab685a6420c124
+[
++Website/flaskr/gestione_vendita/__init__.py,8\9\896e13ff72efb4f40f5131e03a1fddc9cebea329
+l
+<Website/flaskr/gestione_vendita/GestioneVenditaController.py,6\0\60acee495375fde4b8c6128a0faa538b57efb433
