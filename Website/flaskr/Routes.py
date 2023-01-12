@@ -90,11 +90,11 @@ def mostra_alveari():
     return render_template('alveari_adottati.html')
 
 
-@views.route('/richiesta_assistenza_page')
+@views.route('/richiesta_assistenza_page/<int:id_apicoltore>')
 @login_required
-def richiesta_assistenza_page():
+def richiesta_assistenza_page(id_apicoltore):
     if not session['isApicoltore']:
-        return render_template('richiesta_assistenza.html')
+        return render_template('richiedi_assistenza.html',id_apicoltore=id_apicoltore)
     return home()
 
 

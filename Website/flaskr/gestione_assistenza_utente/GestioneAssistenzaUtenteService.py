@@ -24,6 +24,6 @@ def controlla_apicoltore(id_apicoltore):
     return False
 
 def richiedi_assistenza(nome, descrizione, id_apicoltore):
-    ticket = TicketAssistenza(id_cliente=current_user.id, id_apicoltore=id_apicoltore, nome=nome, descrizione=descrizione, data=datetime.datetime.now(), stato='Creato')
+    ticket = TicketAssistenza(id_cliente=current_user.id, id_apicoltore=id_apicoltore, nome=nome, descrizione=descrizione, data_inizio=datetime.datetime.now(), stato='Creato')
     db.session.add(ticket)
     db.session.commit()

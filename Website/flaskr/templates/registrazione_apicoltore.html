@@ -90,9 +90,7 @@
 
                             {% with messages = get_flashed_messages(category_filter=["error"]) %}
                             {% if messages %}
-                            {% for message in messages %}
-                            <p style="color:red">{{ message }}</p>
-                            {% endfor %}
+                            <p style="color:red">{{ messages[0] }}</p>
                             {% endif %}
                             {% endwith %}
 
