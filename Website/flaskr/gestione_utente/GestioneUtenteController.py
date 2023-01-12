@@ -1,5 +1,3 @@
-import re
-
 from flask import Blueprint, request, flash, session
 from flask_login import login_user, logout_user, login_required, current_user
 from werkzeug.security import check_password_hash, generate_password_hash
@@ -7,7 +5,7 @@ from werkzeug.security import check_password_hash, generate_password_hash
 from Website.flaskr.Routes import home, area_personale, modifica_dati_utente_page, login_page, \
     registrazione_page
 from Website.flaskr.gestione_utente.GestioneUtenteService import get_apicoltore_by_email, get_cliente_by_email, \
-    controlla_email_esistente, registra_cliente, registra_apicoltore, modifica_profilo_personale
+    controlla_email_esistente, registra_utente, modifica_profilo_personale
 from Website.flaskr.model.Apicoltore import Apicoltore
 from Website.flaskr.model.Cliente import Cliente
 
@@ -49,8 +47,6 @@ def login():
 def logout():
     logout_user()
     return home()
-
-
 
 
 @gu.route('/registrazione', methods=['GET', 'POST'])
@@ -104,15 +100,12 @@ def registrazione():
             return registrazione_page()
         if is_apicoltore:
             user = Apicoltore(nome=nome, cognome=cognome, indirizzo=indirizzo, citta=citta, cap=cap, telefono=telefono,
-                              email=email, assistenza=0,
-                              password=generate_password_hash(pwd, method='sha256'))
-            registra_apicoltore(user)
+                              email=email, assistenza=0, password=generate_password_hash(pwd, method='sha256'))
         else:
             user = Cliente(nome=nome, cognome=cognome, indirizzo=indirizzo, citta=citta, cap=cap, telefono=telefono,
-                           email=email, assistenza=0,
-                           password=generate_password_hash(pwd, method='sha256'))
-            registra_cliente(user)
+                           email=email, password=generate_password_hash(pwd, method='sha256'))
 
+        registra_utente(user)
         session['isApicoltore'] = is_apicoltore
         login_user(user)
     return home()
