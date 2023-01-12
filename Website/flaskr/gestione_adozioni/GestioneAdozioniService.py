@@ -31,9 +31,6 @@ def get_alveari():
     return Alveare.query.all()
 
 
-def get_AlveariByApicoltore(id_apicoltore):
-    lista = Alveare.query.filter_by(id_apicoltore=id_apicoltore).all()
-    return lista
 
 
 def decrementa_percentuale(id_alveare, percentuale):
@@ -48,7 +45,7 @@ def affitto_alveare(ticket, percentuale):
     db.session.commit()
     decrementa_percentuale(ticket.id_alveare, percentuale)
 
-def update_stato(id, covata_compatta, popolazione, polline, stato_cellette):
+def aggiorna_stato(id, covata_compatta, popolazione, polline, stato_cellette):
     alveare=get_alveare_by_id(id);
     alveare.covata_compatta=covata_compatta
     alveare.popolazione=popolazione

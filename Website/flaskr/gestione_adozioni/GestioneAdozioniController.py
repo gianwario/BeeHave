@@ -8,7 +8,7 @@ from werkzeug.utils import secure_filename
 from Website.flaskr import image_folder_absolute
 from Website.flaskr.Routes import mostra_alveari, home
 from Website.flaskr.gestione_adozioni.GestioneAdozioniService import inserisci_alveare, update_img_alveare, \
-    get_alveari_disponibili, get_alveare_by_id, affitto_alveare, get_ticket_adozione, update_stato
+    get_alveari_disponibili, get_alveare_by_id, affitto_alveare, get_ticket_adozione, aggiorna_stato
 from Website.flaskr.gestione_utente.GestioneUtenteService import get_apicoltore_by_id, get_cliente_by_id
 from Website.flaskr.model.Alveare import Alveare
 from Website.flaskr.model.TicketAdozione import TicketAdozione
@@ -80,7 +80,7 @@ def modifica_stato_alveare():
         polline = request.form.get('polline')
         stato_cellette = request.form.get('stato_cellette')
         alveare_id = request.form.get('alveare_id')
-        update_stato(alveare_id, covata_compatta, popolazione, polline, stato_cellette)
+        aggiorna_stato(alveare_id, covata_compatta, popolazione, polline, stato_cellette)
         flash('Stato alveare aggiornato correttamente', category='success')
         return render_template('/catalogo_alveari_disponibili.html')
     return mostra_alveari()
