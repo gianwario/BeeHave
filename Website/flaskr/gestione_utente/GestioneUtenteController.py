@@ -77,7 +77,7 @@ def registrazione_cliente():
                                     password=generate_password_hash(psw, method='sha256'),
                                     indirizzo=indirizzo, citta=citta, cap=cap, telefono=numtelefono)
 
-            registra_cliente(nuovo_cliente)
+            registra_cliente_db(nuovo_cliente)
             flash("Account creato con successo!", category="success")
             login_user(nuovo_cliente)
             return home()
@@ -130,11 +130,11 @@ def registra_apicoltore():
                           email=email, assistenza=0,
                           password=generate_password_hash(pwd, method='sha256'))
 
-        registra_apicoltore(user)
+        registra_apicoltore_db(user)
         flash("Account creato con successo!", category="success")
         login_user(user)
 
-    return registrazione_apicoltore_page()()
+    return registrazione_apicoltore_page()
 
 
 @gu.route('/modifica_dati_personali', methods=['GET', 'POST'])

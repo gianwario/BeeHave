@@ -26,12 +26,12 @@ def check_email_esistente(email):
         return True
 
 
-def registra_cliente(cliente):
+def registra_cliente_db(cliente):
     db.session.add(cliente)
     db.session.commit()
 
 
-def registra_apicoltore(utente):
+def registra_apicoltore_db(utente):
     db.session.add(utente)
     db.session.commit()
 
