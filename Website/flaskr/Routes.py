@@ -37,17 +37,11 @@ def inserimento_alveare_page():
     return home()
 
 
-@views.route('/registrazione_cliente')
-def registrazione_cliente_page():
-    if not current_user.is_authenticated:
-        return render_template('registrazione_cliente.html')
-    return home()
 
-
-@views.route('/registrazione_apicoltore')
-def registrazione_apicoltore_page():
+@views.route('/registrazione_page')
+def registrazione_page():
     if not current_user.is_authenticated:
-        return render_template('registrazione_apicoltore.html')
+        return render_template('registrazione.html')
     return home()
 
 

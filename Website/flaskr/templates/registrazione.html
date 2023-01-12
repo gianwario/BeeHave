@@ -27,7 +27,7 @@
                 <div class="card bg-glass" >
                     <div class="card-body px-4 py-5 px-md-5" >
 
-                        <form id="form" method="post" action="/registrazione_ap">
+                        <form id="form" method="post" action="/registrazione">
 
                             <div class="row">
                                 <div class="col-md-6 mb-4">
@@ -87,7 +87,13 @@
                                 <input type="password" name="cpwd"id="cpwd" class="form-control"placeholder="Confirm password"required />
                                 <label class="form-label" for="cpwd"></label>
                             </div>
+                            <div class="form-outline mb-4">
+                                <label class="form-label" for="apicoltore">Apicoltore</label>
+                                <input type="radio" name="isApicoltore" id="apicoltore" value="1"  checked />
+                                <label class="form-label" for="cliente" style="padding-left: 10px">Cliente</label>
+                                <input type="radio" name="isApicoltore" value="0" id="cliente" />
 
+                            </div>
                             {% with messages = get_flashed_messages(category_filter=["error"]) %}
                             {% if messages %}
                             <p style="color:red">{{ messages[0] }}</p>
