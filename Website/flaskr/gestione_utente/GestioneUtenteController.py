@@ -164,35 +164,35 @@ def modifica_dati_utente():
 
         if not 0 < len(nome) < 45:
             flash("Nome non valido", category="error")
-            return modifica_dati_utente_page()
+           
         elif not 0 < len(cognome) < 45:
             flash("Cognome non valido", category="error")
-            return modifica_dati_utente_page()
+           
         elif not 0 < len(indirizzo) <= 50:
             flash("Indirizzo non valido", category="error")
-            return modifica_dati_utente_page()
+          
         elif not 0 < len(citta) <= 45:
             flash("Città non valida", category="error")
-            return modifica_dati_utente_page()
+         
         elif not 0 < len(cap) <= 5:
             flash("CAP non valido", category="error")
-            return modifica_dati_utente_page()
+          
         elif not 0 < len(telefono) <= 10:
             flash("Numero telefono non valido", category="error")
-            return modifica_dati_utente_page()
+            
         elif not 0 < len(email) <= 45:
             flash("Email non valida", category="error")
-            return modifica_dati_utente_page()
+            
         elif not controlla_email_esistente(email) and email != current_user.email:
             flash("Email già esistente", category="error")
-            return modifica_dati_utente_page()
+
         elif psw != '':
             if len(psw) < 8:
                 flash("Lunghezza password deve essere almeno 8 caratteri", category="error")
-                return modifica_dati_utente_page()
+
             if not (controllo_caratteri_speciali(psw) and controllo_numeri(psw)):
                 flash("Inserire nel campo password almeno un carattere speciale ed un numero", category="error")
-                return modifica_dati_utente_page()
+              
             if psw != ripeti_psw:
                 flash("Password e Conferma Password non combaciano", category="error")
         else:
