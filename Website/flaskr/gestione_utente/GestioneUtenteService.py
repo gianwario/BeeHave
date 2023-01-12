@@ -14,6 +14,7 @@ def get_apicoltore_by_email(email):
 def get_apicoltore_by_id(id_api):
     return Apicoltore.query.filter_by(id=id_api).first()
 
+
 def get_cliente_by_id(id_cliente):
     return Cliente.query.filter_by(id=id_cliente).first()
 
@@ -44,14 +45,14 @@ def modifica_profilo_personale(nome, cognome, email, telefono, citta, cap, indir
         utente = get_apicoltore_by_id(current_user.id)
     else:
         utente = get_cliente_by_id(current_user.id)
-    utente.nome = nome
-    utente.cognome = cognome
-    utente.email = email
-    utente.telefono = telefono
-    utente.citta = citta
-    utente.cap = cap
-    utente.indirizzo = indirizzo
+    current_user.nome = utente.nome = nome
+    current_user.cognome = utente.cognome = cognome
+    current_user.email = utente.email = email
+    current_user.telefono = utente.telefono = telefono
+    current_user.citta = utente.citta = citta
+    current_user.cap = utente.cap = cap
+    current_user.indirizzo = utente.indirizzo = indirizzo
     if pwd != '':
-        utente.pwd = generate_password_hash(pwd, method='sha256')
+        current_user.password = utente.password = generate_password_hash(pwd, method='sha256')
 
     db.session.commit()
