@@ -1,3 +1,7 @@
+from flask import session
+from flask_login import current_user
+from werkzeug.security import generate_password_hash
+
 from Website.flaskr.model.Apicoltore import Apicoltore
 from Website.flaskr.model.Cliente import Cliente
 from .. import db
@@ -19,8 +23,8 @@ def get_cliente_by_email(email):
     return Cliente.query.filter_by(email=email).first()
 
 
-def check_email_esistente(email):
-    if Cliente.query.filter_by(email=email).first():
+def controlla_email_esistente(email):
+    if Cliente.query.filter_by(email=email).first() or Apicoltore.query.filter_by(email=email).first():
         return False
     else:
         return True
@@ -36,56 +40,20 @@ def registra_apicoltore(utente):
     db.session.commit()
 
 
-def modifica_profilo_personale(uid, nome, cognome, email, numtelefono):
-    cliente = get_cliente_by_id(uid)
-    if not cliente:
-        apicoltore = get_apicoltore_by_id(uid)
-        if not apicoltore:
-            print("Errore comunicazione con db")
-            return # errore comunicazione con db
-        else:
-            apicoltore.nome = nome
-            apicoltore.cognome = cognome
-            apicoltore.email = email
-            apicoltore.telefono = numtelefono
-            db.session.commit()
+
+def modifica_profilo_personale(nome, cognome, email, telefono, citta, cap, indirizzo, pwd):
+    if session['isApicoltore']:
+        utente = get_apicoltore_by_id(current_user.id)
     else:
-        cliente.nome = nome
-        cliente.cognome = cognome
-        cliente.email = email
-        cliente.telefono = numtelefono
-        db.session.commit()
+        utente = get_cliente_by_id(current_user.id)
+    current_user.nome = utente.nome = nome
+    current_user.cognome = utente.cognome = cognome
+    current_user.email = utente.email = email
+    current_user.telefono = utente.telefono = telefono
+    current_user.citta = utente.citta = citta
+    current_user.cap = utente.cap = cap
+    current_user.indirizzo = utente.indirizzo = indirizzo
+    if pwd != '':
+        current_user.password = utente.password = generate_password_hash(pwd, method='sha256')
 
-
-def modifica_residenza(uid, citta, cap, indirizzo):
-    cliente = get_cliente_by_id(uid)
-    if not cliente:
-        apicoltore = get_apicoltore_by_id(uid)
-        if not apicoltore:
-            print("Errore comunicazione con db")
-            return  #
-        else:
-            apicoltore.citta = citta
-            apicoltore.cap = cap
-            apicoltore.indirizzo = indirizzo
-            db.session.commit()
-    else:
-        cliente.citta = citta
-        cliente.cap = cap
-        cliente.indirizzo = indirizzo
-        db.session.commit()
-
-
-def modifica_password_db(uid, psw):
-    cliente = get_cliente_by_id(uid)
-    if not cliente:
-        apicoltore = get_apicoltore_by_id(uid)
-        if not apicoltore:
-            print("Errore comunicazione con db")
-            return  #
-        else:
-            apicoltore.password = psw
-            db.session.commit()
-    else:
-        cliente.password = psw
-        db.session.commit()
+    db.session.commit()
