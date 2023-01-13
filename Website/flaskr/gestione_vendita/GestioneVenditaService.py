@@ -1,25 +1,27 @@
+from flask_login import current_user
+
 from Website.flaskr.model.Prodotto import Prodotto
 from .. import db
 
 
-def getProdottoById(id):
+def get_prodotto_by_id(id):
     return Prodotto.query.filter_by(id=id).first()
 
 
-def updateImage(id, image):
-    prodotto = getProdottoById(id)
+def aggiorna_immagine(id, image):
+    prodotto = get_prodotto_by_id(id)
     prodotto.img_path = str(image)
     db.session.flush()
     db.session.commit()
 
 
-def deleteProdotto(prodotto_id):
-    prod = getProdottoById(prodotto_id)
+def cancella_prodotto(prodotto_id):
+    prod = get_prodotto_by_id(prodotto_id)
     db.session.delete(prod)
     db.session.commit()
 
 
-def getTuttiProdotti():
+def get_tutti_prodotti():
     return Prodotto.query.all()
 
 
@@ -28,18 +30,18 @@ def inserisci_prodotto(prodotto):
     db.session.commit()
 
 
-def decrementa_qnt(id_prodotto, qnt):
+def decrementa_quantita(id_prodotto, qnt):
     prod = Prodotto.query.filter_by(id=id_prodotto).first()
     prod.quantita -= int(qnt)
     db.session.flush()
     db.session.commit()
 
 
-def get_ProdottiByApicoltore(apicoltore_id):
-    return Prodotto.query.filter_by(id_apicoltore=apicoltore_id).all()
+def get_prodotti_by_apicoltore():
+    return Prodotto.query.filter_by(id_apicoltore=current_user.id).all()
 
 
 def acquisto_prodotto(acquisto, qnt):
     db.session.add(acquisto)
     db.session.commit()
-    decrementa_qnt(acquisto.id_prodotto, qnt)
+    decrementa_quantita(acquisto.id_prodotto, qnt)

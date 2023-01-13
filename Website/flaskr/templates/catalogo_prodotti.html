@@ -4,7 +4,9 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="{{url_for('static', filename='css/e-commerce_card.css')}}">
     {% extends "base.html"%}
-    {% block title %}Catalogo Prodotti{% endblock %}
+    <title>
+        {% block title %}Catalogo Prodotti{% endblock %}
+    </title>
 </head>
 <body>
 
@@ -16,7 +18,7 @@
     <!--For Row containing all card-->
     <div class="row">
 
-        {% for products in prods %}
+        {% for products in prodotti %}
         {% if products.quantita>0 %}
         <!--Card 1-->
         <div class="col-md-4">

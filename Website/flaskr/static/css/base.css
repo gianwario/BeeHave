@@ -1,0 +1,24 @@
+body{
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Track */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: hsl(25, 100%, 55%);
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #33383c;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}

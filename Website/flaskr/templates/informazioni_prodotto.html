@@ -4,7 +4,9 @@
 
     <link rel="stylesheet" href="{{url_for('static', filename='css/info_prod.css')}}">
     {% extends "base.html"%}
-    {% block title %}Informazioni Prodotto {% endblock %}
+    <title>
+        {% block title %}Informazioni Prodotto {% endblock %}
+    </title>
 </head>
 <body>
 {% block content %}
@@ -14,13 +16,13 @@
             <div class="col-md-6 border-end">
                 <div class="d-flex flex-column justify-content-center">
                     <div class="main_image"><img src="../static/images/{{prodotto.img_path}}" id="main_product_image"
-                                                 width="350"></div>
+                                                 width="350" alt=""></div>
 
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="p-3 right-side">
-                    <div class="d-flex justify-content-between align-items-center"><h3>{{prodotto.nome}}</h3>    </div>
+                    <div class="d-flex justify-content-between align-items-center"><h3>{{prodotto.nome}}</h3></div>
                     <div class="mt-2 pr-3 content"><p>{{prodotto.descrizione}}</p></div>
                     <p>Localitá di produzione: {{prodotto.localita}}</p>
                     <h3>€{{prodotto.prezzo}}</h3>
@@ -43,7 +45,6 @@
                                     value="1"
                                     max="{{prodotto.quantita}}"
                             />
-                            <input type="hidden" name="qnt_articolo" value="{{prodotto.quantita}}">
                             <input type="hidden" name="id_prd" value="{{prodotto.id}}">
 
                             <!-- Controllo per far effettuare acquisto solo al cliente -->

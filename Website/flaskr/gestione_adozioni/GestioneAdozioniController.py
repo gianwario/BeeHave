@@ -1,17 +1,17 @@
-import datetime
 import os
+from datetime import datetime
 
 from flask import Blueprint, request, session, flash, render_template
 from flask_login import login_required, current_user
 from werkzeug.utils import secure_filename
-from datetime import date
+
 from Website.flaskr import image_folder_absolute
-from Website.flaskr.Routes import inserimento_alveare_page, mostra_alveari
-from Website.flaskr.gestione_adozioni.GestioneAdozioniService import inserisci_alveare, update_imgAlveare, \
-    get_AlveariDisponibili, get_alveareById, affitto_alveare, get_Alveari, getTicket_adozione
+from Website.flaskr.Routes import mostra_alveari, home
+from Website.flaskr.gestione_adozioni.GestioneAdozioniService import inserisci_alveare, update_img_alveare, \
+    get_alveari_disponibili, get_alveare_by_id, affitto_alveare, get_ticket_adozione, aggiorna_stato
 from Website.flaskr.gestione_utente.GestioneUtenteService import get_apicoltore_by_id, get_cliente_by_id
-from Website.flaskr.model.TicketAdozione import TicketAdozione
 from Website.flaskr.model.Alveare import Alveare
+from Website.flaskr.model.TicketAdozione import TicketAdozione
 
 ga = Blueprint('ga', __name__)
 
@@ -57,29 +57,46 @@ def inserimento_alveare():
         path_image = os.path.join(image_folder_absolute, secure_filename(image.filename))
         image.save(path_image)
         os.rename(path_image, os.path.join(image_folder_absolute, nome_alv))
-        update_imgAlveare(alveare.id, nome_alv)
+        update_img_alveare(alveare.id, nome_alv)
         # TODO fixare formati immagini, non basta solo jpg
-    return mostra_alveari_disponibili(current_user.id)
+    return mostra_alveari_disponibili()
 
 
-@ga.route('/visualizza_alveari_disponibili/<int:apicoltore_id>', methods=['POST', 'GET'])
+@ga.route('/visualizza_alveari_disponibili', methods=['GET', 'POST'])
 @login_required
-def mostra_alveari_disponibili(apicoltore_id):
+def mostra_alveari_disponibili():
     if session['isApicoltore']:
-        alveari_disponibili = get_AlveariDisponibili(apicoltore_id)
+
+        alveari_disponibili = get_alveari_disponibili(current_user.id)
         return render_template('/catalogo_alveari_disponibili.html', alveari_disponibili=alveari_disponibili)
+
+
+@ga.route('/modifica_stato_alveare', methods=['GET', 'POST'])
+@login_required
+def modifica_stato_alveare():
+    if request.method=='POST' and session['isApicoltore']:
+        covata_compatta = int(request.form.get('covata_compatta'))
+        popolazione = request.form.get('popolazione')
+        polline = request.form.get('polline')
+        stato_cellette = request.form.get('stato_cellette')
+        alveare_id = request.form.get('alveare_id')
+        aggiorna_stato(alveare_id, covata_compatta, popolazione, polline, stato_cellette)
+        flash('Stato alveare aggiornato correttamente', category='success')
+        return render_template('/catalogo_alveari_disponibili.html')
+    return mostra_alveari()
+
 
 
 @ga.route('/informazioni_alveare/<int:alveare_id>', methods=['POST', 'GET'])
 def informazioni_alveare(alveare_id):
-    alveare = get_alveareById(alveare_id)
+    alveare = get_alveare_by_id(alveare_id)
     apicoltore = get_apicoltore_by_id(alveare.id_apicoltore)
     return render_template('informazioni_alveare.html', alveare=alveare, apicoltore=apicoltore)
 
 
-@ga.route('/affitta_alveare', methods=['POST', 'GET'])
+@ga.route('/adotta_alveare', methods=['POST', 'GET'])
 @login_required
-def affitta_alveare():
+def adotta_alveare():
     if request.method == 'POST' and not session['isApicoltore']:
         percentuale = int(request.form.get('disp'))
         id_alveare = int(request.form.get('id_alv'))
@@ -95,13 +112,15 @@ def affitta_alveare():
         affitto_alveare(ticket, percentuale)
         return mostra_alveari()
 
-@ga.route('/alveari_affittati/<int:apicoltore_id>', methods=['GET'])
-def mostra_alveari_affittati(apicoltore_id):
-    lista_clienti = []
-    #if not current_user.is_authenticated or not session['isApicoltore']:
-    alveari_affittati = getTicket_adozione(apicoltore_id)
-    for x in alveari_affittati:
-        lista_clienti.append(get_cliente_by_id(x.TicketAdozione.id_cliente))
 
-    return render_template('alveari_affittati.html', alveari_affittati=alveari_affittati, lista_clienti=lista_clienti)
-    #return home()
+@ga.route('/alveari_adottati/<int:apicoltore_id>', methods=['GET'])
+@login_required
+def mostra_alveari_adottati(apicoltore_id):
+    if not session['isApicoltore']:
+        lista_clienti = []
+        alveari_adottati = get_ticket_adozione(apicoltore_id)
+        for x in alveari_adottati:
+            lista_clienti.append(get_cliente_by_id(x.TicketAdozione.id_cliente))
+
+        return render_template('alveari_adottati.html', alveari_adottati=alveari_adottati, lista_clienti=lista_clienti)
+    return home()

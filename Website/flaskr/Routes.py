@@ -1,9 +1,10 @@
 from flask import render_template, Blueprint, session
 from flask_login import login_required, current_user
 
-from Website.flaskr.gestione_adozioni.GestioneAdozioniService import get_Alveari
-from Website.flaskr.gestione_vendita.GestioneVenditaService import getTuttiProdotti
-
+from Website.flaskr.gestione_adozioni.GestioneAdozioniService import get_alveari, get_alveari_from_apicoltore
+from Website.flaskr.gestione_assistenza_utente.GestioneAssistenzaUtenteService import get_assistenti, \
+    get_numero_ticket_assistenza_apicoltore
+from Website.flaskr.gestione_vendita.GestioneVenditaService import get_tutti_prodotti, get_prodotti_by_apicoltore
 
 views = Blueprint('views', __name__)
 
@@ -38,7 +39,7 @@ def inserimento_alveare_page():
 
 
 @views.route('/registrazione_cliente')
-def registrazione_cliente_page():  # typo, da cambiare
+def registrazione_cliente_page():
     if not current_user.is_authenticated:
         return render_template('registrazione_cliente.html')
     return home()
@@ -55,33 +56,25 @@ def registrazione_apicoltore_page():
 @login_required
 def area_personale():
     if session['isApicoltore']:
-        return render_template('areapersonale.html')
+        alveari=get_alveari_from_apicoltore(current_user.id)
+        ticket=get_numero_ticket_assistenza_apicoltore(current_user.id)
+        return render_template('areapersonale.html',alveari=alveari,ticket=ticket)
+
     return render_template('area_personale_cliente.html')
 
-
-@views.route('/catalogo_prod')
+@views.route('/catalogo_prodotti')
 def mostra_prodotti():
-    # if not current_user.is_authenticated or not session['isApicoltore']:
-    prods = getTuttiProdotti()
-    return render_template('catalogo_prodotti.html', prods=prods)
+    if not current_user.is_authenticated or not session['isApicoltore']:
+        prodotti = get_tutti_prodotti()
+        return render_template('catalogo_prodotti.html', prodotti=prodotti)
+    prodotti = get_prodotti_by_apicoltore()
+    return render_template('catalogo_prodotti_apicoltore.html', prodotti_in_vendita=prodotti)
 
 
-@views.route('/modifica_dati_personali')
+@views.route('/modifica_dati_utente_page')
 @login_required
-def modifica_dati_pers():
+def modifica_dati_utente_page():
     return render_template("modifica_dati_utente.html")
-
-
-@views.route('/modifica_residenza')
-@login_required
-def modifica_residenza():
-    return render_template("modifica_residenza.html")
-
-
-@views.route('/modifica_password')
-@login_required
-def modifica_psw():
-    return render_template("modifica_password.html")
 
 
 @views.route('/crea_area_assistenza_page')
@@ -92,9 +85,32 @@ def crea_area_assistenza_page():
     return home()
 
 
-@views.route('/catalogo_alveari', methods=['GET'])
+@views.route('/catalogo_alveari')
 def mostra_alveari():
-    # if not current_user.is_authenticated or not session['isApicoltore']:
-    alveari_disponibili = get_Alveari()
-    return render_template('catalogo_alveari.html', alveari_disponibili=alveari_disponibili)
-# return home()
+    if not current_user.is_authenticated or not session['isApicoltore']:
+        alveari_disponibili = get_alveari()
+        return render_template('catalogo_alveari.html', alveari_disponibili=alveari_disponibili)
+    return render_template('alveari_adottati.html')
+
+
+@views.route('/richiesta_assistenza_page/<int:id_apicoltore>')
+@login_required
+def richiesta_assistenza_page(id_apicoltore):
+    if not session['isApicoltore']:
+        return render_template('richiedi_assistenza.html', id_apicoltore=id_apicoltore)
+    return home()
+
+
+@views.route('/lista_assistenti')
+@login_required
+def mostra_lista_assistenti():
+    if not session['isApicoltore']:
+        assistenti = get_assistenti()
+        return render_template('lista_assistenti.html', assistenti=assistenti)
+    return home()
+
+
+@views.route('/modifica_stato_alveare_page/<int:alveare_id>')
+@login_required
+def modifica_stato(alveare_id):
+    return render_template('modifica_stato_alveare.html',alveare_id=alveare_id)
