@@ -1,1 +1,46 @@
-#success_message{ display: none;}
+.selector-for-some-widget {
+    box-sizing: content-box;
+    }
+.background-radial-gradient {
+    background-image: url("https://cdn.shopify.com/s/files/1/0651/3301/9380/files/shutterstock_1145847032_yellow.jpg?v=1657804991&width=1500");
+    background-size:cover;
+    }
+
+input[type=button], input[type=submit], input[type=reset] {
+     background-color: orange;
+     opacity: 70%;
+     border: none;
+     color: white;
+     padding: 7px 50px;
+     text-decoration: none;
+     margin: 4px 2px;
+     cursor: pointer;
+     }
+
+.bg-glass {
+    background-color: hsla(0, 0%, 100%, 0.9) !important;
+    backdrop-filter: saturate(600%) blur(25px);
+}
+
+
+#radius-shape-1 {
+    height: 220px;
+    width: 220px;
+    top: -60px;
+    left: -130px;
+    overflow: hidden;
+}
+
+#radius-shape-2 {
+    border-radius: 38% 62% 63% 37% / 70% 33% 67% 30%;
+    bottom: -60px;
+    right: -110px;
+    width: 300px;
+    height: 300px;
+    overflow: hidden;
+}
+
+.testo_bordato{
+ color: hsl(25, 100%, 55%);
+ text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
