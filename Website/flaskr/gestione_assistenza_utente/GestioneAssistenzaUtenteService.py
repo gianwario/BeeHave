@@ -34,3 +34,11 @@ def richiedi_assistenza(nome, descrizione, id_apicoltore):
                               descrizione=descrizione, data_inizio=datetime.datetime.now(), stato='Creato')
     db.session.add(ticket)
     db.session.commit()
+
+
+def get_numero_ticket_assistenza_apicoltore(id_apicoltore):
+    return len(TicketAssistenza.query.filter_by(id_apicoltore=id_apicoltore).all())
+
+
+def get_numero_ticket_assistenza_cliente(id_cliente):
+    return len(TicketAssistenza.query.filter_by(id_cliente=id_cliente).all())

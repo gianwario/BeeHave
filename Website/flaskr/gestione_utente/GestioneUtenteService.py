@@ -30,12 +30,7 @@ def controlla_email_esistente(email):
         return True
 
 
-def registra_cliente_db(cliente):
-    db.session.add(cliente)
-    db.session.commit()
-
-
-def registra_apicoltore_db(utente):
+def registra_utente(utente):
     db.session.add(utente)
     db.session.commit()
 
@@ -56,3 +51,4 @@ def modifica_profilo_personale(nome, cognome, email, telefono, citta, cap, indir
         current_user.password = utente.password = generate_password_hash(pwd, method='sha256')
 
     db.session.commit()
+    
