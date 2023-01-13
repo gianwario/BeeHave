@@ -79,8 +79,6 @@ def elimina_prodotto(id_prodotto, id_api):
         path = os.path.join(image_folder_absolute, prod.img_path)
         os.remove(path)
         cancella_prodotto(id_prodotto)
-        # prodotti_in_vendita = get_prodotti_by_apicoltore(id_api)
-        # return render_template('/catalogo_prodotti_apicoltore.html', prodotti_in_vendita=prodotti_in_vendita)
         return area_personale()
         # TODO fix refresh page
 

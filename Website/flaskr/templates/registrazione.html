@@ -1,21 +1,24 @@
 <!DOCTYPE html>
 <html lang="it">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="{{url_for('static', filename='css/form.css')}}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/form.css')}}">
     {% extends "base.html"%}
-    {% block title %}Registrazione{% endblock %}
-    </head>
-    <body >
- {% block content %}
- <!-- Section: Design Block -->
-<section class="background-radial-gradient overflow-hidden" style="background-image: url('https://images.unsplash.com/photo-1590334280249-a8f0c9f46a1b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8YXBpY3VsdHVyYXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=900&q=60')">
+    <title>
+        {% block title %}Registrazione{% endblock %}
+    </title>
+</head>
+<body>
+{% block content %}
+<!-- Section: Design Block -->
+<section class="background-radial-gradient overflow-hidden"
+         style="background-image: url('https://images.unsplash.com/photo-1590334280249-a8f0c9f46a1b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8YXBpY3VsdHVyYXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=900&q=60')">
     <div class="container px-4 py-5 px-md-5 text-hight text-lg-start my-5">
         <div class="row gx-lg-5 align-items-high mb-5">
             <div class="col-lg-6 mb-5 mb-lg-0" style="z-index: 10">
                 <h1 class="my-5 display-5 fw-bold ls-tight" style="color:black">
-                    Sei un apicoltore? <br />
+                    Sei un apicoltore? <br/>
                     <span style="color: hsl(25, 100%, 55%)">Vuoi entrare a far parte del team di BeeHave?</span>
                 </h1>
                 <p class="mb-4 opacity-70" style="color: white">
@@ -24,21 +27,23 @@
                 </p>
             </div>
             <div class="col-lg-6 mb-5 mb-lg-0 position-relative">
-                <div class="card bg-glass" >
-                    <div class="card-body px-4 py-5 px-md-5" >
+                <div class="card bg-glass">
+                    <div class="card-body px-4 py-5 px-md-5">
 
                         <form id="form" method="post" action="/registrazione">
 
                             <div class="row">
                                 <div class="col-md-6 mb-4">
                                     <div class="form-outline">
-                                        <input type="text" name="nome" id="nome" class="form-control "placeholder="Nome" required/>
+                                        <input type="text" name="nome" id="nome" class="form-control "
+                                               placeholder="Nome" required/>
                                         <label class="form-label" for="nome"></label>
                                     </div>
                                 </div>
                                 <div class="col-md-6 mb-4">
                                     <div class="form-outline">
-                                        <input type="text" name="cognome" id="cognome" class="form-control"placeholder="Cognome"required />
+                                        <input type="text" name="cognome" id="cognome" class="form-control"
+                                               placeholder="Cognome" required/>
                                         <label class="form-label" for="cognome"></label>
                                     </div>
                                 </div>
@@ -46,7 +51,8 @@
                             <div class="row">
                                 <div class="col-md-6 mb-4">
                                     <div class="form-outline">
-                                        <input type="text" name="citta" id="citta" class="form-control"placeholder="Città"required />
+                                        <input type="text" name="citta" id="citta" class="form-control"
+                                               placeholder="Città" required/>
                                         <label class="form-label" for="citta"></label>
                                     </div>
                                 </div>
@@ -60,7 +66,8 @@
                             <div class="row">
                                 <div class="col-md-6 mb-4">
                                     <div class="form-outline">
-                                        <input type="text" name="cap" id="cap" class="form-control" placeholder="CAP"required/>
+                                        <input type="text" name="cap" id="cap" class="form-control" placeholder="CAP"
+                                               required/>
                                         <label class="form-label" for="cap"></label>
                                     </div>
                                 </div>

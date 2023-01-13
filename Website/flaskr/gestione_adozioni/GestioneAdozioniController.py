@@ -1,5 +1,5 @@
-import datetime
 import os
+from datetime import datetime
 
 from flask import Blueprint, request, session, flash, render_template
 from flask_login import login_required, current_user
@@ -8,7 +8,7 @@ from werkzeug.utils import secure_filename
 from Website.flaskr import image_folder_absolute
 from Website.flaskr.Routes import mostra_alveari, home
 from Website.flaskr.gestione_adozioni.GestioneAdozioniService import inserisci_alveare, update_img_alveare, \
-    get_alveari_disponibili, get_alveare_by_id, affitto_alveare, get_ticket_adozione
+    get_alveari_disponibili, get_alveare_by_id, affitto_alveare, get_ticket_adozione, aggiorna_stato
 from Website.flaskr.gestione_utente.GestioneUtenteService import get_apicoltore_by_id, get_cliente_by_id
 from Website.flaskr.model.Alveare import Alveare
 from Website.flaskr.model.TicketAdozione import TicketAdozione
@@ -59,15 +59,32 @@ def inserimento_alveare():
         os.rename(path_image, os.path.join(image_folder_absolute, nome_alv))
         update_img_alveare(alveare.id, nome_alv)
         # TODO fixare formati immagini, non basta solo jpg
-    return mostra_alveari_disponibili(current_user.id)
+    return mostra_alveari_disponibili()
 
 
-@ga.route('/visualizza_alveari_disponibili/<int:apicoltore_id>', methods=['POST', 'GET'])
+@ga.route('/visualizza_alveari_disponibili', methods=['GET', 'POST'])
 @login_required
-def mostra_alveari_disponibili(apicoltore_id):
+def mostra_alveari_disponibili():
     if session['isApicoltore']:
-        alveari_disponibili = get_alveari_disponibili(apicoltore_id)
+
+        alveari_disponibili = get_alveari_disponibili(current_user.id)
         return render_template('/catalogo_alveari_disponibili.html', alveari_disponibili=alveari_disponibili)
+
+
+@ga.route('/modifica_stato_alveare', methods=['GET', 'POST'])
+@login_required
+def modifica_stato_alveare():
+    if request.method=='POST' and session['isApicoltore']:
+        covata_compatta = int(request.form.get('covata_compatta'))
+        popolazione = request.form.get('popolazione')
+        polline = request.form.get('polline')
+        stato_cellette = request.form.get('stato_cellette')
+        alveare_id = request.form.get('alveare_id')
+        aggiorna_stato(alveare_id, covata_compatta, popolazione, polline, stato_cellette)
+        flash('Stato alveare aggiornato correttamente', category='success')
+        return render_template('/catalogo_alveari_disponibili.html')
+    return mostra_alveari()
+
 
 
 @ga.route('/informazioni_alveare/<int:alveare_id>', methods=['POST', 'GET'])

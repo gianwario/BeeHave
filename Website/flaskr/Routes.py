@@ -1,8 +1,9 @@
 from flask import render_template, Blueprint, session
 from flask_login import login_required, current_user
 
-from Website.flaskr.gestione_adozioni.GestioneAdozioniService import get_alveari
-from Website.flaskr.gestione_assistenza_utente.GestioneAssistenzaUtenteService import get_assistenti
+from Website.flaskr.gestione_adozioni.GestioneAdozioniService import get_alveari, get_alveari_from_apicoltore
+from Website.flaskr.gestione_assistenza_utente.GestioneAssistenzaUtenteService import get_assistenti, \
+    get_numero_ticket_assistenza_apicoltore
 from Website.flaskr.gestione_vendita.GestioneVenditaService import get_tutti_prodotti, get_prodotti_by_apicoltore
 
 views = Blueprint('views', __name__)
@@ -49,9 +50,11 @@ def registrazione_page():
 @login_required
 def area_personale():
     if session['isApicoltore']:
-        return render_template('areapersonale.html')
-    return render_template('area_personale_cliente.html')
+        alveari=get_alveari_from_apicoltore(current_user.id)
+        ticket=get_numero_ticket_assistenza_apicoltore(current_user.id)
+        return render_template('areapersonale.html',alveari=alveari,ticket=ticket)
 
+    return render_template('area_personale_cliente.html')
 
 @views.route('/catalogo_prodotti')
 def mostra_prodotti():
@@ -99,3 +102,9 @@ def mostra_lista_assistenti():
         assistenti = get_assistenti()
         return render_template('lista_assistenti.html', assistenti=assistenti)
     return home()
+
+
+@views.route('/modifica_stato_alveare_page/<int:alveare_id>')
+@login_required
+def modifica_stato(alveare_id):
+    return render_template('modifica_stato_alveare.html',alveare_id=alveare_id)

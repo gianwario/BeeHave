@@ -53,6 +53,7 @@ def create_app():
         else:
             return Cliente.Cliente.query.filter_by(email=email).first()
 
+
     @app.errorhandler(401)
     def unauthorized_user(e):
         # note that we set the 401 status explicitly

@@ -3,7 +3,9 @@
 <head>
     <link rel="stylesheet" href="{{url_for('static', filename='css/home.css')}}">
     {% extends "base.html"%}
-    {% block title %}Home{% endblock %}
+    <title>
+        {% block title %}Home{% endblock %}
+    </title>
 </head>
 <body>
 {% block content %}
@@ -80,8 +82,7 @@
         <span class="visually-hidden">Next</span>
     </button>
 </div>
-<br><br><br>
-<br>
+<br><br><br><br><br>
 <section class="dishes">
     <h2>Community BeeHave</h2>
     <br>
@@ -98,41 +99,73 @@
              alt="Dish of vegetables"/>
 
     </div>
-</section>
-<br><br><br><br><br><br><br><br><br><br><br><br><br>
-<section class="hero">
-    <div class="info">
-        <h1>Un preziosissimo lavoro</h1>
-        <p>Il ruolo che rivestono le api nel nostro ecosistema è centrale, soprattutto in virtù del loro inestimabile
-            lavoro di impollinazione. Volando di fiore in fiore alla ricerca del nettare, api e altri insetti
-            impollinatori diventano dei veri e propri agenti di biodiversità. Le piante che si affidano
-            all’impollinazione entomofila (ovvero resa possibile dagli insetti) sono tantissime. Le stime parlando di
-            quasi il 90% delle piante selvatiche e il 75% delle colture a scopo alimentare. Non è quindi un’esagerazione
-            dire che, se non ci fossero più le api, non potremmo più mangiare la maggior parte del cibo che troviamo
-            tutti i giorni sulla nostra tavola. Anche la produzione di carne e dei prodotti derivanti dal latte
-            subirebbe un calo significativo. Come mai? In realtà la risposta è semplicissima. Una gran parte delle
-            piante foraggere, ovvero utilizzate per nutrire le bestie da allevamento, sono impollinate dalle api.</p>
+  </section>
+<div class="projcard-container">
 
-    </div>
-    <img class="hero-image" src="../static/images/img3.jpeg" alt="Dish with spaghetti and vegetable"/>
-</section>
-<br><br><br><br><br><br><br><br>
+    	<div class="projcard projcard-orange">
+		<div class="projcard-innerbox">
+			<img class="projcard-img" src="../static/images/img2.jpg" />
+			<div class="projcard-textbox">
+				<div class="projcard-title">Le cause che minacciano la sopravvivenza delle api</div>
+				<div class="projcard-bar"></div>
+				<div class="projcard-description">Ma quali sono le cause di questo declino che sembra essere inarrestabile? In realtà sono molte,
+          ma possiamo comunque individuare le principali. Malattie e parassiti, come la Varroa Destructor, cambiamenti climatici,
+          impoverimento degli habitat naturali, pratiche di agricoltura intensiva, uso massiccio di pesticidi, erbicidi e fungicidi.
+          Ognuno di questi fenomeni segna giorno dopo giorno il lento declino della popolazione delle api, che si trovano ormai
+          in una situazione di alto pericolo.</div>
+			</div>
+		</div>
+	</div>
+	<div class="projcard projcard-yellow">
+		<div class="projcard-innerbox">
+			<img class="projcard-img" src="../static/images/img3.jpeg" />
+			<div class="projcard-textbox">
+				<div class="projcard-title">Un preziosissimo lavoro</div>
+				<div class="projcard-bar"></div>
+				<div class="projcard-description">Il ruolo che rivestono le api nel nostro ecosistema
+          è centrale, soprattutto in virtù del loro inestimabile lavoro
+          di impollinazione. Volando di fiore in fiore alla ricerca del nettare,
+          api e altri insetti impollinatori diventano dei veri e propri agenti di
+          biodiversità. Le piante che si affidano all’impollinazione entomofila
+          (ovvero resa possibile dagli insetti) sono tantissime. Le stime parlando
+          di quasi il 90% delle piante selvatiche e il 75% delle colture a scopo alimentare.
+          Non è quindi un’esagerazione dire che, se non ci fossero più le api, non potremmo più
+          mangiare la maggior parte del cibo che troviamo tutti i giorni sulla nostra tavola. Anche la produzione
+          i carne e dei prodotti derivanti dal latte subirebbe un calo significativo. Come mai? In realtà la risposta
+          è semplicissima. Una gran parte delle piante foraggere, ovvero utilizzate per nutrire le bestie da allevamento,
+          sono impollinate dalle api.</div>
+			</div>
+		</div>
+	</div>
 
 
-<section class="hero">
+    <div class="projcard projcard-orange">
+		<div class="projcard-innerbox">
+			<img class="projcard-img" src="../static/images/img4.jpg" />
+			<div class="projcard-textbox">
+				<div class="projcard-title">Adotta un alveare e proteggi le sue api</div>
+				<div class="projcard-bar"></div>
+				<div class="projcard-description">Adotta un alveare e proteggi le sue api
+                    Una delle iniziative più alla portata di tutti è sicuramente l’adozione di un alveare.
+                    Ma in cosa consiste? Grazie alla tecnologia BeeHave, potrai scegliere un alveare monitorato a distanza
+                    e adottarlo per un anno interno. In questo modo potrai seguire direttamente dal tuo cellulare lo sviluppo
+                    e la crescita delle api e seguirle passo passo durante la stagione produttiva, quando la famiglia cresce
+                    al massimo delle sue possibilità e arriva il momento di estrarre il loro prezioso miele. Non solo,
+                    potrai anche vedere come si preparano all’inverno e come l’apicoltore se ne prende cura nel caso non
+                    avessero abbastanza nutrimento per sopravvivere fino alla primavera. Proprio per poterti avvicinare ancora
+                    di più alla realtà dell’alveare e dell’apicoltura da te scelti, a fine stagione apistica riceverai a casa tua
+                    il miele prodotto dalle “tue” api. Potrai sceglierlo in base alle tipologie che vengono prodotte
+                    in ciascun luogo.</div>
+			</div>
+		</div>
+	</div>
+</div>
 
-    <img class="hero-image" src="../static/images/img2.jpeg" alt="Dish with spaghetti and vegetable"/>
-    <div class="info">
-        <h1>Le cause che minacciano la sopravvivenza delle api</h1>
-        <p> Ma quali sono le cause di questo declino che sembra essere inarrestabile? In realtà sono molte, ma possiamo
-            comunque individuare le principali. Malattie e parassiti, come la Varroa Destructor, cambiamenti climatici,
-            impoverimento degli habitat naturali, pratiche di agricoltura intensiva, uso massiccio di pesticidi,
-            erbicidi e fungicidi. Ognuno di questi fenomeni segna giorno dopo giorno il lento declino della popolazione
-            delle api, che si trovano ormai in una situazione di alto pericolo.</p>
 
-    </div>
-</section>
-<br><br><br><br><br><br><br><br>
+<br><br><br><br>
+
+
+
 <div class="d-flex justify-content-center">
     <h1>Hai bisogno di aiuto?</h1>
 </div>

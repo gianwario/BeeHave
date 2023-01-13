@@ -94,8 +94,8 @@ def modifica_dati_utente():
         citta = request.form.get('nuova_citta')
         cap = request.form.get('nuovo_cap')
         indirizzo = request.form.get('nuovo_indirizzo')
-        pwd = request.form.get('nuova_psw')
-        cpwd = request.form.get('nuova_ripeti_psw')
+        psw = request.form.get('nuova_psw')
+        ripeti_psw = request.form.get('nuova_ripeti_psw')
 
         if controlla_campi(nome, cognome, indirizzo, citta, cap, telefono, email):
             if not controlla_email_esistente(email) and email != current_user.email:
