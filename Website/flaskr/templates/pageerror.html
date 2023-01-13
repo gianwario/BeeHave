@@ -4,6 +4,10 @@
 
     <link rel="stylesheet" href="{{url_for('static', filename='css/404page.css')}}">
     {% extends "base.html"%}
+    <title>
+        {% block title %}Pagina Errore {% endblock %}
+    </title>
+
 </head>
 
 <body>

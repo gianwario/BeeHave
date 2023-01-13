@@ -24,19 +24,19 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 
 <div class="container bootstrap snippets bootdey">
-<div class="row">
+    <div class="row">
 
-  <div class="profile-nav col-md-3">
-      <div class="panel">
-          <div class="user-heading round">
-              <a href="#">
-                  <img src="../static/images/um1.webp" alt="">
-              </a>
-              <h1>{{current_user.nome}}</h1>
-              <p>{{current_user.email}}</p>
-          </div>
+        <div class="profile-nav col-md-3">
+            <div class="panel">
+                <div class="user-heading round">
+                    <a href="#">
+                        <img src="../static/images/um1.webp" alt="">
+                    </a>
+                    <h1>{{current_user.nome}}</h1>
+                    <p>{{current_user.email}}</p>
+                </div>
 
-          <ul class="nav nav-pills nav-stacked">
+ <ul class="nav nav-pills nav-stacked">
               <li class="active"><a href="#"> <i class="fa fa-user"></i> Profile</a></li>
               <li><a href="{{url_for('views.crea_area_assistenza_page')}}"> <i class="fa fa-calendar"></i> {% if current_user.assistenza%} Visualizza le tue richieste di assistenza <span class="label label-warning pull-right r-activity">{{ticket}} </span>{%else%}Crea area assistenza{%endif%}  </a></li>
               <li><a href="{{url_for('views.modifica_dati_utente_page')}}"> <i class="fa fa-user"></i> Modifica Account</a></li>
@@ -45,7 +45,7 @@
   </div>
   <div class="profile-info col-md-9">
 
-      <div class="panel">
+            <div class="panel">
 
           <div class="panel-body bio-graph-info">
               <h1>I tuoi dati</h1>
@@ -84,8 +84,8 @@
           </div>
       </div>
 
-  </div>
-</div>
+        </div>
+    </div>
 </div>
 <br><br>
  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
