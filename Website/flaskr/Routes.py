@@ -38,7 +38,6 @@ def inserimento_alveare_page():
     return home()
 
 
-
 @views.route('/registrazione_page')
 def registrazione_page():
     if not current_user.is_authenticated:
@@ -50,11 +49,12 @@ def registrazione_page():
 @login_required
 def area_personale():
     if session['isApicoltore']:
-        alveari=get_alveari_from_apicoltore(current_user.id)
-        ticket=get_numero_ticket_assistenza_apicoltore(current_user.id)
-        return render_template('areapersonale.html',alveari=alveari,ticket=ticket)
+        alveari = get_alveari_from_apicoltore(current_user.id)
+        ticket = get_numero_ticket_assistenza_apicoltore(current_user.id)
+        return render_template('areapersonale.html', alveari=alveari, ticket=ticket)
 
     return render_template('area_personale_cliente.html')
+
 
 @views.route('/catalogo_prodotti')
 def mostra_prodotti():
@@ -107,4 +107,10 @@ def mostra_lista_assistenti():
 @views.route('/modifica_stato_alveare_page/<int:alveare_id>')
 @login_required
 def modifica_stato(alveare_id):
-    return render_template('modifica_stato_alveare.html',alveare_id=alveare_id)
+    return render_template('modifica_stato_alveare.html', alveare_id=alveare_id)
+
+
+@views.route('/lista_ticket_assistenza')
+@login_required
+def mostra_lista_ticket_assistenza():
+    return render_template('ticket_assistenza.html')

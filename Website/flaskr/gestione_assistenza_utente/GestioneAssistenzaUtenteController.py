@@ -1,9 +1,9 @@
-from flask import Blueprint, request, flash, session
+from flask import Blueprint, request, flash, session, render_template
 from flask_login import login_required, current_user
 
 from Website.flaskr.Routes import crea_area_assistenza_page, area_personale, home, richiesta_assistenza_page
 from Website.flaskr.gestione_assistenza_utente.GestioneAssistenzaUtenteService import inserisci_area_assistenza, \
-    controlla_apicoltore, richiedi_assistenza
+    controlla_apicoltore, richiedi_assistenza, get_ticket_assistenza_by_apicoltore, get_ticket_assistenza_by_cliente
 
 gau = Blueprint('gau', __name__)
 
@@ -17,8 +17,8 @@ def crea_area_assistenza():
         if not 0 < len(descrizione) <= 200:
             flash('La lunghezza della descrizione non è valida!', category='error')
             return crea_area_assistenza_page()
-        current_user.descrizione=descrizione
-        current_user.assistenza=assistenza
+        current_user.descrizione = descrizione
+        current_user.assistenza = assistenza
         inserisci_area_assistenza(descrizione, assistenza)
 
     return area_personale()
@@ -46,3 +46,16 @@ def richiesta_assistenza():
         return home()
 
     return richiesta_assistenza_page()
+
+
+@gau.route('/visualizza_richieste_assistenza', methods=['POST', 'GET'])
+@login_required
+def visualizza_richieste_assistenza():
+    if session['isApicoltore']:
+        ticket_assistenza = get_ticket_assistenza_by_apicoltore(current_user.id)
+        return render_template('/ticket_assistenza.html', ticket_assistenza_ap=ticket_assistenza)
+    else:
+        ticket_assistenza = get_ticket_assistenza_by_cliente(current_user.id)
+        return render_template('/ticket_assistenza.html', ticket_assistenza_cl=ticket_assistenza)
+
+

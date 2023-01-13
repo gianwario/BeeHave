@@ -51,4 +51,3 @@ def modifica_profilo_personale(nome, cognome, email, telefono, citta, cap, indir
         current_user.password = utente.password = generate_password_hash(pwd, method='sha256')
 
     db.session.commit()
-    
