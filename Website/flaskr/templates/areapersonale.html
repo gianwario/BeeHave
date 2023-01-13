@@ -5,17 +5,17 @@
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
 
     {% extends "base.html"%}
+    <title>
         {% block title %}Area Personale{% endblock %}
-
-
+    </title>
 
 </head>
 <body>
- {% block content %}
+{% block content %}
 <br><br><br>
- <!-- Latest compiled and minified CSS -->
+<!-- Latest compiled and minified CSS -->
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 
 <!-- Optional theme -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
@@ -30,103 +30,109 @@
             <div class="panel">
                 <div class="user-heading round">
                     <a href="#">
-                        <img src="../static/images/um1.webp" alt="">
+                        <img class="avatar" src="../static/images/{{current_user.img_profilo}}"
+                             alt="../static/images/beekeeper.png">
                     </a>
                     <h1>{{current_user.nome}}</h1>
                     <p>{{current_user.email}}</p>
                 </div>
 
- <ul class="nav nav-pills nav-stacked">
-              <li class="active"><a href="#"> <i class="fa fa-user"></i> Profile</a></li>
-              <li><a href="{{url_for('views.crea_area_assistenza_page')}}"> <i class="fa fa-calendar"></i> {% if current_user.assistenza%} Visualizza le tue richieste di assistenza <span class="label label-warning pull-right r-activity">{{ticket}} </span>{%else%}Crea area assistenza{%endif%}  </a></li>
-              <li><a href="{{url_for('views.modifica_dati_utente_page')}}"> <i class="fa fa-user"></i> Modifica Account</a></li>
-          </ul>
-      </div>
-  </div>
-  <div class="profile-info col-md-9">
+                <ul class="nav nav-pills nav-stacked">
+                    <li class="active"><a href="#"> <i class="fa fa-user"></i> Profile</a></li>
+                    <li><a href="{{url_for('views.crea_area_assistenza_page')}}"> <i class="fa fa-calendar"></i> {% if
+                        current_user.assistenza%} Visualizza le tue richieste di assistenza <span
+                                class="label label-warning pull-right r-activity">{{ticket}} </span>{%else%}Crea area
+                        assistenza{%endif%} </a></li>
+                    <li><a href="{{url_for('views.modifica_dati_utente_page')}}"> <i class="fa fa-user"></i> Modifica
+                        Account</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="profile-info col-md-9">
 
             <div class="panel">
 
-          <div class="panel-body bio-graph-info">
-              <h1>I tuoi dati</h1>
-              <br><br>
+                <div class="panel-body bio-graph-info">
+                    <h1>I tuoi dati</h1>
+                    <br><br>
 
-              <div class="row">
-                  <div class="bio-row">
-                      <p><span>Nome </span>: {{current_user.nome}}</p>
-                  </div>
-                  <div class="bio-row">
-                      <p><span>Cognome </span>: {{current_user.cognome}}</p>
-                  </div>
-                  <div class="bio-row">
-                      <p><span>Città </span>: {{current_user.citta}}</p>
-                  </div>
-                  <div class="bio-row">
-                      <p><span>Indirizzo</span>: {{current_user.indirizzo}}</p>
-                  </div>
-                  <div class="bio-row">
-                      <p><span>CAP </span>: {{current_user.cap}}</p>
-                  </div>
-                  <div class="bio-row">
-                      <p><span>Email </span>: {{current_user.email}}</p>
-                  </div>
-                  <div class="bio-row">
-                      <p><span>Numero di telefono </span>: {{current_user.telefono}}</p>
-                  </div>
+                    <div class="row">
+                        <div class="bio-row">
+                            <p><span>Nome </span>: {{current_user.nome}}</p>
+                        </div>
+                        <div class="bio-row">
+                            <p><span>Cognome </span>: {{current_user.cognome}}</p>
+                        </div>
+                        <div class="bio-row">
+                            <p><span>Città </span>: {{current_user.citta}}</p>
+                        </div>
+                        <div class="bio-row">
+                            <p><span>Indirizzo</span>: {{current_user.indirizzo}}</p>
+                        </div>
+                        <div class="bio-row">
+                            <p><span>CAP </span>: {{current_user.cap}}</p>
+                        </div>
+                        <div class="bio-row">
+                            <p><span>Email </span>: {{current_user.email}}</p>
+                        </div>
+                        <div class="bio-row">
+                            <p><span>Numero di telefono </span>: {{current_user.telefono}}</p>
+                        </div>
 
-                  <br><br>
+                        <br><br>
 
-                  <ul class="nav nav-pills nav-stacked">
-                     </ul>
+                        <ul class="nav nav-pills nav-stacked">
+                        </ul>
 
-                  <br><br>
-              </div>
-          </div>
-      </div>
+                        <br><br>
+                    </div>
+                </div>
+            </div>
 
         </div>
     </div>
 </div>
 <br><br>
- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
 
 
 <div class="container">
-        <div class="row justify-content-center">
+    <div class="row justify-content-center">
 
-            <!-- Section Heading-->
-            <div class="section_heading text-center wow fadeInUp" data-wow-delay="0.2s" style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;">
-              <h1> I tuoi alveari</h1>
-<br><br>
-          </div>
+        <!-- Section Heading-->
+        <div class="section_heading text-center wow fadeInUp" data-wow-delay="0.2s"
+             style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;">
+            <h1> I tuoi alveari</h1>
+            <br><br>
         </div>
+    </div>
 
-        <div class="row">
+    <div class="row">
+        {% for alveare in alveari %}
+        <!-- Single Advisor-->
+        <div class="col-12 col-sm-6 col-lg-3">
+            <div class="single_advisor_profile wow fadeInUp" data-wow-delay="0.2s"
+                 style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;">
+                <!-- Team Thumb-->
+                <div class="advisor_thumb"><img src="../static/images/{{alveare.img_path}}" alt="">
+                    <!-- Social Info-->
 
-    {% for alveare in alveari %}
-
-          <!-- Single Advisor-->
-          <div class="col-12 col-sm-6 col-lg-3">
-            <div class="single_advisor_profile wow fadeInUp" data-wow-delay="0.2s" style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;">
-              <!-- Team Thumb-->
-              <div class="advisor_thumb"><img src="../static/images/{{alveare.img_path}}" alt="">
-                <!-- Social Info-->
-
-              </div>
-              <!-- Team Details-->
-              <div class="single_advisor_details_info">
-                <h4 class="card-title"><strong><a href="{{url_for('ga.informazioni_alveare', alveare_id=alveare.id)}}">{{alveare.nome}}</a></strong></h4>
-                <br>
-                  <p class="price">Prezzo: €{{alveare.prezzo}}</p>
-              </div>
+                </div>
+                <!-- Team Details-->
+                <div class="single_advisor_details_info">
+                    <h4 class="card-title"><strong><a
+                            href="{{url_for('ga.informazioni_alveare', alveare_id=alveare.id)}}">{{alveare.nome}}</a></strong>
+                    </h4>
+                    <br>
+                    <p class="price">Prezzo: €{{alveare.prezzo}}</p>
+                </div>
             </div>
-          </div>
-
-             {%endfor%}
-       </div>
         </div>
+        {%endfor%}
+    </div>
+</div>
 
-      </div>
+</div>
 {% endblock %}
 </body>
 

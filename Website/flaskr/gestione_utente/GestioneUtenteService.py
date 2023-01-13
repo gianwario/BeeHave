@@ -19,6 +19,16 @@ def get_cliente_by_id(id_cliente):
     return Cliente.query.filter_by(id=id_cliente).first()
 
 
+def aggiorna_avatar(id, img):
+    if session['isApicoltore']:
+        utente = get_apicoltore_by_id(current_user.id)
+    else:
+        utente = get_cliente_by_id(current_user.id)
+    utente.img_profilo = str(img)
+    db.session.flush()
+    db.session.commit()
+
+
 def get_cliente_by_email(email):
     return Cliente.query.filter_by(email=email).first()
 
@@ -40,6 +50,7 @@ def modifica_profilo_personale(nome, cognome, email, telefono, citta, cap, indir
         utente = get_apicoltore_by_id(current_user.id)
     else:
         utente = get_cliente_by_id(current_user.id)
+
     current_user.nome = utente.nome = nome
     current_user.cognome = utente.cognome = cognome
     current_user.email = utente.email = email

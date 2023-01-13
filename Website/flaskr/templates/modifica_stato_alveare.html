@@ -1,11 +1,13 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 
     <meta charset="UTF-8">
-     <meta name="viewport" content="width=device-width, initial-scale=1">
-        {% extends "base.html" %}
-    {%block title%}Modifica Stato Alveare{%endblock%}
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% extends "base.html" %}
+    <title>
+        {%block title%}Modifica Stato Alveare{%endblock%}
+    </title>
 </head>
 <body>
 {% block content%}
@@ -55,58 +57,53 @@
                 <div class="card bg-glass">
           <div class="card-body px-4 py-5 px-md-5">
 
-               <form action="/modifica_stato_alveare" enctype="multipart/form-data" method="post">
+<form action="/modifica_stato_alveare" enctype="multipart/form-data" method="post">
 
-                   <input type="hidden" name="alveare_id" value="{{alveare_id}}">
-                   <label for="covata_compatta">La covata è compatta?</label><br>
-                    <input type="radio" id="covata_compatta" name="covata_compatta" value="1">
-                    <label for="covata_compatta">si</label>
-                    <input type="radio" id="covata_compatta2" name="covata_compatta" value="0">
-                    <label for="covata_compatta">no</label>
-                    <br>
-                   <br>
-                      <label for="popolazione">Inserisci stato popolazione: </label><br>
-                    <input type="radio" id="popolazione" name="popolazione" value="scarso">
-                    <label for="popolazione">scarso</label>
-                    <input type="radio" id="popolazione2" name="popolazione" value="medio">
-                    <label for="popolazione">medio</label>
-                    <input type="radio" id="popolazione3" name="popolazione" value="ottimo">
-                    <label for="popolazione">ottimo</label>
-                    <br>
-                   <br>
+    <input type="hidden" name="alveare_id" value="{{alveare_id}}">
+    <label for="covata_compatta">La covata è compatta?</label><br>
+    <input type="radio" id="covata_compatta" name="covata_compatta" value="1">
+    <label for="covata_compatta">si</label>
+    <input type="radio" id="covata_compatta2" name="covata_compatta" value="0">
+    <label for="covata_compatta">no</label>
+    <br>
+    <br>
+    <label for="popolazione">Inserisci stato popolazione: </label><br>
+    <input type="radio" id="popolazione" name="popolazione" value="scarso">
+    <label for="popolazione">scarso</label>
+    <input type="radio" id="popolazione2" name="popolazione" value="medio">
+    <label for="popolazione">medio</label>
+    <input type="radio" id="popolazione3" name="popolazione" value="ottimo">
+    <label for="popolazione">ottimo</label>
+    <br>
+    <br>
 
-                    <label for="polline">Inserisci stato polline: </label> <br>
-                    <input type="radio" id="polline" name="polline" value="scarso">
-                    <label for="polline">scarso</label>
-                    <input type="radio" id="polline2" name="polline" value="medio">
-                    <label for="polline">medio</label>
-                    <input type="radio" id="polline3" name="polline" value="ottimo">
-                    <label for="polline">ottimo</label>
-                   <br>
-                   <br>
-
-
-                      <label for="stato_cellette">Inserisci stato cellette: </label> <br>
-                    <input type="radio" id="stato_cellette" name="stato_cellette" value="scarso">
-                    <label for="stato_cellette">scarso</label>
-                    <input type="radio" id="stato_cellette2" name="stato_cellette" value="medio">
-                    <label for="stato_cellette">medio</label>
-                    <input type="radio" id="stato_cellette3" name="stato_cellette" value="ottimo">
-                    <label for="stato_cellette">ottimo</label>
-                   <br>
-                   <br>
+    <label for="polline">Inserisci stato polline: </label> <br>
+    <input type="radio" id="polline" name="polline" value="scarso">
+    <label for="polline">scarso</label>
+    <input type="radio" id="polline2" name="polline" value="medio">
+    <label for="polline">medio</label>
+    <input type="radio" id="polline3" name="polline" value="ottimo">
+    <label for="polline">ottimo</label>
+    <br>
+    <br>
 
 
-                   <br>
-                    <input type="submit" value="Conferma Inserimento"/> <input type="reset" value="Cancella">
+    <label for="stato_cellette">Inserisci stato cellette: </label> <br>
+    <input type="radio" id="stato_cellette" name="stato_cellette" value="scarso">
+    <label for="stato_cellette">scarso</label>
+    <input type="radio" id="stato_cellette2" name="stato_cellette" value="medio">
+    <label for="stato_cellette">medio</label>
+    <input type="radio" id="stato_cellette3" name="stato_cellette" value="ottimo">
+    <label for="stato_cellette">ottimo</label>
+    <br>
+    <br>
 
-              </form>
-          </div>
-          </div>
-          </div>
-          </div>
-            </div>
-</section>
+
+    <br>
+    <input type="submit" value="Conferma Inserimento"/> <input type="reset" value="Cancella">
+
+</form>
+
 {% endblock %}
 </body>
 </html>
