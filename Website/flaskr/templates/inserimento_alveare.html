@@ -4,7 +4,7 @@
 
     <meta charset="UTF-8">
      <meta name="viewport" content="width=device-width, initial-scale=1">
-        {%extends "base.html" %}
+        {% extends "base.html" %}
     {%block title%}Inserimento Alveare{%endblock%}
 </head>
 <body>
@@ -17,6 +17,7 @@
   }
   .background-radial-gradient {
     background-image: url("https://images.unsplash.com/photo-1498936178812-4b2e558d2937?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80");
+
     background-size:cover;
   }
   .bg-glass {
@@ -25,7 +26,7 @@
     backdrop-filter: saturate(600%) blur(25px);
   }
 
-  input[type=button], input[type=submit], input[type=reset], input[type=file] {
+  input[type=button], input[type=submit], input[type=reset]{
   background-color: orange;
   opacity: 70%;
   border: none;
@@ -57,6 +58,7 @@
           <div class="card-body px-4 py-5 px-md-5">
 
                <form action="/inserimento_alveare" enctype="multipart/form-data" method="post">
+
                   <div class="row">
                     <div class="col-md-6 mb-4">
                         <div class="form-outline">
@@ -186,12 +188,11 @@
                  </div>
 
                   <div class="form-outline">
-                      <label for="image">Carica immagine</label>
-                      <input id="image" accept="image/*" type="file" name="imagepath" style="display:none;">
-                      <button onclick="document.getElementById('image').click()" style="background-color: orange; opacity: 70%;
-                      border: none; border-radius: 10px 10px 10px 10px; color: black; padding: 7px 40px; text-decoration: none; margin: 4px 2px;
-                      cursor: pointer;">Carica qui</button>
-                      <br>
+
+                      <label for="image">Caricare immagine:</label>
+                        <input type="file" id="image" name="imagepath">
+
+                   <br>
                   </div>
                    <div style="text-align:center;">
                    <br>
