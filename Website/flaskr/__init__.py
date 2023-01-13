@@ -62,4 +62,9 @@ def create_app():
         # note that we set the 404 status explicitly
         return render_template('pageerror.html'), 404
 
+    @app.errorhandler(500)
+    def errorpage(e):
+        # note that we set the 500 status explicitly
+        return render_template('pageerror500.html'), 500
+
     return app
