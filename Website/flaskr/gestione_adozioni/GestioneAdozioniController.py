@@ -49,7 +49,6 @@ def inserimento_alveare():
                               covata_compatta=covata_compatta, prezzo=prezzo, tipo_fiore=tipo_fiore,
                               popolazione=popolazione, polline=polline,
                               stato_cellette=stato_cellette, id_apicoltore=apicoltore, img_path='value')
-
         inserisci_alveare(alveare)
 
         image = request.files['imagepath']
@@ -66,7 +65,6 @@ def inserimento_alveare():
 @login_required
 def mostra_alveari_disponibili():
     if session['isApicoltore']:
-
         alveari_disponibili = get_alveari_disponibili(current_user.id)
         return render_template('/catalogo_alveari_disponibili.html', alveari_disponibili=alveari_disponibili)
 
@@ -74,7 +72,7 @@ def mostra_alveari_disponibili():
 @ga.route('/modifica_stato_alveare', methods=['GET', 'POST'])
 @login_required
 def modifica_stato_alveare():
-    if request.method=='POST' and session['isApicoltore']:
+    if request.method == 'POST' and session['isApicoltore']:
         covata_compatta = int(request.form.get('covata_compatta'))
         popolazione = request.form.get('popolazione')
         polline = request.form.get('polline')
@@ -84,7 +82,6 @@ def modifica_stato_alveare():
         flash('Stato alveare aggiornato correttamente', category='success')
         return render_template('/catalogo_alveari_disponibili.html')
     return mostra_alveari()
-
 
 
 @ga.route('/informazioni_alveare/<int:alveare_id>', methods=['POST', 'GET'])
