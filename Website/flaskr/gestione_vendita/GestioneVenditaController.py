@@ -65,9 +65,9 @@ def info_articolo(prodotto_id):
 
 @gv.route('/visualizza_prodotti_vendita/<int:apicoltore_id>', methods=['POST', 'GET'])
 @login_required
-def mostra_articoli_in_vendita(apicoltore_id):
+def mostra_articoli_in_vendita():
     if session['isApicoltore']:
-        prodotti_in_vendita = get_prodotti_by_apicoltore(apicoltore_id)
+        prodotti_in_vendita = get_prodotti_by_apicoltore()
         return render_template('/catalogo_prodotti_apicoltore.html', prodotti_in_vendita=prodotti_in_vendita)
 
 
