@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, session
 import os.path
 
 from flask_login import LoginManager
@@ -46,13 +46,11 @@ def create_app():
             db.create_all()
 
     @login_manager.user_loader
-    def user_loader(email):
-        utente = Apicoltore.Apicoltore.query.filter_by(email=email).first()
-        if utente:
-            return utente
+    def user_loader(user_id):
+        if session['isApicoltore']:
+            return Apicoltore.Apicoltore.query.get(user_id)
         else:
-            return Cliente.Cliente.query.filter_by(email=email).first()
-
+            return Cliente.Cliente.query.get(user_id)
 
     @app.errorhandler(401)
     def unauthorized_user(e):

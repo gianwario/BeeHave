@@ -33,13 +33,13 @@ def inserimento_alveare():
         stato_cellette = request.form.get('stato_cellette')
         apicoltore = current_user.id
 
-        if (len(nome) > 30):
+        if len(nome) > 30:
             flash('Nome troppo lungo!', category='error')
-        elif (len(tipo_fiore) > 30):
+        elif len(tipo_fiore) > 30:
             flash('Fiore invalido!', category='error')
-        elif (len(tipo_miele) > 30):
+        elif len(tipo_miele) > 30:
             flash('Miele invalido!', category='error')
-        elif (prezzo > 1000):
+        elif prezzo > 1000:
             flash('Prezzo troppo alto!', category='error')
         else:
             flash('Inserimento avvenuto con successo!', category='success')
@@ -49,15 +49,16 @@ def inserimento_alveare():
                               covata_compatta=covata_compatta, prezzo=prezzo, tipo_fiore=tipo_fiore,
                               popolazione=popolazione, polline=polline,
                               stato_cellette=stato_cellette, id_apicoltore=apicoltore, img_path='value')
-        inserisci_alveare(alveare)
 
-        image = request.files['imagepath']
-        nome_alv = 'alveare' + str(alveare.id) + ".jpg"
-        path_image = os.path.join(image_folder_absolute, secure_filename(image.filename))
-        image.save(path_image)
-        os.rename(path_image, os.path.join(image_folder_absolute, nome_alv))
-        update_img_alveare(alveare.id, nome_alv)
-        # TODO fixare formati immagini, non basta solo jpg
+            inserisci_alveare(alveare)
+
+            image = request.files['imagepath']
+            nome_alv = 'alveare' + str(alveare.id) + ".jpg"
+            path_image = os.path.join(image_folder_absolute, secure_filename(image.filename))
+            image.save(path_image)
+            os.rename(path_image, os.path.join(image_folder_absolute, nome_alv))
+            update_img_alveare(alveare.id, nome_alv)
+            # TODO fixare formati immagini, non basta solo jpg
     return mostra_alveari_disponibili()
 
 
