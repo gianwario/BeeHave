@@ -7,8 +7,17 @@
     <title></title>
 </head>
 <body>
-{% block content %}
-<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+ {% block content %}
+ <!-- Latest compiled and minified CSS -->
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
 <div class="container bootstrap snippets bootdey">
     <div class="row">
 
@@ -22,12 +31,11 @@
                     <p>{{current_user.email}}</p>
                 </div>
 
-                <ul class="nav nav-pills nav-stacked">
-                    <li class="active"><a href="#"> <i class="fa fa-user"></i> Profile</a></li>
-                    <li><a href="#"> <i class="fa fa-calendar"></i> Visualizza le tue richieste di assistenza <span
-                            class="label label-warning pull-right r-activity">9</span></a></li>
-                    <li><a href="{{url_for('views.modifica_dati_utente_page')}}"> <i class="fa fa-user"></i> Modifica
-                        Account</a></li>
+          <ul class="nav nav-pills nav-stacked">
+              <li class="active"><a href="#"> <i class="fa fa-user"></i> Profile</a></li>
+              <li><a href="{{url_for('views.mostra_lista_assistenti')}}"> <i class="fa fa-user"></i>Richiedi assistenza </a></li>
+              <li><a href="#"> <i class="fa fa-calendar"></i> Visualizza le tue richieste di assistenza </a></li>
+              <li><a href="{{url_for('views.modifica_dati_utente_page')}}"> <i class="fa fa-user"></i> Modifica Account</a></li>
 
                 </ul>
             </div>
@@ -68,6 +76,7 @@
         </div>
     </div>
 </div>
+ <br><br>
 {% endblock %}
 </body>
 
