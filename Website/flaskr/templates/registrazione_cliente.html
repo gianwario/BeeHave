@@ -1,141 +1,120 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <link rel="stylesheet" href="{{url_for('static', filename='css/registrazione_cl.css')}}">
-    <script src="{{url_for('static', filename='js/registrazione_cl.js')}}"></script>
-    <title>
-        {% block title %} Registrazione {% endblock %}
-    </title>
-    {% extends "base.html" %}
-</head>
-<body>
-{% block content %}
-<div class="container">
+    <head>
+        <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="{{url_for('static', filename='css/registrazione_cl.css')}}">
+{% extends "base.html"%}
+ {% block title %}Registrazione{% endblock %}
 
-    <form class="well form-horizontal" action="/registrazione_cl" method="POST" id="contact_form">
-        <fieldset>
+    </head>
+    <body>
+ {% block content %}
+ <!-- Section: Design Block -->
+<section class="background-radial-gradient overflow-hidden">
 
-            <!-- Nome Form -->
-            <legend><h2><b>Registrazione Cliente</b></h2></legend>
-            <br>
+  <div class="container px-4 py-5 px-md-5 text-hight text-lg-start my-5">
+    <div class="row gx-lg-5 align-items-high mb-5">
+      <div class="col-lg-6 mb-5 mb-lg-0" style="z-index: 10">
+        <h1 class="my-5 display-5 fw-bold ls-tight" style="color:black">
+           Sei un cliente?<br /> <!-- Non mi piace molto come termine, valutare alternative -->
+          <span class ="testo_bordato">Ti interessa supportare gli apicoltori?</span>
+        </h1>
+        <p class="testo_bordato mb-4 opacity-70" style="color: white">
+          Registrandoti avrai la possibilità di aiutare gli apicoltori, supportando
+            la crescita e lo sviluppo delle loro api.
+        </p>
+      </div>
 
+      <div class="col-lg-6 mb-5 mb-lg-0 position-relative">
+        <div id="radius-shape-1" class="position-absolute rounded-circle shadow-5-strong"></div>
+        <div id="radius-shape-2" class="position-absolute shadow-5-strong"></div>
 
-            <div class="form-group">
-                <label class="col-md-4 control-label">Nome</label>
-                <div class="col-md-4 inputGroupContainer">
-                    <div class="input-group">
-                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                        <input name="nome" placeholder="Nome" class="form-control" type="text" required>
-                    </div>
+        <div class="card bg-glass" >
+          <div class="card-body px-4 py-5 px-md-5" >
+
+              <form id="form" method="post" action="/registrazione_cl">
+
+              <div class="row">
+                <div class="col-md-6 mb-4">
+                  <div class="form-outline">
+                    <input type="text" name="nome" id="nome" class="form-control" placeholder="Nome" required/>
+                    <label class="form-label" for="nome"></label>
+                  </div>
                 </div>
-            </div>
-
-            <div class="form-group">
-                <label class="col-md-4 control-label">Cognome</label>
-                <div class="col-md-4 inputGroupContainer">
-                    <div class="input-group">
-                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                        <input name="cognome" placeholder="Cognome" class="form-control" type="text" required>
-                    </div>
+                <div class="col-md-6 mb-4">
+                  <div class="form-outline">
+                    <input type="text" name="cognome" id="cognome" class="form-control" placeholder="Cognome" required />
+                    <label class="form-label" for="cognome"></label>
+                  </div>
                 </div>
-            </div>
-
-            <!-- Text input-->
-
-            <div class="form-group">
-                <label class="col-md-4 control-label">Password</label>
-                <div class="col-md-4 inputGroupContainer">
-                    <div class="input-group">
-                        <span class="input-group-addon"><i class="glyphicon glyphicon-piggy-bank"></i></span>
-                        <input name="psw" placeholder="Password" class="form-control" type="password" required>
-                    </div>
+              </div>
+            <div class="row">
+                <div class="col-md-6 mb-4">
+                  <div class="form-outline">
+                    <input type="text" name="citta" id="citta" class="form-control" placeholder="Citt&#224" required />
+                    <label class="form-label" for="citta"></label>
+                  </div>
                 </div>
-            </div>
-
-
-            <div class="form-group">
-                <label class="col-md-4 control-label">Conferma Password</label>
-                <div class="col-md-4 inputGroupContainer">
-                    <div class="input-group">
-                        <span class="input-group-addon"><i class="glyphicon glyphicon-piggy-bank"></i></span>
-                        <input name="psw-ripeti" placeholder="Conferma Password" class="form-control" type="password"
-                               required>
-                    </div>
+                <div class="col-md-6 mb-4">
+                  <div class="form-outline">
+                    <input type="text" name="indirizzo" id="indirizzo" class="form-control" placeholder="Indirizzo" required/>
+                    <label class="form-label" for="indirizzo"></label>
+                  </div>
                 </div>
-            </div>
-
-
-            <div class="form-group">
-                <label class="col-md-4 control-label">E-Mail</label>
-                <div class="col-md-4 inputGroupContainer">
-                    <div class="input-group">
-                        <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-                        <input name="email" placeholder="Indirizzo E-Mail" class="form-control" type="text" required>
-                    </div>
+              </div>
+            <div class="row">
+                <div class="col-md-6 mb-4">
+                  <div class="form-outline">
+                    <input type="text" name="cap" id="cap" class="form-control" placeholder="CAP" required/>
+                    <label class="form-label" for="cap"></label>
+                  </div>
                 </div>
-            </div>
-
-            <div class="form-group">
-                <label class="col-md-4 control-label">Indirizzo</label>
-                <div class="col-md-4 inputGroupContainer">
-                    <div class="input-group">
-                        <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
-                        <input name="indirizzo" placeholder="indirizzo" class="form-control" type="text" required>
-                    </div>
+                <div class="col-md-6 mb-4">
+                  <div class="form-outline">
+                    <input type="text" name="numtelefono" id="numtelefono" class="form-control" placeholder="Numero di telefono" required/>
+                    <label class="form-label" for="numtelefono"> </label>
+                  </div>
                 </div>
-            </div>
+              </div>
 
-            <div class="form-group">
-                <label class="col-md-4 control-label">Citt&#224</label>
-                <div class="col-md-4 inputGroupContainer">
-                    <div class="input-group">
-                        <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
-                        <input name="citta" placeholder="Citt&#224" class="form-control" type="text" required>
-                    </div>
+              <!-- Email input -->
+              <div class="form-outline mb-4">
+                <input type="email" name="email" id="email" class="form-control"  placeholder="Indirizzo Email" required/>
+                <label class="form-label" for="email"></label>
+              </div>
+
+              <!-- Password input -->
+              <div class="form-outline mb-4">
+                <input type="password" name="psw" id="psw" class="form-control" placeholder="Password" required/>
+                <label class="form-label" for="psw"></label>
+              </div>
+            <div class="form-outline mb-4">
+                <input type="password" name="conferma_psw" id="conferma_psw" class="form-control" placeholder="Conferma password" required />
+                <label class="form-label" for="conferma_psw"></label>
+              </div>
+
+
+
+
+
+                <div class="form-footer" style="text-align: center">
+                    <p>Hai già un account? <a class="form-link"  style="color: darkorange" href="{{url_for('views.login_page')}}">Login</a></p>
                 </div>
-            </div>
+            </form>
+              <div style="text-align: center">
 
-            <div class="form-group">
-                <label class="col-md-4 control-label">CAP</label>
-                <div class="col-md-4 inputGroupContainer">
-                    <div class="input-group">
-                        <span class="input-group-addon"><i class="glyphicon glyphicon-map-marker"></i></span>
-                        <input name="cap" placeholder="CAP" class="form-control" type="text" required>
-                    </div>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label class="col-md-4 control-label">Numero di Telefono</label>
-                <div class="col-md-4 inputGroupContainer">
-                    <div class="input-group">
-                        <span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
-                        <input name="numtelefono" placeholder="+39" class="form-control" type="text" required>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Termini di Servizio -->
-            <p>Registrandoti, dichiari di aver letto ed accettato i nostri <a href="#" style="color:dodgerblue">Termini
-                di servizio e privacy</a>.</p>
-
-            <!-- Button -->
-            <div class="form-group">
-                <label class="col-md-4 control-label"></label>
-                <div class="col-md-4"><br>
-                    <button type="button" class="annullabtn">Annulla<span
-                            class="glyphicon glyphicon-remove"></span></button>
-                    <button type="submit" class="btn btn-warning">Registrati<span
-                            class="glyphicon glyphicon-send"></span></button>
-                </div>
-            </div>
-
-        </fieldset>
-    </form>
+              <input form="form" type="submit" name="register" id="register" value="REGISTRATI">
+                 </div>
+              </div>
+    </div>
+  </div>
 </div>
 </div>
-
-</body>
+</section>
+<!-- Section: Design Block -->
 {% endblock %}
+</body>
+
 
 </html>
