@@ -8,7 +8,7 @@
   <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
     <title>
         {% block title %}
-            Ticket Assistenza
+            Lista Ticket Assistenza
         {% endblock %}
     </title>
 </head>
@@ -44,7 +44,7 @@
           </div>
 
           <div class="col-12 col-md-4 text-center">
-            <a href="" class="f-n-hover btn btn-info btn-raised px-4 py-25 w-75 text-600">Visualizza</a>
+            <a href="{{url_for('gau.visualizza_info_ticket', ticket_id=ticket_assistenza.id)}}" class="f-n-hover btn btn-info btn-raised px-4 py-25 w-75 text-600">Visualizza</a>
           </div>
         </div>
 
@@ -80,7 +80,7 @@
           </div>
 
           <div class="col-12 col-md-4 text-center">
-            <a href="" class="f-n-hover btn btn-info btn-raised px-4 py-25 w-75 text-600">Visualizza</a>
+            <a href="{{url_for('gau.visualizza_info_ticket',ticket_id=ticket_assistenza.id)}}" class="f-n-hover btn btn-info btn-raised px-4 py-25 w-75 text-600">Visualizza</a>
           </div>
         </div>
 

@@ -52,3 +52,7 @@ def get_ticket_assistenza_by_apicoltore(id_apicoltore):
 
 def get_ticket_assistenza_by_cliente(id_cliente):
     return TicketAssistenza.query.filter_by(id_cliente=id_cliente).all()
+
+
+def get_ticket_by_id(id_ticket):
+    return TicketAssistenza.query.filter_by(id=id_ticket).first()

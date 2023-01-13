@@ -3,7 +3,8 @@ from flask_login import login_required, current_user
 
 from Website.flaskr.Routes import crea_area_assistenza_page, area_personale, home, richiesta_assistenza_page
 from Website.flaskr.gestione_assistenza_utente.GestioneAssistenzaUtenteService import inserisci_area_assistenza, \
-    controlla_apicoltore, richiedi_assistenza, get_ticket_assistenza_by_apicoltore, get_ticket_assistenza_by_cliente
+    controlla_apicoltore, richiedi_assistenza, get_ticket_assistenza_by_apicoltore, get_ticket_assistenza_by_cliente, \
+    get_ticket_by_id
 
 gau = Blueprint('gau', __name__)
 
@@ -59,3 +60,8 @@ def visualizza_richieste_assistenza():
         return render_template('/ticket_assistenza.html', ticket_assistenza_cl=ticket_assistenza)
 
 
+@gau.route('/visualizza_informazioni_ticket/<int:ticket_id>', methods=['POST', 'GET'])
+@login_required
+def visualizza_info_ticket(ticket_id):
+    ticket = get_ticket_by_id(ticket_id)
+    return render_template('/singolo_ticket.html', ticket_assistenza=ticket)
