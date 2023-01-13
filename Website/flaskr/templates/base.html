@@ -40,10 +40,7 @@
 
                     {% if not current_user.is_authenticated %}
                     <li><a class="dropdown-item" href="{{url_for('views.login_page')}}">Login</a></li>
-                    <li><a class="dropdown-item" href="{{url_for('views.registrazione_apicoltore_page')}}">Registra
-                        Apicoltore</a></li>
-                    <li><a class="dropdown-item" href="{{url_for('views.registrazione_cliente_page')}}">Registra
-                        Cliente</a></li>
+                    <li><a class="dropdown-item" href="{{url_for('views.registrazione_page')}}">Registrati</a></li>
 
                     {% else %}
                     <li><a class="dropdown-item" href="{{url_for('views.area_personale')}}">Area Personale</a></li>
@@ -86,8 +83,8 @@
                     <h6 class="footer-heading text-uppercase text-white">Informazioni</h6>
                     <ul class="list-unstyled footer-link mt-4">
                         <li><a href="{{url_for('views.home')}}">Home</a></li>
-                        <li><a href="">Adotta Alveare</a></li>
-                        <li><a href="">Catalogo Prodotti</a></li>
+                        <li><a href="{{url_for('views.mostra_alveari')}}">Adotta Alveare</a></li>
+                        <li><a href="{{url_for('views.mostra_prodotti')}}">Catalogo Prodotti</a></li>
                         <li><a href="">Chi siamo</a></li>
                     </ul>
                 </div>
@@ -99,9 +96,7 @@
                     <br><br>
                     <h6 class="footer-heading text-uppercase text-white">Risorse</h6>
                     <ul class="list-unstyled footer-link mt-4">
-                        <li><a href="{{url_for('views.registrazione_cliente_page')}}">Registrazione cliente</a></li>
-                        <li><a href="{{url_for('views.registrazione_apicoltore_page')}}">Registrazione apicoltore</a>
-                        </li>
+                        <li><a href="{{url_for('views.registrazione_page')}}">Registrati</a></li>
                         <li><a href="{{url_for('views.login_page')}}">Login</a></li>
                     </ul>
                 </div>
@@ -132,6 +127,7 @@
         <p class="footer-alt mb-0 f-14">2023 ©BeeHave, All Rights Reserved</p>
     </div>
 </footer>
+
 </body>
 
 </html>
