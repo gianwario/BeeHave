@@ -17,8 +17,8 @@ def crea_area_assistenza():
         if not 0 < len(descrizione) <= 200:
             flash('La lunghezza della descrizione non è valida!', category='error')
             return crea_area_assistenza_page()
-        current_user.descrizione=descrizione
-        current_user.assistenza=assistenza
+        current_user.descrizione = descrizione
+        current_user.assistenza = assistenza
         inserisci_area_assistenza(descrizione, assistenza)
 
     return area_personale()
