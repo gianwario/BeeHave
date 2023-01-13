@@ -13,6 +13,8 @@ def inserisci_area_assistenza(descrizione, assistenza):
     apicoltore.assistenza = assistenza
     db.session.add(apicoltore)
     db.session.commit()
+
+
 def get_numero_ticket_assistenza_apicoltore(id_apicoltore):
     return len(TicketAssistenza.query.filter_by(id_apicoltore=id_apicoltore).all())
 
