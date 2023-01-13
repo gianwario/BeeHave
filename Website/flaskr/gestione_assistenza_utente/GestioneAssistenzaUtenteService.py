@@ -15,6 +15,10 @@ def inserisci_area_assistenza(descrizione, assistenza):
     db.session.commit()
 
 
+def get_numero_ticket_assistenza_apicoltore(id_apicoltore):
+    return len(TicketAssistenza.query.filter_by(id_apicoltore=id_apicoltore).all())
+
+
 def get_assistenti():
     return Apicoltore.query.filter_by(assistenza=1).all()
 
@@ -40,3 +44,15 @@ def get_numero_ticket_assistenza_apicoltore(id_apicoltore):
 
 def get_numero_ticket_assistenza_cliente(id_cliente):
     return len(TicketAssistenza.query.filter_by(id_cliente=id_cliente).all())
+
+
+def get_ticket_assistenza_by_apicoltore(id_apicoltore):
+    return TicketAssistenza.query.filter_by(id_apicoltore=id_apicoltore).all()
+
+
+def get_ticket_assistenza_by_cliente(id_cliente):
+    return TicketAssistenza.query.filter_by(id_cliente=id_cliente).all()
+
+
+def get_ticket_by_id(id_ticket):
+    return TicketAssistenza.query.filter_by(id=id_ticket).first()

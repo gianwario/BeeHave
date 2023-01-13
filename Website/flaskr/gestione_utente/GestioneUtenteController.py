@@ -179,11 +179,11 @@ def controlla_campi(nome, cognome, indirizzo, citta, cap, telefono, email):
 
 def controlla_password(pwd, cpwd):
     if len(pwd) < 8:
-        flash("Lunghezza password deve essere almeno 8 caratteri", category="error")
+        flash("Lunghezza password deve essere almeno 8 caratteri.", category="error")
     elif not (controllo_caratteri_speciali(pwd) and controllo_numeri(pwd)):
-        flash("Inserire nel campo password almeno un carattere speciale ed un numero", category="error")
+        flash("Inserire nel campo password almeno un carattere speciale ed un numero.", category="error")
     elif pwd != cpwd:
-        flash("Password e Conferma Password non combaciano", category="error")
+        flash("Password e Conferma Password non combaciano.", category="error")
     else:
         return True
     return False

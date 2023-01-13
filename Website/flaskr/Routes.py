@@ -108,3 +108,9 @@ def mostra_lista_assistenti():
 @login_required
 def modifica_stato(alveare_id):
     return render_template('modifica_stato_alveare.html', alveare_id=alveare_id)
+
+
+@views.route('/lista_ticket_assistenza')
+@login_required
+def mostra_lista_ticket_assistenza():
+    return render_template('ticket_assistenza.html')
