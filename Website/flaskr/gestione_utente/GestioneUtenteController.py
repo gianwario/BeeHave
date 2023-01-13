@@ -63,52 +63,24 @@ def registrazione():
         cpwd = request.form.get('cpwd')
         is_apicoltore = bool(int(request.form.get('isApicoltore')))
 
-        if not 0 < len(nome) <= 45:
-            flash("Nome non valido", category="error")
-            return registrazione_page()
-        if not 0 < len(cognome) <= 45:
-            flash("Cognome non valido", category="error")
-            return registrazione_page()
-        if not 0 < len(indirizzo) <= 50:
-            flash("Indirizzo non valido", category="error")
-            return registrazione_page()
-        if not 0 < len(citta) <= 45:
-            flash("Città non valida", category="error")
-            return registrazione_page()
-        if not 0 < len(cap) <= 5:
-            flash("CAP non valido", category="error")
-            return registrazione_page()
-        if not 0 < len(telefono) <= 10:
-            flash("Numero telefono non valido", category="error")
-            return registrazione_page()
-        if not 0 < len(email) <= 45:
-            flash("Email non valida", category="error")
-            return registrazione_page()
-        if not controlla_email_esistente(email):
-            flash("Email già esistente", category="error")
-            return registrazione_page()
-        if len(pwd) < 8:
-            flash("Lunghezza password deve essere almeno 8 caratteri", category="error")
-            return registrazione_page()
+        if controlla_campi(nome, cognome, indirizzo, citta, cap, telefono, email):
+            if not controlla_email_esistente(email):
+                flash("Email già esistente", category="error")
+            elif not controlla_password(pwd, cpwd):
+                if is_apicoltore:
+                    user = Apicoltore(nome=nome, cognome=cognome, indirizzo=indirizzo, citta=citta, cap=cap,
+                                      telefono=telefono,
+                                      email=email, assistenza=0, password=generate_password_hash(pwd, method='sha256'))
+                else:
+                    user = Cliente(nome=nome, cognome=cognome, indirizzo=indirizzo, citta=citta, cap=cap,
+                                   telefono=telefono,
+                                   email=email, password=generate_password_hash(pwd, method='sha256'))
 
-        if not (controllo_caratteri_speciali(pwd) and controllo_numeri(pwd)):
-            flash("Inserire nel campo password almeno un carattere speciale ed un numero", category="error")
-            return registrazione_page()
-
-        if pwd != cpwd:
-            flash("Password e Conferma Password non combaciano", category="error")
-            return registrazione_page()
-        if is_apicoltore:
-            user = Apicoltore(nome=nome, cognome=cognome, indirizzo=indirizzo, citta=citta, cap=cap, telefono=telefono,
-                              email=email, assistenza=0, password=generate_password_hash(pwd, method='sha256'))
-        else:
-            user = Cliente(nome=nome, cognome=cognome, indirizzo=indirizzo, citta=citta, cap=cap, telefono=telefono,
-                           email=email, password=generate_password_hash(pwd, method='sha256'))
-
-        registra_utente(user)
-        session['isApicoltore'] = is_apicoltore
-        login_user(user)
-    return home()
+                registra_utente(user)
+                session['isApicoltore'] = is_apicoltore
+                login_user(user)
+                return home()
+    return registrazione_page()
 
 
 @gu.route('/modifica_dati_utente', methods=['GET', 'POST'])
@@ -125,45 +97,46 @@ def modifica_dati_utente():
         pwd = request.form.get('nuova_psw')
         cpwd = request.form.get('nuova_ripeti_psw')
 
-        if not 0 < len(nome) <= 45:
-            flash("Nome non valido", category="error")
-            return modifica_dati_utente_page()
-        if not 0 < len(cognome) <= 45:
-            flash("Cognome non valido", category="error")
-            return modifica_dati_utente_page()
-        if not 0 < len(indirizzo) <= 50:
-            flash("Indirizzo non valido", category="error")
-            return modifica_dati_utente_page()
-        if not 0 < len(citta) <= 45:
-            flash("Città non valida", category="error")
-            return modifica_dati_utente_page()
-        if not 0 < len(cap) <= 5:
-            flash("CAP non valido", category="error")
-            return modifica_dati_utente_page()
-        if not 0 < len(telefono) <= 10:
-            flash("Numero telefono non valido", category="error")
-            return modifica_dati_utente_page()
-        if not 0 < len(email) <= 45:
-            flash("Email non valida", category="error")
-            return modifica_dati_utente_page()
-        if not controlla_email_esistente(email) and email != current_user.email:
-            flash("Email già esistente", category="error")
-            return modifica_dati_utente_page()
-        if pwd != '':
-            if len(pwd) < 8:
-                flash("Lunghezza password deve essere almeno 8 caratteri", category="error")
-                return modifica_dati_utente_page()
-            if not (controllo_caratteri_speciali(pwd) and controllo_numeri(pwd)):
-                flash("Inserire nel campo password almeno un carattere speciale ed un numero", category="error")
-                return modifica_dati_utente_page()
-            if pwd != cpwd:
-                flash("Password e Conferma Password non combaciano", category="error")
-                return modifica_dati_utente_page()
-        modifica_profilo_personale(nome, cognome, email, telefono, citta, cap, indirizzo, pwd)
+        if controlla_campi(nome, cognome, indirizzo, citta, cap, telefono, email):
+            if not controlla_email_esistente(email) and email != current_user.email:
+                flash("Email già esistente", category="error")
+            elif pwd != '':
+                if controlla_password(pwd, cpwd):
+                    modifica_profilo_personale(nome, cognome, email, telefono, citta, cap, indirizzo, pwd)
+                    return area_personale()
+    return modifica_dati_utente_page()
 
-        flash("Modifica dati utente avvenuta con successo!", category="success")
 
-    return area_personale()
+def controlla_campi(nome, cognome, indirizzo, citta, cap, telefono, email):
+    if not 0 < len(nome) <= 45:
+        flash("Nome non valido", category="error")
+    elif not 0 < len(cognome) <= 45:
+        flash("Cognome non valido", category="error")
+    elif not 0 < len(indirizzo) <= 50:
+        flash("Indirizzo non valido", category="error")
+    elif not 0 < len(citta) <= 45:
+        flash("Città non valida", category="error")
+    elif not 0 < len(cap) <= 5 or not cap.isdigit():
+        flash("CAP non valido", category="error")
+    elif not 0 < len(telefono) <= 10 or not telefono.isdigit():
+        flash("Numero telefono non valido", category="error")
+    elif not 0 < len(email) <= 45:
+        flash("Email non valida", category="error")
+    else:
+        return True
+    return False
+
+
+def controlla_password(pwd, cpwd):
+    if len(pwd) < 8:
+        flash("Lunghezza password deve essere almeno 8 caratteri", category="error")
+    elif not (controllo_caratteri_speciali(pwd) and controllo_numeri(pwd)):
+        flash("Inserire nel campo password almeno un carattere speciale ed un numero", category="error")
+    elif pwd != cpwd:
+        flash("Password e Conferma Password non combaciano", category="error")
+    else:
+        return True
+    return False
 
 
 def controllo_caratteri_speciali(psw):
