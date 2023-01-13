@@ -408,6 +408,13 @@
                             </div>
                             <div style="text-align:center;">
                    <br>
+                <div class="form-outline mb-4">
+                    {% with messages = get_flashed_messages(category_filter=["error"]) %}
+                        {% if messages %}
+                            <p style="color:red">{{ messages[0] }}</p>
+                        {% endif %}
+                    {% endwith %}
+                </div>
                     <input type="submit" value="Conferma Inserimento"/> <input type="reset" value="Cancella">
                </div>
                         </form>

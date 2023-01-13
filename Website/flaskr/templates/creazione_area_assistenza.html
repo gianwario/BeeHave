@@ -31,6 +31,13 @@
                     </div>
                 </div>
             </div>
+            <div class="form-outline mb-4">
+                {% with messages = get_flashed_messages(category_filter=["error"]) %}
+                    {% if messages %}
+                        <p style="color:red">{{ messages[0] }}</p>
+                    {% endif %}
+                {% endwith %}
+            </div>
             <div class="form-group">
                 <label class="col-md-4 control-label"></label>
                 <div class="col-md-4"><br>

@@ -101,12 +101,14 @@
                                 <input type="radio" name="isApicoltore" value="0" id="cliente" />
 
                             </div>
-                            {% with messages = get_flashed_messages(category_filter=["error"]) %}
-                            {% if messages %}
-                            <p style="color:red">{{ messages[0] }}</p>
-                            {% endif %}
-                            {% endwith %}
+                            <div class="form-outline mb-4">
 
+                                {% with messages = get_flashed_messages(category_filter=["error"]) %}
+                                    {% if messages %}
+                                        <p style="color:red">{{ messages[0] }}</p>
+                                    {% endif %}
+                                {% endwith %}
+                            </div>
                             <div class="form-footer" style="text-align: center">
                                 <p>Hai già un account? <a class="form-link"  style="color: darkorange" href="{{url_for('views.login_page')}}">Login</a></p>
                             </div>
