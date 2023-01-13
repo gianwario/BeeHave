@@ -8,12 +8,12 @@ def inserisci_alveare(alveare):
     db.session.commit()
 
 
-def get_alveare_by_id(id):
-    return Alveare.query.filter_by(id=id).first()
+def get_alveare_by_id(alveare_id):
+    return Alveare.query.filter_by(id=alveare_id).first()
 
 
-def update_img_alveare(id, img):
-    alveare = get_alveare_by_id(id)
+def update_img_alveare(alveare_id, img):
+    alveare = get_alveare_by_id(alveare_id)
     alveare.img_path = str(img)
     db.session.flush()
     db.session.commit()
@@ -31,8 +31,6 @@ def get_alveari():
     return Alveare.query.all()
 
 
-
-
 def decrementa_percentuale(id_alveare, percentuale):
     alveare = Alveare.query.filter_by(id=id_alveare).first()
     alveare.percentuale_disponibile -= int(percentuale)
@@ -45,12 +43,13 @@ def affitto_alveare(ticket, percentuale):
     db.session.commit()
     decrementa_percentuale(ticket.id_alveare, percentuale)
 
-def aggiorna_stato(id, covata_compatta, popolazione, polline, stato_cellette):
-    alveare=get_alveare_by_id(id);
-    alveare.covata_compatta=covata_compatta
-    alveare.popolazione=popolazione
-    alveare.polline=polline
-    alveare.stato_cellette=stato_cellette
+
+def aggiorna_stato(alveare_id, covata_compatta, popolazione, polline, stato_cellette):
+    alveare = get_alveare_by_id(alveare_id)
+    alveare.covata_compatta = covata_compatta
+    alveare.popolazione = popolazione
+    alveare.polline = polline
+    alveare.stato_cellette = stato_cellette
     db.session.flush()
     db.session.commit()
     # TODO eventualmente considerare di restituire la % allo scadere del tempo
