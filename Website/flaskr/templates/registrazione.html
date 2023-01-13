@@ -30,7 +30,7 @@
                 <div class="card bg-glass">
                     <div class="card-body px-4 py-5 px-md-5">
 
-                        <form id="form" method="post" action="/registrazione">
+                        <form id="form" method="post" enctype="multipart/form-data" action="/registrazione">
 
                             <div class="row">
                                 <div class="col-md-6 mb-4">
@@ -58,7 +58,8 @@
                                 </div>
                                 <div class="col-md-6 mb-4">
                                     <div class="form-outline">
-                                        <input type="text" name="indirizzo" id="indirizzo" class="form-control" placeholder="Indirizzo"required/>
+                                        <input type="text" name="indirizzo" id="indirizzo" class="form-control"
+                                               placeholder="Indirizzo" required/>
                                         <label class="form-label" for="indirizzo"></label>
                                     </div>
                                 </div>
@@ -73,7 +74,8 @@
                                 </div>
                                 <div class="col-md-6 mb-4">
                                     <div class="form-outline">
-                                        <input type="text" name="telefono" id="telefono" class="form-control" placeholder="Numero di telefono"required/>
+                                        <input type="text" name="telefono" id="telefono" class="form-control"
+                                               placeholder="Numero di telefono" required/>
                                         <label class="form-label" for="telefono"> </label>
                                     </div>
                                 </div>
@@ -81,25 +83,35 @@
 
                             <!-- Email input -->
                             <div class="form-outline mb-4">
-                                <input type="email" name="email" id="email" class="form-control"  placeholder="Email address"required/>
+                                <input type="email" name="email" id="email" class="form-control"
+                                       placeholder="Email address" required/>
                                 <label class="form-label" for="email"></label>
                             </div>
 
                             <!-- Password input -->
                             <div class="form-outline mb-4">
-                                <input type="password" name="password" id="password" class="form-control" placeholder="Password"required/>
+                                <input type="password" name="password" id="password" class="form-control"
+                                       placeholder="Password" required/>
                                 <label class="form-label" for="password"></label>
                             </div>
                             <div class="form-outline mb-4">
-                                <input type="password" name="cpwd" id="cpwd" class="form-control"placeholder="Confirm password"required />
+                                <input type="password" name="cpwd" id="cpwd" class="form-control"
+                                       placeholder="Confirm password" required/>
                                 <label class="form-label" for="cpwd"></label>
                             </div>
                             <div class="form-outline mb-4">
                                 <label class="form-label" for="apicoltore">Apicoltore</label>
-                                <input type="radio" name="isApicoltore" id="apicoltore" value="1"  checked />
+                                <input type="radio" name="isApicoltore" id="apicoltore" value="1" checked/>
                                 <label class="form-label" for="cliente" style="padding-left: 10px">Cliente</label>
-                                <input type="radio" name="isApicoltore" value="0" id="cliente" />
+                                <input type="radio" name="isApicoltore" value="0" id="cliente"/>
 
+                            </div>
+
+                            <div class="form-outline mb-4">
+                                <label for="image">Carica immagine</label>
+                                <input id="image" accept="image/*" type="file" name="imagepath" >
+
+                                <br>
                             </div>
                             {% with messages = get_flashed_messages(category_filter=["error"]) %}
                             {% if messages %}
@@ -108,7 +120,8 @@
                             {% endwith %}
 
                             <div class="form-footer" style="text-align: center">
-                                <p>Hai già un account? <a class="form-link"  style="color: darkorange" href="{{url_for('views.login_page')}}">Login</a></p>
+                                <p>Hai già un account? <a class="form-link" style="color: darkorange"
+                                                          href="{{url_for('views.login_page')}}">Login</a></p>
                             </div>
                         </form>
                         <div style="text-align: center">

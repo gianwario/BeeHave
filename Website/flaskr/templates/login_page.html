@@ -4,53 +4,58 @@
     <link rel="stylesheet" href="{{url_for('static', filename='css/form.css')}}">
     {% extends "base.html"%}
     <title>
-    {% block title %}Login{% endblock %}
-        </title>
+        {% block title %}Login{% endblock %}
+    </title>
 </head>
 <body>
 {% block content %}
-<section class="background-radial-gradient overflow-hidden" style="background-image: url('https://images.unsplash.com/photo-1555773419-9f97a6f48320?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80')">
+<section class="background-radial-gradient overflow-hidden"
+         style="background-image: url('https://images.unsplash.com/photo-1555773419-9f97a6f48320?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80')">
     <div class="container px-4 py-5 px-md-5 text-hight text-lg-start my-5">
         <div class="row gx-lg-5 align-items-high mb-5">
             <div class="col-lg-6 mb-5 mb-lg-0" style="z-index: 10">
                 <h1 class="my-5 display-5 fw-bold ls-tight" style="color:black">
-                  Login <br />
-                  <span style="color: hsl(25, 100%, 55%)">Effettua l'accesso per usufruire dei contenuti</span>
+                    Login <br/>
+                    <span style="color: hsl(25, 100%, 55%)">Effettua l'accesso per usufruire dei contenuti</span>
                 </h1>
                 <p class="mb-4 opacity-70" style="color: white">
-                  Ti diamo la possibilità di partecipare attivamente al nostro movimento.
+                    Ti diamo la possibilità di partecipare attivamente al nostro movimento.
                 </p>
             </div>
 
             <div class="col-lg-6 mb-5 mb-lg-0 position-relative">
 
-                <div class="card bg-glass" >
-                    <div class="card-body px-4 py-5 px-md-5" >
+                <div class="card bg-glass">
+                    <div class="card-body px-4 py-5 px-md-5">
 
                         <form id="form" method="post" action="/login">
 
                             <!-- Email input -->
                             <div class="form-outline mb-4">
-                                <input type="text" name="email" id="email" class="form-control"  placeholder="Inserisci l'email" />
+                                <input type="text" name="email" id="email" class="form-control"
+                                       placeholder="Inserisci l'email"/>
                                 <label class="form-label" for="email"></label>
                             </div>
 
                             <!-- Password input -->
                             <div class="form-outline mb-4">
-                                <input type="password" name="password" id="password" class="form-control required" placeholder="Password" />
+                                <input type="password" name="password" id="password" class="form-control required"
+                                       placeholder="Password"/>
                                 <label class="form-label" for="password"></label>
                             </div>
 
                             {% with messages = get_flashed_messages(category_filter=["error"]) %}
-                                {% if messages %}
-                                    {% for message in messages %}
-                                    <p style="color:red">{{ message }}</p>
-                                    {% endfor %}
-                                {% endif %}
+                            {% if messages %}
+                            {% for message in messages %}
+                            <p style="color:red">{{ message }}</p>
+                            {% endfor %}
+                            {% endif %}
                             {% endwith %}
 
                             <div class="form-footer" style="text-align: center">
-                                <p>Non hai un account? <a class="form-link"  style="color: darkorange" href="{{url_for('views.registrazione_page')}}">Registrati</a></p>
+                                <p>Non hai un account? <a class="form-link" style="color: darkorange"
+                                                          href="{{url_for('views.registrazione_page')}}">Registrati</a>
+                                </p>
                             </div>
                         </form>
                         <div style="text-align: center">
