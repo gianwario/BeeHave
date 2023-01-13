@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
 <head>
 
@@ -8,7 +9,51 @@
 </head>
 <body>
 {% block content%}
+<section class="background-radial-gradient overflow-hidden">
+  <style>
 
+  .selector-for-some-widget {
+  box-sizing: content-box;
+  }
+  .background-radial-gradient {
+    background-image: url("https://images.pexels.com/photos/2231469/pexels-photo-2231469.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1");
+    background-size:cover;
+  }
+  .bg-glass {
+
+    background-color: hsla(0, 0%, 100%, 0.9) !important;
+    backdrop-filter: saturate(600%) blur(25px);
+  }
+
+  input[type=button], input[type=submit], input[type=reset]{
+  background-color: orange;
+  opacity: 70%;
+  border: none;
+  border-radius: 10px 10px 10px 10px;
+  color: black;
+  padding: 7px 40px;
+  text-decoration: none;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+  </style>
+
+        <div class="container px-4 py-5 px-md-5 text-center text-lg-start my-5">
+        <div class="row gx-lg-5 align-items-high mb-5">
+            <div class="col-lg-6 mb-5 mb-lg-0" style="z-index: 10">
+                <h1 class="my-5 display-3 fw-bold ls-tight" style="color: orange">
+                    Modifica lo stato <br/>
+             <span style="color: black">del tuo alveare!</span>
+                </h1>
+      </div>
+
+            <div class="col-lg-6 mb-5 mb-lg-0 position-relative">
+        <div id="radius-shape-1" class="position-absolute rounded-circle shadow-5-strong"></div>
+        <div id="radius-shape-2" class="position-absolute shadow-5-strong"></div>
+
+                <div class="card bg-glass">
+          <div class="card-body px-4 py-5 px-md-5">
 
                <form action="/modifica_stato_alveare" enctype="multipart/form-data" method="post">
 
@@ -56,7 +101,12 @@
                     <input type="submit" value="Conferma Inserimento"/> <input type="reset" value="Cancella">
 
               </form>
-
+          </div>
+          </div>
+          </div>
+          </div>
+            </div>
+</section>
 {% endblock %}
 </body>
 </html>
