@@ -1,10 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <title></title>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="{{url_for('static', filename='css/e-commerce_card.css')}}">
     {% extends "base.html"%}
-    {% block title %}Catalogo Alveari Disponibili{% endblock %}
+    <title>
+        {% block title %}Catalogo Alveari Disponibili{% endblock %}
+    </title>
 </head>
 <body>
 
@@ -36,7 +39,9 @@
                 <div class="card-body card-body-cascade text-center">
 
                     <!--Card Title-->
-                    <h4 class="card-title"><strong><a href="{{url_for('ga.informazioni_alveare', alveare_id=alveare.id)}}">{{alveare.nome}}</a></strong></h4>
+                    <h4 class="card-title"><strong><a
+                            href="{{url_for('ga.informazioni_alveare', alveare_id=alveare.id)}}">{{alveare.nome}}</a></strong>
+                    </h4>
 
                     <!-- Card Description-->
                     <p class="card-text">Descrizione generica
@@ -45,11 +50,6 @@
 
                     <p class="price">Prezzo: {{alveare.prezzo}}</p>
 
-                    <!--Card footer
-                    <div class="card-footer">
-                        <p>Affitta</p>
-                    </div>
-                        -->
 
                 </div>
             </div>

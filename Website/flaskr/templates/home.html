@@ -3,7 +3,9 @@
 <head>
     <link rel="stylesheet" href="{{url_for('static', filename='css/home.css')}}">
     {% extends "base.html"%}
-    {% block title %}Home{% endblock %}
+    <title>
+        {% block title %}Home{% endblock %}
+    </title>
 </head>
 <body>
 {% block content %}

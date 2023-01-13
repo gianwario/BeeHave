@@ -4,8 +4,9 @@
 
     <link rel="stylesheet" href="{{url_for('static', filename='css/info_prod.css')}}">
     {% extends "base.html"%}
-    {% block title %}Informazioni Alveare {% endblock %}
-
+    <title>
+        {% block title %}Informazioni Alveare {% endblock %}
+    </title>
 </head>
 <body>
 {% block content %}
@@ -15,7 +16,7 @@
             <div class="col-md-6 border-end">
                 <div class="d-flex flex-column justify-content-center">
                     <div class="main_image"><img src="../static/images/{{alveare.img_path}}" id="main_product_image"
-                                                 width="350"></div>
+                                                 width="350" alt=""></div>
 
                 </div>
             </div>
