@@ -12,20 +12,27 @@
 {% block content %}
 
 <div class="container">
+    <h1 class="text-secondary">I Tuoi Alveari</h1>
     <div class="row">
         {% for elemento in alveari_adottati %}
 
         <!--Profile Card 5-->
         <div class="col-md-4 mt-4">
-            <div class="card profile-card-5">
-                <div class="card-img-block">
-                    <img class="card-img-top" src="../static/images/{{elemento.Alveare.img_path}}"
-                         alt="Card image cap">
+            <div class="card card-cascade card-ecommerce wider shadow mb-5 ">
+
+                <!--Card image-->
+                <div class="view view-cascade overlay text-center">
+                    <img class="card-img-top" src="../static/images/{{elemento.img_path}}"
+                         alt="">
+                    <a>
+                        <div class="mask rgba-white-slight"></div>
+                    </a>
                 </div>
                 <div class="card-body pt-0">
                     <h5 class="card-title">{{elemento.Alveare.nome}}</h5>
                     <p class="card-text">Tempo adozione: {{elemento.TicketAdozione.tempo_adozione}} Mesi</p>
                     <p class="card-text">Data Inizio: {{elemento.TicketAdozione.data_inizio_adozione}}</p>
+                    <p class="card-text">Data Scadenza: {{elemento.TicketAdozione.data_fine_adozione()}}</p>
                     <div class="progress">
                         <div class="progress-bar progress-bar-striped progress-bar-animated  bg-warning"
                              role="progressbar" style="width:{{elemento.TicketAdozione.percentuale_adozione}}%"

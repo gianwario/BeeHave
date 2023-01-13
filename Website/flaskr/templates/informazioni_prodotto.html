@@ -11,6 +11,7 @@
 <body>
 {% block content %}
 <div class="container mt-5 mb-5">
+    <h1 class="text-secondary">Informazioni Prodotto</h1>
     <div class="card">
         <div class="row g-0">
             <div class="col-md-6 border-end">
@@ -30,9 +31,9 @@
                         <div class="d-flex flex-row"><i class='bx bxs-star'></i> <i class='bx bxs-star'></i> <i
                                 class='bx bxs-star'></i> <i class='bx bxs-star'></i> <i class='bx bx-star'></i></div>
 
-                        <span>Nome Apicoltore:{{apicoltore.nome}}</span><span>  Tipologia:{{prodotto.tipologia}}</span><span>  Peso:{{prodotto.peso}}</span><span>  Quantitá:{{prodotto.quantita}}</span>
+                        <span>Apicoltore: {{apicoltore.nome}}</span><span>  Tipologia: {{prodotto.tipologia}}</span><span>  Peso: {{prodotto.peso}}g</span><span>  Quantitá: {{prodotto.quantita}}</span>
                     </div>
-
+                    {% if not current_user.is_authenticated or not session['isApicoltore'] %}
                     <div class="buttons d-flex flex-row mt-5 gap-3">
                         <form action="/acquista_prodotto" method="post">
                             <label for="seleziona_qnt">Inserire Quantitá</label>
@@ -47,12 +48,13 @@
                             />
                             <input type="hidden" name="id_prd" value="{{prodotto.id}}">
 
-                            <!-- Controllo per far effettuare acquisto solo al cliente -->
-                            <input type="hidden" name="id_client" value="{{current_user.id}}">
-                            <button type="submit" value="acquista" class="btn btn-outline-dark">Compra</button>
+
+                                <input type="hidden" name="id_client" value="{{current_user.id}}">
+                                <button type="submit" value="acquista" class="btn btn-outline-dark">Compra</button>
+
                         </form>
                     </div>
-
+                {% endif %}
                 </div>
             </div>
         </div>

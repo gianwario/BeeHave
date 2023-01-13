@@ -9,9 +9,9 @@
 <body>
 {% block content %}
 <div class="container">
+    <h1 class="text-secondary">Crea Area Assistenza</h1>
     <form class="well form-horizontal" action="/richiesta_assistenza" method="POST" id="contact_form">
         <fieldset>
-            <legend><h2><b>Richiesta Assistenza</b></h2></legend>
             <br>
             <input type="hidden" value='{{id_apicoltore}}' name="id_apicoltore">
             <div class="form-group">

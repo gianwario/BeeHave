@@ -1,25 +1,20 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="it">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
     <link rel="stylesheet" href="{{url_for('static', filename='css/e-commerce_card.css')}}">
     {% extends "base.html"%}
-    <title>
-        {% block title %}Catalogo Alveari{% endblock %}
-    </title>
+    {% block title %}Catalogo Alveari{% endblock %}
 </head>
 <body>
 
 {% block content %}
 <!--For Page-->
 <div class="page">
-
+    <h1 class="text-secondary">Catalogo Alveari</h1>
     <!--For Row containing all card-->
     <div class="row">
 
         {% for alveare in alveari_disponibili %}
-        {% if alveare.percentuale_disponibile>=25 %}
         <!--Card 1-->
         <div class="col-md-4">
             <div class="card card-cascade card-ecommerce wider shadow mb-5 ">
@@ -39,7 +34,7 @@
 
                     <!--Card Title-->
                     <h4 class="card-title"><strong><a
-                            href="{{url_for('ga.informazioni_alveare', alveare_id=alveare.id)}}">{{alveare.nome}}</a></strong>
+                            href="{{url_for('views.informazioni_alveare', alveare_id=alveare.id)}}">{{alveare.nome}}</a></strong>
                     </h4>
 
                     <!-- Card Description-->
@@ -53,7 +48,6 @@
                 </div>
             </div>
         </div>
-        {% endif %}
         {% endfor %}
 
     </div>

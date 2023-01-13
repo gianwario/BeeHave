@@ -34,19 +34,19 @@
                     </div>
                     {%if current_user.is_authenticated and not session['isApicoltore'] %}
                     <div class="buttons d-flex flex-row mt-5 gap-3">
-                        <form action="/affitta_alveare" method="post">
+                        <form action="/adotta_alveare" method="post">
                             {% if alveare.percentuale_disponibile >= 25 %}
                             <label for="percentuale">Scegliere percentuale da adottare: </label> <br>
-                            <input type="radio" id="percentuale" name="disp" value="25">
+                            <input type="radio" id="percentuale" name="disp" value="25" required>
                             <label for="percentuale2">25%</label><br>
                             {% if alveare.percentuale_disponibile >= 50 %}
-                            <input type="radio" id="percentuale2" name="disp" value="50">
+                            <input type="radio" id="percentuale2" name="disp" value="50" required>
                             <label for="percentuale3">50%</label><br>
                             {% if alveare.percentuale_disponibile >= 75 %}
-                            <input type="radio" id="percentuale3" name="disp" value="75">
+                            <input type="radio" id="percentuale3" name="disp" value="75" required>
                             <label for="percentuale4">75%</label><br>
                             {% if alveare.percentuale_disponibile > 75 %}
-                            <input type="radio" id="percentuale4" name="disp" value="100">
+                            <input type="radio" id="percentuale4" name="disp" value="100" required>
                             <label for="percentuale4">100%</label>
                             <br>
                             <br>
@@ -55,19 +55,18 @@
                             {% endif %}
                             {% endif %}
                             <label for="tempo">Scegliere Tempo di adozione: </label> <br>
-                            <input type="radio" id="tempo" name="tempo_adozione" value="3">
+                            <input type="radio" id="tempo" name="tempo_adozione" value="3" required>
                             <label for="tempo">3 Mesi</label><br>
-                            <input type="radio" id="tempo2" name="tempo_adozione" value="6">
+                            <input type="radio" id="tempo2" name="tempo_adozione" value="6" required>
                             <label for="tempo">6 Mesi</label><br>
-                            <input type="radio" id="tempo3" name="tempo_adozione" value="9">
+                            <input type="radio" id="tempo3" name="tempo_adozione" value="9" required>
                             <label for="tempo">9 Mesi</label><br>
-                            <input type="radio" id="tempo4" name="tempo_adozione" value="12">
+                            <input type="radio" id="tempo4" name="tempo_adozione" value="12" required>
                             <label for="tempo">12 Mesi</label>
                             <br>
                             <br>
                             <input type="hidden" name="percentuale_residua" value="{{alveare.percentuale_disponibile}}">
                             <input type="hidden" name="id_alv" value="{{alveare.id}}">
-                            <!-- Controllo per far effettuare acquisto solo al cliente -->
                             <input type="hidden" name="id_client" value="{{current_user.id}}">
                             <button type="submit" value="acquista" class="btn btn-outline-dark">Adotta</button>
                         </form>

@@ -1,24 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title></title>
-    <meta charset="UTF-8">
-    <title>Title</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="{{url_for('static', filename='css/e-commerce_card.css')}}">
     {% extends "base.html"%}
-    <title>
-        {% block title %}Catalogo Alveari Disponibili{% endblock %}
-    </title>
+        {% block title %}Catalogo Alveari Apicoltore{% endblock %}
 </head>
 <body>
 
 {% block content %}
 <!--For Page-->
 <div class="page">
-
+    <h1 class="text-secondary">I Tuoi Alveari</h1>
     <!--For Row containing all card-->
     <div class="row">
 
@@ -44,7 +36,7 @@
                     <!--Card Title-->
 
                     <h4 class="card-title"><strong><a
-                            href="{{url_for('ga.informazioni_alveare', alveare_id=alveare.id)}}">{{alveare.nome}}</a></strong>
+                            href="{{url_for('views.informazioni_alveare', alveare_id=alveare.id)}}">{{alveare.nome}}</a></strong>
                     </h4>
 
                     <!-- Card Description-->

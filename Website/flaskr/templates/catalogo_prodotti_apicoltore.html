@@ -14,18 +14,19 @@
 
 <!--For Page-->
 <div class="page">
+    <h1 class="text-secondary">I Tuoi Prodotti</h1>
     <!--For Row containing all card-->
     <div class="row">
 
-        {% for products in prodotti_in_vendita %}
-        {% if products.quantita>0 %}
+        {% for prodotto in prodotti_in_vendita %}
+
         <!--Card 1-->
         <div class="col-md-4">
             <div class="card card-cascade card-ecommerce wider shadow mb-5 ">
 
                 <!--Card image-->
                 <div class="view view-cascade overlay text-center">
-                    <img class="card-img-top" src="../static/images/{{products.img_path}}"
+                    <img class="card-img-top" src="../static/images/{{prodotto.img_path}}"
                          alt="">
                     <a>
                         <div class="mask rgba-white-slight"></div>
@@ -38,31 +39,31 @@
 
                     <!--Card Title-->
                     <h4 class="card-title"><strong><a
-                            href="{{url_for('gv.info_articolo', prodotto_id=products.id)}}">{{products.nome}}</a></strong>
+                            href="{{url_for('views.info_articolo', prodotto_id=prodotto.id)}}">{{prodotto.nome}}</a></strong>
                     </h4>
 
                     <!-- Card Description-->
-                    <p class="card-text"> {{products.descrizione}}
+                    <p class="card-text"> {{prodotto.descrizione}}
                     </p>
 
 
-                    <p class="price">{{products.prezzo}}€</p>
-
+                    <p class="price">{{prodotto.prezzo}}€</p>
+                    {% if prodotto.quantita>0 %}
                     <!--Card footer-->
                     <div class="card-footer">
 
-                        <a href="{{url_for('gv.elimina_prodotto', id_prodotto=products.id, id_api=current_user.id)}}">
+                        <a href="{{url_for('gv.elimina_prodotto', id_prodotto=prodotto.id, id_apicoltore=current_user.id)}}">
                             <button type="submit" value="acquista" class="btn btn-outline-dark">Elimina</button>
                         </a>
 
 
                     </div>
-
+                    {% endif %}
 
                 </div>
             </div>
         </div>
-        {% endif %}
+
         {% endfor %}
 
     </div>

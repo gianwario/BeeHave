@@ -1,13 +1,13 @@
-from flask import Blueprint, request, session, render_template, flash
-from flask_login import current_user, login_required
 import os
 
+from flask import Blueprint, request, session, flash
+from flask_login import current_user, login_required
 from werkzeug.utils import secure_filename
+
 from Website.flaskr import image_folder_absolute
-from Website.flaskr.Routes import area_personale, mostra_prodotti
-from Website.flaskr.gestione_utente.GestioneUtenteService import get_apicoltore_by_id
-from Website.flaskr.gestione_vendita.GestioneVenditaService import inserisci_prodotto, get_prodotto_by_id, \
-    aggiorna_immagine, get_prodotti_by_apicoltore, cancella_prodotto, acquisto_prodotto
+from Website.flaskr.Routes import mostra_prodotti, mostra_articoli_in_vendita
+from Website.flaskr.gestione_vendita.GestioneVenditaService import inserisci_prodotto, aggiorna_immagine, \
+    cancella_prodotto, acquisto_prodotto
 from Website.flaskr.model.Acquisto import Acquisto
 from Website.flaskr.model.Prodotto import Prodotto
 
@@ -48,39 +48,21 @@ def inserimento_prodotto():
         inserisci_prodotto(prod)
 
         image = request.files['imagepath']
-        nome_vasetto = 'honey_pot' + str(prod.id) + ".jpg"
-        path_image = os.path.join(image_folder_absolute, secure_filename(image.filename))
-        image.save(path_image)
-        os.rename(path_image, os.path.join(image_folder_absolute, nome_vasetto))
-        aggiorna_immagine(prod.id, nome_vasetto)
+        if image == '':
+            nome_vasetto = 'honey_pot' + str(prod.id) + ".jpg"
+            path_image = os.path.join(image_folder_absolute, secure_filename(image.filename))
+            image.save(path_image)
+            os.rename(path_image, os.path.join(image_folder_absolute, nome_vasetto))
+            aggiorna_immagine(prod.id, nome_vasetto)
     return mostra_articoli_in_vendita(current_user.id)
 
 
-@gv.route('/visualizza_prod/<int:prodotto_id>', methods=['POST', 'GET'])
-def info_articolo(prodotto_id):
-    prod = get_prodotto_by_id(prodotto_id)
-    apicoltore = get_apicoltore_by_id(prod.id_apicoltore)
-    return render_template('informazioni_prodotto.html', prodotto=prod, apicoltore=apicoltore)
-
-
-@gv.route('/visualizza_prodotti_vendita/<int:apicoltore_id>', methods=['POST', 'GET'])
+@gv.route('/elimina_prodotto/<int:id_prodotto>/<int:id_apicoltore>', methods=['POST', 'GET'])
 @login_required
-def mostra_articoli_in_vendita(apicoltore_id):
-    if session['isApicoltore']:
-        prodotti_in_vendita = get_prodotti_by_apicoltore(apicoltore_id)
-        return render_template('/catalogo_prodotti_apicoltore.html', prodotti_in_vendita=prodotti_in_vendita)
-
-
-@gv.route('/elimina_prodotto/<int:id_prodotto>/<int:id_api>', methods=['POST', 'GET'])
-@login_required
-def elimina_prodotto(id_prodotto, id_api):
-    if session['isApicoltore']:
-        prod = get_prodotto_by_id(id_prodotto)
-        path = os.path.join(image_folder_absolute, prod.img_path)
-        os.remove(path)
+def elimina_prodotto(id_prodotto, id_apicoltore):
+    if session['isApicoltore'] and id_apicoltore == current_user.id:
         cancella_prodotto(id_prodotto)
-        return area_personale()
-        # TODO fix refresh page
+        return mostra_articoli_in_vendita(current_user.id)
 
 
 @gv.route('/acquista_prodotto', methods=['POST', 'GET'])
