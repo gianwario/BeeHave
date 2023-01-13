@@ -15,10 +15,6 @@ def inserisci_area_assistenza(descrizione, assistenza):
     db.session.commit()
 
 
-def get_numero_ticket_assistenza_apicoltore(id_apicoltore):
-    return len(TicketAssistenza.query.filter_by(id_apicoltore=id_apicoltore).all())
-
-
 def get_assistenti():
     return Apicoltore.query.filter_by(assistenza=1).all()
 
