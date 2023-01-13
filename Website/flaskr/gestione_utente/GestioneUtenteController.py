@@ -6,7 +6,8 @@ from werkzeug.security import check_password_hash, generate_password_hash
 
 from Website.flaskr.Routes import home, area_personale, modifica_dati_utente_page, login_page, \
     registrazione_apicoltore_page, registrazione_cliente_page
-from Website.flaskr.gestione_utente.GestioneUtenteService import *
+from Website.flaskr.gestione_utente.GestioneUtenteService import get_apicoltore_by_email, get_cliente_by_email, \
+     controlla_email_esistente, registra_cliente, registra_apicoltore, modifica_profilo_personale
 from Website.flaskr.model.Apicoltore import Apicoltore
 from Website.flaskr.model.Cliente import Cliente
 
