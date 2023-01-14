@@ -30,7 +30,16 @@
                         <div class="d-flex flex-row"><i class='bx bxs-star'></i> <i class='bx bxs-star'></i> <i
                                 class='bx bxs-star'></i> <i class='bx bxs-star'></i> <i class='bx bx-star'></i></div>
 
-                        <span>Nome Apicoltore:{{apicoltore.nome}}</span><span>  Popolazione:{{alveare.popolazione}}</span><span>  Polline:{{alveare.polline}}</span><span>  Stato Cellette:{{alveare.stato_cellette}}</span><span>  Stato Larve:{{alveare.stato_larve}}</span><span>  % Disponibile:{{alveare.percentuale_disponibile}}</span>
+                        <span>Nome Apicoltore:{{apicoltore.nome}}</span>
+                        <span>  % Disponibile:{{alveare.percentuale_disponibile}}</span>
+                        {% if alveare.popolazione is not None %}
+                            <span>  Popolazione:{{alveare.popolazione}}</span>
+                            <span>  Polline:{{alveare.polline}}</span>
+                            <span>  Stato Cellette:{{alveare.stato_cellette}}</span>
+                            <span>  Stato Larve:{{alveare.stato_larve}}</span>
+                        {% else %}
+                            <span>  Stato Alveare non disponibile</span>
+                        {% endif %}
                     </div>
                     {% if current_user.is_authenticated %}
                         {%if not session['isApicoltore'] %}
@@ -77,7 +86,7 @@
                         <br><br>
                         <form action="{{url_for('views.modifica_stato', alveare_id=alveare.id)}}">
                               <button type="submit">
-                                Modifica Stato
+                                Aggiorna Stato
                               </button>
                             </form>
                         {% endif %}

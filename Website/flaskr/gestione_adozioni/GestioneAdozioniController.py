@@ -19,14 +19,8 @@ def inserimento_alveare():
         produzione = int(request.form.get('produzione'))
         numero_api = int(request.form.get('numero_api'))
         tipo_miele = request.form.get('tipo_miele')
-        percentuale_disponibile = 100
-        covata_compatta = int(request.form.get('covata_compatta'))
         tipo_fiore = request.form.get('tipo_fiore')
-        prezzo: int = int(request.form.get('prezzo'))
-        popolazione = request.form.get('popolazione')
-        polline = request.form.get('polline')
-        stato_cellette = request.form.get('stato_cellette')
-        stato_larve = request.form.get('stato_larve')
+        prezzo = float(request.form.get('prezzo'))
         apicoltore = current_user.id
 
         if not 0 < len(nome) <= 30:
@@ -45,10 +39,8 @@ def inserimento_alveare():
             flash('Inserimento avvenuto con successo!', category='success')
 
             alveare = Alveare(nome=nome, produzione=produzione, numero_api=numero_api, tipo_miele=tipo_miele,
-                              percentuale_disponibile=percentuale_disponibile,
-                              covata_compatta=covata_compatta, prezzo=prezzo, tipo_fiore=tipo_fiore,
-                              popolazione=popolazione, polline=polline,
-                              stato_cellette=stato_cellette, stato_larve=stato_larve, id_apicoltore=apicoltore)
+                              percentuale_disponibile=100,
+                              prezzo=prezzo, tipo_fiore=tipo_fiore, id_apicoltore=apicoltore)
 
             inserisci_alveare(alveare)
 
