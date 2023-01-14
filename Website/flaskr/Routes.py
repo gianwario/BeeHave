@@ -6,7 +6,8 @@ from flask_login import login_required, current_user
 from Website.flaskr.gestione_adozioni.GestioneAdozioniService import get_alveari, get_alveari_from_apicoltore, \
     get_alveare_by_id, get_ticket_adozione, get_ticket_from_alveare, controlla_scadenza_ticket
 from Website.flaskr.gestione_assistenza_utente.GestioneAssistenzaUtenteService import get_assistenti, \
-    get_numero_ticket_assistenza_apicoltore
+    get_numero_ticket_assistenza_apicoltore, get_ticket_assistenza_by_apicoltore, get_ticket_assistenza_by_cliente, \
+    get_ticket_by_id
 from Website.flaskr.gestione_utente.GestioneUtenteService import get_apicoltore_by_id
 from Website.flaskr.gestione_vendita.GestioneVenditaService import get_tutti_prodotti, get_prodotti_by_apicoltore, \
     get_prodotto_by_id
@@ -142,8 +143,26 @@ def mostra_alveari_adottati(cliente_id):
         return render_template('alveari_adottati.html', alveari_adottati=alveari_adottati)
     return home()
 
-    
+
 @views.route('/lista_ticket_assistenza')
 @login_required
 def mostra_lista_ticket_assistenza():
     return render_template('ticket_assistenza.html')
+
+
+@views.route('/visualizza_richieste_assistenza', methods=['POST', 'GET'])
+@login_required
+def visualizza_richieste_assistenza():
+    if session['isApicoltore']:
+        ticket_assistenza = get_ticket_assistenza_by_apicoltore(current_user.id)
+        return render_template('/ticket_assistenza.html', ticket_assistenza_ap=ticket_assistenza)
+    else:
+        ticket_assistenza = get_ticket_assistenza_by_cliente(current_user.id)
+        return render_template('/ticket_assistenza.html', ticket_assistenza_cl=ticket_assistenza)
+
+
+@views.route('/visualizza_informazioni_ticket/<int:ticket_id>', methods=['POST', 'GET'])
+@login_required
+def visualizza_info_ticket(ticket_id):
+    ticket = get_ticket_by_id(ticket_id)
+    return render_template('/singolo_ticket.html', ticket_assistenza=ticket)

@@ -48,20 +48,3 @@ def richiesta_assistenza():
 
     return richiesta_assistenza_page()
 
-
-@gau.route('/visualizza_richieste_assistenza', methods=['POST', 'GET'])
-@login_required
-def visualizza_richieste_assistenza():
-    if session['isApicoltore']:
-        ticket_assistenza = get_ticket_assistenza_by_apicoltore(current_user.id)
-        return render_template('/ticket_assistenza.html', ticket_assistenza_ap=ticket_assistenza)
-    else:
-        ticket_assistenza = get_ticket_assistenza_by_cliente(current_user.id)
-        return render_template('/ticket_assistenza.html', ticket_assistenza_cl=ticket_assistenza)
-
-
-@gau.route('/visualizza_informazioni_ticket/<int:ticket_id>', methods=['POST', 'GET'])
-@login_required
-def visualizza_info_ticket(ticket_id):
-    ticket = get_ticket_by_id(ticket_id)
-    return render_template('/singolo_ticket.html', ticket_assistenza=ticket)
