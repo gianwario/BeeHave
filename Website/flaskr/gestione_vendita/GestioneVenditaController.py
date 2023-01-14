@@ -1,13 +1,9 @@
-import os
-
 from flask import Blueprint, request, session, flash
 from flask_login import current_user, login_required
-from werkzeug.utils import secure_filename
 
-from Website.flaskr import image_folder_absolute
 from Website.flaskr.Routes import mostra_prodotti, mostra_articoli_in_vendita
-from Website.flaskr.gestione_vendita.GestioneVenditaService import inserisci_prodotto, aggiorna_immagine, \
-    cancella_prodotto, acquisto_prodotto
+from Website.flaskr.gestione_vendita.GestioneVenditaService import inserisci_prodotto, cancella_prodotto, \
+    acquisto_prodotto
 from Website.flaskr.model.Acquisto import Acquisto
 from Website.flaskr.model.Prodotto import Prodotto
 
@@ -27,33 +23,27 @@ def inserimento_prodotto():
         quantita = int(request.form.get('quantita'))
         apicoltore = current_user.id
 
-        if len(nome) > 30:
-            flash('Nome troppo lungo!', category='error')
-        elif len(descrizione) > 200:
-            flash('Descrizione troppo lunga!', category='error')
-        elif len(localita) > 40:
-            flash('Località invalida!', category='error')
-        elif prezzo > 1000:
-            flash('Prezzo invalido!', category='error')
-        elif len(tipologia) > 30:
-            flash('Nome tipologia lungo!', category='error')
-        elif quantita > 1000000:
-            flash('Quantità invalida!', category='error')
+        if not 0 < len(nome) <= 30:
+            flash('Lunghezza nome non valida!', category='error')
+        elif not 0 < len(descrizione) <= 200:
+            flash('Lunghezza descrizione non valida!', category='error')
+        elif not 0 < len(localita) <= 40:
+            flash('Lunghezza località non valida!', category='error')
+        elif not 0 < peso <= 1000:
+            flash('Peso non è nel range corretto', category='error')
+        elif not 0 < len(tipologia) <= 30:
+            flash('Lunghezza tipologia non valida!', category='error')
+        elif not 0 < prezzo <= 1000:
+            flash('Prezzo non è nel range corretto!', category='error')
+        elif not 0 < quantita <= 1000000:
+            flash('Quantità non è nel range corretto!', category='error')
         else:
             flash('Inserimento avvenuto con successo!', category='success')
 
-        prod = Prodotto(nome=nome, descrizione=descrizione, localita=localita, peso=peso, img_path='ssd', prezzo=prezzo,
-                        quantita=quantita, id_apicoltore=apicoltore, tipologia=tipologia)
+            prod = Prodotto(nome=nome, descrizione=descrizione, localita=localita, peso=peso, prezzo=prezzo,
+                            quantita=quantita, id_apicoltore=apicoltore, tipologia=tipologia)
 
-        inserisci_prodotto(prod)
-
-        image = request.files['imagepath']
-        if image == '':
-            nome_vasetto = 'honey_pot' + str(prod.id) + ".jpg"
-            path_image = os.path.join(image_folder_absolute, secure_filename(image.filename))
-            image.save(path_image)
-            os.rename(path_image, os.path.join(image_folder_absolute, nome_vasetto))
-            aggiorna_immagine(prod.id, nome_vasetto)
+            inserisci_prodotto(prod)
     return mostra_articoli_in_vendita(current_user.id)
 
 

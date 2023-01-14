@@ -1,18 +1,9 @@
-from flask_login import current_user
-
 from Website.flaskr.model.Prodotto import Prodotto
 from .. import db
 
 
 def get_prodotto_by_id(id_prodotto):
     return Prodotto.query.filter_by(id=id_prodotto).first()
-
-
-def aggiorna_immagine(id_prodotto, image):
-    prodotto = get_prodotto_by_id(id_prodotto)
-    prodotto.img_path = str(image)
-    db.session.flush()
-    db.session.commit()
 
 
 def cancella_prodotto(prodotto_id):

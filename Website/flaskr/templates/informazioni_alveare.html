@@ -15,7 +15,7 @@
         <div class="row g-0">
             <div class="col-md-6 border-end">
                 <div class="d-flex flex-column justify-content-center">
-                    <div class="main_image"><img src="../static/images/{{alveare.img_path}}" id="main_product_image"
+                    <div class="main_image"><img src="../static/images/honey_pot.jpg" id="main_product_image"
                                                  width="350" alt=""></div>
 
                 </div>
@@ -30,7 +30,7 @@
                         <div class="d-flex flex-row"><i class='bx bxs-star'></i> <i class='bx bxs-star'></i> <i
                                 class='bx bxs-star'></i> <i class='bx bxs-star'></i> <i class='bx bx-star'></i></div>
 
-                        <span>Nome Apicoltore:{{apicoltore.nome}}</span><span>  Popolazione:{{alveare.popolazione}}</span><span>  Polline:{{alveare.polline}}</span><span>  % Disponibile:{{alveare.percentuale_disponibile}}</span>
+                        <span>Nome Apicoltore:{{apicoltore.nome}}</span><span>  Popolazione:{{alveare.popolazione}}</span><span>  Polline:{{alveare.polline}}</span><span>  Stato Cellette:{{alveare.stato_cellette}}</span><span>  Stato Larve:{{alveare.stato_larve}}</span><span>  % Disponibile:{{alveare.percentuale_disponibile}}</span>
                     </div>
                     {% if current_user.is_authenticated %}
                         {%if not session['isApicoltore'] %}

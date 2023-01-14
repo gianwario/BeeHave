@@ -14,10 +14,6 @@
 <section class="background-radial-gradient overflow-hidden">
     <style>
 
-        .selector-for-some-widget {
-            box-sizing: content-box;
-        }
-
         .background-radial-gradient {
             background-image: url("https://images.unsplash.com/photo-1498936178812-4b2e558d2937?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80");
             background-size: cover;
@@ -188,18 +184,19 @@
                                         <label for="stato_cellette">ottimo</label>
                                     </div>
                                 </div>
+                                <div class="col-md-6 mb-4">
+                                    <div class="form-outline">
+                                        <label for="stato_larve">Inserisci stato larve: </label> <br>
+                                        <input type="radio" id="stato_larve" name="stato_larve" value="scarso">
+                                        <label for="stato_larve">scarso</label>
+                                        <input type="radio" id="stato_larve2" name="stato_larve" value="medio">
+                                        <label for="stato_larve2">medio</label>
+                                        <input type="radio" id="stato_larve3" name="stato_larve" value="ottimo">
+                                        <label for="stato_larve3">ottimo</label>
+                                    </div>
+                                </div>
                             </div>
 
-                            <div class="form-outline">
-                                <label for="image">Carica immagine</label>
-                                <input id="image" accept="image/*" type="file" name="imagepath" style="display:none;">
-                                <button onclick="document.getElementById('image').click()" style="background-color: orange; opacity: 70%;
-                      border: none; border-radius: 10px 10px 10px 10px; color: black; padding: 7px 40px; text-decoration: none; margin: 4px 2px;
-                      cursor: pointer;">Scegli File
-                                </button>
-                                </input>
-                                <br>
-                            </div>
                             <div style="text-align:center;">
                                 <br>
                                 <input type="submit" value="Conferma Inserimento"/> <input type="reset"
