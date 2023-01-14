@@ -86,11 +86,6 @@ def mostra_alveari():
     alveari_disponibili = get_alveari()
     if current_user.is_authenticated and session['isApicoltore']:
         return render_template('catalogo_alveari_apicoltore.html', alveari_disponibili=alveari_disponibili)
-    #fix for alveare in alveari_disponibili:
-    #    if alveare.percentuale_disponibile < 25 or controlla_scadenza_ticket(alveare.id):
-    #        alveari_disponibili.remove(alveare)
-
-
     return render_template('catalogo_alveari.html', alveari_disponibili=alveari_disponibili)
 
 
