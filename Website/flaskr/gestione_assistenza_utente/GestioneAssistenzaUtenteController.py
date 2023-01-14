@@ -1,10 +1,9 @@
-from flask import Blueprint, request, flash, session, render_template
+from flask import Blueprint, request, flash, session
 from flask_login import login_required, current_user
 
 from Website.flaskr.Routes import crea_area_assistenza_page, area_personale, home, richiesta_assistenza_page
 from Website.flaskr.gestione_assistenza_utente.GestioneAssistenzaUtenteService import inserisci_area_assistenza, \
-    controlla_apicoltore, richiedi_assistenza, get_ticket_assistenza_by_apicoltore, get_ticket_assistenza_by_cliente, \
-    get_ticket_by_id
+    controlla_apicoltore, richiedi_assistenza
 
 gau = Blueprint('gau', __name__)
 
@@ -14,13 +13,12 @@ gau = Blueprint('gau', __name__)
 def crea_area_assistenza():
     if request.method == 'POST' and session['isApicoltore']:
         descrizione = request.form.get('descrizione')
-        assistenza = bool(request.form.get('assistenza'))
-        if not 0 < len(descrizione) <= 200:
+        if descrizione is None or not 0 < len(descrizione) <= 200:
             flash('La lunghezza della descrizione non è valida!', category='error')
             return crea_area_assistenza_page()
         current_user.descrizione = descrizione
-        current_user.assistenza = assistenza
-        inserisci_area_assistenza(descrizione, assistenza)
+        current_user.assistenza = True
+        inserisci_area_assistenza(descrizione, assistenza=True)
 
     return area_personale()
 
@@ -47,21 +45,3 @@ def richiesta_assistenza():
         return home()
 
     return richiesta_assistenza_page()
-
-
-@gau.route('/visualizza_richieste_assistenza', methods=['POST', 'GET'])
-@login_required
-def visualizza_richieste_assistenza():
-    if session['isApicoltore']:
-        ticket_assistenza = get_ticket_assistenza_by_apicoltore(current_user.id)
-        return render_template('/ticket_assistenza.html', ticket_assistenza_ap=ticket_assistenza)
-    else:
-        ticket_assistenza = get_ticket_assistenza_by_cliente(current_user.id)
-        return render_template('/ticket_assistenza.html', ticket_assistenza_cl=ticket_assistenza)
-
-
-@gau.route('/visualizza_informazioni_ticket/<int:ticket_id>', methods=['POST', 'GET'])
-@login_required
-def visualizza_info_ticket(ticket_id):
-    ticket = get_ticket_by_id(ticket_id)
-    return render_template('/singolo_ticket.html', ticket_assistenza=ticket)

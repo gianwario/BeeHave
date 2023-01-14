@@ -1,3 +1,5 @@
+import datetime
+
 from .. import db
 from sqlalchemy.sql import func
 
@@ -11,4 +13,4 @@ class TicketAdozione(db.Model):
     data_inizio_adozione = db.Column(db.DateTime(timezone=True), default=func.now(), nullable=True)
 
     def data_fine_adozione(self):
-        return self.data_inizio_adozione + self.tempo_adozione
+        return self.data_inizio_adozione + datetime.timedelta(days=self.tempo_adozione * 30)
