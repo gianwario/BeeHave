@@ -1,10 +1,9 @@
-from flask import Blueprint, request, flash, session, render_template
+from flask import Blueprint, request, flash, session
 from flask_login import login_required, current_user
 
 from Website.flaskr.Routes import crea_area_assistenza_page, area_personale, home, richiesta_assistenza_page
 from Website.flaskr.gestione_assistenza_utente.GestioneAssistenzaUtenteService import inserisci_area_assistenza, \
-    controlla_apicoltore, richiedi_assistenza, get_ticket_assistenza_by_apicoltore, get_ticket_assistenza_by_cliente, \
-    get_ticket_by_id
+    controlla_apicoltore, richiedi_assistenza
 
 gau = Blueprint('gau', __name__)
 
@@ -47,4 +46,3 @@ def richiesta_assistenza():
         return home()
 
     return richiesta_assistenza_page()
-

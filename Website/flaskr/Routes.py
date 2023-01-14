@@ -1,10 +1,8 @@
-from datetime import datetime
-
 from flask import render_template, Blueprint, session
 from flask_login import login_required, current_user
 
 from Website.flaskr.gestione_adozioni.GestioneAdozioniService import get_alveari, get_alveari_from_apicoltore, \
-    get_alveare_by_id, get_ticket_adozione, get_ticket_from_alveare, controlla_scadenza_ticket
+    get_alveare_by_id, get_ticket_adozione
 from Website.flaskr.gestione_assistenza_utente.GestioneAssistenzaUtenteService import get_assistenti, \
     get_numero_ticket_assistenza_apicoltore, get_ticket_assistenza_by_apicoltore, get_ticket_assistenza_by_cliente, \
     get_ticket_by_id
