@@ -1,85 +1,91 @@
-
 <!DOCTYPE html>
 <html>
 <head>
 
     <meta charset="UTF-8">
-     <meta name="viewport" content="width=device-width, initial-scale=1">
-        {%extends "base.html" %}
-    {%block title%}Inserimento Prodotto{%endblock%}
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {%extends "base.html" %}
+    <title>
+        {%block title%}Inserimento Prodotto{%endblock%}
+    </title>
 </head>
 <body>
 {% block content%}
 <section class="background-radial-gradient overflow-hidden">
-  <style>
+    <style>
 
-  .background-radial-gradient {
-    background-image: url("https://images.unsplash.com/photo-1613548058193-1cd24c1bebcf?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80");
-    background-size:cover;
-  }
-  .bg-glass {
+        .selector-for-some-widget {
+            box-sizing: content-box;
+        }
 
-    background-color: hsla(0, 0%, 100%, 0.9) !important;
-    backdrop-filter: saturate(600%) blur(25px);
-  }
+        .background-radial-gradient {
+            background-image: url("https://images.unsplash.com/photo-1613548058193-1cd24c1bebcf?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80");
+            background-size: cover;
+        }
 
-  input[type=button], input[type=submit], input[type=reset], input[type=file] {
-  background-color: orange;
-  opacity: 70%;
-  border: none;
-  border-radius: 10px 10px 10px 10px;
-  color: black;
-  padding: 7px 40px;
-  text-decoration: none;
-  margin: 4px 2px;
-  cursor: pointer;
-}
-</style>
+        .bg-glass {
+
+            background-color: hsla(0, 0%, 100%, 0.9) !important;
+            backdrop-filter: saturate(600%) blur(25px);
+        }
+
+        input[type=button], input[type=submit], input[type=reset], input[type=file] {
+            background-color: orange;
+            opacity: 70%;
+            border: none;
+            border-radius: 10px 10px 10px 10px;
+            color: black;
+            padding: 7px 40px;
+            text-decoration: none;
+            margin: 4px 2px;
+            cursor: pointer;
+        }
+    </style>
 
     <div class="container px-4 py-5 px-md-5 text-center text-lg-start my-5">
         <div class="row gx-lg-5 align-items-high mb-5">
             <div class="col-lg-6 mb-5 mb-lg-0" style="z-index: 10">
                 <h1 class="my-5 display-3 fw-bold ls-tight" style="color: black">
-                    Inserisci qui <br />
-             <span style="color: white">il tuo prodotto!</span>
+                    Inserisci qui <br/>
+                    <span style="color: white">il tuo prodotto!</span>
                 </h1>
             </div>
             <div class="col-lg-6 mb-5 mb-lg-0 position-relative">
                 <div id="radius-shape-1" class="position-absolute rounded-circle shadow-5-strong"></div>
                 <div id="radius-shape-2" class="position-absolute shadow-5-strong"></div>
 
-                <div class="card bg-glass">
-                    <div class="card-body px-4 py-5 px-md-5">
-                        <form action="/inserimento_prodotto" enctype="multipart/form-data" method="post">
-                            <div class="row">
-                                <div class="col-md-6 mb-4">
-                                    <div class="form-outline">
-                                        <label for="nome">Inserire nome: </label>
-                                                <input
-                                                        id="nome"
-                                                        name="nome"
-                                                        type="text"
-                                                        required=true
-                                                        placeholder="Inserisci nome"
-                                                />
+                    <div class="card bg-glass">
+                        <div class="card-body px-4 py-5 px-md-5">
+                            <form action="/inserimento_prodotto" enctype="multipart/form-data" method="post">
+                                <div class="row">
+                                    <div class="col-md-6 mb-4">
+                                        <div class="form-outline">
+                                            <label for="nome">Inserire nome: </label>
+                                            <input
+                                                    id="nome"
+                                                    name="nome"
+                                                    type="text"
+                                                    required=true
+                                                    placeholder="Inserisci nome"
+                                            />
+                                        </div>
                                     </div>
-                                </div>
-                                 <div class="col-md-6 mb-4">
-                                    <div class="form-outline">
+                                    <div class="col-md-6 mb-4">
+                                        <div class="form-outline">
                                             <label for="descrizione">Inserire descrizione: </label>
-                                                    <input
-                                                            id="descrizione"
-                                                            name="descrizione"
-                                                            type="text" required=true
-                                                            placeholder="Inserisci descrizione"
-                                                    />
+                                            <input
+                                                    id="descrizione"
+                                                    name="descrizione"
+                                                    type="text" required=true
+                                                    placeholder="Inserisci descrizione"
+                                            />
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6 mb-4">
-                                    <div class="form-outline">
-                                        <label for="Localita">Selezionare provincia: </label>
+                                <div class="row">
+                                    <div class="col-md-6 mb-4">
+                                        <div class="form-outline">
+                                            <label for="Localita">Selezionare provincia: </label>
                                             <select id="localita" name="localita">
                                                 <option value="Agrigento">Agrigento</option>
                                                 <option value="Alessandria">Alessandria</option>
@@ -191,11 +197,11 @@
                                                 <option value="Vicenza">Vicenza</option>
                                                 <option value="Viterbo">Viterbo</option>
                                             </select>
+                                        </div>
                                     </div>
-                                </div>
-                                 <div class="col-md-6 mb-4">
-                                    <div class="form-outline">
-                                         <label for="peso">Inserire peso in grammi: </label> <br>
+                                    <div class="col-md-6 mb-4">
+                                        <div class="form-outline">
+                                            <label for="peso">Inserire peso in grammi: </label> <br>
                                             <input type="radio" id="peso" name="peso" value="250">
                                             <label for="peso">250</label>
                                             <input type="radio" id="peso2" name="peso" value="500">
@@ -204,13 +210,13 @@
                                             <label for="peso">750</label>
                                             <input type="radio" id="peso4" name="peso" value="1000">
                                             <label for="peso">1000</label>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6 mb-4">
-                                    <div class="form-outline">
-                                        <label for="tipologia">Inserire tipologia:</label>
+                                <div class="row">
+                                    <div class="col-md-6 mb-4">
+                                        <div class="form-outline">
+                                            <label for="tipologia">Inserire tipologia:</label>
                                             <input
                                                     id="tipologia"
                                                     name="tipologia"
@@ -218,35 +224,34 @@
                                                     required=true
                                                     placeholder="Inserisci tipologia"
                                             />
+                                        </div>
                                     </div>
-                                </div>
-                                 <div class="col-md-6 mb-4">
-                                    <div class="form-outline">
+                                    <div class="col-md-6 mb-4">
+                                        <div class="form-outline">
                                             <label for="prezzo">Inserire prezzo: </label>
-                                                <input
-                                                        id="prezzo"
-                                                        name="prezzo"
-                                                        type="number"
-                                                        required=true
-                                                        placeholder="Inserisci prezzo"
-                                                />
+                                            <input
+                                                    id="prezzo"
+                                                    name="prezzo"
+                                                    type="number"
+                                                    required=true
+                                                    placeholder="Inserisci prezzo"
+                                            />
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                             <div class="row">
-                                <div class="col-md-6 mb-4">
-                                    <div class="form-outline">
-                                        <label for="quantita" required=true>Inserire quantit&#224:</label>
+                                <div class="row">
+                                    <div class="col-md-6 mb-4">
+                                        <div class="form-outline">
+                                            <label for="quantita" required=true>Inserire quantit&#224:</label>
                                             <input
                                                     id="quantita"
                                                     name="quantita"
                                                     type="number" required=true
                                                     placeholder="Inserisci quantit&#224"
                                             />
+                                        </div>
                                     </div>
-                                </div>
-                                 <div class="col-md-6 mb-4">
-                                    <div class="form-outline">
+                                    <div class="col-md-6 mb-4">
                                         <div class="form-outline">
                                             <label for="image">Carica immagine</label>
                                             <input  id="image" accept="image/*" type="file" name="imagepath" style="display:none;">
@@ -271,9 +276,7 @@
                </div>
                         </form>
                 </div>
-            </div>
         </div>
-    </div>
 </section>
 {% endblock %}
 </body>

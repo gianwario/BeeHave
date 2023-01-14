@@ -141,3 +141,9 @@ def mostra_alveari_adottati(cliente_id):
         alveari_adottati = get_ticket_adozione(cliente_id)
         return render_template('alveari_adottati.html', alveari_adottati=alveari_adottati)
     return home()
+
+    
+@views.route('/lista_ticket_assistenza')
+@login_required
+def mostra_lista_ticket_assistenza():
+    return render_template('ticket_assistenza.html')
