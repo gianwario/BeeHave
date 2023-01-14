@@ -80,15 +80,19 @@ def modifica_stato_alveare():
 @login_required
 def adotta_alveare():
     if request.method == 'POST' and not session['isApicoltore']:
-        percentuale = int(request.form.get('disp'))
+        tempo_adozione = request.form.get('tempo_adozione')
+        percentuale = request.form.get('disp')
         id_alveare = int(request.form.get('id_alv'))
         percentuale_residua = int(request.form.get('percentuale_residua'))
         id_cliente = int(request.form.get('id_client'))
-        tempo_adozione = int(request.form.get('tempo_adozione'))
-        if percentuale > percentuale_residua:
-            flash('Quantitá non disponibile!', category='error')
+        if tempo_adozione is None or not tempo_adozione.isdigit() or not 3 <= int(tempo_adozione) <= 12:
+            flash('TempoAdozione non è nel range corretto!', category='error')
+        elif percentuale is None or not percentuale.isdigit() or not 25 <= int(percentuale) <= 100:
+            flash('Percentuale Adozione non è nel range corretto!', category='error')
+        if int(percentuale) > percentuale_residua:
+            flash('Percentuale Adozione è maggiore di Percentuale Disponibile!', category='error')
         else:
-            ticket = TicketAdozione(id_cliente=id_cliente, id_alveare=id_alveare, percentuale_adozione=percentuale,
-                                    data_inizio_adozione=datetime.now(), tempo_adozione=tempo_adozione)
+            ticket = TicketAdozione(id_cliente=id_cliente, id_alveare=id_alveare, percentuale_adozione=int(percentuale),
+                                    data_inizio_adozione=datetime.now(), tempo_adozione=int(tempo_adozione))
             affitto_alveare(ticket, percentuale)
     return mostra_alveari()

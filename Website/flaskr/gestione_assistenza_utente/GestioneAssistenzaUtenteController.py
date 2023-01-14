@@ -13,13 +13,12 @@ gau = Blueprint('gau', __name__)
 def crea_area_assistenza():
     if request.method == 'POST' and session['isApicoltore']:
         descrizione = request.form.get('descrizione')
-        assistenza = bool(request.form.get('assistenza'))
-        if not 0 < len(descrizione) <= 200:
+        if descrizione is None or not 0 < len(descrizione) <= 200:
             flash('La lunghezza della descrizione non è valida!', category='error')
             return crea_area_assistenza_page()
         current_user.descrizione = descrizione
-        current_user.assistenza = assistenza
-        inserisci_area_assistenza(descrizione, assistenza)
+        current_user.assistenza = True
+        inserisci_area_assistenza(descrizione, assistenza=True)
 
     return area_personale()
 
