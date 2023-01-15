@@ -26,7 +26,7 @@
                 <ul class="nav nav-pills nav-stacked">
                     <li class="nav-item active"><a class="nav-link" href="#"> <i class="fa fa-user"></i> Profile</a></li>
                     <li class="nav-item">{% if current_user.assistenza%}<a class="nav-link" href="{{url_for('views.visualizza_richieste_assistenza')}}"> <i class="fa fa-calendar"></i>  Visualizza le tue richieste di assistenza <span
-                                class="label label-warning pull-right r-activity">{{ticket}} </span></a>{%else%}<a href="{{url_for('views.crea_area_assistenza_page')}}"> <i class="fa fa-calendar"></i> Crea area
+                                class="label label-warning pull-right r-activity">{{ticket}} </span></a>{%else%}<a class="nav-link" href="{{url_for('views.crea_area_assistenza_page')}}"> <i class="fa fa-calendar"></i> Crea area
                         assistenza</a>{%endif%} </li>
                     <li class="nav-item"><a class="nav-link" href="{{url_for('views.modifica_dati_utente_page')}}"> <i class="fa fa-user"></i> Modifica
                         Account</a></li>
