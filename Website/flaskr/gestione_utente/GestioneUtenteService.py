@@ -19,16 +19,6 @@ def get_cliente_by_id(id_cliente):
     return Cliente.query.filter_by(id=id_cliente).first()
 
 
-def aggiorna_avatar(id, img):
-    if session['isApicoltore']:
-        utente = get_apicoltore_by_id(current_user.id)
-    else:
-        utente = get_cliente_by_id(current_user.id)
-    utente.img_profilo = str(img)
-    db.session.flush()
-    db.session.commit()
-
-
 def get_cliente_by_email(email):
     return Cliente.query.filter_by(email=email).first()
 

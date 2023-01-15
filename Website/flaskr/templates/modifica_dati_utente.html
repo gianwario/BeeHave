@@ -10,13 +10,13 @@
 <body>
 {% block content %}
 <div class="container bootstrap snippets bootdey">
-    <h1 class="text-primary">Modifica Profilo</h1>
+    <h1 class="text-secondary">Modifica Profilo</h1>
     <hr>
     <div class="row">
         <div class="col-md-3">
             <div class="text-center">
-                <img src="../static/images/{{current_user.img_profilo}}" class="avatar img-circle img-thumbnail"
-                     alt="../static/images/beekeeper.png}}">
+                <img src="../static/images/beekeeper.png" class="avatar img-circle img-thumbnail"
+                     alt="../static/images/beekeeper.png">
             </div>
         </div>
 
@@ -82,30 +82,22 @@
                                type="password">
                     </div>
                 </div>
-                <div class="form-group">
-                    <label class="col-lg-3 control-label" for="image">Carica immagine</label>
-                    <input id="image" accept="image/*" type="file" name="imagepath">
-                    {% if session['isApicoltore'] %}
-                    <input type="hidden" name="user_type" value="apicoltore">
-                    {% endif %}
-                    <br>
+
+                <div class="form-outline mb-4">
+                    {% with messages = get_flashed_messages(category_filter=["error"]) %}
+                        {% if messages %}
+                            <p style="color:red">{{ messages[0] }}</p>
+                        {% endif %}
+                    {% endwith %}
                 </div>
-                {% with messages = get_flashed_messages(category_filter=["error"]) %}
-                {% if messages %}
-                {% for message in messages %}
-                <p style="color:red">{{ message }}</p>
-                {% endfor %}
-                {% endif %}
-                {% endwith %}
                 <div class="form-group">
                     <label class="col-md-4 control-label"></label>
                     <div class="col-md-4"><br>
+                        <button type="button" class="btn btn-secondary btn-md"><a style="text-decoration: none; color:white"
+                                    href="{{url_for('views.area_personale')}}">Annulla <span
+                                    class="glyphicon glyphicon-remove"></span></a></button>
                         <button type="submit" class="btn btn-warning">Conferma Modifiche <span
                                 class="glyphicon glyphicon-ok-sign"></span></button>
-                        <a href="{{url_for('views.area_personale')}}">
-                            <button type="button" class="btn btn-secondary btn-sm">Annulla <span
-                                    class="glyphicon glyphicon-remove"></span></button>
-                        </a>
                     </div>
                 </div>
             </form>

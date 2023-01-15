@@ -1,16 +1,11 @@
-import os
-
 from flask import Blueprint, request, flash, session
 from flask_login import login_user, logout_user, login_required, current_user
 from werkzeug.security import check_password_hash, generate_password_hash
-from werkzeug.utils import secure_filename
 
-from Website.flaskr import image_folder_absolute
 from Website.flaskr.Routes import home, area_personale, modifica_dati_utente_page, login_page, \
     registrazione_page
 from Website.flaskr.gestione_utente.GestioneUtenteService import get_apicoltore_by_email, get_cliente_by_email, \
-    controlla_email_esistente, registra_utente, modifica_profilo_personale, aggiorna_avatar, \
-    aggiorna_avatar
+    controlla_email_esistente, registra_utente, modifica_profilo_personale
 from Website.flaskr.model.Apicoltore import Apicoltore
 from Website.flaskr.model.Cliente import Cliente
 
@@ -82,30 +77,6 @@ def registrazione():
                                    email=email, password=generate_password_hash(pwd, method='sha256'))
 
                 registra_utente(user)
-                avatar = 'beekeeper.png'
-                nome_avatar_cliente = 'avatar_cliente' + str(user.id) + ".jpg"
-                nome_avatar_apicoltore = 'avatar_apicoltore' + str(user.id) + ".jpg"
-
-                try:
-                    image = request.files['imagepath']
-                    path_image = os.path.join(image_folder_absolute, secure_filename(image.filename))
-                    try:
-                        image.save(path_image)
-                        if is_apicoltore:
-                            os.rename(path_image, os.path.join(image_folder_absolute, nome_avatar_apicoltore))
-                            aggiorna_avatar(user.id, nome_avatar_apicoltore)
-                        else:
-                            os.rename(path_image, os.path.join(image_folder_absolute, nome_avatar_cliente))
-                            aggiorna_avatar(user.id, nome_avatar_cliente)
-                    except Exception as e:
-                        print(e)
-                except Exception as e:
-                    print(e)
-                    if is_apicoltore:
-                        aggiorna_avatar(user.id, avatar)
-                    else:
-                        aggiorna_avatar(user.id, avatar)
-
                 session['isApicoltore'] = is_apicoltore
                 login_user(user)
                 return home()
@@ -126,34 +97,16 @@ def modifica_dati_utente():
         pwd = request.form.get('nuova_psw')
         cpwd = request.form.get('nuova_ripeti_psw')
 
-        nome_avatar_cliente = 'avatar_cliente' + str(current_user.id) + ".jpg"
-        nome_avatar_apicoltore = 'avatar_apicoltore' + str(current_user.id) + ".jpg"
-
         if controlla_campi(nome, cognome, indirizzo, citta, cap, telefono, email):
             if not controlla_email_esistente(email) and email != current_user.email:
                 flash("Email già esistente", category="error")
             elif pwd != '':
-                # todo Avvisare L'utente che i cambiamenti avvengono solo dopo aver inserito pwd
                 if controlla_password(pwd, cpwd):
                     modifica_profilo_personale(nome, cognome, email, telefono, citta, cap, indirizzo, pwd)
-                    try:
-                        image = request.files['imagepath']
-                        path_image = os.path.join(image_folder_absolute, secure_filename(image.filename))
-                        try:
-                            image.save(path_image)
-                            if session['isApicoltore']:
-                                os.remove(os.path.join(image_folder_absolute, nome_avatar_apicoltore))
-                                os.rename(path_image, os.path.join(image_folder_absolute, nome_avatar_apicoltore))
-                                aggiorna_avatar(current_user.id, nome_avatar_apicoltore)
-                            else:
-                                os.remove(os.path.join(image_folder_absolute, nome_avatar_cliente))
-                                os.rename(path_image, os.path.join(image_folder_absolute, nome_avatar_cliente))
-                                aggiorna_avatar(current_user.id, nome_avatar_cliente)
-                        except Exception as e:
-                            print(e)
-                    except Exception as e:
-                        print(e)
-            return area_personale()
+                    return area_personale()
+            else:
+                modifica_profilo_personale(nome, cognome, email, telefono, citta, cap, indirizzo, pwd)
+                return area_personale()
     return modifica_dati_utente_page()
 
 
@@ -179,11 +132,11 @@ def controlla_campi(nome, cognome, indirizzo, citta, cap, telefono, email):
 
 def controlla_password(pwd, cpwd):
     if len(pwd) < 8:
-        flash("Lunghezza password deve essere almeno 8 caratteri", category="error")
+        flash("Lunghezza password deve essere almeno 8 caratteri.", category="error")
     elif not (controllo_caratteri_speciali(pwd) and controllo_numeri(pwd)):
-        flash("Inserire nel campo password almeno un carattere speciale ed un numero", category="error")
+        flash("Inserire nel campo password almeno un carattere speciale ed un numero.", category="error")
     elif pwd != cpwd:
-        flash("Password e Conferma Password non combaciano", category="error")
+        flash("Password e Conferma Password non combaciano.", category="error")
     else:
         return True
     return False

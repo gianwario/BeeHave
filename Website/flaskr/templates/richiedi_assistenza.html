@@ -9,9 +9,9 @@
 <body>
 {% block content %}
 <div class="container">
+    <h1 class="text-secondary">Crea Area Assistenza</h1>
     <form class="well form-horizontal" action="/richiesta_assistenza" method="POST" id="contact_form">
         <fieldset>
-            <legend><h2><b>Richiesta Assistenza</b></h2></legend>
             <br>
             <input type="hidden" value='{{id_apicoltore}}' name="id_apicoltore">
             <div class="form-group">
@@ -32,11 +32,13 @@
                     </div>
                 </div>
             </div>
-            {% with messages = get_flashed_messages(category_filter=["error"]) %}
-            {% if messages %}
-            <p style="color:red">{{ messages[0] }}</p>
-            {% endif %}
-            {% endwith %}
+            <div class="form-outline mb-4">
+                {% with messages = get_flashed_messages(category_filter=["error"]) %}
+                    {% if messages %}
+                        <p style="color:red">{{ messages[0] }}</p>
+                    {% endif %}
+                {% endwith %}
+            </div>
             <div class="form-group">
                 <label class="col-md-4 control-label"></label>
                 <div class="col-md-4"><br>
