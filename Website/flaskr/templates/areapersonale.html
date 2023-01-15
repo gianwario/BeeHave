@@ -2,28 +2,14 @@
 <html lang="en">
 <head>
     <link rel="stylesheet" href="{{url_for('static', filename='css/areautente.css')}}">
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
-
     {% extends "base.html"%}
-    <title>
-        {% block title %}Area Personale{% endblock %}
-    </title>
-
+    {% block title %}Area Personale{% endblock %}
 </head>
 <body>
 {% block content %}
-<br><br><br>
-<!-- Latest compiled and minified CSS -->
-
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-
-<!-- Optional theme -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
-
-<!-- Latest compiled and minified JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 
 <div class="container bootstrap snippets bootdey">
+    <br><br>
     <div class="row">
 
         <div class="profile-nav col-md-3">
@@ -38,12 +24,11 @@
                 </div>
 
                 <ul class="nav nav-pills nav-stacked">
-                    <li class="active"><a href="#"> <i class="fa fa-user"></i> Profile</a></li>
-                    <li><a href="{{url_for('views.crea_area_assistenza_page')}}"> <i class="fa fa-calendar"></i> {% if
-                        current_user.assistenza%} Visualizza le tue richieste di assistenza <span
-                                class="label label-warning pull-right r-activity">{{ticket}} </span>{%else%}Crea area
-                        assistenza{%endif%} </a></li>
-                    <li><a href="{{url_for('views.modifica_dati_utente_page')}}"> <i class="fa fa-user"></i> Modifica
+                    <li class="nav-item active"><a class="nav-link" href="#"> <i class="fa fa-user"></i> Profile</a></li>
+                    <li class="nav-item">{% if current_user.assistenza%}<a class="nav-link" href="{{url_for('views.visualizza_richieste_assistenza')}}"> <i class="fa fa-calendar"></i>  Visualizza le tue richieste di assistenza <span
+                                class="label label-warning pull-right r-activity">{{ticket}} </span></a>{%else%}<a href="{{url_for('views.crea_area_assistenza_page')}}"> <i class="fa fa-calendar"></i> Crea area
+                        assistenza</a>{%endif%} </li>
+                    <li class="nav-item"><a class="nav-link" href="{{url_for('views.modifica_dati_utente_page')}}"> <i class="fa fa-user"></i> Modifica
                         Account</a></li>
                 </ul>
             </div>

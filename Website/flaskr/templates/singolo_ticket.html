@@ -2,8 +2,6 @@
 <html lang="en">
 <head>
     <link rel="stylesheet" href="{{url_for('static', filename='css/singolo_ticket.css')}}">
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
-
     {% extends "base.html"%}
     <title>
         {% block title %}
@@ -13,22 +11,19 @@
 
 </head>
 {% block content %}
-<body>
     <div class="container">
-        <div class="row">
+        <h1 class="text-secondary">{{ticket_assistenza.nome}}</h1>
         <div class="col align-self-center">
-            <h1>{{ticket_assistenza.nome}}</h1>
             {{ticket_assistenza.descrizione}}
-        </div>
+              <br><br>
+            <button type="button" class="annullabtn btn btn-secondary btn-md"><a style="text-decoration: none; color:white "
+                                                                href="{{url_for('views.visualizza_richieste_assistenza')}}">Torna indietro<span
+               class="glyphicon glyphicon-remove"></span></a></button>
         </div>
     </div>
-    <br />
-        <a href="{{url_for('views.visualizza_richieste_assistenza')}}">
-            <button type="button">Torna Indietro</button>
-        </a>
+
+
 
     </div>
-
-</body>
-
 {% endblock %}
+</html>
