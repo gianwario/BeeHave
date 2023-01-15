@@ -29,7 +29,7 @@
                     </a>
                 </div>
                 <div class="card-body pt-0">
-                    <h5 class="card-title">{{elemento.Alveare.nome}}</h5>
+                    <a href="{{url_for('views.informazioni_alveare',alveare_id=elemento.Alveare.id)}}"><h5 class="card-title">{{elemento.Alveare.nome}}</h5></a>
                     <p class="card-text">Tempo adozione: {{elemento.TicketAdozione.tempo_adozione}} Mesi</p>
                     <p class="card-text">Data Inizio: {{elemento.TicketAdozione.data_inizio_adozione}}</p>
                     <p class="card-text">Data Scadenza: {{elemento.TicketAdozione.data_fine_adozione()}}</p>

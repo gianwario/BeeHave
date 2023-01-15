@@ -3,7 +3,7 @@ from datetime import datetime
 from flask import Blueprint, request, session, flash
 from flask_login import login_required, current_user
 
-from Website.flaskr.Routes import mostra_alveari, modifica_stato, home
+from Website.flaskr.Routes import mostra_alveari, modifica_stato, home, informazioni_alveare
 from Website.flaskr.gestione_adozioni.GestioneAdozioniService import inserisci_alveare, adozione_alveare, aggiorna_stato
 from Website.flaskr.model.Alveare import Alveare
 from Website.flaskr.model.TicketAdozione import TicketAdozione
@@ -95,4 +95,6 @@ def adotta_alveare():
             ticket = TicketAdozione(id_cliente=id_cliente, id_alveare=id_alveare, percentuale_adozione=int(percentuale),
                                     data_inizio_adozione=datetime.now(), tempo_adozione=int(tempo_adozione))
             adozione_alveare(ticket, percentuale)
+            flash('Alveare adottato con successo!', category='success')
+            return informazioni_alveare(id_alveare)
     return mostra_alveari()

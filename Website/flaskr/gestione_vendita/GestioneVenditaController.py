@@ -1,9 +1,9 @@
 from flask import Blueprint, request, session, flash
 from flask_login import current_user, login_required
 
-from Website.flaskr.Routes import mostra_prodotti, mostra_articoli_in_vendita
+from Website.flaskr.Routes import mostra_prodotti, mostra_articoli_in_vendita, info_articolo
 from Website.flaskr.gestione_vendita.GestioneVenditaService import inserisci_prodotto, cancella_prodotto, \
-    acquisto_prodotto
+    acquisto_prodotto, get_prodotto_by_id
 from Website.flaskr.model.Acquisto import Acquisto
 from Website.flaskr.model.Prodotto import Prodotto
 
@@ -60,12 +60,14 @@ def elimina_prodotto(id_prodotto, id_apicoltore):
 def acquista_prodotto():
     if request.method == 'POST' and not session['isApicoltore']:
         quantita = int(request.form.get('quantita_prod'))
-        qnt_articolo = int(request.form.get('qnt_articolo'))
         id_cliente = int(request.form.get('id_client'))
         id_prodotto = int(request.form.get('id_prd'))
-        if quantita > qnt_articolo:
+        quantita_articolo = get_prodotto_by_id(id_prodotto).quantita
+        if quantita > quantita_articolo:
             flash('Quantitá non disponibile!', category='error')
-
-        acquisto = Acquisto(id_cliente=id_cliente, id_prodotto=id_prodotto, quantita=quantita)
-        acquisto_prodotto(acquisto, quantita)
+        else:
+            acquisto = Acquisto(id_cliente=id_cliente, id_prodotto=id_prodotto, quantita=quantita)
+            acquisto_prodotto(acquisto, quantita)
+            flash('Acquisto andato a buon fine!',category='success')
+            return info_articolo(id_prodotto)
     return mostra_prodotti()
