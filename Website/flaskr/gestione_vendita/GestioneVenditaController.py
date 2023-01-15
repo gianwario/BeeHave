@@ -49,14 +49,6 @@ def inserimento_prodotto():
 
 @gv.route('/elimina_prodotto/<int:id_prodotto>/<int:id_apicoltore>', methods=['POST', 'GET'])
 @login_required
-def mostra_articoli_in_vendita():
-    if session['isApicoltore']:
-        prodotti_in_vendita = get_prodotti_by_apicoltore()
-        return render_template('/catalogo_prodotti_apicoltore.html', prodotti_in_vendita=prodotti_in_vendita)
-
-
-@gv.route('/elimina_prodotto/<int:id_prodotto>/<int:id_api>', methods=['POST', 'GET'])
-@login_required
 def elimina_prodotto(id_prodotto, id_apicoltore):
     if session['isApicoltore'] and id_apicoltore == current_user.id:
         cancella_prodotto(id_prodotto)
