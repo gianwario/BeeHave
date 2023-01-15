@@ -1,7 +1,8 @@
 from flask import Blueprint, request, flash, session
 from flask_login import login_required, current_user
 
-from Website.flaskr.Routes import crea_area_assistenza_page, area_personale, home, richiesta_assistenza_page
+from Website.flaskr.Routes import crea_area_assistenza_page, area_personale, home, richiesta_assistenza_page, \
+    visualizza_richieste_assistenza
 from Website.flaskr.gestione_assistenza_utente.GestioneAssistenzaUtenteService import inserisci_area_assistenza, \
     controlla_apicoltore, richiedi_assistenza
 
@@ -42,6 +43,6 @@ def richiesta_assistenza():
             return richiesta_assistenza_page()
 
         richiedi_assistenza(nome, descrizione, id_apicoltore)
-        return home()
+        return visualizza_richieste_assistenza()
 
     return richiesta_assistenza_page()
