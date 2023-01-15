@@ -2,23 +2,16 @@
 <html lang="en">
 <head>
     <link rel="stylesheet" href="{{url_for('static', filename='css/areautente.css')}}">
+
     {% extends "base.html"%}
+
     {% block title %}Area Personale{% endblock %}
-    <title></title>
 </head>
 <body>
- {% block content %}
- <!-- Latest compiled and minified CSS -->
+{% block content %}
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-
-<!-- Optional theme -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
-
-<!-- Latest compiled and minified JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-
-<div class="container bootstrap snippets bootdey">
+<div class="container  bootstrap snippets bootdey">
+    <br><br>
     <div class="row">
 
         <div class="profile-nav col-md-3">
@@ -32,11 +25,11 @@
                 </div>
 
           <ul class="nav nav-pills nav-stacked">
-              <li class="active"><a href="#"> <i class="fa fa-user"></i> Profile</a></li>
-              <li><a href="{{url_for('views.mostra_lista_assistenti')}}"> <i class="fa fa-user"></i>Richiedi assistenza </a></li>
-              <li><a href="{{url_for('views.visualizza_richieste_assistenza')}}"> <i class="fa fa-calendar"></i>
+              <li class="nav-item active"><a class="nav-link" href="#"> <i class="fa fa-user"></i> Profile</a></li>
+              <li class="nav-item"><a class="nav-link" href="{{url_for('views.mostra_lista_assistenti')}}"> <i class="fa fa-user"></i>Richiedi assistenza </a></li>
+              <li class="nav-item"><a class="nav-link" href="{{url_for('views.visualizza_richieste_assistenza')}}"> <i class="fa fa-calendar"></i>
                   Visualizza le tue richieste di assistenza</a></li>
-              <li><a href="{{url_for('views.modifica_dati_utente_page')}}"> <i class="fa fa-user"></i> Modifica Account</a></li>
+              <li class="nav-item"><a class="nav-link" href="{{url_for('views.modifica_dati_utente_page')}}"> <i class="fa fa-user"></i> Modifica Account</a></li>
 
                 </ul>
             </div>
