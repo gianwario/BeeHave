@@ -32,7 +32,7 @@ def decrementa_percentuale(id_alveare, percentuale):
     db.session.commit()
 
 
-def affitto_alveare(ticket, percentuale):
+def adotta_alveare(ticket, percentuale):
     db.session.add(ticket)
     db.session.commit()
     decrementa_percentuale(ticket.id_alveare, percentuale)
