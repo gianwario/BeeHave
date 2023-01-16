@@ -3,21 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="{{url_for('static', filename='css/ticket_assistenza.css')}}">
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
-    {% extends "base.html"%}
-  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
-    <title>
+      {% extends "base.html"%}
+
         {% block title %}
             Lista Ticket Assistenza
         {% endblock %}
-    </title>
+
 </head>
 
 <body>
 
 {% block content %}
-    {% if session['isApicoltore'] %}
-     {% for ticket_assistenza in ticket_assistenza_ap %}
+<br><br><br>
+ <h1 style="text-align: center"class="text-secondary"> I tuoi ticket assistenza</h1>
+
+     {% for ticket_assistenza in tickets_assistenza%}
 
      <div class="container">
      <div class="mt-5">
@@ -51,35 +51,7 @@
      </div>
      </div>
      {% endfor %}
-    {% else %}
-     {% for ticket_assistenza in ticket_assistenza_cl %}
-        <div class="container">
-            <div class="mt-5">
-                <div class="d-style btn btn-brc-tp border-2 bgc-white btn-outline-blue btn-h-outline-blue btn-a-outline-blue w-100 my-2 py-3 shadow-sm">
-                    <div class="row align-items-center">
-                        <div class="col-12 col-md-4">
-                            <h4 class="pt-3 text-170 text-600 text-primary-d1 letter-spacing">
-                                {{ ticket_assistenza.nome }}
-                            </h4>
-                            <div class="text-secondary-d1 text-120">
-                                <span class="ml-n15 align-text-bottom">Stato: {{ticket_assistenza.stato}}</span>
-                            </div>
-                        </div>
-                        <div class="mb-0 col-12 col-md-4 text-dark-l1 text-90 text-left my-4 my-md-0">
-                            <i class="bi bi-bookmark text-success-m2 text-110 mr-2 mt-1"></i>
-                            <span>
-                                <span class="text-110">Ticket aperto il: {{ticket_assistenza.data_inizio}}</span>
-                            </span>
-                        </div>
-                        <div class="col-12 col-md-4 text-center">
-                            <a href="{{url_for('views.visualizza_info_ticket',ticket_id=ticket_assistenza.id)}}" class="f-n-hover btn btn-info btn-raised px-4 py-25 w-75 text-600">Visualizza</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-     {% endfor %}
-    {% endif %}
+<br><br><br><br><br>
 {% endblock %}
 </body>
 </html>

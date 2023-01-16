@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" href="{{url_for('static', filename='css/singolo_ticket.css')}}">
+
     {% extends "base.html"%}
     <title>
         {% block title %}
@@ -11,11 +11,12 @@
 
 </head>
 {% block content %}
+<br><br><br><br><br>
     <div class="container">
         <h1 class="text-secondary">{{ticket_assistenza.nome}}</h1>
         <div class="col align-self-center">
             {{ticket_assistenza.descrizione}}
-              <br><br>
+              <br>
             <button type="button" class="annullabtn btn btn-secondary btn-md"><a style="text-decoration: none; color:white "
                                                                 href="{{url_for('views.visualizza_richieste_assistenza')}}">Torna indietro<span
                class="glyphicon glyphicon-remove"></span></a></button>
@@ -25,5 +26,6 @@
 
 
     </div>
+
 {% endblock %}
 </html>

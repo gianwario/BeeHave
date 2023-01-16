@@ -12,6 +12,7 @@
 <div class="page">
     <h1 class="text-secondary">I Tuoi Alveari</h1>
     <!--For Row containing all card-->
+    <br><br>
     <div class="row">
 
         {% for alveare in alveari_disponibili %}
@@ -50,9 +51,9 @@
                         <p>Affitta</p>
 
                         <form action="{{url_for('views.modifica_stato', alveare_id=alveare.id)}}">
-                          <button type="submit">
-                            Modifica Stato
-                          </button>
+                            <button type="submit">
+                                Modifica Stato
+                            </button>
                         </form>
 
                     </div>
