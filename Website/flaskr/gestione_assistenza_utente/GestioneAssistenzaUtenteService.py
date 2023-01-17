@@ -1,5 +1,6 @@
 import datetime
 
+from flask import flash
 from flask_login import current_user
 
 from .. import db
@@ -7,12 +8,17 @@ from ..model.Apicoltore import Apicoltore
 from ..model.TicketAssistenza import TicketAssistenza
 
 
-def inserisci_area_assistenza(descrizione, assistenza):
-    apicoltore = Apicoltore.query.filter_by(id=current_user.id).first()
-    apicoltore.descrizione = descrizione
-    apicoltore.assistenza = assistenza
-    db.session.add(apicoltore)
-    db.session.commit()
+def inserisci_area_assistenza(descrizione):
+    if descrizione is None or not 0 < len(descrizione) <= 200:
+        flash('La lunghezza della descrizione non è valida!', category='error')
+    else:
+        apicoltore = Apicoltore.query.filter_by(id=current_user.id).first()
+        apicoltore.descrizione = descrizione
+        apicoltore.assistenza = True
+        db.session.add(apicoltore)
+        db.session.commit()
+        return True
+    return False
 
 
 def get_numero_ticket_assistenza_apicoltore(id_apicoltore):
@@ -32,10 +38,19 @@ def controlla_apicoltore(id_apicoltore):
 
 
 def richiedi_assistenza(nome, descrizione, id_apicoltore):
-    ticket = TicketAssistenza(id_cliente=current_user.id, id_apicoltore=id_apicoltore, nome=nome,
-                              descrizione=descrizione, data_inizio=datetime.datetime.now(), stato='Creato')
-    db.session.add(ticket)
-    db.session.commit()
+    if not 0 < len(nome) <= 45:
+        flash('La lunghezza del nome non è valida', category='error')
+    elif not 0 < len(descrizione) <= 200:
+        flash('La lunghezza della descrizione non è valida!', category='error')
+    elif not controlla_apicoltore(id_apicoltore):
+        flash("L'apicoltore non esiste o non è disponibile a fornire assistenza", category='error')
+    else:
+        ticket = TicketAssistenza(id_cliente=current_user.id, id_apicoltore=id_apicoltore, nome=nome,
+                                  descrizione=descrizione, data_inizio=datetime.datetime.now(), stato='Creato')
+        db.session.add(ticket)
+        db.session.commit()
+        return True
+    return False
 
 
 def get_numero_ticket_assistenza_apicoltore(id_apicoltore):
