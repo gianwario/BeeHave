@@ -1,14 +1,19 @@
-const navLinks = document.querySelector('.nav-links');
-const burger = document.querySelector('.hamburger-menu');
-const navbar = document.querySelector('.navbar');
+window.onload = () => {
+    var navbar = document.getElementById("navbar");
+    var page = document.title;
+    if (page == "Home"){
+        window.onscroll = function() {stick()};
+    } else {
+        navbar.className ="navbar navbar-expand-sm bg-dark";
+    }
+}
 
-// Event listeners
-burger.addEventListener('click', () => {
-    navLinks.classList.toggle('nav-active');
-    burger.classList.toggle('bar-change');
-})
-
-// Sticky navbar
-window.addEventListener('scroll', () => {
-    navbar.classList.toggle('sticky', scrollY > 0)
-})
+function stick() {
+    var navbar = document.getElementById("navbar");
+    var sticky = 180;
+    if (window.pageYOffset >= sticky) {
+        navbar.className ="navbar navbar-expand-sm bg-dark";
+    } else {
+        navbar.className ="navbar navbar-expand-sm ";
+    }
+}
