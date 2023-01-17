@@ -9,7 +9,7 @@ from ..model.TicketAssistenza import TicketAssistenza
 
 
 def inserisci_area_assistenza(descrizione):
-    if descrizione is None or not 0 < len(descrizione) <= 200:
+    if not isinstance(descrizione, str) or not 0 < len(descrizione) <= 200:
         flash('La lunghezza della descrizione non è valida!', category='error')
     else:
         apicoltore = Apicoltore.query.filter_by(id=current_user.id).first()
@@ -38,14 +38,14 @@ def controlla_apicoltore(id_apicoltore):
 
 
 def richiedi_assistenza(nome, descrizione, id_apicoltore):
-    if not 0 < len(nome) <= 45:
+    if not isinstance(nome, str) or not 0 < len(nome) <= 45:
         flash('La lunghezza del nome non è valida', category='error')
-    elif not 0 < len(descrizione) <= 200:
+    elif not isinstance(descrizione, str) or not 0 < len(descrizione) <= 200:
         flash('La lunghezza della descrizione non è valida!', category='error')
-    elif not controlla_apicoltore(id_apicoltore):
+    elif not isinstance(id_apicoltore, str) or not id_apicoltore.isdigit() or not controlla_apicoltore(int(id_apicoltore)):
         flash("L'apicoltore non esiste o non è disponibile a fornire assistenza", category='error')
     else:
-        ticket = TicketAssistenza(id_cliente=current_user.id, id_apicoltore=id_apicoltore, nome=nome,
+        ticket = TicketAssistenza(id_cliente=current_user.id, id_apicoltore=int(id_apicoltore), nome=nome,
                                   descrizione=descrizione, data_inizio=datetime.datetime.now(), stato='Creato')
         db.session.add(ticket)
         db.session.commit()
