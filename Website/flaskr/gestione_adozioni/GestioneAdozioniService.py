@@ -9,17 +9,17 @@ from Website.flaskr.model.TicketAdozione import TicketAdozione
 
 
 def inserisci_alveare(nome, produzione, numero_api, tipo_miele, prezzo, tipo_fiore):
-    if nome is None or not 0 < len(nome) <= 30:
+    if not isinstance(nome, str) or not 0 < len(nome) <= 30:
         flash('Lunghezza Nome non valida!', category='error')
-    elif tipo_fiore is None or not 0 < len(tipo_fiore) <= 30:
+    elif not isinstance(nome, tipo_fiore) or not 0 < len(tipo_fiore) <= 30:
         flash('Lunghezza di TipoFiore non valida!', category='error')
-    elif produzione is None or not produzione.isdigit() or not 0 < int(produzione) <= 2000:
+    elif not isinstance(produzione, str) or not produzione.isdigit() or not 0 < int(produzione) <= 2000:
         flash('Quantità produzione non è nel range corretto!', category='error')
-    elif tipo_miele is None or not 0 < len(tipo_miele) <= 30:
+    elif not isinstance(tipo_miele, str) or not 0 < len(tipo_miele) <= 30:
         flash('Lunghezza di TipoMiele non valida!', category='error')
-    elif numero_api is None or not numero_api.isdigit() or not 0 < int(numero_api) <= 40000:
+    elif not isinstance(numero_api, str) or not numero_api.isdigit() or not 0 < int(numero_api) <= 40000:
         flash('NumeroApi non è nel range corretto!', category='error')
-    elif prezzo is None or not 0 < float(prezzo) <= 1000:
+    elif not isinstance(prezzo, str) or not 0 < float(prezzo) <= 1000:
         flash('Prezzo non è nel range corretto!', category='error')
     else:
         alveare = Alveare(nome=nome, produzione=int(produzione), numero_api=int(numero_api), tipo_miele=tipo_miele,
@@ -49,11 +49,11 @@ def decrementa_percentuale(id_alveare, percentuale):
 
 
 def adozione_alveare(id_alveare, tempo_adozione, percentuale):
-    if tempo_adozione is None or not tempo_adozione.isdigit() or not 3 <= int(tempo_adozione) <= 12:
+    if not isinstance(tempo_adozione, str) or not tempo_adozione.isdigit() or not 3 <= int(tempo_adozione) <= 12:
         flash('TempoAdozione non è nel range corretto!', category='error')
-    elif percentuale is None or not percentuale.isdigit() or not 25 <= int(percentuale) <= 100:
+    elif not isinstance(percentuale, str) or not percentuale.isdigit() or not 25 <= int(percentuale) <= 100:
         flash('Percentuale Adozione non è nel range corretto!', category='error')
-    elif id_alveare is None or not isinstance(id_alveare, int):
+    elif not isinstance(id_alveare, str) or not isinstance(id_alveare, int):
         flash('ID Alveare non valido!', category='error')
     elif int(percentuale) > get_alveare_by_id(id_alveare).percentuale_disponibile:
         flash('Percentuale Adozione è maggiore di Percentuale Disponibile!', category='error')
@@ -70,17 +70,17 @@ def adozione_alveare(id_alveare, tempo_adozione, percentuale):
 
 
 def aggiorna_stato(alveare_id, covata_compatta, popolazione, polline, stato_cellette, stato_larve):
-    if covata_compatta is None or not covata_compatta.isdigit():
+    if not isinstance(covata_compatta, str) or not covata_compatta.isdigit():
         flash('CovataCompatta non è stata inserita!', category='error')
-    elif popolazione is None or not 0 < len(popolazione) <= 30:
+    elif not isinstance(popolazione, str) or not 0 < len(popolazione) <= 30:
         flash('Lunghezza di Popolazione non valida!', category='error')
-    elif polline is None or not 0 < len(polline) <= 30:
+    elif not isinstance(polline, str) or not 0 < len(polline) <= 30:
         flash('Lunghezza di Polline non valida!', category='error')
-    elif stato_cellette is None or not 0 < len(stato_cellette) <= 30:
+    elif not isinstance(stato_cellette, str) or not 0 < len(stato_cellette) <= 30:
         flash('Lunghezza di Stato Cellette non valida!', category='error')
-    elif stato_larve is None or not 0 < len(stato_larve) <= 30:
+    elif not isinstance(stato_larve, str) or not 0 < len(stato_larve) <= 30:
         flash('Lunghezza di Stato Larve non valida!', category='error')
-    elif alveare_id is None or not alveare_id.isdigit():
+    elif not isinstance(alveare_id, str) or not alveare_id.isdigit():
         flash('ID Alveare non valido!', category='error')
     else:
         alveare = get_alveare_by_id(int(alveare_id))
