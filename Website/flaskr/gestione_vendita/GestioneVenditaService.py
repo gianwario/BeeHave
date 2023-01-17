@@ -36,11 +36,11 @@ def inserisci_prodotto(nome, descrizione, localita, peso, tipologia, prezzo, qua
     elif not isinstance(quantita, str) or not quantita.isdigit() or not 0 < int(quantita) <= 1000000:
         flash('Quantità non è nel range corretto!', category='error')
     else:
-        flash('Inserimento avvenuto con successo!', category='success')
         prodotto = Prodotto(nome=nome, descrizione=descrizione, localita=localita, peso=int(peso), prezzo=float(prezzo),
                             quantita=int(quantita), id_apicoltore=current_user.id, tipologia=tipologia)
         db.session.add(prodotto)
         db.session.commit()
+        flash('Inserimento avvenuto con successo!', category='success')
         return True
     return False
 
