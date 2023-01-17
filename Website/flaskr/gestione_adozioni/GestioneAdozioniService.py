@@ -1,24 +1,40 @@
 import datetime
 
+from flask import flash
+from flask_login import current_user
+
 from Website.flaskr import db
 from Website.flaskr.model.Alveare import Alveare
 from Website.flaskr.model.TicketAdozione import TicketAdozione
 
 
-def inserisci_alveare(alveare):
-    db.session.add(alveare)
-    db.session.commit()
+def inserisci_alveare(nome, produzione, numero_api, tipo_miele, prezzo, tipo_fiore):
+    if nome is None or not 0 < len(nome) <= 30:
+        flash('Lunghezza Nome non valida!', category='error')
+    elif tipo_fiore is None or not 0 < len(tipo_fiore) <= 30:
+        flash('Lunghezza di TipoFiore non valida!', category='error')
+    elif produzione is None or not produzione.isdigit() or not 0 < int(produzione) <= 2000:
+        flash('Quantità produzione non è nel range corretto!', category='error')
+    elif tipo_miele is None or not 0 < len(tipo_miele) <= 30:
+        flash('Lunghezza di TipoMiele non valida!', category='error')
+    elif numero_api is None or not numero_api.isdigit() or not 0 < int(numero_api) <= 40000:
+        flash('NumeroApi non è nel range corretto!', category='error')
+    elif prezzo is None or not 0 < float(prezzo) <= 1000:
+        flash('Prezzo non è nel range corretto!', category='error')
+    else:
+        alveare = Alveare(nome=nome, produzione=int(produzione), numero_api=int(numero_api), tipo_miele=tipo_miele,
+                          percentuale_disponibile=100,
+                          prezzo=float(prezzo), tipo_fiore=tipo_fiore, id_apicoltore=current_user.id)
+        flash('Inserimento avvenuto con successo!', category='success')
+
+        db.session.add(alveare)
+        db.session.commit()
+        return True
+    return False
 
 
 def get_alveare_by_id(alveare_id):
     return Alveare.query.filter_by(id=alveare_id).first()
-
-
-def aggiorna_immagine_alveare(alveare_id, img):
-    alveare = get_alveare_by_id(alveare_id)
-    alveare.img_path = str(img)
-    db.session.flush()
-    db.session.commit()
 
 
 def get_alveari():
@@ -32,22 +48,52 @@ def decrementa_percentuale(id_alveare, percentuale):
     db.session.commit()
 
 
-def adozione_alveare(ticket, percentuale):
-    db.session.add(ticket)
-    db.session.commit()
-    decrementa_percentuale(ticket.id_alveare, percentuale)
+def adozione_alveare(id_alveare, tempo_adozione, percentuale):
+    if tempo_adozione is None or not tempo_adozione.isdigit() or not 3 <= int(tempo_adozione) <= 12:
+        flash('TempoAdozione non è nel range corretto!', category='error')
+    elif percentuale is None or not percentuale.isdigit() or not 25 <= int(percentuale) <= 100:
+        flash('Percentuale Adozione non è nel range corretto!', category='error')
+    elif id_alveare is None or not isinstance(id_alveare, int):
+        flash('ID Alveare non valido!', category='error')
+    elif int(percentuale) > get_alveare_by_id(id_alveare).percentuale_disponibile:
+        flash('Percentuale Adozione è maggiore di Percentuale Disponibile!', category='error')
+    else:
+        ticket = TicketAdozione(id_cliente=current_user.id, id_alveare=id_alveare,
+                                percentuale_adozione=int(percentuale),
+                                data_inizio_adozione=datetime.datetime.now(), tempo_adozione=int(tempo_adozione))
+        db.session.add(ticket)
+        db.session.commit()
+        decrementa_percentuale(ticket.id_alveare, percentuale)
+        flash('Alveare adottato con successo!', category='success')
+        return True
+    return False
 
 
 def aggiorna_stato(alveare_id, covata_compatta, popolazione, polline, stato_cellette, stato_larve):
-    alveare = get_alveare_by_id(alveare_id)
-    alveare.covata_compatta = covata_compatta
-    alveare.popolazione = popolazione
-    alveare.polline = polline
-    alveare.stato_cellette = stato_cellette
-    alveare.stato_larve = stato_larve
-    db.session.flush()
-    db.session.commit()
-    # TODO eventualmente considerare di restituire la % allo scadere del tempo
+    if covata_compatta is None or not covata_compatta.isdigit():
+        flash('CovataCompatta non è stata inserita!', category='error')
+    elif popolazione is None or not 0 < len(popolazione) <= 30:
+        flash('Lunghezza di Popolazione non valida!', category='error')
+    elif polline is None or not 0 < len(polline) <= 30:
+        flash('Lunghezza di Polline non valida!', category='error')
+    elif stato_cellette is None or not 0 < len(stato_cellette) <= 30:
+        flash('Lunghezza di Stato Cellette non valida!', category='error')
+    elif stato_larve is None or not 0 < len(stato_larve) <= 30:
+        flash('Lunghezza di Stato Larve non valida!', category='error')
+    elif alveare_id is None or not alveare_id.isdigit():
+        flash('ID Alveare non valido!', category='error')
+    else:
+        alveare = get_alveare_by_id(int(alveare_id))
+        alveare.covata_compatta = bool(int(covata_compatta))
+        alveare.popolazione = popolazione
+        alveare.polline = polline
+        alveare.stato_cellette = stato_cellette
+        alveare.stato_larve = stato_larve
+        db.session.flush()
+        db.session.commit()
+        flash('Stato alveare aggiornato correttamente', category='success')
+        return True
+    return False
 
 
 def get_alveari_from_apicoltore(apicoltore_id):

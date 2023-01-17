@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
 
     <meta charset="UTF-8">
@@ -27,7 +27,7 @@
     backdrop-filter: saturate(600%) blur(25px);
   }
 
-  input[type=button], input[type=submit], input[type=reset]{
+  input[type=button], input[type=submit], input[type=reset], .annullabtn{
   background-color: orange;
   opacity: 70%;
   border: none;
@@ -116,7 +116,7 @@
         {% endwith %}
         </div>
     <br>
-    <input type="submit" value="Conferma Inserimento"/> <input type="reset" value="Cancella">
+    <input type="submit" value="Conferma Inserimento"/> <button class="annullabtn"><a href="{{url_for('views.mostra_alveari')}}" style="text-decoration: none; color:black">Annulla</a></button>
 
 </form>
  </div>
