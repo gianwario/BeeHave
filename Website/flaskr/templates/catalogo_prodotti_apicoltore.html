@@ -18,6 +18,7 @@
 <!--For Page-->
 <div class="page">
     <h1 class="text-secondary">I Tuoi Prodotti</h1>
+    <br><br>
     <!--For Row containing all card-->
     <div class="row">
 
@@ -51,17 +52,18 @@
 
 
                     <p class="price">{{prodotto.prezzo}}€</p>
-                    {% if prodotto.quantita>0 %}
+
                     <!--Card footer-->
                     <div class="card-footer">
-
+                        {% if prodotto.quantita>0 %}
                         <a href="{{url_for('gv.elimina_prodotto', id_prodotto=prodotto.id, id_apicoltore=current_user.id)}}">
-                            <button type="submit" value="acquista" class="btn btn-outline-dark">Elimina</button>
+                            <button type="submit" class="btn btn-outline-dark">Elimina</button>
                         </a>
-
-
+                        {% else %}
+                        <p class="text-center text-dark">Prodotto eliminato</p>
+                        {% endif %}
                     </div>
-                    {% endif %}
+
 
                 </div>
             </div>
