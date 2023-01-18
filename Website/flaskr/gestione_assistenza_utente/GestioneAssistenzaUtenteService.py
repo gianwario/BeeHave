@@ -17,6 +17,7 @@ def inserisci_area_assistenza(descrizione):
         apicoltore.assistenza = True
         db.session.add(apicoltore)
         db.session.commit()
+        flash('Messa a disposizione area assistenza avvenuta con successo!', category='success')
         return True
     return False
 
@@ -49,6 +50,7 @@ def richiedi_assistenza(nome, descrizione, id_apicoltore):
                                   descrizione=descrizione, data_inizio=datetime.datetime.now(), stato='Creato')
         db.session.add(ticket)
         db.session.commit()
+        flash('Richiesta assistenza avvenuta con successo!', category='success')
         return True
     return False
 
