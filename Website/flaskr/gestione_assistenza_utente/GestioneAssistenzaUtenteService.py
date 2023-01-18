@@ -8,11 +8,10 @@ from ..model.Apicoltore import Apicoltore
 from ..model.TicketAssistenza import TicketAssistenza
 
 
-def inserisci_area_assistenza(descrizione):
+def inserisci_area_assistenza(descrizione, apicoltore):
     if not isinstance(descrizione, str) or not 0 < len(descrizione) <= 200:
         flash('La lunghezza della descrizione non è valida!', category='error')
     else:
-        apicoltore = Apicoltore.query.filter_by(id=current_user.id).first()
         apicoltore.descrizione = descrizione
         apicoltore.assistenza = True
         db.session.add(apicoltore)
