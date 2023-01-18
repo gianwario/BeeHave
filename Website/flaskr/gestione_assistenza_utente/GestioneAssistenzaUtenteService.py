@@ -15,7 +15,6 @@ def inserisci_area_assistenza(descrizione, apicoltore):
     else:
         apicoltore.descrizione = descrizione
         apicoltore.assistenza = True
-        db.session.add(apicoltore)
         db.session.commit()
         flash('Messa a disposizione area assistenza avvenuta con successo!', category='success')
         return True
@@ -38,7 +37,7 @@ def controlla_apicoltore(id_apicoltore):
     return False
 
 
-def richiedi_assistenza(nome, descrizione, id_apicoltore):
+def richiedi_assistenza(nome, descrizione, id_apicoltore, cliente):
     if not isinstance(nome, str) or not 0 < len(nome) <= 45:
         flash('La lunghezza del nome non è valida', category='error')
     elif not isinstance(descrizione, str) or not 0 < len(descrizione) <= 200:
@@ -46,7 +45,7 @@ def richiedi_assistenza(nome, descrizione, id_apicoltore):
     elif not isinstance(id_apicoltore, str) or not id_apicoltore.isdigit() or not controlla_apicoltore(int(id_apicoltore)):
         flash("L'apicoltore non esiste o non è disponibile a fornire assistenza", category='error')
     else:
-        ticket = TicketAssistenza(id_cliente=current_user.id, id_apicoltore=int(id_apicoltore), nome=nome,
+        ticket = TicketAssistenza(id_cliente=cliente.id, id_apicoltore=int(id_apicoltore), nome=nome,
                                   descrizione=descrizione, data_inizio=datetime.datetime.now(), stato='Creato')
         db.session.add(ticket)
         db.session.commit()

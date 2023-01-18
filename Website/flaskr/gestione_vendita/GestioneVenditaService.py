@@ -24,7 +24,7 @@ def get_tutti_prodotti():
     return Prodotto.query.all()
 
 
-def inserisci_prodotto(nome, descrizione, localita, peso, tipologia, prezzo, quantita):
+def inserisci_prodotto(nome, descrizione, localita, peso, tipologia, prezzo, quantita, apicoltore):
     if not isinstance(nome, str) or not 0 < len(nome) <= 30:
         flash('Lunghezza nome non valida!', category='error')
     elif not isinstance(descrizione, str) or not 0 < len(descrizione) <= 200:
@@ -35,13 +35,13 @@ def inserisci_prodotto(nome, descrizione, localita, peso, tipologia, prezzo, qua
         flash('Peso non è nel range corretto', category='error')
     elif not isinstance(tipologia, str) or not 0 < len(tipologia) <= 30:
         flash('Lunghezza tipologia non valida!', category='error')
-    elif not isinstance(prezzo, str) or not 0 < float(prezzo) <= 1000:
+    elif not isinstance(prezzo, str) or prezzo == '' or not 0 < float(prezzo) <= 1000:
         flash('Prezzo non è nel range corretto!', category='error')
     elif not isinstance(quantita, str) or not quantita.isdigit() or not 0 < int(quantita) <= 1000000:
         flash('Quantità non è nel range corretto!', category='error')
     else:
         prodotto = Prodotto(nome=nome, descrizione=descrizione, localita=localita, peso=int(peso), prezzo=float(prezzo),
-                            quantita=int(quantita), id_apicoltore=current_user.id, tipologia=tipologia)
+                            quantita=int(quantita), id_apicoltore=apicoltore.id, tipologia=tipologia)
         db.session.add(prodotto)
         db.session.commit()
         flash('Inserimento avvenuto con successo!', category='success')
@@ -63,14 +63,14 @@ def get_prodotti_by_apicoltore(id_apicoltore):
     return Prodotto.query.filter_by(id_apicoltore=id_apicoltore).all()
 
 
-def acquisto_prodotto(id_prodotto, quantita):
+def acquisto_prodotto(id_prodotto, quantita, cliente):
     if not isinstance(id_prodotto, str) or not id_prodotto.isdigit():
         flash('ID Prodotto non valido!', category='error')
     elif not isinstance(quantita, str) or not quantita.isdigit() or int(quantita) > \
             get_prodotto_by_id(int(id_prodotto)).quantita:
         flash('Quantitá non disponibile!', category='error')
     else:
-        acquisto = Acquisto(id_prodotto=int(id_prodotto), quantita=int(quantita))
+        acquisto = Acquisto(id_cliente=cliente.id, id_prodotto=int(id_prodotto), quantita=int(quantita))
         db.session.add(acquisto)
         db.session.commit()
         decrementa_quantita(acquisto.id_prodotto, acquisto.quantita)

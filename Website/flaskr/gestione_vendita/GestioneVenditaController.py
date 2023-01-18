@@ -19,7 +19,7 @@ def inserimento_prodotto():
         tipologia = request.form.get('tipologia')
         prezzo = request.form.get('prezzo')
         quantita = request.form.get('quantita')
-        if not inserisci_prodotto(nome, descrizione, localita, peso, tipologia, prezzo, quantita):
+        if not inserisci_prodotto(nome, descrizione, localita, peso, tipologia, prezzo, quantita, current_user):
             return inserimento_prodotto_page()
     return mostra_articoli_in_vendita(current_user.id)
 
@@ -39,6 +39,6 @@ def acquista_prodotto():
         quantita = request.form.get('quantita_prod')
         id_prodotto = request.form.get('id_prd')
 
-        if acquisto_prodotto(id_prodotto=id_prodotto, quantita=quantita):
+        if acquisto_prodotto(id_prodotto=id_prodotto, quantita=quantita, cliente=current_user):
             return info_articolo(id_prodotto)
     return mostra_prodotti()
