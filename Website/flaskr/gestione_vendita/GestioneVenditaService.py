@@ -12,8 +12,12 @@ def get_prodotto_by_id(id_prodotto):
 
 def cancella_prodotto(prodotto_id):
     prodotto = get_prodotto_by_id(prodotto_id)
-    prodotto.quantita = 0
-    db.session.commit()
+    if prodotto is None:
+        flash("Il prodotto non esiste!", category='error')
+    else:
+        prodotto.quantita = 0
+        db.session.commit()
+        flash("Prodotto eliminato con successo!", category='success')
 
 
 def get_tutti_prodotti():
@@ -47,9 +51,12 @@ def inserisci_prodotto(nome, descrizione, localita, peso, tipologia, prezzo, qua
 
 def decrementa_quantita(id_prodotto, quantita):
     prodotto = Prodotto.query.filter_by(id=id_prodotto).first()
-    prodotto.quantita -= quantita
-    db.session.flush()
-    db.session.commit()
+    if prodotto is None:
+        flash("Il prodotto non esiste!", category='error')
+    else:
+        prodotto.quantita -= quantita
+        db.session.flush()
+        db.session.commit()
 
 
 def get_prodotti_by_apicoltore(id_apicoltore):

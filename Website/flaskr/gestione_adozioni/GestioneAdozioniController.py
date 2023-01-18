@@ -2,7 +2,8 @@ from flask import Blueprint, request, session
 from flask_login import login_required
 
 from Website.flaskr.Routes import mostra_alveari, modifica_stato, home, informazioni_alveare, inserimento_alveare_page
-from Website.flaskr.gestione_adozioni.GestioneAdozioniService import inserisci_alveare, adozione_alveare, aggiorna_stato
+from Website.flaskr.gestione_adozioni.GestioneAdozioniService import inserisci_alveare, adozione_alveare, \
+    aggiorna_stato, get_alveare_by_id
 
 ga = Blueprint('ga', __name__)
 
@@ -35,9 +36,10 @@ def modifica_stato_alveare():
         stato_cellette = request.form.get('stato_cellette')
         stato_larve = request.form.get('stato_larve')
         alveare_id = request.form.get('alveare_id')
-
-        if aggiorna_stato(alveare_id, covata_compatta, popolazione, polline, stato_cellette, stato_larve):
-            return mostra_alveari()
+        alveare = get_alveare_by_id(alveare_id)
+        if alveare is not None:
+            if aggiorna_stato(alveare, covata_compatta, popolazione, polline, stato_cellette, stato_larve):
+                return informazioni_alveare(alveare_id)
         return modifica_stato(alveare_id)
     return home()
 

@@ -69,7 +69,7 @@ def adozione_alveare(id_alveare, tempo_adozione, percentuale):
     return False
 
 
-def aggiorna_stato(alveare_id, covata_compatta, popolazione, polline, stato_cellette, stato_larve):
+def aggiorna_stato(alveare, covata_compatta, popolazione, polline, stato_cellette, stato_larve):
     if not isinstance(covata_compatta, str) or not covata_compatta.isdigit():
         flash('CovataCompatta non è stata inserita!', category='error')
     elif not isinstance(popolazione, str) or not 0 < len(popolazione) <= 30:
@@ -80,10 +80,9 @@ def aggiorna_stato(alveare_id, covata_compatta, popolazione, polline, stato_cell
         flash('Lunghezza di Stato Cellette non valida!', category='error')
     elif not isinstance(stato_larve, str) or not 0 < len(stato_larve) <= 30:
         flash('Lunghezza di Stato Larve non valida!', category='error')
-    elif not isinstance(alveare_id, str) or not alveare_id.isdigit():
-        flash('ID Alveare non valido!', category='error')
+    elif alveare is None:
+        flash(' Alveare non valido!', category='error')
     else:
-        alveare = get_alveare_by_id(int(alveare_id))
         alveare.covata_compatta = bool(int(covata_compatta))
         alveare.popolazione = popolazione
         alveare.polline = polline
