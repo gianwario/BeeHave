@@ -39,7 +39,7 @@ def registra_utente(nome, cognome, indirizzo, citta, cap, telefono, email, passw
         if not controlla_email_esistente(email):
             flash("Email già esistente", category="error")
         elif controlla_password(password, conferma_password):
-            if is_apicoltore is None or not is_apicoltore.isdigit():
+            if not isinstance(is_apicoltore, str) or not is_apicoltore.isdigit():
                 flash("is_apicoltore non è valido")
             elif int(is_apicoltore):
                 user = Apicoltore(nome=nome, cognome=cognome, indirizzo=indirizzo, citta=citta, cap=cap,
@@ -53,6 +53,7 @@ def registra_utente(nome, cognome, indirizzo, citta, cap, telefono, email, passw
             db.session.commit()
             session['isApicoltore'] = is_apicoltore
             login_user(user)
+            flash('Registrazione avvenuta con successo!', category='success')
             return True
     return False
 
@@ -80,24 +81,25 @@ def modifica_profilo_personale(nome, cognome, email, telefono, citta, cap, indir
             current_user.password = utente.password = generate_password_hash(pwd, method='sha256')
 
         db.session.commit()
+        flash('Modifica dati avvenuta con successo!', category='success')
         return True
     return False
 
 
 def controlla_campi(nome, cognome, indirizzo, citta, cap, telefono, email):
-    if not 0 < len(nome) <= 45:
+    if not isinstance(nome, str) or not 0 < len(nome) <= 45:
         flash("Nome non valido", category="error")
-    elif not 0 < len(cognome) <= 45:
+    elif not isinstance(cognome, str) or not 0 < len(cognome) <= 45:
         flash("Cognome non valido", category="error")
-    elif not 0 < len(indirizzo) <= 50:
+    elif not isinstance(indirizzo, str) or not 0 < len(indirizzo) <= 50:
         flash("Indirizzo non valido", category="error")
-    elif not 0 < len(citta) <= 45:
+    elif not isinstance(citta, str) or not 0 < len(citta) <= 45:
         flash("Città non valida", category="error")
-    elif not 0 < len(cap) <= 5 or not cap.isdigit():
+    elif not isinstance(cap, str) or not 0 < len(cap) <= 5 or not cap.isdigit():
         flash("CAP non valido", category="error")
-    elif not 0 < len(telefono) <= 10 or not telefono.isdigit():
+    elif not isinstance(telefono, str) or not 0 < len(telefono) <= 10 or not telefono.isdigit():
         flash("Numero telefono non valido", category="error")
-    elif not 0 < len(email) <= 45:
+    elif not isinstance(email, str) or not 0 < len(email) <= 45:
         flash("Email non valida", category="error")
     else:
         return True
@@ -105,7 +107,7 @@ def controlla_campi(nome, cognome, indirizzo, citta, cap, telefono, email):
 
 
 def controlla_password(pwd, cpwd):
-    if len(pwd) < 8:
+    if not isinstance(pwd, str) or len(pwd) < 8:
         flash("Lunghezza password deve essere almeno 8 caratteri.", category="error")
     elif not (controllo_caratteri_speciali(pwd) and controllo_numeri(pwd)):
         flash("Inserire nel campo password almeno un carattere speciale ed un numero.", category="error")
