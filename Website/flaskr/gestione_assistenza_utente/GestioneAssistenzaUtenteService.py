@@ -4,6 +4,7 @@ from flask import flash
 from flask_login import current_user
 
 from .. import db
+from ..gestione_utente.GestioneUtenteService import get_apicoltore_by_id
 from ..model.Apicoltore import Apicoltore
 from ..model.TicketAssistenza import TicketAssistenza
 
@@ -31,7 +32,7 @@ def get_assistenti():
 
 # Controllo se l'apicoltore esiste ed è disponibile a fornire assistenza
 def controlla_apicoltore(id_apicoltore):
-    apicoltore = Apicoltore.query.filter_by(id=id_apicoltore).first()
+    apicoltore = get_apicoltore_by_id(id_apicoltore)
     if apicoltore:
         return apicoltore.assistenza
     return False
