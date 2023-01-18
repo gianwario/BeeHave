@@ -28,6 +28,7 @@ jobs:
             pip install flake8 pytest
             pip install -r Website/requirements.txt
             sudo /etc/init.d/mysql start
+            mysql -e 'CREATE DATABASE beehavedb;' -u root -p root
         - name: Lint with flake8
           run: |
             # stop the build if there are Python syntax errors or undefined names
