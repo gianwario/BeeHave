@@ -4,15 +4,15 @@ from flask import flash
 from flask_login import current_user
 
 from .. import db
+from ..gestione_utente.GestioneUtenteService import get_apicoltore_by_id
 from ..model.Apicoltore import Apicoltore
 from ..model.TicketAssistenza import TicketAssistenza
 
 
-def inserisci_area_assistenza(descrizione):
+def inserisci_area_assistenza(descrizione, apicoltore):
     if not isinstance(descrizione, str) or not 0 < len(descrizione) <= 200:
         flash('La lunghezza della descrizione non è valida!', category='error')
     else:
-        apicoltore = Apicoltore.query.filter_by(id=current_user.id).first()
         apicoltore.descrizione = descrizione
         apicoltore.assistenza = True
         db.session.add(apicoltore)
@@ -32,7 +32,7 @@ def get_assistenti():
 
 # Controllo se l'apicoltore esiste ed è disponibile a fornire assistenza
 def controlla_apicoltore(id_apicoltore):
-    apicoltore = Apicoltore.query.filter_by(id=id_apicoltore).first()
+    apicoltore = get_apicoltore_by_id(id_apicoltore)
     if apicoltore:
         return apicoltore.assistenza
     return False

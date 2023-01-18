@@ -41,35 +41,32 @@ def get_alveari():
     return Alveare.query.all()
 
 
-def decrementa_percentuale(id_alveare, percentuale):
-    alveare = Alveare.query.filter_by(id=id_alveare).first()
+def decrementa_percentuale(alveare, percentuale):
     alveare.percentuale_disponibile -= int(percentuale)
     db.session.flush()
     db.session.commit()
 
 
-def adozione_alveare(id_alveare, tempo_adozione, percentuale):
+def adozione_alveare(alveare, tempo_adozione, percentuale):
     if not isinstance(tempo_adozione, str) or not tempo_adozione.isdigit() or not 3 <= int(tempo_adozione) <= 12:
         flash('TempoAdozione non è nel range corretto!', category='error')
     elif not isinstance(percentuale, str) or not percentuale.isdigit() or not 25 <= int(percentuale) <= 100:
         flash('Percentuale Adozione non è nel range corretto!', category='error')
-    elif not isinstance(id_alveare, str) or not isinstance(id_alveare, int):
-        flash('ID Alveare non valido!', category='error')
-    elif int(percentuale) > get_alveare_by_id(id_alveare).percentuale_disponibile:
+    elif int(percentuale) > alveare.percentuale_disponibile:
         flash('Percentuale Adozione è maggiore di Percentuale Disponibile!', category='error')
     else:
-        ticket = TicketAdozione(id_cliente=current_user.id, id_alveare=id_alveare,
+        ticket = TicketAdozione(id_cliente=current_user.id, id_alveare=alveare.id,
                                 percentuale_adozione=int(percentuale),
                                 data_inizio_adozione=datetime.datetime.now(), tempo_adozione=int(tempo_adozione))
         db.session.add(ticket)
         db.session.commit()
-        decrementa_percentuale(ticket.id_alveare, percentuale)
+        decrementa_percentuale(alveare, percentuale)
         flash('Alveare adottato con successo!', category='success')
         return True
     return False
 
 
-def aggiorna_stato(alveare_id, covata_compatta, popolazione, polline, stato_cellette, stato_larve):
+def aggiorna_stato(alveare, covata_compatta, popolazione, polline, stato_cellette, stato_larve):
     if not isinstance(covata_compatta, str) or not covata_compatta.isdigit():
         flash('CovataCompatta non è stata inserita!', category='error')
     elif not isinstance(popolazione, str) or not 0 < len(popolazione) <= 30:
@@ -80,10 +77,7 @@ def aggiorna_stato(alveare_id, covata_compatta, popolazione, polline, stato_cell
         flash('Lunghezza di Stato Cellette non valida!', category='error')
     elif not isinstance(stato_larve, str) or not 0 < len(stato_larve) <= 30:
         flash('Lunghezza di Stato Larve non valida!', category='error')
-    elif not isinstance(alveare_id, str) or not alveare_id.isdigit():
-        flash('ID Alveare non valido!', category='error')
     else:
-        alveare = get_alveare_by_id(int(alveare_id))
         alveare.covata_compatta = bool(int(covata_compatta))
         alveare.popolazione = popolazione
         alveare.polline = polline

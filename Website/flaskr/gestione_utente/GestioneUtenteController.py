@@ -28,7 +28,6 @@ def login():
             if check_password_hash(user.password, pwd):
 
                 login_user(user)
-                flash('Login effettuato con successo!', category='success')
                 return home()
             else:
                 flash('Password errata!', category='error')
