@@ -51,8 +51,9 @@ def adotta_alveare():
         tempo_adozione = request.form.get('tempo_adozione')
         percentuale = request.form.get('disp')
         id_alveare = request.form.get('id_alv')
+        alveare = get_alveare_by_id(id_alveare)
+        if alveare is not None:
+            adozione_alveare(percentuale=percentuale, tempo_adozione=tempo_adozione, alveare=alveare)
 
-        adozione_alveare(percentuale=percentuale, tempo_adozione=tempo_adozione, id_alveare=id_alveare)
-
-        return informazioni_alveare(id_alveare)
+            return informazioni_alveare(id_alveare)
     return mostra_alveari()
