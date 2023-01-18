@@ -1,7 +1,15 @@
+import pytest
 from flask import get_flashed_messages
-
+from mock import app, mock_login_apicoltore
 from Website.flaskr.gestione_adozioni.GestioneAdozioniService import aggiorna_stato
-from Website.tests.mock import mock_alveare, app
+from Website.flaskr.model.Alveare import Alveare
+
+
+@pytest.fixture
+def mock_alveare():
+    return Alveare(nome="nome", produzione=1, numero_api=1, tipo_miele="tipo_miele",
+                   percentuale_disponibile=100,
+                   prezzo=2, tipo_fiore="tipo_fiore", id_apicoltore=1)
 
 
 def test_aggiorna_stato_tc_1_1(app):

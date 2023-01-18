@@ -18,7 +18,7 @@ def inserisci_alveare(nome, produzione, numero_api, tipo_miele, prezzo, tipo_fio
         flash('Lunghezza di TipoMiele non valida!', category='error')
     elif not isinstance(numero_api, str) or not numero_api.isdigit() or not 0 < int(numero_api) <= 40000:
         flash('NumeroApi non è nel range corretto!', category='error')
-    elif not isinstance(prezzo, str) or not 0 < float(prezzo) <= 1000:
+    elif not isinstance(prezzo, str) or not prezzo.replace('.', '', 1).isdigit() or not 0 < float(prezzo) <= 1000:
         flash('Prezzo non è nel range corretto!', category='error')
     else:
         alveare = Alveare(nome=nome, produzione=int(produzione), numero_api=int(numero_api), tipo_miele=tipo_miele,

@@ -10,9 +10,10 @@
 </head>
 <body>
 {% block content %}
-
+<br><br>
+<h1 style="text-align: center">I Tuoi Alveari</h1>
 <div class="container">
-    <h1 class="text-secondary">I Tuoi Alveari</h1>
+
     <div class="row">
         {% for elemento in alveari_adottati %}
 
@@ -28,11 +29,14 @@
                         <div class="mask rgba-white-slight"></div>
                     </a>
                 </div>
-                <div class="card-body pt-0">
-                    <a href="{{url_for('views.informazioni_alveare',alveare_id=elemento.Alveare.id)}}"><h5 class="card-title">{{elemento.Alveare.nome}}</h5></a>
+                <div class="card-body pt-0" style="text-align: center">
+                    <br>
+                    <a style="text-decoration: none;color: black"href="{{url_for('views.informazioni_alveare',alveare_id=elemento.Alveare.id)}}"><h5 class="card-title">{{elemento.Alveare.nome}}</h5></a>
+                    <br>
                     <p class="card-text">Tempo adozione: {{elemento.TicketAdozione.tempo_adozione}} Mesi</p>
                     <p class="card-text">Data Inizio: {{elemento.TicketAdozione.data_inizio_adozione}}</p>
                     <p class="card-text">Data Scadenza: {{elemento.TicketAdozione.data_fine_adozione()}}</p>
+                    <br>
                     <div class="progress">
                         <div class="progress-bar progress-bar-striped progress-bar-animated  bg-warning"
                              role="progressbar" style="width:{{elemento.TicketAdozione.percentuale_adozione}}%"

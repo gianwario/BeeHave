@@ -6,6 +6,7 @@ from flask_sqlalchemy import SQLAlchemy
 from Website.flaskr import create_app
 from Website.flaskr.Routes import views
 from Website.flaskr.model.Alveare import Alveare
+
 from Website.flaskr.model.Apicoltore import Apicoltore
 
 
@@ -22,8 +23,8 @@ def mock_login_apicoltore():
     return "ok"
 
 
-db = SQLAlchemy()
 
+db = SQLAlchemy()
 
 @pytest.fixture
 def app():
@@ -46,3 +47,4 @@ def mock_alveare():
 
 def mock_apicoltore():
     return Apicoltore.query.filter_by(email="email").first()
+    
