@@ -35,7 +35,7 @@ def inserisci_prodotto(nome, descrizione, localita, peso, tipologia, prezzo, qua
         flash('Peso non è nel range corretto', category='error')
     elif not isinstance(tipologia, str) or not 0 < len(tipologia) <= 30:
         flash('Lunghezza tipologia non valida!', category='error')
-    elif not isinstance(prezzo, str) or not 0 < float(prezzo) <= 1000:
+    elif not isinstance(prezzo, str) or not prezzo.replace('.', '', 1).isdigit() or not 0 < float(prezzo) <= 1000:
         flash('Prezzo non è nel range corretto!', category='error')
     elif not isinstance(quantita, str) or not quantita.isdigit() or not 0 < int(quantita) <= 1000000:
         flash('Quantità non è nel range corretto!', category='error')
