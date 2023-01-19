@@ -23,8 +23,8 @@ def mock_login_apicoltore():
     return "ok"
 
 
-
 db = SQLAlchemy()
+
 
 @pytest.fixture
 def app():
@@ -47,4 +47,3 @@ def mock_alveare():
 
 def mock_apicoltore():
     return Apicoltore.query.filter_by(email="email").first()
-    
