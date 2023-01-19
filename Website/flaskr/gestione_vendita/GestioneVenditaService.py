@@ -1,5 +1,4 @@
 from flask import flash
-from flask_login import current_user
 
 from Website.flaskr.model.Prodotto import Prodotto
 from .. import db
@@ -18,6 +17,8 @@ def cancella_prodotto(prodotto_id):
         prodotto.quantita = 0
         db.session.commit()
         flash("Prodotto eliminato con successo!", category='success')
+        return True
+    return False
 
 
 def get_tutti_prodotti():
@@ -57,6 +58,8 @@ def decrementa_quantita(id_prodotto, quantita):
         prodotto.quantita -= quantita
         db.session.flush()
         db.session.commit()
+        return True
+    return False
 
 
 def get_prodotti_by_apicoltore(id_apicoltore):

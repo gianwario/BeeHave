@@ -1,7 +1,6 @@
 import datetime
 
 from flask import flash
-from flask_login import current_user
 
 from .. import db
 from ..gestione_utente.GestioneUtenteService import get_apicoltore_by_id
