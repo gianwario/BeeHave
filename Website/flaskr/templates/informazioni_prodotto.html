@@ -10,12 +10,18 @@
 </head>
 <body>
 {% block content %}
-<div class="container mt-5 mb-5">
-    <h1 class="text-secondary">Informazioni Prodotto</h1>
-    <div class="card">
+<style>
+    .btn:hover{
+          background-color: darkorange;
+    }
+</style>
+<br><br><br>
+ <h1 style="text-align: center">Informazioni Prodotto</h1>
+<br>
+    <div class="card shadow-lg "style="width: 80%;margin-left: 8%">
         <div class="row g-0">
             <div class="col-md-6 border-end">
-                <div class="d-flex flex-column justify-content-center">
+                <div class="  justify-content-center">
                     <div class="main_image"><img src="../static/images/honey_pot.jpg" id="main_product_image"
                                                  width="350" alt=""></div>
 
@@ -23,21 +29,23 @@
             </div>
             <div class="col-md-6">
                 <div class="p-3 right-side">
+                    <br>
                     <div class="d-flex justify-content-between align-items-center"><h3>{{prodotto.nome}}</h3></div>
                     <div class="mt-2 pr-3 content"><p>{{prodotto.descrizione}}</p></div>
+                    <br>
                     <p>Localitá di produzione: {{prodotto.localita}}</p>
-                    <h3>€{{prodotto.prezzo}}</h3>
+                    <h3 style="color: orange">€{{prodotto.prezzo}}</h3>
                     <div class="ratings d-flex flex-row align-items-center">
                         <div class="d-flex flex-row"><i class='bx bxs-star'></i> <i class='bx bxs-star'></i> <i
                                 class='bx bxs-star'></i> <i class='bx bxs-star'></i> <i class='bx bx-star'></i></div>
-
-                        <span>Apicoltore: {{apicoltore.nome}}</span><span>  Tipologia: {{prodotto.tipologia}}</span><span>  Peso: {{prodotto.peso}}g</span><span>  Quantitá: {{prodotto.quantita}}</span>
+                        <br>
+                        <span style="margin: 0">Apicoltore: {{apicoltore.email}}</span><span>  Tipologia: {{prodotto.tipologia}}</span><span>  Peso: {{prodotto.peso}}g</span><span>  Quantitá: {{prodotto.quantita}}</span>
                     </div>
                     {% if not current_user.is_authenticated or not session['isApicoltore'] %}
                     <div class="buttons d-flex flex-row mt-5 gap-3">
                         <form action="/acquista_prodotto" method="post">
                             <label for="seleziona_qnt">Inserire Quantitá</label>
-                            <input
+                            <input style="padding: 5px 5px;border-color: orange;border-radius:5px"
                                     required="true"
                                     type="number"
                                     id="seleziona_qnt"
@@ -48,9 +56,15 @@
                             />
                             <input type="hidden" name="id_prd" value="{{prodotto.id}}">
 
-
+<br><br>
                                 <input type="hidden" name="id_client" value="{{current_user.id}}">
-                                <button type="submit" value="acquista" class="btn btn-outline-dark">Compra</button>
+                                <button type="submit" value="acquista" class="btn" style="padding: 10px 20px;
+                                                                                  background-color: orange;
+                                                                                  border: none;
+                                                                                  border-radius: 5px;
+                                                                                  color: white;
+                                                                                  font-size: 0.875rem;
+                                                                                  cursor: pointer;">Compra</button>
                             <div class="form-outline mb-4">
                                 {% with messages = get_flashed_messages(category_filter=["success"]) %}
                                     {% if messages %}
@@ -69,7 +83,7 @@
         </div>
     </div>
 </div>
-
+<br><br>
 {% endblock %}
 </body>
 </html>
