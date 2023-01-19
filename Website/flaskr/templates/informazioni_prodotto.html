@@ -51,10 +51,19 @@
 
                                 <input type="hidden" name="id_client" value="{{current_user.id}}">
                                 <button type="submit" value="acquista" class="btn btn-outline-dark">Compra</button>
-
+                            <div class="form-outline mb-4">
+                                {% with messages = get_flashed_messages(category_filter=["success"]) %}
+                                    {% if messages %}
+                                        <p style="color:green">{{ messages[0] }}</p>
+                                    {% endif %}
+                                {% endwith %}
+                            </div>
                         </form>
                     </div>
-                {% endif %}
+
+
+
+                    {% endif %}
                 </div>
             </div>
         </div>

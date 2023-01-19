@@ -8,63 +8,49 @@
 <body>
 
 {% block content %}
+<br><br><br>
+<h1 style="text-align: center">I Tuoi Alveari</h1>
 <!--For Page-->
 <div class="page">
-    <h1 class="text-secondary">I Tuoi Alveari</h1>
+
     <!--For Row containing all card-->
+    <br>
     <div class="row">
 
+        <div class="product-container ">
         {% for alveare in alveari_disponibili %}
 
-        <!--Card 1-->
-        <div class="col-md-4">
-            <div class="card card-cascade card-ecommerce wider shadow mb-5 ">
-
-                <!--Card image-->
-                <div class="view view-cascade overlay text-center">
-                    <img class="card-img-top" src="../static/images/honey_pot.jpg"
+                <div class="product-card shadow-lg">
+                    <img class="product-image" src="../static/images/honey_pot.jpg"
                          alt="">
-                    <a>
-                        <div class="mask rgba-white-slight"></div>
-                    </a>
-                </div>
 
 
-                <!--Card Body-->
-                <div class="card-body card-body-cascade text-center">
-
-                    <!--Card Title-->
-
-                    <h4 class="card-title"><strong><a
-                            href="{{url_for('views.informazioni_alveare', alveare_id=alveare.id)}}">{{alveare.nome}}</a></strong>
-                    </h4>
-
-                    <!-- Card Description-->
-                    <p class="card-text">Descrizione generica
-                    </p>
+                    <h3 class="product-name"><strong >  {{alveare.nome}}</strong>
+                    </h3>
 
 
-                    <p class="price">Prezzo: {{alveare.prezzo}}</p>
-                    <!--Card footer-->
-                    <div class="card-footer">
-                        <p>Affitta</p>
+                    <p class="product-price">Prezzo:{{alveare.prezzo}}€</p>
+
+
+
 
                         <form action="{{url_for('views.modifica_stato', alveare_id=alveare.id)}}">
-                          <button type="submit">
-                            Modifica Stato
-                          </button>
+                            <button class="add-to-cart-button"><a style="text-decoration: none;color:white"href="{{url_for('views.modifica_stato',alveare_id=alveare.id)}}">  Modifica Stato</a></button>
+
                         </form>
 
-                    </div>
-
                 </div>
+
+
+
+
+        {% endfor %}
             </div>
         </div>
-        {% endfor %}
-
-    </div>
+ </div>
 </div>
-
+</div>
+<br>
 {% endblock %}
 </body>
 </html>

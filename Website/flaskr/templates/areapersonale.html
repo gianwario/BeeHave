@@ -2,14 +2,17 @@
 <html lang="en">
 <head>
     <link rel="stylesheet" href="{{url_for('static', filename='css/areautente.css')}}">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
     {% extends "base.html"%}
     {% block title %}Area Personale{% endblock %}
 </head>
 <body>
-{% block content %}
 
+{% block content %}
+<br><br><br>
+ <h1 style="text-align:center">I tuoi dati</h1>
 <div class="container bootstrap snippets bootdey">
-    <br><br>
+
     <div class="row">
 
         <div class="profile-nav col-md-3">
@@ -26,21 +29,22 @@
                 <ul class="nav nav-pills nav-stacked">
                     <li class="nav-item active"><a class="nav-link" href="#"> <i class="fa fa-user"></i> Profile</a></li>
                     <li class="nav-item">{% if current_user.assistenza%}<a class="nav-link" href="{{url_for('views.visualizza_richieste_assistenza')}}"> <i class="fa fa-calendar"></i>  Visualizza le tue richieste di assistenza <span
-                                class="label label-warning pull-right r-activity">{{ticket}} </span></a>{%else%}<a class="nav-link" href="{{url_for('views.crea_area_assistenza_page')}}"> <i class="fa fa-calendar"></i> Crea area
+                                class="badge text-bg-warning pull-right r-activity" style="text-align: center; ">{{ticket}} </span></a>{%else%}<a class="nav-link" href="{{url_for('views.crea_area_assistenza_page')}}"> <i class="fa fa-calendar"></i> Crea area
                         assistenza</a>{%endif%} </li>
                     <li class="nav-item"><a class="nav-link" href="{{url_for('views.modifica_dati_utente_page')}}"> <i class="fa fa-user"></i> Modifica
                         Account</a></li>
                 </ul>
             </div>
         </div>
-        <div class="profile-info col-md-9">
 
+
+        <div class="profile-info col-md-9">
 
             <div class="panel">
 
                 <div class="panel-body bio-graph-info">
-                    <h1>I tuoi dati</h1>
-                    <br><br>
+
+
 
                     <div class="row">
                         <div class="bio-row">
@@ -55,6 +59,7 @@
                         <div class="bio-row">
                             <p><span>Indirizzo</span>: {{current_user.indirizzo}}</p>
                         </div>
+
                         <div class="bio-row">
                             <p><span>CAP </span>: {{current_user.cap}}</p>
                         </div>
@@ -65,7 +70,7 @@
                             <p><span>Numero di telefono </span>: {{current_user.telefono}}</p>
                         </div>
 
-                        <br><br>
+                        <br>
 
                         <ul class="nav nav-pills nav-stacked">
                         </ul>
@@ -78,8 +83,8 @@
         </div>
     </div>
 </div>
-<br><br>
-<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
+<br>
+
 
 
 <div class="container">
@@ -106,7 +111,7 @@
               </div>
               <!-- Team Details-->
               <div class="single_advisor_details_info">
-                <h4 class="card-title"><strong><a href="{{url_for('views.informazioni_alveare', alveare_id=alveare.id)}}">{{alveare.nome}}</a></strong></h4>
+                <h4 class="card-title" ><strong><a style="text-decoration: none;color: black"href="{{url_for('views.informazioni_alveare', alveare_id=alveare.id)}}">{{alveare.nome}}</a></strong></h4>
                 <br>
                   <p class="price">Prezzo: €{{alveare.prezzo}}</p>
               </div>

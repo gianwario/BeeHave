@@ -26,7 +26,7 @@
 }
 
 .info p {
-  font-size: 1.2rem;
+  font-size: 2rem;
 }
 
 
@@ -603,6 +603,7 @@ body {
 .projcard-title {
 	font-family: 'Voces', 'Open Sans', arial, sans-serif;
 	font-size: 40px;
+color: black;
 }
 
 .projcard-bar {
@@ -673,5 +674,7 @@ body {
 	right: -10px;
 	top: 0;
 }
+
+
 
 

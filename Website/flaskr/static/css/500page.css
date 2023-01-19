@@ -1,0 +1,26 @@
+.pageerror{
+    padding:60px 0; background:#fff; font-family: 'Arvo', serif;}
+
+.pageerror  img{
+    width:100%;}
+
+.four_zero_four_bg{
+    background-image: url(https://i.pinimg.com/originals/c1/dc/25/c1dc25c150904864cc24c48e15e63b0d.gif);
+    height: 600px;
+    background-position: center;}
+
+
+ .four_zero_four_bg h1{
+    font-size:80px;}
+
+  .four_zero_four_bg h3{
+      font-size:80px;}
+
+    .link_500{
+	    color: #fff!important;
+        padding: 10px 30px;
+        background: #faa500;
+        margin: 20px 0;
+        display: inline-block;}
+	.contant_box_500{
+        margin-top:-150px;}

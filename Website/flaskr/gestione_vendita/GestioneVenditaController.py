@@ -1,11 +1,9 @@
-from flask import Blueprint, request, session, flash
+from flask import Blueprint, request, session
 from flask_login import current_user, login_required
 
-from Website.flaskr.Routes import mostra_prodotti, mostra_articoli_in_vendita
+from Website.flaskr.Routes import mostra_prodotti, mostra_articoli_in_vendita, info_articolo, inserimento_prodotto_page
 from Website.flaskr.gestione_vendita.GestioneVenditaService import inserisci_prodotto, cancella_prodotto, \
     acquisto_prodotto
-from Website.flaskr.model.Acquisto import Acquisto
-from Website.flaskr.model.Prodotto import Prodotto
 
 gv = Blueprint('gv', __name__)
 
@@ -17,33 +15,12 @@ def inserimento_prodotto():
         nome = request.form.get('nome')
         descrizione = request.form.get('descrizione')
         localita = request.form.get('localita')
-        peso = int(request.form.get('peso'))
+        peso = request.form.get('peso')
         tipologia = request.form.get('tipologia')
-        prezzo = float(request.form.get('prezzo'))
-        quantita = int(request.form.get('quantita'))
-        apicoltore = current_user.id
-
-        if not 0 < len(nome) <= 30:
-            flash('Lunghezza nome non valida!', category='error')
-        elif not 0 < len(descrizione) <= 200:
-            flash('Lunghezza descrizione non valida!', category='error')
-        elif not 0 < len(localita) <= 40:
-            flash('Lunghezza località non valida!', category='error')
-        elif not 0 < peso <= 1000:
-            flash('Peso non è nel range corretto', category='error')
-        elif not 0 < len(tipologia) <= 30:
-            flash('Lunghezza tipologia non valida!', category='error')
-        elif not 0 < prezzo <= 1000:
-            flash('Prezzo non è nel range corretto!', category='error')
-        elif not 0 < quantita <= 1000000:
-            flash('Quantità non è nel range corretto!', category='error')
-        else:
-            flash('Inserimento avvenuto con successo!', category='success')
-
-            prod = Prodotto(nome=nome, descrizione=descrizione, localita=localita, peso=peso, prezzo=prezzo,
-                            quantita=quantita, id_apicoltore=apicoltore, tipologia=tipologia)
-
-            inserisci_prodotto(prod)
+        prezzo = request.form.get('prezzo')
+        quantita = request.form.get('quantita')
+        if not inserisci_prodotto(nome, descrizione, localita, peso, tipologia, prezzo, quantita):
+            return inserimento_prodotto_page()
     return mostra_articoli_in_vendita(current_user.id)
 
 
@@ -59,13 +36,9 @@ def elimina_prodotto(id_prodotto, id_apicoltore):
 @login_required
 def acquista_prodotto():
     if request.method == 'POST' and not session['isApicoltore']:
-        quantita = int(request.form.get('quantita_prod'))
-        qnt_articolo = int(request.form.get('qnt_articolo'))
-        id_cliente = int(request.form.get('id_client'))
-        id_prodotto = int(request.form.get('id_prd'))
-        if quantita > qnt_articolo:
-            flash('Quantitá non disponibile!', category='error')
+        quantita = request.form.get('quantita_prod')
+        id_prodotto = request.form.get('id_prd')
 
-        acquisto = Acquisto(id_cliente=id_cliente, id_prodotto=id_prodotto, quantita=quantita)
-        acquisto_prodotto(acquisto, quantita)
+        if acquisto_prodotto(id_prodotto=id_prodotto, quantita=quantita):
+            return info_articolo(id_prodotto)
     return mostra_prodotti()

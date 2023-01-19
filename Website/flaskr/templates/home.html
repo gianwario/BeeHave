@@ -6,20 +6,40 @@
     <title>
         {% block title %}Home{% endblock %}
     </title>
+
 </head>
 <body>
 {% block content %}
 <style>
+
     .carousel {
-        width: 70%;
-        height: 60%;
+
+        width: 100%;
+        height: 100%;
         position: center;
         margin-left: auto;
         margin-right: auto;
         margin-top: 0px;
         text-align: center;
-        text-align: center;
+
+
+ font-size: 1.7rem;
+        vertical-align:middle ;
+
     }
+
+.carousel-inner button {
+  margin-top: 1rem;
+  background-color: black;
+  opacity: 70%;
+  color: #fff;
+  border: none;
+  outline: none;
+  padding: 1rem 1.5rem;
+  font-size: 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+}
 
 </style>
 <br>
@@ -33,7 +53,7 @@
                 unici impollinatori?</p>
             <p>Queste ed altre domande sono state affrontate dai nostri esperti. Le api sono effettivamente l'anello
                 fondamentale della nostra catena alimentare.</p>
-            <button>Leggi l'articolo</button>
+            <button><a href="#qui"style="text-decoration: none;color: white" >Leggi l'articolo</a> </button>
         </section>
     </div>
 
@@ -42,9 +62,59 @@
     </div>
 
 </header>
+
+
 <br><br><br><br><br>
+
+<br><br><br>
+<br>
+
+
+ <section class="dishes">
+    <h2>Community BeeHave</h2>
+    <br>
+
+    <div class="dishes-grid">
+
+
+         <div class="dishes-item dishes-item-1__big"style="position: relative;">
+        <section style="position:absolute;z-index: 50;color:white;text-align: center;vertical-align: middle;top: 40%;padding-left: 12%">
+            <h1>Conosci e fatti conoscere</h1>
+              <h1>  dai nostri apicoltori esperti</h1>
+            <br>
+            <p >Resta in contatto con i tuoi apicoltori preferiti</p>
+            <p>Richiedi assistenza comodamente da casa!</p>
+             <button style="margin-top: 1rem;background-color: black;opacity: 70%;color: #fff;border: none;outline: none;padding: 1rem 1.5rem;font-size: 0.9rem;border-radius: 6px;cursor: pointer;" ><a href="#qui2"style="text-decoration: none;color: white" >Scopri di più</a> </button>
+
+            </section>
+
+        <img style="filter: brightness(50%); "
+             src="https://images.unsplash.com/photo-1593844848769-c725b9f47908?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjZ8fGFwaWN1bHR1cmF8ZW58MHx8MHx8&auto=format&fit=crop&w=900&q=60"
+             alt="Video of three dishes on a table"/>
+
+
+            </div>
+
+        <img class="dishes-item dishes-item-2"
+             src="https://images.unsplash.com/photo-1619522893151-bb5138b60292?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OXx8YXBpY3VsdHVyYXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=900&q=60"
+             alt="Dish of vegetables"/>
+        <img class="dishes-item dishes-item-3"
+             src="https://images.unsplash.com/photo-1620032599268-c822dd1c3076?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mzl8fGFwaWN1bHR1cmF8ZW58MHx8MHx8&auto=format&fit=crop&w=900&q=60"
+             alt="Dish of vegetables"/>
+    <div  class="dishes-item dishes-item-4"style=" grid-column:3/span 4;grid-row:2/3; text-align: center;vertical-align: middle;top:90%">
+    <blockquote style="width:93%;height:100%;border-radius: 5px;">
+    <p style=" font-style:italic;padding-top:15%;margin-bottom: 0;position:relative;font-size: 2rem;height: 50%;padding-bottom:0;display: flex;flex-direction: column;justify-content: center;
+  width: 100%;">"Oggi, ogni terzo cucchiaio di cibo dipende dall'impollinazione e i prodotti delle api sono una ricca fonte di nutrienti essenziali"</p>
+   <br><br>
+    <cite style="margin-top: 50%;" >20 Maggio - World's Bee Day</cite></blockquote>
+    </div>
+    </div>
+
+  </section>
+
+<br><br><br><br><br><br><br>
 <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
-    <div class="carousel-indicators">
+    <div class="carousel-indicators" >
         <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active"
                 aria-current="true" aria-label="Slide 1"></button>
         <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1" aria-label="Slide 2"></button>
@@ -52,24 +122,28 @@
     </div>
     <div class="carousel-inner">
         <div class="carousel-item active" data-bs-interval="10000">
-            <img src="../static/images/home2.webp" class="d-block w-100" alt="...">
-            <div class="carousel-caption d-none d-md-block">
-                <h5>First slide label</h5>
-                <p>Some representative placeholder content for the first slide.</p>
+            <img src="https://www.3bee.com/static/2df350a7824039de5c4da9391ba4cb1e/9c4c3/api_sfondo_scuro.webp" class="d-block w-100" alt="...">
+            <div class="carousel-caption d-none d-md-block"style="font-size: 1.2rem;color:white; top:35rem ;@media screen and (max-width:1024px){top: 1rem}">
+                <h5 >Scegli il tuo alveare e proteggilo a distanza</h5>
+                <p>Scegli l'apicoltore che preferisci, supporta la sua attività e scegli uno dei suoi alveari . Seleziona il tuo miele e ricevilo direttamente a casa tua una volta pronto! Potrai seguire da remoto la crescita e lo sviluppo del tuo alveare.</p>
+                <button style="margin-top: 3rem"><a href="{{url_for('views.mostra_alveari')}}" style="text-decoration: none;color: white">Mostra alveari disponibili all'adozione</a></button>
             </div>
         </div>
         <div class="carousel-item" data-bs-interval="2000">
-            <img src="../static/images/home1.webp" class="d-block w-100" alt="...">
-            <div class="carousel-caption d-none d-md-block">
-                <h5>Second slide label</h5>
-                <p>Some representative placeholder content for the second slide.</p>
+
+            <img src="https://www.3bee.com/static/c100fd947f5090f86b75340892bdcadd/ef898/beeoncherry.jpg" class="d-block w-100" alt="...">
+            <div class="carousel-caption d-none d-md-block"style="font-size: 1.2rem;color:white;top:35rem ;@media screen and (max-width:1024px){top: 1rem}">
+                <h5>Fai scoprire il tuo miele unico</h5>
+                <p>Fai conoscere la tua realtà apistica in tutta Italia tramite BeeHave. Entra nel network degli apicoltori . Spedisci il tuo miele unico direttamente ai tuoi clienti.</p>
+            <button><a href="{{url_for('views.login_page')}}" style="text-decoration: none;color: white"> Sono un apicoltore</a></button>
             </div>
         </div>
         <div class="carousel-item">
-            <img src="../static/images/home3.webp" class="d-block w-100" alt="...">
-            <div class="carousel-caption d-none d-md-block">
-                <h5>Third slide label</h5>
-                <p>Some representative placeholder content for the third slide.</p>
+            <img src="https://www.3bee.com/static/b1e453deeacc9925f6c3bb1784c4d433/aee1a/apired.webp" class="d-block w-100" alt="...">
+            <div class="carousel-caption d-none d-md-block"style="font-size: 1.2rem;color:white;top:35rem ;@media screen and (max-width:1024px){top: 1rem}">
+                <h5>Mostra catalogo prodotti</h5>
+                <p>Scegli la qualità e la professionalità dei nostri apicoltori esperti.</p>
+                <button><a href="{{url_for('views.mostra_prodotti')}}" style="text-decoration: none;color: white">Acquista i nostri prodotti</a></button>
             </div>
         </div>
     </div>
@@ -82,24 +156,9 @@
         <span class="visually-hidden">Next</span>
     </button>
 </div>
-<br><br><br><br><br>
-<section class="dishes">
-    <h2>Community BeeHave</h2>
-    <br>
-    <div class="dishes-grid">
-        <img class="dishes-item dishes-item-1__big"
-             src="https://images.unsplash.com/photo-1593844848769-c725b9f47908?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjZ8fGFwaWN1bHR1cmF8ZW58MHx8MHx8&auto=format&fit=crop&w=900&q=60"
-             alt="Video of three dishes on a table"/>
 
-        <img class="dishes-item dishes-item-2"
-             src="https://images.unsplash.com/photo-1619522893151-bb5138b60292?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OXx8YXBpY3VsdHVyYXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=900&q=60"
-             alt="Dish of vegetables"/>
-        <img class="dishes-item dishes-item-3"
-             src="https://images.unsplash.com/photo-1620032599268-c822dd1c3076?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mzl8fGFwaWN1bHR1cmF8ZW58MHx8MHx8&auto=format&fit=crop&w=900&q=60"
-             alt="Dish of vegetables"/>
+<br><br><div id="qui"></div><br>
 
-    </div>
-  </section>
 <div class="projcard-container">
 
     	<div class="projcard projcard-orange">
@@ -148,12 +207,11 @@
 				<div class="projcard-description">Adotta un alveare e proteggi le sue api
                     Una delle iniziative più alla portata di tutti è sicuramente l’adozione di un alveare.
                     Ma in cosa consiste? Grazie alla tecnologia BeeHave, potrai scegliere un alveare monitorato a distanza
-                    e adottarlo per un anno interno. In questo modo potrai seguire direttamente dal tuo cellulare lo sviluppo
-                    e la crescita delle api e seguirle passo passo durante la stagione produttiva, quando la famiglia cresce
-                    al massimo delle sue possibilità e arriva il momento di estrarre il loro prezioso miele. Non solo,
+                    e adottarlo per un anno interno. In questo modo potrai sempre seguire lo sviluppo
+                    e la crescita delle api. Non solo,
                     potrai anche vedere come si preparano all’inverno e come l’apicoltore se ne prende cura nel caso non
                     avessero abbastanza nutrimento per sopravvivere fino alla primavera. Proprio per poterti avvicinare ancora
-                    di più alla realtà dell’alveare e dell’apicoltura da te scelti, a fine stagione apistica riceverai a casa tua
+                    di più alla realtà dell’alveare, a fine stagione apistica, riceverai a casa tua
                     il miele prodotto dalle “tue” api. Potrai sceglierlo in base alle tipologie che vengono prodotte
                     in ciascun luogo.</div>
 			</div>
@@ -161,160 +219,6 @@
 	</div>
 </div>
 
-
-<br><br><br><br>
-
-
-
-<div class="d-flex justify-content-center">
-    <h1>Hai bisogno di aiuto?</h1>
-</div>
-<div class="d-flex justify-content-center">
-    <h3>Contatta qualcuno degli esperti sulla piattaforma</h3>
-</div>
-<div class="row p-5">
-    <div class="col-xl-6 mb-4">
-        <div class="card">
-            <div class="card-body">
-                <div class="d-flex justify-content-between align-items-center">
-                    <div class="d-flex align-items-center">
-                        <img
-                                src="../static/images/expert.png"
-                                alt=""
-                                style="width: 45px; height: 45px"
-                                class="rounded-circle"
-                        />
-                        <div class="ms-3">
-                            <p class="fw-bold mb-1">John Doe</p>
-                            <p class="text-muted mb-0">john.doe@gmail.com</p>
-                        </div>
-                    </div>
-                    <span class="badge rounded-pill badge-success">Active</span>
-                </div>
-            </div>
-            <div
-                    class="card-footer border-0 bg-light p-2 d-flex justify-content-around"
-            >
-                <a
-                        class="btn btn-link m-0 text-reset"
-                        href="#"
-                        role="button"
-                        data-ripple-color="primary"
-                >Messaggia<i class="fas fa-envelope ms-2"></i
-                ></a>
-
-            </div>
-        </div>
-    </div>
-    <div class="col-xl-6 mb-4">
-        <div class="card">
-            <div class="card-body">
-                <div class="d-flex justify-content-between align-items-center">
-                    <div class="d-flex align-items-center">
-                        <img
-                                src="../static/images/expert.png"
-                                alt=""
-                                style="width: 45px; height: 45px"
-                                class="rounded-circle"
-                        />
-                        <div class="ms-3">
-                            <p class="fw-bold mb-1">Alex Ray</p>
-                            <p class="text-muted mb-0">alex.ray@gmail.com</p>
-                        </div>
-                    </div>
-                    <span class="badge rounded-pill badge-primary"
-                    >Onboarding</span
-                    >
-                </div>
-            </div>
-            <div
-                    class="card-footer border-0 bg-light p-2 d-flex justify-content-around"
-            >
-                <a
-                        class="btn btn-link m-0 text-reset"
-                        href="#"
-                        role="button"
-                        data-ripple-color="primary"
-                >Messaggia<i class="fas fa-envelope ms-2"></i
-                ></a>
-
-            </div>
-        </div>
-    </div>
-    <div class="col-xl-6 mb-4">
-        <div class="card">
-            <div class="card-body">
-                <div class="d-flex justify-content-between align-items-center">
-                    <div class="d-flex align-items-center">
-                        <img
-                                src="../static/images/expert.png" alt=""
-                                style="width: 45px; height: 45px"
-                                class="rounded-circle"
-                        />
-                        <div class="ms-3">
-                            <p class="fw-bold mb-1">Kate Hunington</p>
-                            <p class="text-muted mb-0">kate.hunington@gmail.com</p>
-                        </div>
-                    </div>
-                    <span class="badge rounded-pill badge-warning">Awaiting</span>
-                </div>
-            </div>
-            <div
-                    class="card-footer border-0 bg-light p-2 d-flex justify-content-around"
-            >
-                <a
-                        class="btn btn-link m-0 text-reset"
-                        href="#"
-                        role="button"
-                        data-ripple-color="primary"
-                >Messaggia<i class="fas fa-envelope ms-2"></i
-                ></a>
-
-            </div>
-        </div>
-    </div>
-    <div class="col-xl-6 mb-4">
-        <div class="card">
-            <div class="card-body">
-                <div class="d-flex justify-content-between align-items-center">
-                    <div class="d-flex align-items-center">
-                        <img
-                                src="../static/images/expert.png"
-                                alt=""
-                                style="width: 45px; height: 45px"
-                                class="rounded-circle"
-                        />
-                        <div class="ms-3">
-                            <p class="fw-bold mb-1">Michael Bale</p>
-                            <p class="text-muted mb-0">michael.bale@gmail.com</p>
-                        </div>
-                    </div>
-                    <span class="badge rounded-pill badge-danger">Removed</span>
-                </div>
-            </div>
-            <div
-                    class="card-footer border-0 bg-light p-2 d-flex justify-content-around"
-            >
-                <a
-                        class="btn btn-link m-0 text-reset"
-                        href="#"
-                        role="button"
-                        data-ripple-color="primary"
-                >Messaggia<i class="fas fa-envelope ms-2"></i
-                ></a>
-
-            </div>
-        </div>
-    </div>
-</div>
-
-<center>
-    <a href="{{url_for('views.mostra_lista_assistenti')}}">
-        <button type="button" class="btn btn-warning w-25">Mostra
-            di Piú
-        </button>
-    </a>
-</center>
 
 {% endblock %}
 

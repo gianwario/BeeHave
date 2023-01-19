@@ -153,10 +153,9 @@ def mostra_lista_ticket_assistenza():
 def visualizza_richieste_assistenza():
     if session['isApicoltore']:
         ticket_assistenza = get_ticket_assistenza_by_apicoltore(current_user.id)
-        return render_template('/ticket_assistenza.html', ticket_assistenza_ap=ticket_assistenza)
     else:
         ticket_assistenza = get_ticket_assistenza_by_cliente(current_user.id)
-        return render_template('/ticket_assistenza.html', ticket_assistenza_cl=ticket_assistenza)
+    return render_template('/ticket_assistenza.html', tickets_assistenza=ticket_assistenza)
 
 
 @views.route('/visualizza_informazioni_ticket/<int:ticket_id>', methods=['POST', 'GET'])

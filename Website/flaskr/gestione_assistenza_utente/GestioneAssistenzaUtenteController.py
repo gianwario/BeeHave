@@ -1,10 +1,11 @@
-from flask import Blueprint, request, flash, session
+from flask import Blueprint, request, session
 from flask_login import login_required, current_user
 
 from Website.flaskr.Routes import crea_area_assistenza_page, area_personale, richiesta_assistenza_page, \
     visualizza_richieste_assistenza
 from Website.flaskr.gestione_assistenza_utente.GestioneAssistenzaUtenteService import inserisci_area_assistenza, \
-    controlla_apicoltore, richiedi_assistenza
+    richiedi_assistenza
+from Website.flaskr.gestione_utente.GestioneUtenteService import get_apicoltore_by_id
 
 gau = Blueprint('gau', __name__)
 
@@ -14,13 +15,12 @@ gau = Blueprint('gau', __name__)
 def crea_area_assistenza():
     if request.method == 'POST' and session['isApicoltore']:
         descrizione = request.form.get('descrizione')
-        if descrizione is None or not 0 < len(descrizione) <= 200:
-            flash('La lunghezza della descrizione non è valida!', category='error')
+        apicoltore = get_apicoltore_by_id(current_user.id)
+        if inserisci_area_assistenza(descrizione, apicoltore):
+            current_user.descrizione = descrizione
+            current_user.assistenza = True
+        else:
             return crea_area_assistenza_page()
-        current_user.descrizione = descrizione
-        current_user.assistenza = True
-        inserisci_area_assistenza(descrizione, assistenza=True)
-
     return area_personale()
 
 
@@ -32,17 +32,7 @@ def richiesta_assistenza():
         descrizione = request.form.get('descrizione')
         id_apicoltore = request.form.get('id_apicoltore')
 
-        if not 0 < len(nome) <= 45:
-            flash('La lunghezza del nome non è valida', category='error')
-            return richiesta_assistenza_page()
-        if not 0 < len(descrizione) <= 200:
-            flash('La lunghezza della descrizione non è valida!', category='error')
-            return richiesta_assistenza_page()
-        if not controlla_apicoltore(id_apicoltore):
-            flash("L'apicoltore non esiste o non è disponibile a fornire assistenza", category='error')
-            return richiesta_assistenza_page()
-
-        richiedi_assistenza(nome, descrizione, id_apicoltore)
-        return visualizza_richieste_assistenza()
+        if richiedi_assistenza(nome, descrizione, id_apicoltore):
+            return visualizza_richieste_assistenza()
 
     return richiesta_assistenza_page()
