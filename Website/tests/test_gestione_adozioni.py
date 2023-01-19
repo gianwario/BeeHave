@@ -1,6 +1,6 @@
 import pytest
 from flask import get_flashed_messages
-from mock import app, mock_login_apicoltore
+from mock import app
 from Website.flaskr.gestione_adozioni.GestioneAdozioniService import aggiorna_stato
 from Website.flaskr.model.Alveare import Alveare
 
