@@ -1,3 +1,4 @@
+import pytest
 from flask import session
 from flask_login import login_user
 from flask_sqlalchemy import SQLAlchemy
