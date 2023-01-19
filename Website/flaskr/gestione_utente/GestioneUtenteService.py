@@ -15,8 +15,8 @@ def get_apicoltore_by_email(email):
     return Apicoltore.query.filter_by(email=email).first()
 
 
-def get_apicoltore_by_id(id_api):
-    return Apicoltore.query.filter_by(id=id_api).first()
+def get_apicoltore_by_id(id_apicoltore):
+    return Apicoltore.query.filter_by(id=id_apicoltore).first()
 
 
 def get_cliente_by_id(id_cliente):
@@ -58,12 +58,12 @@ def registra_utente(nome, cognome, indirizzo, citta, cap, telefono, email, passw
     return False
 
 
-def modifica_profilo_personale(nome, cognome, email, telefono, citta, cap, indirizzo, pwd, cpwd):
+def modifica_profilo_personale(nome, cognome, email, telefono, citta, cap, indirizzo, password, conferma_password):
     if controlla_campi(nome, cognome, indirizzo, citta, cap, telefono, email):
         if not controlla_email_esistente(email) and email != current_user.email:
             flash("Email già esistente", category="error")
             return False
-        if pwd != '' and not controlla_password(pwd, cpwd):
+        if password != '' and not controlla_password(password, conferma_password):
             return False
         if session['isApicoltore']:
             utente = get_apicoltore_by_id(current_user.id)
@@ -77,8 +77,8 @@ def modifica_profilo_personale(nome, cognome, email, telefono, citta, cap, indir
         current_user.citta = utente.citta = citta
         current_user.cap = utente.cap = cap
         current_user.indirizzo = utente.indirizzo = indirizzo
-        if pwd != '':
-            current_user.password = utente.password = generate_password_hash(pwd, method='sha256')
+        if password != '':
+            current_user.password = utente.password = generate_password_hash(password, method='sha256')
 
         db.session.commit()
         flash('Modifica dati avvenuta con successo!', category='success')
@@ -106,28 +106,28 @@ def controlla_campi(nome, cognome, indirizzo, citta, cap, telefono, email):
     return False
 
 
-def controlla_password(pwd, cpwd):
-    if not isinstance(pwd, str) or len(pwd) < 8:
+def controlla_password(password, conferma_password):
+    if not isinstance(password, str) or len(password) < 8:
         flash("Lunghezza password deve essere almeno 8 caratteri.", category="error")
-    elif not (controllo_caratteri_speciali(pwd) and controllo_numeri(pwd)):
+    elif not (controllo_caratteri_speciali(password) and controllo_numeri(password)):
         flash("Inserire nel campo password almeno un carattere speciale ed un numero.", category="error")
-    elif pwd != cpwd:
+    elif password != conferma_password:
         flash("Password e Conferma Password non combaciano.", category="error")
     else:
         return True
     return False
 
 
-def controllo_caratteri_speciali(psw):
-    for char in psw:
+def controllo_caratteri_speciali(password):
+    for char in password:
         for symbol in spec:
             if char == symbol:
                 return True
     return False
 
 
-def controllo_numeri(psw):
-    for char in psw:
+def controllo_numeri(password):
+    for char in password:
         if char.isdigit():
             return True
     return False
