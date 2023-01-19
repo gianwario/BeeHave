@@ -5,6 +5,7 @@ from Website.flaskr.Routes import crea_area_assistenza_page, area_personale, ric
     visualizza_richieste_assistenza
 from Website.flaskr.gestione_assistenza_utente.GestioneAssistenzaUtenteService import inserisci_area_assistenza, \
     richiedi_assistenza
+from Website.flaskr.gestione_utente.GestioneUtenteService import get_apicoltore_by_id
 
 gau = Blueprint('gau', __name__)
 
@@ -14,7 +15,8 @@ gau = Blueprint('gau', __name__)
 def crea_area_assistenza():
     if request.method == 'POST' and session['isApicoltore']:
         descrizione = request.form.get('descrizione')
-        if inserisci_area_assistenza(descrizione):
+        apicoltore = get_apicoltore_by_id(current_user.id)
+        if inserisci_area_assistenza(descrizione, apicoltore):
             current_user.descrizione = descrizione
             current_user.assistenza = True
         else:
@@ -30,7 +32,7 @@ def richiesta_assistenza():
         descrizione = request.form.get('descrizione')
         id_apicoltore = request.form.get('id_apicoltore')
 
-        if richiedi_assistenza(nome, descrizione, id_apicoltore):
+        if richiedi_assistenza(nome, descrizione, id_apicoltore, cliente=current_user):
             return visualizza_richieste_assistenza()
 
     return richiesta_assistenza_page()

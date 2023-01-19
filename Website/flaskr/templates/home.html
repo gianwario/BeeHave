@@ -6,6 +6,7 @@
     <title>
         {% block title %}Home{% endblock %}
     </title>
+
 </head>
 <body>
 {% block content %}
@@ -125,7 +126,7 @@
             <div class="carousel-caption d-none d-md-block"style="font-size: 1.2rem;color:white; top:35rem ;@media screen and (max-width:1024px){top: 1rem}">
                 <h5 >Scegli il tuo alveare e proteggilo a distanza</h5>
                 <p>Scegli l'apicoltore che preferisci, supporta la sua attività e scegli uno dei suoi alveari . Seleziona il tuo miele e ricevilo direttamente a casa tua una volta pronto! Potrai seguire da remoto la crescita e lo sviluppo del tuo alveare.</p>
-                <button style="margin-top: 3rem"><a href="{{url_for('views.mostra_alveari')}}" style="text-decoration: none;color: white">Mostra alveari disponibili all'adozione</button>
+                <button style="margin-top: 3rem"><a href="{{url_for('views.mostra_alveari')}}" style="text-decoration: none;color: white">Mostra alveari disponibili all'adozione</a></button>
             </div>
         </div>
         <div class="carousel-item" data-bs-interval="2000">
@@ -142,7 +143,7 @@
             <div class="carousel-caption d-none d-md-block"style="font-size: 1.2rem;color:white;top:35rem ;@media screen and (max-width:1024px){top: 1rem}">
                 <h5>Mostra catalogo prodotti</h5>
                 <p>Scegli la qualità e la professionalità dei nostri apicoltori esperti.</p>
-                <button><a href="{{url_for('views.mostra_prodotti')}}" style="text-decoration: none;color: white">Acquista i nostri prodotti</button>
+                <button><a href="{{url_for('views.mostra_prodotti')}}" style="text-decoration: none;color: white">Acquista i nostri prodotti</a></button>
             </div>
         </div>
     </div>
@@ -218,160 +219,6 @@
 	</div>
 </div>
 
-
-<br><br><br><br>
-
-
-
-<div id="qui2"class="d-flex justify-content-center">
-    <h1>Hai bisogno di aiuto?</h1>
-</div>
-<div class="d-flex justify-content-center">
-    <h3>Contatta qualcuno degli esperti sulla piattaforma</h3>
-</div>
-<div class="row p-5">
-    <div class="col-xl-6 mb-4">
-        <div class="card">
-            <div class="card-body">
-                <div class="d-flex justify-content-between align-items-center">
-                    <div class="d-flex align-items-center">
-                        <img
-                                src="../static/images/expert.png"
-                                alt=""
-                                style="width: 45px; height: 45px"
-                                class="rounded-circle"
-                        />
-                        <div class="ms-3">
-                            <p class="fw-bold mb-1">John Doe</p>
-                            <p class="text-muted mb-0">john.doe@gmail.com</p>
-                        </div>
-                    </div>
-                    <span class="badge rounded-pill badge-success">Active</span>
-                </div>
-            </div>
-            <div
-                    class="card-footer border-0 bg-light p-2 d-flex justify-content-around"
-            >
-                <a
-                        class="btn btn-link m-0 text-reset"
-                        href="#"
-                        role="button"
-                        data-ripple-color="primary"
-                >Messaggia<i class="fas fa-envelope ms-2"></i
-                ></a>
-
-            </div>
-        </div>
-    </div>
-    <div class="col-xl-6 mb-4">
-        <div class="card">
-            <div class="card-body">
-                <div class="d-flex justify-content-between align-items-center">
-                    <div class="d-flex align-items-center">
-                        <img
-                                src="../static/images/expert.png"
-                                alt=""
-                                style="width: 45px; height: 45px"
-                                class="rounded-circle"
-                        />
-                        <div class="ms-3">
-                            <p class="fw-bold mb-1">Alex Ray</p>
-                            <p class="text-muted mb-0">alex.ray@gmail.com</p>
-                        </div>
-                    </div>
-                    <span class="badge rounded-pill badge-primary"
-                    >Onboarding</span
-                    >
-                </div>
-            </div>
-            <div
-                    class="card-footer border-0 bg-light p-2 d-flex justify-content-around"
-            >
-                <a
-                        class="btn btn-link m-0 text-reset"
-                        href="#"
-                        role="button"
-                        data-ripple-color="primary"
-                >Messaggia<i class="fas fa-envelope ms-2"></i
-                ></a>
-
-            </div>
-        </div>
-    </div>
-    <div class="col-xl-6 mb-4">
-        <div class="card">
-            <div class="card-body">
-                <div class="d-flex justify-content-between align-items-center">
-                    <div class="d-flex align-items-center">
-                        <img
-                                src="../static/images/expert.png" alt=""
-                                style="width: 45px; height: 45px"
-                                class="rounded-circle"
-                        />
-                        <div class="ms-3">
-                            <p class="fw-bold mb-1">Kate Hunington</p>
-                            <p class="text-muted mb-0">kate.hunington@gmail.com</p>
-                        </div>
-                    </div>
-                    <span class="badge rounded-pill badge-warning">Awaiting</span>
-                </div>
-            </div>
-            <div
-                    class="card-footer border-0 bg-light p-2 d-flex justify-content-around"
-            >
-                <a
-                        class="btn btn-link m-0 text-reset"
-                        href="#"
-                        role="button"
-                        data-ripple-color="primary"
-                >Messaggia<i class="fas fa-envelope ms-2"></i
-                ></a>
-
-            </div>
-        </div>
-    </div>
-    <div class="col-xl-6 mb-4">
-        <div class="card">
-            <div class="card-body">
-                <div class="d-flex justify-content-between align-items-center">
-                    <div class="d-flex align-items-center">
-                        <img
-                                src="../static/images/expert.png"
-                                alt=""
-                                style="width: 45px; height: 45px"
-                                class="rounded-circle"
-                        />
-                        <div class="ms-3">
-                            <p class="fw-bold mb-1">Michael Bale</p>
-                            <p class="text-muted mb-0">michael.bale@gmail.com</p>
-                        </div>
-                    </div>
-                    <span class="badge rounded-pill badge-danger">Removed</span>
-                </div>
-            </div>
-            <div
-                    class="card-footer border-0 bg-light p-2 d-flex justify-content-around"
-            >
-                <a
-                        class="btn btn-link m-0 text-reset"
-                        href="#"
-                        role="button"
-                        data-ripple-color="primary"
-                >Messaggia<i class="fas fa-envelope ms-2"></i
-                ></a>
-
-            </div>
-        </div>
-    </div>
-</div>
-
-<center>
-    <a href="{{url_for('views.mostra_lista_assistenti')}}">
-        <button type="button" class="btn btn-warning w-25">Mostra
-            di Piú
-        </button>
-    </a>
-</center>
 
 {% endblock %}
 

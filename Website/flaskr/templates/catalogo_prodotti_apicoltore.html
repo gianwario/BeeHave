@@ -14,66 +14,42 @@
 <body>
 
 {% block content %}
-
+<br><br><br>
+<h1 style="text-align: center">I tuoi Prodotti</h1>
 <!--For Page-->
 <div class="page">
-    <h1 class="text-secondary">I Tuoi Prodotti</h1>
-    <br><br>
-    <!--For Row containing all card-->
+   <br>
     <div class="row">
-
+<div class="product-container ">
         {% for prodotto in prodotti_in_vendita %}
 
-        <!--Card 1-->
-        <div class="col-md-4">
-            <div class="card card-cascade card-ecommerce wider shadow mb-5 ">
 
-                <!--Card image-->
-                <div class="view view-cascade overlay text-center">
-                    <img class="card-img-top" src="../static/images/honey_pot.jpg"
+    <div class="product-card shadow-lg">
+  <img class="product-image" src="../static/images/honey_pot.jpg"
                          alt="">
-                    <a>
-                        <div class="mask rgba-white-slight"></div>
-                    </a>
-                </div>
-
-
-                <!--Card Body-->
-                <div class="card-body card-body-cascade text-center">
-
-                    <!--Card Title-->
-                    <h4 class="card-title"><strong><a
-                            href="{{url_for('views.info_articolo', prodotto_id=prodotto.id)}}">{{prodotto.nome}}</a></strong>
-                    </h4>
-
-                    <!-- Card Description-->
-                    <p class="card-text"> {{prodotto.descrizione}}
+  <h3 class="product-name"><strong >  {{prodotto.nome}}</strong>
+                    </h3>
+  <p class="product-description"> {{prodotto.descrizione}}
                     </p>
 
 
-                    <p class="price">{{prodotto.prezzo}}€</p>
+                    <p class="product-price">{{prodotto.prezzo}}€</p>
 
-                    <!--Card footer-->
-                    <div class="card-footer">
-                        {% if prodotto.quantita>0 %}
+  <button class="add-to-cart-button"><a style="text-decoration: none;color:white"href="{{url_for('views.info_articolo',prodotto_id=prodotto.id)}}"> Visualizza prodotto</a></button>
+  {% if prodotto.quantita>0 %}
+        <br>
                         <a href="{{url_for('gv.elimina_prodotto', id_prodotto=prodotto.id, id_apicoltore=current_user.id)}}">
-                            <button type="submit" class="btn btn-outline-dark">Elimina</button>
+                            <button class="add-to-cart-button">Elimina Prodotto</button>
                         </a>
-                        {% else %}
-                        <p class="text-center text-dark">Prodotto eliminato</p>
-                        {% endif %}
-                    </div>
-
-
-                </div>
-            </div>
-        </div>
-
-        {% endfor %}
+           {% endif %}
 
     </div>
-</div>
 
+
+        {% endfor %}
+</div></div>
+</div>
+<br>
 {% endblock %}
 </body>
 </html>
