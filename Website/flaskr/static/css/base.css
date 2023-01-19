@@ -29,9 +29,14 @@ body{
   margin: 0 20px;
   font-weight: 600;
   font-size: 1.05rem;
+
+
   position: relative;
 }
-
+.navitm{
+  width: 100%;
+margin: 0;
+}
 .nav-link span::after {
   position: absolute;
   bottom: 0;
