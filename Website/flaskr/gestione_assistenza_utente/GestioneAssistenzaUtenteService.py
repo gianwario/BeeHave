@@ -20,10 +20,6 @@ def inserisci_area_assistenza(descrizione, apicoltore):
     return False
 
 
-def get_numero_ticket_assistenza_apicoltore(id_apicoltore):
-    return len(TicketAssistenza.query.filter_by(id_apicoltore=id_apicoltore).all())
-
-
 def get_assistenti():
     return Apicoltore.query.filter_by(assistenza=1).all()
 
@@ -41,7 +37,8 @@ def richiedi_assistenza(nome, descrizione, id_apicoltore, cliente):
         flash('La lunghezza del nome non è valida', category='error')
     elif not isinstance(descrizione, str) or not 0 < len(descrizione) <= 200:
         flash('La lunghezza della descrizione non è valida!', category='error')
-    elif not isinstance(id_apicoltore, str) or not id_apicoltore.isdigit() or not controlla_apicoltore(int(id_apicoltore)):
+    elif not isinstance(id_apicoltore, str) or not id_apicoltore.isdigit() or not controlla_apicoltore(
+            int(id_apicoltore)):
         flash("L'apicoltore non esiste o non è disponibile a fornire assistenza", category='error')
     else:
         ticket = TicketAssistenza(id_cliente=cliente.id, id_apicoltore=int(id_apicoltore), nome=nome,
