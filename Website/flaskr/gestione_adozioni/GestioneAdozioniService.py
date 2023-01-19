@@ -10,7 +10,7 @@ from Website.flaskr.model.TicketAdozione import TicketAdozione
 def inserisci_alveare(nome, produzione, numero_api, tipo_miele, prezzo, tipo_fiore, apicoltore):
     if not isinstance(nome, str) or not 0 < len(nome) <= 30:
         flash('Lunghezza Nome non valida!', category='error')
-    elif not isinstance(nome, tipo_fiore) or not 0 < len(tipo_fiore) <= 30:
+    elif not isinstance(nome, str) or not 0 < len(tipo_fiore) <= 30:
         flash('Lunghezza di TipoFiore non valida!', category='error')
     elif not isinstance(produzione, str) or not produzione.isdigit() or not 0 < int(produzione) <= 2000:
         flash('Quantità produzione non è nel range corretto!', category='error')
