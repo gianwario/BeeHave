@@ -1,6 +1,5 @@
 from flask import session
 from flask_login import login_user
-import pytest
 from flask_sqlalchemy import SQLAlchemy
 
 from Website.flaskr import create_app
@@ -30,8 +29,10 @@ def app():
     app = create_app()
     app.testing = True
     db.init_app(app)
+
     with app.app_context():
         db.create_all()
+
     return app
 
 
@@ -40,3 +41,7 @@ def mock_alveare():
     return Alveare(nome="nome", produzione=1, numero_api=1, tipo_miele="tipo_miele",
                    percentuale_disponibile=100,
                    prezzo=2, tipo_fiore="tipo_fiore", id_apicoltore=1)
+
+
+def mock_apicoltore():
+    return Apicoltore.query.filter_by(email="email").first()

@@ -61,8 +61,8 @@
                                                     id="nome"
                                                     name="nome"
                                                     type="text"
-                                                    required=true
                                                     placeholder="Inserisci nome"
+                                                    required
                                             />
                                         </div>
                                     </div>
@@ -72,8 +72,9 @@
                                             <input
                                                     id="descrizione"
                                                     name="descrizione"
-                                                    type="text" required=true
+                                                    type="text"
                                                     placeholder="Inserisci descrizione"
+                                                    required
                                             />
                                         </div>
                                     </div>
@@ -217,8 +218,8 @@
                                                     id="tipologia"
                                                     name="tipologia"
                                                     type="text"
-                                                    required=true
                                                     placeholder="Inserisci tipologia"
+                                                    required
                                             />
                                         </div>
                                     </div>
@@ -227,11 +228,12 @@
                                             <label for="prezzo">Inserire prezzo: </label>
                                             <input
                                                     id="prezzo"
+                                                    min="0"
                                                     name="prezzo"
                                                     type="number"
                                                     step="0.01"
-                                                    required=true
                                                     placeholder="Inserisci prezzo"
+                                                    required
                                             />
                                         </div>
                                     </div>
@@ -242,6 +244,7 @@
                                             <label for="quantita" required=true>Inserire quantit&#224:</label>
                                             <input
                                                     id="quantita"
+                                                    min="0"
                                                     name="quantita"
                                                     type="number" required=true
                                                     placeholder="Inserisci quantit&#224"

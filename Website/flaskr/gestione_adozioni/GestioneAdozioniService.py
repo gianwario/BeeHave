@@ -1,17 +1,16 @@
 import datetime
 
 from flask import flash
-from flask_login import current_user
 
 from Website.flaskr import db
 from Website.flaskr.model.Alveare import Alveare
 from Website.flaskr.model.TicketAdozione import TicketAdozione
 
 
-def inserisci_alveare(nome, produzione, numero_api, tipo_miele, prezzo, tipo_fiore):
+def inserisci_alveare(nome, produzione, numero_api, tipo_miele, prezzo, tipo_fiore, apicoltore):
     if not isinstance(nome, str) or not 0 < len(nome) <= 30:
         flash('Lunghezza Nome non valida!', category='error')
-    elif not isinstance(nome, tipo_fiore) or not 0 < len(tipo_fiore) <= 30:
+    elif not isinstance(nome, str) or not 0 < len(tipo_fiore) <= 30:
         flash('Lunghezza di TipoFiore non valida!', category='error')
     elif not isinstance(produzione, str) or not produzione.isdigit() or not 0 < int(produzione) <= 2000:
         flash('Quantità produzione non è nel range corretto!', category='error')
@@ -24,7 +23,7 @@ def inserisci_alveare(nome, produzione, numero_api, tipo_miele, prezzo, tipo_fio
     else:
         alveare = Alveare(nome=nome, produzione=int(produzione), numero_api=int(numero_api), tipo_miele=tipo_miele,
                           percentuale_disponibile=100,
-                          prezzo=float(prezzo), tipo_fiore=tipo_fiore, id_apicoltore=current_user.id)
+                          prezzo=float(prezzo), tipo_fiore=tipo_fiore, id_apicoltore=apicoltore.id)
         flash('Inserimento avvenuto con successo!', category='success')
 
         db.session.add(alveare)
@@ -47,7 +46,7 @@ def decrementa_percentuale(alveare, percentuale):
     db.session.commit()
 
 
-def adozione_alveare(alveare, tempo_adozione, percentuale):
+def adozione_alveare(alveare, cliente, tempo_adozione, percentuale):
     if not isinstance(tempo_adozione, str) or not tempo_adozione.isdigit() or not 3 <= int(tempo_adozione) <= 12:
         flash('TempoAdozione non è nel range corretto!', category='error')
     elif not isinstance(percentuale, str) or not percentuale.isdigit() or not 25 <= int(percentuale) <= 100:
@@ -55,7 +54,7 @@ def adozione_alveare(alveare, tempo_adozione, percentuale):
     elif int(percentuale) > alveare.percentuale_disponibile:
         flash('Percentuale Adozione è maggiore di Percentuale Disponibile!', category='error')
     else:
-        ticket = TicketAdozione(id_cliente=current_user.id, id_alveare=alveare.id,
+        ticket = TicketAdozione(id_cliente=cliente.id, id_alveare=alveare.id,
                                 percentuale_adozione=int(percentuale),
                                 data_inizio_adozione=datetime.datetime.now(), tempo_adozione=int(tempo_adozione))
         db.session.add(ticket)
