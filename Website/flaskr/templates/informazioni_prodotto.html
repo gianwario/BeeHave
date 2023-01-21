@@ -34,7 +34,7 @@
                     <div class="mt-2 pr-3 content"><p>{{prodotto.descrizione}}</p></div>
                     <br>
                     <p>Localitá di produzione: {{prodotto.localita}}</p>
-                    <h3 style="color: orange">€{{prodotto.prezzo}}</h3>
+                    <h3 style="color: orange">€{{'%0.2f'|format(prodotto.prezzo|float)}}</h3>
                     <div class="ratings d-flex flex-row align-items-center">
                         <div class="d-flex flex-row"><i class='bx bxs-star'></i> <i class='bx bxs-star'></i> <i
                                 class='bx bxs-star'></i> <i class='bx bxs-star'></i> <i class='bx bx-star'></i></div>

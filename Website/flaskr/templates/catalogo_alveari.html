@@ -9,7 +9,7 @@
 
 {% block content %}
 <br><br><br>
-<h1 style="text-align: center">Catalogo  Alveari</h1>
+<h1 style="text-align: center">Catalogo Alveari</h1>
 
 <div class="page">
 
@@ -28,14 +28,13 @@
                     <h3 class="product-name"><strong >  {{alveare.nome}}</strong>
                     </h3>
 
-                    <p class="product-price">Prezzo:{{alveare.prezzo}}€</p>
+                    <p class="product-price">Prezzo:{{'%0.2f'|format(alveare.prezzo|float)}}€</p>
 
 
 
-                        <form action="{{url_for('views.modifica_stato', alveare_id=alveare.id)}}">
+
                             <button class="add-to-cart-button"><a style="text-decoration: none;color:white"href="{{url_for('views.informazioni_alveare',alveare_id=alveare.id)}}"> Visualizza Alveare</a></button>
 
-                        </form>
 
         </div>
         {% endfor %}

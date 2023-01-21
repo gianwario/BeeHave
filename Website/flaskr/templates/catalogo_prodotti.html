@@ -36,7 +36,7 @@
                     </p>
 
 
-                    <p class="product-price">{{prodotto.prezzo}}€</p>
+                    <p class="product-price">{{'%0.2f'|format(prodotto.prezzo|float)}}€</p>
   <button class="add-to-cart-button"><a style="text-decoration: none;color:white"href="{{url_for('views.info_articolo',prodotto_id=prodotto.id)}}"> Visualizza prodotto</a></button>
 
 

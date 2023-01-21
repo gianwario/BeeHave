@@ -40,8 +40,6 @@
                         {% if current_user.is_authenticated and session['isApicoltore'] %}
                         <li class="nav-item "><a class="nav-link navitm" href="{{url_for('views.inserimento_alveare_page')}}">Inserisci
                             Alveare</a></li>
-                     <li class="nav-item "><a class="nav-link navitm"
-                            href="{{url_for('views.mostra_alveari', cliente_id=current_user.id)}}">Visualizza i tuoi alveari</a></li>
 
                         {% else%}
                        {%if current_user.is_authenticated and not session['isApicoltore'] %}
