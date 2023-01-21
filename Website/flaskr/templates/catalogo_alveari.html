@@ -3,47 +3,50 @@
 <head>
     <link rel="stylesheet" href="{{url_for('static', filename='css/e-commerce_card.css')}}">
     {% extends "base.html"%}
-    {% block title %}Catalogo Alveari{% endblock %}
+    <title>
+        {% block title %}Catalogo Alveari{% endblock %}
+    </title>
 </head>
 <body>
 
 {% block content %}
 <br><br><br>
-<h1 style="text-align: center">Catalogo  Alveari</h1>
+<h1 style="text-align: center">Catalogo Alveari</h1>
 
 <div class="page">
 
 
     <br>
     <div class="row">
-     <div class="product-container">
-        {% for alveare in alveari_disponibili %}
-        <!--Card 1-->
-        <div class="product-card shadow-lg">
+        <div class="product-container">
+            {% for alveare in alveari_disponibili %}
+            <!--Card 1-->
+            <div class="product-card shadow-lg">
 
-                    <img class="product-image" src="../static/images/honey_pot.jpg"
-                         alt="">
-
-
-                    <h3 class="product-name"><strong >  {{alveare.nome}}</strong>
-                    </h3>
-
-                    <p class="product-price">Prezzo:{{alveare.prezzo}}€</p>
+                <img class="product-image" src="../static/images/honey_pot.jpg"
+                     alt="">
 
 
+                <h3 class="product-name"><strong> {{alveare.nome}}</strong>
+                </h3>
 
-                        <form action="{{url_for('views.modifica_stato', alveare_id=alveare.id)}}">
-                            <button class="add-to-cart-button"><a style="text-decoration: none;color:white"href="{{url_for('views.informazioni_alveare',alveare_id=alveare.id)}}"> Visualizza Alveare</a></button>
+                <p class="product-price">Prezzo:{{alveare.prezzo}}€</p>
 
-                        </form>
 
+                <form action="{{url_for('views.modifica_stato', alveare_id=alveare.id)}}">
+                    <button class="add-to-cart-button"><a style="text-decoration: none;color:white"
+                                                          href="{{url_for('views.informazioni_alveare',alveare_id=alveare.id)}}">
+                        Visualizza Alveare</a></button>
+
+                </form>
+
+            </div>
+            {% endfor %}
         </div>
-        {% endfor %}
-    </div>
     </div>
 </div>
 
-                </div>
+</div>
 
 
 {% endblock %}

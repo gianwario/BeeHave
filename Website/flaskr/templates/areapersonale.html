@@ -10,7 +10,7 @@
 
 {% block content %}
 <br><br><br>
- <h1 style="text-align:center">I tuoi dati</h1>
+<h1 style="text-align:center">I tuoi dati</h1>
 <div class="container bootstrap snippets bootdey">
 
     <div class="row">
@@ -27,11 +27,19 @@
                 </div>
 
                 <ul class="nav nav-pills nav-stacked">
-                    <li class="nav-item active"><a class="nav-link" href="#"> <i class="fa fa-user"></i> Profile</a></li>
-                    <li class="nav-item">{% if current_user.assistenza%}<a class="nav-link" href="{{url_for('views.visualizza_richieste_assistenza')}}"> <i class="fa fa-calendar"></i>  Visualizza le tue richieste di assistenza <span
-                                class="badge text-bg-warning pull-right r-activity" style="text-align: center; ">{{ticket}} </span></a>{%else%}<a class="nav-link" href="{{url_for('views.crea_area_assistenza_page')}}"> <i class="fa fa-calendar"></i> Crea area
-                        assistenza</a>{%endif%} </li>
-                    <li class="nav-item"><a class="nav-link" href="{{url_for('views.modifica_dati_utente_page')}}"> <i class="fa fa-user"></i> Modifica
+                    <li class="nav-item active"><a class="nav-link" href="#"> <i class="fa fa-user"></i> Profile</a>
+                    </li>
+                    <li class="nav-item">{% if current_user.assistenza%}<a class="nav-link"
+                                                                           href="{{url_for('views.visualizza_richieste_assistenza')}}">
+                        <i class="fa fa-calendar"></i> Visualizza le tue richieste di assistenza <span
+                            class="badge text-bg-warning pull-right r-activity"
+                            style="text-align: center; ">{{ticket}} </span></a>{%else%}<a class="nav-link"
+                                                                                          href="{{url_for('views.crea_area_assistenza_page')}}">
+                        <i class="fa fa-calendar"></i> Crea area
+                        assistenza</a>{%endif%}
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="{{url_for('views.modifica_dati_utente_page')}}"> <i
+                            class="fa fa-user"></i> Modifica
                         Account</a></li>
                 </ul>
             </div>
@@ -43,7 +51,6 @@
             <div class="panel">
 
                 <div class="panel-body bio-graph-info">
-
 
 
                     <div class="row">
@@ -86,7 +93,6 @@
 <br>
 
 
-
 <div class="container">
     <div class="row justify-content-center">
 
@@ -108,13 +114,15 @@
                 <div class="advisor_thumb"><img src="../static/images/alveare.jpg" alt="">
                     <!-- Social Info-->
 
-              </div>
-              <!-- Team Details-->
-              <div class="single_advisor_details_info">
-                <h4 class="card-title" ><strong><a style="text-decoration: none;color: black"href="{{url_for('views.informazioni_alveare', alveare_id=alveare.id)}}">{{alveare.nome}}</a></strong></h4>
-                <br>
-                  <p class="price">Prezzo: €{{alveare.prezzo}}</p>
-              </div>
+                </div>
+                <!-- Team Details-->
+                <div class="single_advisor_details_info">
+                    <h4 class="card-title"><strong><a style="text-decoration: none;color: black"
+                                                      href="{{url_for('views.informazioni_alveare', alveare_id=alveare.id)}}">{{alveare.nome}}</a></strong>
+                    </h4>
+                    <br>
+                    <p class="price">Prezzo: €{{alveare.prezzo}}</p>
+                </div>
             </div>
         </div>
         {%endfor%}
