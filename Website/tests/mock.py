@@ -26,7 +26,7 @@ db = SQLAlchemy()
 
 
 @pytest.fixture
-def app():
+def mock_app():
     app = create_app()
     app.testing = True
     db.init_app(app)
@@ -44,5 +44,7 @@ def mock_alveare():
                    prezzo=2, tipo_fiore="tipo_fiore", id_apicoltore=1)
 
 
-def mock_apicoltore():
-    return Apicoltore.query.filter_by(email="email").first()
+@pytest.fixture
+def mock_apicoltore(mock_app):
+    with mock_app.app_context():
+        return Apicoltore.query.filter_by(email="email").first()
