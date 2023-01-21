@@ -18,6 +18,7 @@
     <div class="row">
      <div class="product-container">
         {% for alveare in alveari_disponibili %}
+         {% if alveare.percentuale_disponibile==0%}
         <!--Card 1-->
         <div class="product-card shadow-lg">
 
@@ -37,6 +38,7 @@
 
 
         </div>
+         {% endif %}
         {% endfor %}
     </div>
     </div>
