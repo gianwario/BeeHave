@@ -6,7 +6,7 @@ from Website.flaskr.gestione_adozioni.GestioneAdozioniService import get_alveari
 from Website.flaskr.gestione_assistenza_utente.GestioneAssistenzaUtenteService import get_assistenti, \
     get_numero_ticket_assistenza_apicoltore, get_ticket_assistenza_by_apicoltore, get_ticket_assistenza_by_cliente, \
     get_ticket_by_id
-from Website.flaskr.gestione_utente.GestioneUtenteService import get_apicoltore_by_id
+from Website.flaskr.gestione_utente.GestioneUtenteService import get_apicoltore_by_id, get_cliente_by_id
 from Website.flaskr.gestione_vendita.GestioneVenditaService import get_tutti_prodotti, get_prodotti_by_apicoltore, \
     get_prodotto_by_id
 
@@ -162,4 +162,5 @@ def visualizza_richieste_assistenza():
 @login_required
 def visualizza_info_ticket(ticket_id):
     ticket = get_ticket_by_id(ticket_id)
-    return render_template('singolo_ticket.html', ticket_assistenza=ticket)
+    cliente= get_cliente_by_id(ticket.id_cliente)
+    return render_template('/singolo_ticket.html', ticket_assistenza=ticket,cliente=cliente)
