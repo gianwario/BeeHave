@@ -2,52 +2,79 @@
 <html lang="en">
 <head>
     <link rel="stylesheet" href="{{url_for('static', filename='css/e-commerce_card.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/500page.css')}}">
     {% extends "base.html"%}
-        {% block title %}Catalogo Alveari Apicoltore{% endblock %}
+    {% block title %}Catalogo Alveari Apicoltore{% endblock %}
 </head>
 <body>
 
 {% block content %}
 <br><br><br>
-<h1 style="text-align: center">I Tuoi Alveari</h1>
 <!--For Page-->
 <div class="page">
+  {% if alveari_disponibili | length < 1 %}
+    <section class="pageerror">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="col-sm-100 col-sm-offset-1  text-center">
+                        <div class="four_zero_four_bg">
+                            <h1 class="text-center ">500</h1>
 
+
+                        </div>
+
+                        <div class="contant_box_500">
+                            <h3 class="h2">
+                                OPS!
+                                Sembra che non ci siano alveari disponibili!
+                            </h3>
+
+                            <p>Inizia subito, metti in affitto delle arnie!</p>
+
+                            <a href="{{url_for('views.inserimento_alveare_page')}}" class="link_500">Inserisci alveare</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    {% else %}
+    <h1 style="text-align: center">I tuoi alveari</h1>
+    {% endif %}
     <!--For Row containing all card-->
     <br>
     <div class="row">
 
         <div class="product-container ">
-        {% for alveare in alveari_disponibili %}
+            {% for alveare in alveari_disponibili %}
 
-                <div class="product-card shadow-lg">
-                    <img class="product-image" src="../static/images/honey_pot.jpg"
-                         alt="">
-
-
-                    <h3 class="product-name"><strong >  {{alveare.nome}}</strong>
-                    </h3>
+            <div class="product-card shadow-lg">
+                <img class="product-image" src="../static/images/honey_pot.jpg"
+                     alt="">
 
 
-                    <p class="product-price">Prezzo:{{alveare.prezzo}}€</p>
+                <h3 class="product-name"><strong> {{alveare.nome}}</strong>
+                </h3>
 
 
+                <p class="product-price">Prezzo:{{alveare.prezzo}}€</p>
 
 
-                        <form action="{{url_for('views.modifica_stato', alveare_id=alveare.id)}}">
-                            <button class="add-to-cart-button"><a style="text-decoration: none;color:white"href="{{url_for('views.modifica_stato',alveare_id=alveare.id)}}">  Modifica Stato</a></button>
+                <form action="{{url_for('views.modifica_stato', alveare_id=alveare.id)}}">
+                    <button class="add-to-cart-button"><a style="text-decoration: none;color:white"
+                                                          href="{{url_for('views.modifica_stato',alveare_id=alveare.id)}}">
+                        Modifica Stato</a></button>
 
-                        </form>
+                </form>
 
-                </div>
-
-
-
-
-        {% endfor %}
             </div>
+
+
+            {% endfor %}
         </div>
- </div>
+    </div>
+</div>
 </div>
 </div>
 <br>
