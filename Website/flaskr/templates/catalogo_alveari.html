@@ -2,6 +2,7 @@
 <html lang="it">
 <head>
     <link rel="stylesheet" href="{{url_for('static', filename='css/e-commerce_card.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/500page.css')}}">
     {% extends "base.html"%}
     <title>
         {% block title %}Catalogo Alveari{% endblock %}
@@ -11,18 +12,45 @@
 
 {% block content %}
 <br><br><br>
-<h1 style="text-align: center">Catalogo Alveari</h1>
+
 
 <div class="page">
 
+    {% if alveari_disponibili | length < 1 %}
+    <section class="pageerror">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="col-sm-100 col-sm-offset-1  text-center">
+                        <div class="four_zero_four_bg">
+                            <h1 class="text-center ">500</h1>
 
+
+                        </div>
+
+                        <div class="contant_box_500">
+                            <h3 class="h2">
+                                OPS!
+                                Sembra che non ci siano alveari disponibili!
+                            </h3>
+
+                            <p>Aspetta che qualcuno metta in affitto delle arnie!</p>
+
+                            <a href="{{url_for('views.home')}}" class="link_500">Torna alla Home</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    {% else %}
+    <h1 style="text-align: center">Catalogo Alveari</h1>
+    {% endif %}
     <br>
     <div class="row">
         <div class="product-container">
             {% for alveare in alveari_disponibili %}
-            {% if len(alveari_disponibili) == 0 %}
-            <h5 vuota ></h5>
-            {% endif %}
+
             <!--Card 1-->
             <div class="product-card shadow-lg">
 

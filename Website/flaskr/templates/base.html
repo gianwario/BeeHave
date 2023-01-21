@@ -20,7 +20,8 @@
 </head>
 <body style="overflow-x:hidden; padding:0 0; margin: 0 0;">
 
-<nav id="navbar" style="width:100%; z-index: 100; position: fixed; top:0; transition: all 200ms linear;" class="navbar navbar-expand-sm ">
+<nav id="navbar" style="width:100%; z-index: 100; position: fixed; top:0; transition: all 200ms linear;"
+     class="navbar navbar-expand-sm ">
     <div class="container-fluid d-flex flex-row justify-content-between" style="max-width: 1200px">
         <div>
             <a href="{{url_for('views.home')}}" class="navbar-brand" style="color:white">BeeHave</a>
@@ -32,22 +33,26 @@
 
                 <li class="nav-item dropdown">
 
-                    <a aria-expanded="false"  style="color:white" role="button" href="#" class="nav-link dropdown-toggle"
-                    data-bs-toggle="dropdown"><span class="glyphicon glyphicon-user">Alveari </span></a>
-                   <ul aria-labelledby="navbarDropdown" class="dropdown-menu">
-                        <li class="nav-item "><a class="nav-link navitm"  href="{{url_for('views.mostra_alveari')}}">Catalogo Alveari</a></li>
+                    <a aria-expanded="false" style="color:white" role="button" href="#" class="nav-link dropdown-toggle"
+                       data-bs-toggle="dropdown"><span class="glyphicon glyphicon-user">Alveari </span></a>
+                    <ul aria-labelledby="navbarDropdown" class="dropdown-menu">
+                        <li class="nav-item "><a class="nav-link navitm" href="{{url_for('views.mostra_alveari')}}">Catalogo
+                            Alveari</a></li>
 
                         {% if current_user.is_authenticated and session['isApicoltore'] %}
-                        <li class="nav-item "><a class="nav-link navitm" href="{{url_for('views.inserimento_alveare_page')}}">Inserisci
+                        <li class="nav-item "><a class="nav-link navitm"
+                                                 href="{{url_for('views.inserimento_alveare_page')}}">Inserisci
                             Alveare</a></li>
-                     <li class="nav-item "><a class="nav-link navitm"
-                            href="{{url_for('views.mostra_alveari', cliente_id=current_user.id)}}">Visualizza i tuoi alveari</a></li>
+                        <li class="nav-item "><a class="nav-link navitm"
+                                                 href="{{url_for('views.mostra_alveari', cliente_id=current_user.id)}}">Visualizza
+                            i tuoi alveari</a></li>
 
                         {% else%}
-                       {%if current_user.is_authenticated and not session['isApicoltore'] %}
+                        {%if current_user.is_authenticated and not session['isApicoltore'] %}
                         <li class="nav-item "><a class="nav-link navitm"
-                            href="{{url_for('views.mostra_alveari_adottati', cliente_id=current_user.id)}}">Visualizza Alveari Adottati</a></li>
-                       {% endif %}
+                                                 href="{{url_for('views.mostra_alveari_adottati', cliente_id=current_user.id)}}">Visualizza
+                            Alveari Adottati</a></li>
+                        {% endif %}
                         {% endif %}
 
                     </ul>
@@ -55,43 +60,52 @@
                 </li>
                 <li class="nav-item dropdown">
 
-                    <a aria-expanded="false"  style="color:white" role="button" href="#" class="nav-link dropdown-toggle"
-                    data-bs-toggle="dropdown"><span class="glyphicon glyphicon-user">Prodotti</span></a>
+                    <a aria-expanded="false" style="color:white" role="button" href="#" class="nav-link dropdown-toggle"
+                       data-bs-toggle="dropdown"><span class="glyphicon glyphicon-user">Prodotti</span></a>
                     <ul aria-labelledby="navbarDropdown" class="dropdown-menu">
-                        <li class="nav-item  "><a class="nav-link navitm"  href="{{url_for('views.mostra_prodotti')}}"> Catalogo Prodotti</a></li>
+                        <li class="nav-item  "><a class="nav-link navitm" href="{{url_for('views.mostra_prodotti')}}">
+                            Catalogo Prodotti</a></li>
 
                         {% if current_user.is_authenticated and session['isApicoltore'] %}
-                        <li class="nav-item "><a class="nav-link navitm" href="{{url_for('views.inserimento_prodotto_page')}}">Inserisci
+                        <li class="nav-item "><a class="nav-link navitm"
+                                                 href="{{url_for('views.inserimento_prodotto_page')}}">Inserisci
                             Prodotto</a></li>
                         <li class="nav-item "><a class="nav-link navitm"
-                            href="{{url_for('views.mostra_articoli_in_vendita', apicoltore_id=current_user.id)}}">Mostra i tuoi Prodotti</a></li>
+                                                 href="{{url_for('views.mostra_articoli_in_vendita', apicoltore_id=current_user.id)}}">Mostra
+                            i tuoi Prodotti</a></li>
 
                         {% endif %}
 
                     </ul>
                 </li>
                 {%if current_user.is_authenticated and not session['isApicoltore']%}
-                <li class="nav-item"><a class="nav-link navitm" style="color:white" href="{{url_for('views.mostra_lista_assistenti')}}"><span>Assistenza </span></a>
+                <li class="nav-item"><a class="nav-link navitm" style="color:white"
+                                        href="{{url_for('views.mostra_lista_assistenti')}}"><span>Assistenza </span></a>
                 </li>
                 {%else%}
-                 <li class="nav-item"><a class="nav-link navitm" style="color:white" href="{{url_for('views.visualizza_richieste_assistenza')}}"><span>Assistenza </span></a>
+                <li class="nav-item"><a class="nav-link navitm" style="color:white"
+                                        href="{{url_for('views.visualizza_richieste_assistenza')}}"><span>Assistenza </span></a>
                 </li>
                 {%endif%}
             </ul>
 
             <ul class="navbar-nav">
                 <li class="nav-item dropdown">
-                    <a aria-expanded="false" id="navbarDropdown" style="color:white" role="button" href="#" class="nav-link dropdown-toggle "
-                    data-bs-toggle="dropdown"><span class="glyphicon glyphicon-user">Area Utente</span></a>
+                    <a aria-expanded="false" id="navbarDropdown" style="color:white" role="button" href="#"
+                       class="nav-link dropdown-toggle "
+                       data-bs-toggle="dropdown"><span class="glyphicon glyphicon-user">Area Utente</span></a>
                     <ul aria-labelledby="navbarDropdown" class="dropdown-menu">
 
 
                         {% if not current_user.is_authenticated %}
-                        <li class="nav-item"><a class="nav-link navitm" href="{{url_for('views.login_page')}}">Login</a></li>
-                        <li class="nav-item"><a class="nav-link navitm" href="{{url_for('views.registrazione_page')}}">Registrati</a></li>
+                        <li class="nav-item"><a class="nav-link navitm" href="{{url_for('views.login_page')}}">Login</a>
+                        </li>
+                        <li class="nav-item"><a class="nav-link navitm" href="{{url_for('views.registrazione_page')}}">Registrati</a>
+                        </li>
 
                         {% else %}
-                        <li class="nav-item"><a class="nav-link navitm" href="{{url_for('views.area_personale')}}">Area Personale</a></li>
+                        <li class="nav-item"><a class="nav-link navitm" href="{{url_for('views.area_personale')}}">Area
+                            Personale</a></li>
 
                         <li class="nav-item"><a class="nav-link navitm" href="{{url_for('gu.logout')}}">Logout</a></li>
                         {% endif %}
@@ -104,9 +118,9 @@
 </nav>
 
 <div style="margin-top:50px">
-{% block content %}
+    {% block content %}
 
-{% endblock %}
+    {% endblock %}
 </div>
 
 <footer style="width: 100vw;" class="section bg-footer">
@@ -125,8 +139,8 @@
                         <li><a href="{{url_for('views.mostra_lista_assistenti')}}"> Assistenza</a></li>
                         {%else%}
                         <li><a href="{{url_for('views.visualizza_richieste_assistenza')}}"> Assistenza</a></li>
-                         {%endif%}
-                     </ul>
+                        {%endif%}
+                    </ul>
                 </div>
 
             </div>
