@@ -11,7 +11,7 @@ from Website.flaskr.model.Apicoltore import Apicoltore
 
 @views.route('/mock_login_apicoltore')
 def mock_login_apicoltore():
-    user = Apicoltore( nome="nome", cognome="cognome", indirizzo="indirizzo", citta="citta", cap=84345,
+    user = Apicoltore(nome="nome", cognome="cognome", indirizzo="indirizzo", citta="citta", cap=84345,
                       telefono=4324324362,
                       email="email", assistenza=1, descrizione="descrizione", password="password")
     if not Apicoltore.query.filter_by(email="email").first():
