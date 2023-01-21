@@ -8,42 +8,46 @@
     </title>
 </head>
 <body>
-{% block content %}
-<div class="container">
-    <h1 class="text-secondary">Lista Assistenti</h1>
+{% block content %}<br><br><br>
+ <h1 style="text-align: center"> Lista Assistenti </h1>
+    <div class="container">
     {% for assistente in assistenti %}
-    <div class="row p-5">
-        <div class="col-xl-6 mb-4">
-            <div class="card">
-                <div class="card-body">
-                    <div class="d-flex justify-content-between align-items-center">
-                        <div class="d-flex align-items-center">
-                            <img
-                                    src="../static/images/expert.png"
-                                    alt=""
-                                    style="width: 45px; height: 45px"
-                                    class="rounded-circle"
-                            />
-                            <div class="ms-3">
-                                <p class="fw-bold mb-1">{{assistente.nome}} {{assistente.cognome}}</p>
-                                <p class="text-muted mb-0">{{assistente.email}}</p>
+    <div class="row  justify-content-center" style="width: 100%;margin:5%;margin-left:0;margin-top: 0">
+
+            <div class="mt-5 ">
+                <div class="d-style btn btn-brc-tp  bgc-white  w-100 my-2 py-3 shadow-lg ">
+                    <div class="row align-items-center">
+
+
+                            <div class="col-12 col-md-4">
+                            <img class="avatar" src="../static/images/beekeeper.png"
+                             alt="../static/images/beekeeper.png"
+                                    style="width: 80px; height: 80px"
+                                    class="rounded-circle">
+                            <img/>
+                        </div>
+                             <div class="mb-0 col-12 col-md-4 text-dark-l1 text-90 text-center my-4 my-md-0">
+                                <p class="fw-bold mb-1">Apicoltore: {{assistente.nome}} {{assistente.cognome}}</p>
+                                <p class="text-muted mb-0">Email: {{assistente.email}}</p>
                                 <p class="text-muted mb-0">{{assistente.descrizione}}</p>
                             </div>
-                        </div>
-                        <span class="badge rounded-pill badge-success">Active</span>
-                    </div>
-                </div>
-                <div class="card-footer border-0 bg-light p-2 d-flex justify-content-around">
+
+
+                 <div class="mb-0 col-12 col-md-4 ">
                     <a
-                            class="btn btn-link m-0 text-reset"
+
+                            class="bott" style="z-index: auto;text-decoration:none;padding: 10px 20px;background-color: orange;border: none;border-radius: 5px;color: white;font-size: 0.875rem;cursor: pointer;"
                             href="{{url_for('views.richiesta_assistenza_page', id_apicoltore=assistente.id)}}"
                             role="button"
                             data-ripple-color="primary"
                     >Messaggia<i class="fas fa-envelope ms-2"></i
                     ></a>
                 </div>
+      </div>
+                </div>
+
             </div>
-        </div>
+
     </div>
     {% endfor %}
 </div>
