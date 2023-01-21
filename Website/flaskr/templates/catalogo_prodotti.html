@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="{{url_for('static', filename='css/e-commerce_card.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/500page.css')}}">
     {% extends "base.html"%}
     <title>
         {% block title %}Catalogo Prodotti{% endblock %}
@@ -12,40 +13,74 @@
 
 {% block content %}
 <br><br><br>
-<h1 style="text-align: center">Catalogo Prodotti</h1>
 <!--For Page-->
 <div class="page">
+
+    {% if prodotti | length < 1 %}
+    <section class="pageerror">
+
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="col-sm-100 col-sm-offset-1  text-center">
+                        <div class="four_zero_four_bg">
+                            <h1 class="text-center ">500</h1>
+
+                        </div>
+
+                        <div class="contant_box_500">
+                            <h3 class="h2">
+                                OPS!
+                                Sembra che non ci siano prodotti disponibili!
+                            </h3>
+
+                            <p>Aspetta che qualcuno metta in vendita del miele!</p>
+
+                            <a href="{{url_for('views.home')}}" class="link_500">Torna alla Home</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    {% else %}
+    <h1 style="text-align: center">Catalogo Prodotti</h1>
+    {% endif %}
 
     <!--For Row containing all card-->
     <br>
     <div class="row">
 
         <div class="product-container ">
-        {% for prodotto in prodotti %}
-        {% if prodotto.quantita>0 %}
+            {% for prodotto in prodotti %}
+
+            {% if prodotto.quantita>0 %}
+
+            <div class="product-card shadow-lg">
+                <img class="product-image" src="../static/images/honey_pot.jpg"
+                     alt="">
+                <h3 class="product-name"><strong> {{prodotto.nome}}</strong>
+                </h3>
+                <p class="product-description"> {{prodotto.descrizione}}
+                </p>
 
 
+                <p class="product-price">{{'%0.2f'|format(prodotto.prezzo|float)}}€</p>
+                <button class="add-to-cart-button"><a style="text-decoration: none;color:white"
+                                                      href="{{url_for('views.info_articolo',prodotto_id=prodotto.id)}}">
+                    Visualizza prodotto</a></button>
 
 
-    <div class="product-card shadow-lg">
-  <img class="product-image" src="../static/images/honey_pot.jpg"
-                         alt="">
-  <h3 class="product-name"><strong >  {{prodotto.nome}}</strong>
-                    </h3>
-  <p class="product-description"> {{prodotto.descrizione}}
-                    </p>
+            </div>
 
 
-                    <p class="product-price">{{'%0.2f'|format(prodotto.prezzo|float)}}€</p>
-  <button class="add-to-cart-button"><a style="text-decoration: none;color:white"href="{{url_for('views.info_articolo',prodotto_id=prodotto.id)}}"> Visualizza prodotto</a></button>
+                   
+  
+            {% endif %}
+            {% endfor %}
 
 
-    </div>
-
-
-        {% endif %}
-        {% endfor %}
-</div>
+        </div>
     </div>
 </div>
 <br>

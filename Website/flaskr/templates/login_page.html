@@ -32,23 +32,25 @@
 
                             <!-- Email input -->
                             <div class="form-outline mb-4">
+                                <label class="form-label" for="email">Email</label>
                                 <input type="text" name="email" id="email" class="form-control"
-                                       placeholder="Inserisci l'email"/>
-                                <label class="form-label" for="email"></label>
+                                       placeholder="mario_rossi@email.com"/>
+
                             </div>
 
                             <!-- Password input -->
                             <div class="form-outline mb-4">
+                                <label class="form-label" for="password">Password</label>
                                 <input type="password" name="password" id="password" class="form-control required"
                                        placeholder="Password"/>
-                                <label class="form-label" for="password"></label>
+
                             </div>
 
                             <div class="form-outline mb-4">
                                 {% with messages = get_flashed_messages(category_filter=["error"]) %}
-                                    {% if messages %}
-                                        <p style="color:red">{{ messages[0] }}</p>
-                                    {% endif %}
+                                {% if messages %}
+                                <p style="color:red">{{ messages[0] }}</p>
+                                {% endif %}
                                 {% endwith %}
                             </div>
 
