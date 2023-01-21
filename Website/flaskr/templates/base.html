@@ -29,43 +29,71 @@
             <ul class="navbar-nav">
                 <li class="nav-item">
                     <a class="nav-link" style="color:white" href="{{url_for('views.home')}}"><span>Home</span></a></li>
-                <li class="nav-item"><a class="nav-link" style="color:white" href="{{url_for('views.mostra_alveari')}}"><span>Adotta </span></a></li>
-                <li class="nav-item"><a class="nav-link" style="color:white" href="{{url_for('views.mostra_prodotti')}}"><span>Catalogo </span></a>
+
+                <li class="nav-item dropdown">
+
+                    <a aria-expanded="false"  style="color:white" role="button" href="#" class="nav-link dropdown-toggle"
+                    data-bs-toggle="dropdown"><span class="glyphicon glyphicon-user">Alveari </span></a>
+                   <ul aria-labelledby="navbarDropdown" class="dropdown-menu">
+                        <li class="nav-item "><a class="nav-link navitm"  href="{{url_for('views.mostra_alveari')}}">Catalogo Alveari</a></li>
+
+                        {% if current_user.is_authenticated and session['isApicoltore'] %}
+                        <li class="nav-item "><a class="nav-link navitm" href="{{url_for('views.inserimento_alveare_page')}}">Inserisci
+                            Alveare</a></li>
+                     <li class="nav-item "><a class="nav-link navitm"
+                            href="{{url_for('views.mostra_alveari', cliente_id=current_user.id)}}">Visualizza i tuoi alveari</a></li>
+
+                        {% else%}
+                       {%if current_user.is_authenticated and not session['isApicoltore'] %}
+                        <li class="nav-item "><a class="nav-link navitm"
+                            href="{{url_for('views.mostra_alveari_adottati', cliente_id=current_user.id)}}">Visualizza Alveari Adottati</a></li>
+                       {% endif %}
+                        {% endif %}
+
+                    </ul>
+
                 </li>
-                <li class="nav-item"><a class="nav-link" style="color:white" href="{{url_for('views.visualizza_richieste_assistenza')}}"><span>Assistenza </span></a>
+                <li class="nav-item dropdown">
+
+                    <a aria-expanded="false"  style="color:white" role="button" href="#" class="nav-link dropdown-toggle"
+                    data-bs-toggle="dropdown"><span class="glyphicon glyphicon-user">Prodotti</span></a>
+                    <ul aria-labelledby="navbarDropdown" class="dropdown-menu">
+                        <li class="nav-item  "><a class="nav-link navitm"  href="{{url_for('views.mostra_prodotti')}}"> Catalogo Prodotti</a></li>
+
+                        {% if current_user.is_authenticated and session['isApicoltore'] %}
+                        <li class="nav-item "><a class="nav-link navitm" href="{{url_for('views.inserimento_prodotto_page')}}">Inserisci
+                            Prodotto</a></li>
+                        <li class="nav-item "><a class="nav-link navitm"
+                            href="{{url_for('views.mostra_articoli_in_vendita', apicoltore_id=current_user.id)}}">Mostra i tuoi Prodotti</a></li>
+
+                        {% endif %}
+
+                    </ul>
                 </li>
+                {%if current_user.is_authenticated and not session['isApicoltore']%}
+                <li class="nav-item"><a class="nav-link navitm" style="color:white" href="{{url_for('views.mostra_lista_assistenti')}}"><span>Assistenza </span></a>
+                </li>
+                {%else%}
+                 <li class="nav-item"><a class="nav-link navitm" style="color:white" href="{{url_for('views.visualizza_richieste_assistenza')}}"><span>Assistenza </span></a>
+                </li>
+                {%endif%}
             </ul>
 
             <ul class="navbar-nav">
                 <li class="nav-item dropdown">
-                    <a aria-expanded="false" id="navbarDropdown" style="color:white" role="button" href="#" class="nav-link dropdown-toggle"
-                    data-bs-toggle="dropdown"><span class="glyphicon glyphicon-user"></span>Area Utente</a>
+                    <a aria-expanded="false" id="navbarDropdown" style="color:white" role="button" href="#" class="nav-link dropdown-toggle "
+                    data-bs-toggle="dropdown"><span class="glyphicon glyphicon-user">Area Utente</span></a>
                     <ul aria-labelledby="navbarDropdown" class="dropdown-menu">
 
 
                         {% if not current_user.is_authenticated %}
-                        <li><a class="dropdown-item" href="{{url_for('views.login_page')}}">Login</a></li>
-                        <li><a class="dropdown-item" href="{{url_for('views.registrazione_page')}}">Registrati</a></li>
+                        <li class="nav-item"><a class="nav-link navitm" href="{{url_for('views.login_page')}}">Login</a></li>
+                        <li class="nav-item"><a class="nav-link navitm" href="{{url_for('views.registrazione_page')}}">Registrati</a></li>
 
                         {% else %}
-                        <li><a class="dropdown-item" href="{{url_for('views.area_personale')}}">Area Personale</a></li>
+                        <li class="nav-item"><a class="nav-link navitm" href="{{url_for('views.area_personale')}}">Area Personale</a></li>
 
-                        {% if session['isApicoltore'] %}
-                        <li><a class="dropdown-item" href="{{url_for('views.inserimento_prodotto_page')}}">Inserisci
-                            Prodotto</a></li>
-                        <li><a class="dropdown-item" href="{{url_for('views.inserimento_alveare_page')}}">Inserisci
-                            Alveare</a></li>
-                        <li><a class="dropdown-item"
-                            href="{{url_for('views.mostra_alveari', apicoltore_id=current_user.id)}}">Mostra i tuoi Alveari</a></li>
-
-                        <li><a class="dropdown-item"
-                            href="{{url_for('views.mostra_articoli_in_vendita', apicoltore_id=current_user.id)}}">Mostra i tuoi Prodotti</a></li>
-                        {% else %}
-                        <li><a class="dropdown-item"
-                            href="{{url_for('views.mostra_alveari_adottati', cliente_id=current_user.id)}}">Mostra
-                            Alveari adottati</a></li>
-                        {% endif %}
-                        <li><a class="dropdown-item" href="{{url_for('gu.logout')}}">Logout</a></li>
+                        <li class="nav-item"><a class="nav-link navitm" href="{{url_for('gu.logout')}}">Logout</a></li>
                         {% endif %}
                     </ul>
                 </li>
@@ -90,10 +118,15 @@
                     <h6 class="footer-heading text-uppercase text-white">Informazioni</h6>
                     <ul class="list-unstyled footer-link mt-4">
                         <li><a href="{{url_for('views.home')}}">Home</a></li>
-                        <li><a href="{{url_for('views.mostra_alveari')}}">Adotta Alveare</a></li>
-                        <li><a href="{{url_for('views.mostra_prodotti')}}">Catalogo Prodotti</a></li>
-                        <li><a href="">Chi siamo</a></li>
-                    </ul>
+                        <li><a href="{{url_for('views.mostra_alveari')}}">Alveari</a></li>
+                        <li><a href="{{url_for('views.mostra_prodotti')}}"> Prodotti</a></li>
+
+                        {%if current_user.is_authenticated and not session['isApicoltore']%}
+                        <li><a href="{{url_for('views.mostra_lista_assistenti')}}"> Assistenza</a></li>
+                        {%else%}
+                        <li><a href="{{url_for('views.visualizza_richieste_assistenza')}}"> Assistenza</a></li>
+                         {%endif%}
+                     </ul>
                 </div>
 
             </div>
