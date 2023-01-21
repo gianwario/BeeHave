@@ -44,24 +44,20 @@
     </section>
     {% else %}
     <h1 style="text-align: center">Catalogo Alveari</h1>
-    {% endif %}
     <br>
     <div class="row">
-     <div class="product-container">
+        <div class="product-container">
         {% for alveare in alveari_disponibili %}
-         {% if alveare.percentuale_disponibile==0%}
-        <!--Card 1-->
-        <div class="product-card shadow-lg">
+            {% if alveare.percentuale_disponibile==0%}
 
             <!--Card 1-->
-            <div class="product-card shadow-lg">
+                <div class="product-card shadow-lg">
 
                 <img class="product-image" src="../static/images/honey_pot.jpg"
                      alt="">
 
 
-                <h3 class="product-name"><strong> {{alveare.nome}}</strong>
-                </h3>
+                <h3 class="product-name"><strong> {{alveare.nome}}</strong></h3>
 
                     <p class="product-price">Prezzo:{{'%0.2f'|format(alveare.prezzo|float)}}€</p>
 
@@ -72,13 +68,12 @@
                         Visualizza Alveare</a></button>
 
 
-        </div>
-         {% endif %}
+                </div>
+            {% endif %}
         {% endfor %}
+        </div>
     </div>
-    </div>
-</div>
-
+    {% endif %}
 </div>
 
 
