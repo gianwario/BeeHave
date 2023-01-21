@@ -133,21 +133,6 @@ def informazioni_alveare(alveare_id):
     return render_template('informazioni_alveare.html', alveare=alveare, apicoltore=apicoltore)
 
 
-@views.route('/alveari_adottati/<int:cliente_id>', methods=['GET'])
-@login_required
-def mostra_alveari_adottati(cliente_id):
-    if not session['isApicoltore']:
-        alveari_adottati = get_ticket_adozione(cliente_id)
-        return render_template('alveari_adottati.html', alveari_adottati=alveari_adottati)
-    return home()
-
-
-@views.route('/lista_ticket_assistenza')
-@login_required
-def mostra_lista_ticket_assistenza():
-    return render_template('ticket_assistenza.html')
-
-
 @views.route('/visualizza_richieste_assistenza', methods=['POST', 'GET'])
 @login_required
 def visualizza_richieste_assistenza():
@@ -158,9 +143,24 @@ def visualizza_richieste_assistenza():
     return render_template('/ticket_assistenza.html', tickets_assistenza=ticket_assistenza)
 
 
+@views.route('/alveari_adottati/<int:cliente_id>', methods=['GET'])
+@login_required
+def mostra_alveari_adottati(cliente_id):
+    if not session['isApicoltore']:
+        alveari_adottati = get_ticket_adozione(cliente_id)
+        return render_template('alveari_adottati.html', alveari_adottati=alveari_adottati)
+    return home()
+
+
 @views.route('/visualizza_informazioni_ticket/<int:ticket_id>', methods=['POST', 'GET'])
 @login_required
 def visualizza_info_ticket(ticket_id):
     ticket = get_ticket_by_id(ticket_id)
-    cliente= get_cliente_by_id(ticket.id_cliente)
-    return render_template('/singolo_ticket.html', ticket_assistenza=ticket,cliente=cliente)
+    cliente = get_cliente_by_id(ticket.id_cliente)
+    return render_template('/singolo_ticket.html', ticket_assistenza=ticket, cliente=cliente)
+
+
+@views.route('/lista_ticket_assistenza')
+@login_required
+def mostra_lista_ticket_assistenza():
+    return render_template('ticket_assistenza.html')
