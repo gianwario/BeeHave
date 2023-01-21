@@ -6,7 +6,7 @@ from Website.flaskr.model.Apicoltore import Apicoltore
 from Website.flaskr.model.Cliente import Cliente
 from .. import db
 
-""" 
+"""
     caratteri per il controllo del form di registrazione
 """
 email_valida = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b'
@@ -63,7 +63,7 @@ def controlla_email_esistente(email):
 
 """
     Gestisce la registrazione dell' utente alla piattaforma
-    post: flask::session['isApicoltore']==is_apicoltore 
+    post: flask::session['isApicoltore']==is_apicoltore
 """
 
 

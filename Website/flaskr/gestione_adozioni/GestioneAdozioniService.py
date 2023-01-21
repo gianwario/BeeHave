@@ -150,4 +150,3 @@ def get_ticket_adozione(cliente_id):
 
 def get_ticket_from_alveare(id_alveare):
     return TicketAdozione.query.filter_by(id_alveare=id_alveare).all()
-

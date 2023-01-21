@@ -10,7 +10,7 @@ from ..model.TicketAssistenza import TicketAssistenza
 """
     Gestisce la creazione dell'area di assistenza da parte di un apicoltore
     pre: apicoltore is not None
-    post: context apicoltore::assistenza==True 
+    post: context apicoltore::assistenza==True
 """
 
 

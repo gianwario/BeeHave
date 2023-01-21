@@ -162,5 +162,5 @@ def visualizza_richieste_assistenza():
 @login_required
 def visualizza_info_ticket(ticket_id):
     ticket = get_ticket_by_id(ticket_id)
-    cliente= get_cliente_by_id(ticket.id_cliente)
-    return render_template('/singolo_ticket.html', ticket_assistenza=ticket,cliente=cliente)
+    cliente = get_cliente_by_id(ticket.id_cliente)
+    return render_template('/singolo_ticket.html', ticket_assistenza=ticket, cliente=cliente)
