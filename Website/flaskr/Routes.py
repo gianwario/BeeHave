@@ -157,7 +157,8 @@ def mostra_alveari_adottati(cliente_id):
 def visualizza_info_ticket(ticket_id):
     ticket = get_ticket_by_id(ticket_id)
     cliente = get_cliente_by_id(ticket.id_cliente)
-    return render_template('/singolo_ticket.html', ticket_assistenza=ticket, cliente=cliente)
+    apicoltore = get_apicoltore_by_id(ticket.id_apicoltore)
+    return render_template('/singolo_ticket.html', ticket_assistenza=ticket, cliente=cliente, apicoltore=apicoltore)
 
 
 @views.route('/lista_ticket_assistenza')

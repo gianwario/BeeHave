@@ -35,7 +35,9 @@
                <i class="bi bi-bookmark text-success-m2 text-110 mr-2 mt-1"></i>
                <span>
                    {% if session['isApicoltore'] %}
-                   <span class="ml-n15 align-text-bottom"> Email cliente: {{cliente.email}}</p></span>
+                   <span class="ml-n15 align-text-bottom"> Contatto cliente: {{cliente.telefono}}</p></span>
+                   {% else %}
+                   <span class="ml-n15 align-text-bottom"> Contatto apicoltore: {{apicoltore.telefono}}</p></span>
                    {% endif %}
                  <span class="ml-n15 align-text-bottom">Ticket aperto il: <br>{{ticket_assistenza.data_inizio}}</span>
 
