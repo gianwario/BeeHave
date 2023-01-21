@@ -32,7 +32,7 @@ def richiesta_assistenza():
         descrizione = request.form.get('descrizione')
         id_apicoltore = request.form.get('id_apicoltore')
 
-        if richiedi_assistenza(nome, descrizione, id_apicoltore):
+        if richiedi_assistenza(nome, descrizione, id_apicoltore, cliente=current_user):
             return visualizza_richieste_assistenza()
 
     return richiesta_assistenza_page()
