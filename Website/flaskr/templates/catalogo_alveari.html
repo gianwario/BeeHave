@@ -20,6 +20,9 @@
     <div class="row">
         <div class="product-container">
             {% for alveare in alveari_disponibili %}
+            {% if len(alveari_disponibili) == 0 %}
+            <h5 vuota ></h5>
+            {% endif %}
             <!--Card 1-->
             <div class="product-card shadow-lg">
 
