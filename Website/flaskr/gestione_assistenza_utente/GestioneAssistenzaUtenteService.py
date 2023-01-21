@@ -7,6 +7,12 @@ from ..gestione_utente.GestioneUtenteService import get_apicoltore_by_id
 from ..model.Apicoltore import Apicoltore
 from ..model.TicketAssistenza import TicketAssistenza
 
+"""
+    Gestisce la creazione dell'area di assistenza da parte di un apicoltore
+    pre: apicoltore is not None
+    post: context apicoltore::assistenza==True 
+"""
+
 
 def inserisci_area_assistenza(descrizione, apicoltore):
     if not isinstance(descrizione, str) or not 0 < len(descrizione) <= 200:
