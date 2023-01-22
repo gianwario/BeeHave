@@ -6,6 +6,12 @@ from Website.flaskr import db
 from Website.flaskr.model.Alveare import Alveare
 from Website.flaskr.model.TicketAdozione import TicketAdozione
 
+"""
+    Gestisce l'inserimento di un alveare da parte di un apicoltore
+    Pre: flask::session['isApicoltore']==True
+    Post: GestioniAdozioniService::get_alveare_by_id(alveare.id) is not None
+"""
+
 
 def inserisci_alveare(nome, produzione, numero_api, tipo_miele, prezzo, tipo_fiore, apicoltore):
     if not isinstance(nome, str) or not 0 < len(nome) <= 30:
@@ -32,18 +38,41 @@ def inserisci_alveare(nome, produzione, numero_api, tipo_miele, prezzo, tipo_fio
     return False
 
 
+"""
+    Restituisce l'alveare dato l'id
+"""
+
+
 def get_alveare_by_id(alveare_id):
     return Alveare.query.filter_by(id=alveare_id).first()
+
+
+"""
+    Restituisce tutti gli alveari
+"""
 
 
 def get_alveari():
     return Alveare.query.all()
 
 
+"""
+    Decrementa la percentuale disponibile dell'alveare
+    pre: percentuale>0 and alveare is not None
+"""
+
+
 def decrementa_percentuale(alveare, percentuale):
     alveare.percentuale_disponibile -= int(percentuale)
     db.session.flush()
     db.session.commit()
+
+
+"""
+    Gestisce l'adozione dell'alveare da parte di un cliente
+    pre: alveare is not None and cliente is not None
+    post: alveare.percentuale == alveare.percentuale-percentuale
+"""
 
 
 def adozione_alveare(alveare, cliente, tempo_adozione, percentuale):
@@ -64,6 +93,13 @@ def adozione_alveare(alveare, cliente, tempo_adozione, percentuale):
         flash('Alveare adottato con successo!', category='success')
         return True
     return False
+
+
+"""
+    Gestisce l'aggiornamento dello stato dell'alveare da parte di un apicoltore
+    pre: alveare is not None and flask::session['isApicoltore'] == True
+    post: alveare.percentuale == alveare.percentuale-percentuale
+"""
 
 
 def aggiorna_stato(alveare, covata_compatta, popolazione, polline, stato_cellette, stato_larve):
@@ -90,21 +126,28 @@ def aggiorna_stato(alveare, covata_compatta, popolazione, polline, stato_cellett
     return False
 
 
+"""
+    Restituisce gli alveari di un apicoltore
+"""
+
+
 def get_alveari_from_apicoltore(apicoltore_id):
     return Alveare.query.filter_by(id_apicoltore=apicoltore_id).all()
+
+
+"""
+    Restituisce gli alveari adottati da un cliente
+"""
 
 
 def get_ticket_adozione(cliente_id):
     return db.session.query(TicketAdozione, Alveare).filter_by(id_cliente=cliente_id).join(Alveare).all()
 
 
+"""
+    Restituisce i ticket di adozione di un alveare
+"""
+
+
 def get_ticket_from_alveare(id_alveare):
     return TicketAdozione.query.filter_by(id_alveare=id_alveare).all()
-
-
-def controlla_scadenza_ticket(id_alveare):
-    tickets = get_ticket_from_alveare(id_alveare)
-    for ticket in tickets:
-        if ticket.data_fine_adozione() > datetime.datetime.now():
-            return False
-    return True

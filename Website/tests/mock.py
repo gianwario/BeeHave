@@ -38,7 +38,7 @@ def mock_login_cliente():
 
 
 @pytest.fixture
-def app():
+def mock_app():
     app = create_app()
     app.testing = True
     db.init_app(app)
@@ -73,3 +73,4 @@ def mock_cliente():
 
 def clean(alveare):
     Alveare.query.filter_by(id=alveare.id).delete()
+
