@@ -33,7 +33,7 @@
                     <div class="d-flex justify-content-between align-items-center"><h3>{{alveare.nome}}</h3></div>
                     <div class="mt-2 pr-3 content" ><p>Numero Api: {{alveare.numero_api}}</p></div>
                     <p>Tipo miele: {{alveare.tipo_miele}}</p>
-                    <h3 style="color: orange">€{{alveare.prezzo}}</h3>
+                    <h3 style="color: orange">€{{'%0.2f'|format(alveare.prezzo|float)}}</h3>
                     <div class="ratings  align-items-center">
 
                         <span style="margin: 0">Email Apicoltore: {{apicoltore.email}}</span><br>

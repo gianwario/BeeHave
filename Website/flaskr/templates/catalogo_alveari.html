@@ -13,7 +13,6 @@
 {% block content %}
 <br><br><br>
 
-
 <div class="page">
 
     {% if alveari_disponibili | length < 1 %}
@@ -45,38 +44,36 @@
     </section>
     {% else %}
     <h1 style="text-align: center">Catalogo Alveari</h1>
-    {% endif %}
     <br>
     <div class="row">
         <div class="product-container">
-            {% for alveare in alveari_disponibili %}
+        {% for alveare in alveari_disponibili %}
+            {% if alveare.percentuale_disponibile==0%}
 
             <!--Card 1-->
-            <div class="product-card shadow-lg">
+                <div class="product-card shadow-lg">
 
                 <img class="product-image" src="../static/images/honey_pot.jpg"
                      alt="">
 
 
-                <h3 class="product-name"><strong> {{alveare.nome}}</strong>
-                </h3>
+                <h3 class="product-name"><strong> {{alveare.nome}}</strong></h3>
 
-                <p class="product-price">Prezzo:{{alveare.prezzo}}€</p>
+                    <p class="product-price">Prezzo:{{'%0.2f'|format(alveare.prezzo|float)}}€</p>
 
 
-                <form action="{{url_for('views.modifica_stato', alveare_id=alveare.id)}}">
+
                     <button class="add-to-cart-button"><a style="text-decoration: none;color:white"
                                                           href="{{url_for('views.informazioni_alveare',alveare_id=alveare.id)}}">
                         Visualizza Alveare</a></button>
 
-                </form>
 
-            </div>
-            {% endfor %}
+                </div>
+            {% endif %}
+        {% endfor %}
         </div>
     </div>
-</div>
-
+    {% endif %}
 </div>
 
 
