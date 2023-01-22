@@ -48,11 +48,12 @@ def decrementa_percentuale(alveare, percentuale):
 
 def adozione_alveare(alveare, cliente, tempo_adozione, percentuale):
     if not isinstance(tempo_adozione, str) or not tempo_adozione.isdigit() or not 3 <= int(tempo_adozione) <= 12:
-        flash('TempoAdozione non è nel range corretto!', category='error')
+        flash('Tempo Adozione non è nel range corretto!', category='error')
     elif not isinstance(percentuale, str) or not percentuale.isdigit() or not 25 <= int(percentuale) <= 100:
         flash('Percentuale Adozione non è nel range corretto!', category='error')
     elif int(percentuale) > alveare.percentuale_disponibile:
         flash('Percentuale Adozione è maggiore di Percentuale Disponibile!', category='error')
+
     else:
         ticket = TicketAdozione(id_cliente=cliente.id, id_alveare=alveare.id,
                                 percentuale_adozione=int(percentuale),

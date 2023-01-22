@@ -118,16 +118,16 @@ def controlla_password(password, conferma_password):
     return False
 
 
+def controllo_numeri(password):
+    for char in password:
+        if char.isdigit():
+            return True
+    return False
+
+
 def controllo_caratteri_speciali(password):
     for char in password:
         for symbol in spec:
             if char == symbol:
                 return True
-    return False
-
-
-def controllo_numeri(password):
-    for char in password:
-        if char.isdigit():
-            return True
     return False
