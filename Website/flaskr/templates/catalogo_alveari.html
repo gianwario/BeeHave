@@ -63,17 +63,26 @@
 
 
 
+                {% if session['isApicoltore'] %}
+                <form action="{{url_for('views.modifica_stato', alveare_id=alveare.id)}}">
+                    <button class="add-to-cart-button"><a style="text-decoration: none;color:white"
+                                                          href="{{url_for('views.modifica_stato',alveare_id=alveare.id)}}">
+                        Modifica Alveare</a></button>
+                </form>
+                {% else %}
+                <form action="{{url_for('views.informazioni_alveare', alveare_id=alveare.id)}}">
                     <button class="add-to-cart-button"><a style="text-decoration: none;color:white"
                                                           href="{{url_for('views.informazioni_alveare',alveare_id=alveare.id)}}">
                         Visualizza Alveare</a></button>
-
-
+                </form>
+                {% endif %}
                 </div>
             {% endif %}
         {% endfor %}
         </div>
     </div>
     {% endif %}
+
 </div>
 
 
