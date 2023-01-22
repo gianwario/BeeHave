@@ -37,19 +37,6 @@ def mock_login_cliente():
     return "cliente_loggato"
 
 
-@views.route('/mock_login_cliente')
-def mock_login_cliente():
-    user = Cliente(nome="nome", cognome="cognome", indirizzo="indirizzo", citta="città", cap=84131,
-                   telefono=4324324362, email="email", password="password")
-    if not Cliente.query.filter_by(email="email").first():
-        db.session.add(user)
-        db.session.commit()
-
-    login_user(user, remember=True)
-    session['isApicoltore'] = False
-    return "cliente_loggato"
-
-
 @pytest.fixture
 def mock_app():
     app = create_app()
