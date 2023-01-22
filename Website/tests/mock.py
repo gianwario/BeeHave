@@ -12,7 +12,6 @@ from Website.flaskr.model.Cliente import Cliente
 db = SQLAlchemy()
 
 
-
 @views.route('/mock_login_apicoltore')
 def mock_login_apicoltore():
     user = Apicoltore(nome="nome", cognome="cognome", indirizzo="indirizzo", citta="citta", cap=84345,
@@ -85,6 +84,3 @@ def mock_alveare_non_disponibile():
 def mock_cliente(mock_app):
     with mock_app.app_context():
         return Cliente.query.filter_by(email="email").first()
-
-
-
