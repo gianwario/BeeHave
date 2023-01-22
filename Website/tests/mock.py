@@ -49,28 +49,25 @@ def mock_app():
     return app
 
 
-def mock_alveare():
-    alveare = Alveare(nome="nome", produzione=1, numero_api=1, tipo_miele="tipo_miele",
-                      percentuale_disponibile=100,
-                      prezzo=2, tipo_fiore="tipo_fiore", id_apicoltore=1)
-    db.session.add(alveare)
-    db.session.commit()
-    return alveare
+@pytest.fixture
+def mock_alveare(mock_app, mock_apicoltore):
+    with mock_app.app_context():
+        return Alveare.query.filter_by(id_apicoltore=mock_apicoltore.id).first()
 
 
+@pytest.fixture
+def mock_apicoltore(mock_app):
+    with mock_app.app_context():
+        return Apicoltore.query.filter_by(email="email").first()
+
+
+@pytest.fixture
 def mock_alveare_non_disponibile():
     return Alveare(nome="nome", produzione=1, numero_api=1, tipo_miele="tipo_miele",
                    percentuale_disponibile=20, prezzo=2, tipo_fiore="tipo_fiore", id_apicoltore=1)
 
 
-def mock_apicoltore():
-    return Apicoltore.query.filter_by(email="email").first()
-
-
-def mock_cliente():
-    return Cliente.query.filter_by(email="email").first()
-
-
-def clean(alveare):
-    Alveare.query.filter_by(id=alveare.id).delete()
-
+@pytest.fixture
+def mock_cliente(mock_app):
+    with mock_app.app_context():
+        return Cliente.query.filter_by(email="email").first()
