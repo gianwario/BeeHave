@@ -169,23 +169,21 @@ def controlla_password(password, conferma_password):
 """
     Effettua il controllo dei caratteri speciali della password nel form di registrazione
 """
-
-
 def controllo_caratteri_speciali(password):
+
     for char in password:
-        for symbol in spec:
-            if char == symbol:
-                return True
+        if char.isdigit():
+            return True
     return False
+
 
 
 """
     Effettua il controllo dei numeri della password nel form di registrazione
 """
-
-
 def controllo_numeri(password):
     for char in password:
-        if char.isdigit():
-            return True
+        for symbol in spec:
+            if char == symbol:
+                return True
     return False
