@@ -119,7 +119,7 @@ def test_adotta_alveare_tc_4_1(mock_app, mock_alveare, mock_cliente):
         test_client.get('/mock_login_cliente')
         result = adozione_alveare(mock_alveare, mock_cliente, "100", "25")
         message = get_flashed_messages(category_filter=['error'])
-        assert result is False and message[0] == 'TempoAdozione non è nel range corretto!'
+        assert result is False and message[0] == 'Tempo Adozione non è nel range corretto!'
 
 
 def test_adotta_alveare_tc_4_2(mock_app, mock_alveare, mock_cliente):
