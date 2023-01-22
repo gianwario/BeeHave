@@ -118,12 +118,12 @@ def info_articolo(prodotto_id):
     return render_template('informazioni_prodotto.html', prodotto=prod, apicoltore=apicoltore)
 
 
-@views.route('/visualizza_prodotti_vendita/<int:apicoltore_id>', methods=['POST', 'GET'])
+@views.route('/visualizza_prodotti_vendita/<int:apicoltore_id>')
 @login_required
 def mostra_articoli_in_vendita(apicoltore_id):
     if session['isApicoltore']:
         prodotti_in_vendita = get_prodotti_by_apicoltore(apicoltore_id)
-        return render_template('/catalogo_prodotti_apicoltore.html', prodotti_in_vendita=prodotti_in_vendita)
+        return render_template('catalogo_prodotti_apicoltore.html', prodotti_in_vendita=prodotti_in_vendita)
 
 
 @views.route('/informazioni_alveare/<int:alveare_id>', methods=['POST', 'GET'])
@@ -140,7 +140,7 @@ def visualizza_richieste_assistenza():
         ticket_assistenza = get_ticket_assistenza_by_apicoltore(current_user.id)
     else:
         ticket_assistenza = get_ticket_assistenza_by_cliente(current_user.id)
-    return render_template('/ticket_assistenza.html', tickets_assistenza=ticket_assistenza)
+    return render_template('ticket_assistenza.html', tickets_assistenza=ticket_assistenza)
 
 
 @views.route('/alveari_adottati/<int:cliente_id>', methods=['GET'])
