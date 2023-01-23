@@ -118,12 +118,12 @@ def info_articolo(prodotto_id):
     return render_template('informazioni_prodotto.html', prodotto=prod, apicoltore=apicoltore)
 
 
-@views.route('/visualizza_prodotti_vendita/<int:apicoltore_id>', methods=['POST', 'GET'])
+@views.route('/visualizza_prodotti_vendita/<int:apicoltore_id>')
 @login_required
 def mostra_articoli_in_vendita(apicoltore_id):
     if session['isApicoltore']:
         prodotti_in_vendita = get_prodotti_by_apicoltore(apicoltore_id)
-        return render_template('/catalogo_prodotti_apicoltore.html', prodotti_in_vendita=prodotti_in_vendita)
+        return render_template('catalogo_prodotti_apicoltore.html', prodotti_in_vendita=prodotti_in_vendita)
 
 
 @views.route('/informazioni_alveare/<int:alveare_id>', methods=['POST', 'GET'])
@@ -131,6 +131,16 @@ def informazioni_alveare(alveare_id):
     alveare = get_alveare_by_id(alveare_id)
     apicoltore = get_apicoltore_by_id(alveare.id_apicoltore)
     return render_template('informazioni_alveare.html', alveare=alveare, apicoltore=apicoltore)
+
+
+@views.route('/visualizza_richieste_assistenza', methods=['POST', 'GET'])
+@login_required
+def visualizza_richieste_assistenza():
+    if session['isApicoltore']:
+        ticket_assistenza = get_ticket_assistenza_by_apicoltore(current_user.id)
+    else:
+        ticket_assistenza = get_ticket_assistenza_by_cliente(current_user.id)
+    return render_template('ticket_assistenza.html', tickets_assistenza=ticket_assistenza)
 
 
 @views.route('/alveari_adottati/<int:cliente_id>', methods=['GET'])
@@ -142,25 +152,16 @@ def mostra_alveari_adottati(cliente_id):
     return home()
 
 
-@views.route('/lista_ticket_assistenza')
-@login_required
-def mostra_lista_ticket_assistenza():
-    return render_template('ticket_assistenza.html')
-
-
-@views.route('/visualizza_richieste_assistenza', methods=['POST', 'GET'])
-@login_required
-def visualizza_richieste_assistenza():
-    if session['isApicoltore']:
-        ticket_assistenza = get_ticket_assistenza_by_apicoltore(current_user.id)
-    else:
-        ticket_assistenza = get_ticket_assistenza_by_cliente(current_user.id)
-    return render_template('/ticket_assistenza.html', tickets_assistenza=ticket_assistenza)
-
-
 @views.route('/visualizza_informazioni_ticket/<int:ticket_id>', methods=['POST', 'GET'])
 @login_required
 def visualizza_info_ticket(ticket_id):
     ticket = get_ticket_by_id(ticket_id)
-    cliente= get_cliente_by_id(ticket.id_cliente)
-    return render_template('/singolo_ticket.html', ticket_assistenza=ticket,cliente=cliente)
+    cliente = get_cliente_by_id(ticket.id_cliente)
+    apicoltore = get_apicoltore_by_id(ticket.id_apicoltore)
+    return render_template('/singolo_ticket.html', ticket_assistenza=ticket, cliente=cliente, apicoltore=apicoltore)
+
+
+@views.route('/lista_ticket_assistenza')
+@login_required
+def mostra_lista_ticket_assistenza():
+    return render_template('ticket_assistenza.html')

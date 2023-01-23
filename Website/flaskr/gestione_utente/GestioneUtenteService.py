@@ -6,25 +6,52 @@ from Website.flaskr.model.Apicoltore import Apicoltore
 from Website.flaskr.model.Cliente import Cliente
 from .. import db
 
+"""
+    caratteri per il controllo del form di registrazione
+"""
 email_valida = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b'
 spec = ["$", "#", "@", "!", "*", "£", "%", "&", "/", "(", ")", "=", "|",
         "+", "-", "^", "_", "-", "?", ",", ":", ";", ".", "§", "°", "[", "]"]
+
+"""
+    Restituisce un apicoltore data l'email
+"""
 
 
 def get_apicoltore_by_email(email):
     return Apicoltore.query.filter_by(email=email).first()
 
 
+"""
+    Restituisce un apicoltore dato l'id
+"""
+
+
 def get_apicoltore_by_id(id_apicoltore):
     return Apicoltore.query.filter_by(id=id_apicoltore).first()
+
+
+"""
+    Restituisce un cliente dato l'id
+"""
 
 
 def get_cliente_by_id(id_cliente):
     return Cliente.query.filter_by(id=id_cliente).first()
 
 
+"""
+    Restituisce un cliente data l'email
+"""
+
+
 def get_cliente_by_email(email):
     return Cliente.query.filter_by(email=email).first()
+
+
+"""
+    Controlla se l'email è già presente nel database
+"""
 
 
 def controlla_email_esistente(email):
@@ -32,6 +59,13 @@ def controlla_email_esistente(email):
         return False
     else:
         return True
+
+
+"""
+    Gestisce la registrazione dell' utente alla piattaforma
+    post: session['isApicoltore']==is_apicoltore and
+            (get_apicoltore_by_email(email) is not None or get_cliente_by_email(email) is not None)
+"""
 
 
 def registra_utente(nome, cognome, indirizzo, citta, cap, telefono, email, password, conferma_password, is_apicoltore):
@@ -56,6 +90,11 @@ def registra_utente(nome, cognome, indirizzo, citta, cap, telefono, email, passw
             flash('Registrazione avvenuta con successo!', category='success')
             return True
     return False
+
+
+"""
+    Gestisce la modifica dei dati dell' utente
+"""
 
 
 def modifica_profilo_personale(nome, cognome, email, telefono, citta, cap, indirizzo, password, conferma_password):
@@ -86,6 +125,11 @@ def modifica_profilo_personale(nome, cognome, email, telefono, citta, cap, indir
     return False
 
 
+"""
+    Effettua il controllo dei campi del form della registrazione
+"""
+
+
 def controlla_campi(nome, cognome, indirizzo, citta, cap, telefono, email):
     if not isinstance(nome, str) or not 0 < len(nome) <= 45:
         flash("Nome non valido", category="error")
@@ -106,6 +150,11 @@ def controlla_campi(nome, cognome, indirizzo, citta, cap, telefono, email):
     return False
 
 
+"""
+    Effettua il controllo della password nel form di registrazione
+"""
+
+
 def controlla_password(password, conferma_password):
     if not isinstance(password, str) or len(password) < 8:
         flash("Lunghezza password deve essere almeno 8 caratteri.", category="error")
@@ -118,16 +167,26 @@ def controlla_password(password, conferma_password):
     return False
 
 
+"""
+    Effettua il controllo dei caratteri speciali della password nel form di registrazione
+"""
+
+
 def controllo_caratteri_speciali(password):
     for char in password:
-        for symbol in spec:
-            if char == symbol:
-                return True
+        if char.isdigit():
+            return True
     return False
+
+
+"""
+    Effettua il controllo dei numeri della password nel form di registrazione
+"""
 
 
 def controllo_numeri(password):
     for char in password:
-        if char.isdigit():
-            return True
+        for symbol in spec:
+            if char == symbol:
+                return True
     return False

@@ -1,7 +1,7 @@
 
 
 .btn:not(:disabled):not(.disabled) {
-    cursor: pointer;
+    cursor: auto;
 }
 .btn-a-brc-tp:not(.disabled):not(:disabled).active, .btn-brc-tp, .btn-brc-tp:focus:not(:hover):not(:active):not(.active):not(.dropdown-toggle), .btn-h-brc-tp:hover, .btn.btn-f-brc-tp:focus, .btn.btn-h-brc-tp:hover {
     border-color: transparent;
@@ -12,7 +12,7 @@
     background-color: transparent;
 }
 .btn {
-    cursor: pointer;
+    cursor: auto;
     position: relative;
     z-index: auto;
     border-radius: .175rem;

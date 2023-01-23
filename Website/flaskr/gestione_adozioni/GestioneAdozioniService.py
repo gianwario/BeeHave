@@ -6,6 +6,12 @@ from Website.flaskr import db
 from Website.flaskr.model.Alveare import Alveare
 from Website.flaskr.model.TicketAdozione import TicketAdozione
 
+"""
+    Gestisce l'inserimento di un alveare da parte di un apicoltore
+    Pre: apicoltore is not None
+    Post: get_alveare_by_id(alveare.id) is not None
+"""
+
 
 def inserisci_alveare(nome, produzione, numero_api, tipo_miele, prezzo, tipo_fiore, apicoltore):
     if not isinstance(nome, str) or not 0 < len(nome) <= 30:
@@ -32,12 +38,29 @@ def inserisci_alveare(nome, produzione, numero_api, tipo_miele, prezzo, tipo_fio
     return False
 
 
+"""
+    Restituisce l'alveare dato l'id
+"""
+
+
 def get_alveare_by_id(alveare_id):
     return Alveare.query.filter_by(id=alveare_id).first()
 
 
+"""
+    Restituisce tutti gli alveari
+"""
+
+
 def get_alveari():
     return Alveare.query.all()
+
+
+"""
+    Decrementa la percentuale disponibile dell'alveare
+    pre: alveare is not None and alveare.percentuale_disponibile >= percentuale
+    post: alveare is not None and @pre.alveare.percentuale_disponibile == .alveare.percentuale_disponibile - percentuale
+"""
 
 
 def decrementa_percentuale(alveare, percentuale):
@@ -46,13 +69,21 @@ def decrementa_percentuale(alveare, percentuale):
     db.session.commit()
 
 
+"""
+    Gestisce l'adozione dell'alveare da parte di un cliente
+    pre: alveare is not None and cliente is not None
+    post: get_ticket_adozione(cliente.id).get(alveare) is not None
+"""
+
+
 def adozione_alveare(alveare, cliente, tempo_adozione, percentuale):
     if not isinstance(tempo_adozione, str) or not tempo_adozione.isdigit() or not 3 <= int(tempo_adozione) <= 12:
-        flash('TempoAdozione non è nel range corretto!', category='error')
+        flash('Tempo Adozione non è nel range corretto!', category='error')
     elif not isinstance(percentuale, str) or not percentuale.isdigit() or not 25 <= int(percentuale) <= 100:
         flash('Percentuale Adozione non è nel range corretto!', category='error')
     elif int(percentuale) > alveare.percentuale_disponibile:
         flash('Percentuale Adozione è maggiore di Percentuale Disponibile!', category='error')
+
     else:
         ticket = TicketAdozione(id_cliente=cliente.id, id_alveare=alveare.id,
                                 percentuale_adozione=int(percentuale),
@@ -63,6 +94,12 @@ def adozione_alveare(alveare, cliente, tempo_adozione, percentuale):
         flash('Alveare adottato con successo!', category='success')
         return True
     return False
+
+
+"""
+    Gestisce l'aggiornamento dello stato dell'alveare da parte di un apicoltore
+    pre: alveare is not None
+"""
 
 
 def aggiorna_stato(alveare, covata_compatta, popolazione, polline, stato_cellette, stato_larve):
@@ -89,21 +126,31 @@ def aggiorna_stato(alveare, covata_compatta, popolazione, polline, stato_cellett
     return False
 
 
+"""
+    Restituisce gli alveari di un apicoltore
+    pre: get_apicoltore_by_id(apicoltore_id) is not None
+"""
+
+
 def get_alveari_from_apicoltore(apicoltore_id):
     return Alveare.query.filter_by(id_apicoltore=apicoltore_id).all()
+
+
+"""
+    Restituisce gli alveari adottati da un cliente
+    pre: get_cliente_by_id(cliente_id) is not None
+"""
 
 
 def get_ticket_adozione(cliente_id):
     return db.session.query(TicketAdozione, Alveare).filter_by(id_cliente=cliente_id).join(Alveare).all()
 
 
+"""
+    Restituisce i ticket di adozione di un alveare
+    pre: get_alvearee_by_id(id_alveare) is not None
+"""
+
+
 def get_ticket_from_alveare(id_alveare):
     return TicketAdozione.query.filter_by(id_alveare=id_alveare).all()
-
-
-def controlla_scadenza_ticket(id_alveare):
-    tickets = get_ticket_from_alveare(id_alveare)
-    for ticket in tickets:
-        if ticket.data_fine_adozione() > datetime.datetime.now():
-            return False
-    return True
