@@ -34,8 +34,8 @@
                     <a style="text-decoration: none;color: black"href="{{url_for('views.informazioni_alveare',alveare_id=elemento.Alveare.id)}}"><h5 class="card-title">{{elemento.Alveare.nome}}</h5></a>
                     <br>
                     <p class="card-text">Tempo adozione: {{elemento.TicketAdozione.tempo_adozione}} Mesi</p>
-                    <p class="card-text">Data Inizio: {{elemento.TicketAdozione.data_inizio_adozione}}</p>
-                    <p class="card-text">Data Scadenza: {{elemento.TicketAdozione.data_fine_adozione()}}</p>
+                    <p class="card-text">Data Inizio: {{elemento.TicketAdozione.data_inizio_adozione.strftime("%m-%d-%Y, %H:%M:%S") }}</p>
+                    <p class="card-text">Data Scadenza: {{elemento.TicketAdozione.data_fine_adozione().strftime("%m-%d-%Y, %H:%M:%S")}}</p>
                     <br>
                     <div class="progress">
                         <div class="progress-bar progress-bar-striped progress-bar-animated  bg-warning"
