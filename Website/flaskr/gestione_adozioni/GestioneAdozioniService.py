@@ -8,8 +8,8 @@ from Website.flaskr.model.TicketAdozione import TicketAdozione
 
 """
     Gestisce l'inserimento di un alveare da parte di un apicoltore
-    Pre: flask::session['isApicoltore']==True
-    Post: GestioniAdozioniService::get_alveare_by_id(alveare.id) is not None
+    Pre: apicoltore is not None
+    Post: get_alveare_by_id(alveare.id) is not None
 """
 
 
@@ -58,7 +58,8 @@ def get_alveari():
 
 """
     Decrementa la percentuale disponibile dell'alveare
-    pre: percentuale>0 and alveare is not None
+    pre: alveare is not None and alveare.percentuale_disponibile >= percentuale
+    post: alveare is not None and @pre.alveare.percentuale_disponibile == .alveare.percentuale_disponibile - percentuale
 """
 
 
@@ -71,7 +72,7 @@ def decrementa_percentuale(alveare, percentuale):
 """
     Gestisce l'adozione dell'alveare da parte di un cliente
     pre: alveare is not None and cliente is not None
-    post: alveare.percentuale == alveare.percentuale-percentuale
+    post: get_ticket_adozione(cliente.id).get(alveare) is not None 
 """
 
 
@@ -97,8 +98,7 @@ def adozione_alveare(alveare, cliente, tempo_adozione, percentuale):
 
 """
     Gestisce l'aggiornamento dello stato dell'alveare da parte di un apicoltore
-    pre: alveare is not None and flask::session['isApicoltore'] == True
-    post: alveare.percentuale == alveare.percentuale-percentuale
+    pre: alveare is not None
 """
 
 
@@ -128,6 +128,7 @@ def aggiorna_stato(alveare, covata_compatta, popolazione, polline, stato_cellett
 
 """
     Restituisce gli alveari di un apicoltore
+    pre: get_apicoltore_by_id(apicoltore_id) is not None
 """
 
 
@@ -137,6 +138,7 @@ def get_alveari_from_apicoltore(apicoltore_id):
 
 """
     Restituisce gli alveari adottati da un cliente
+    pre: get_cliente_by_id(cliente_id) is not None 
 """
 
 
@@ -146,6 +148,7 @@ def get_ticket_adozione(cliente_id):
 
 """
     Restituisce i ticket di adozione di un alveare
+    pre: get_alvearee_by_id(id_alveare) is not None 
 """
 
 
