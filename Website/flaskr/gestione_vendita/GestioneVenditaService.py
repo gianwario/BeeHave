@@ -15,6 +15,8 @@ def get_prodotto_by_id(id_prodotto):
 
 """
     Gestisce la rimozione di un prodotto
+    pre: get_prodotto_by_id(prodotto_id) is not None
+    post: get_prodotto_by_id(prodotto_id).quantita==0
 """
 
 
@@ -72,7 +74,8 @@ def inserisci_prodotto(nome, descrizione, localita, peso, tipologia, prezzo, qua
 
 """
     Decrementa la quantità di un prodotto all'interno del catalogo
-    pre: quantita>0
+    pre: get_prodotto_by_id(prodotto_id).quantita is not None and get_prodotto_by_id(prodotto_id) >= quantita
+    post: @pre.get_prodotto_by_id(int(id_prodotto)).quantita==get_prodotto_by_id(int(id_prodotto)).quantita - quantita
 """
 
 
@@ -90,6 +93,7 @@ def decrementa_quantita(id_prodotto, quantita):
 
 """
     Restituisce tutti i prodotti di un apicoltore
+    pre: get_apicoltore_by_id(id_apicoltore) is not None
 """
 
 
@@ -99,7 +103,7 @@ def get_prodotti_by_apicoltore(id_apicoltore):
 
 """
     Gestisce l'acquisto di un prodotto da parte di un cliente
-    pre: cliente is not None and quan
+    pre: cliente is not None
 """
 
 
