@@ -63,7 +63,7 @@ def controlla_email_esistente(email):
 
 """
     Gestisce la registrazione dell' utente alla piattaforma
-    post: session['isApicoltore']==is_apicoltore and 
+    post: session['isApicoltore']==is_apicoltore and
             (get_apicoltore_by_email(email) is not None or get_cliente_by_email(email) is not None)
 """
 

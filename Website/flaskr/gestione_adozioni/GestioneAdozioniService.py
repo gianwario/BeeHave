@@ -72,7 +72,7 @@ def decrementa_percentuale(alveare, percentuale):
 """
     Gestisce l'adozione dell'alveare da parte di un cliente
     pre: alveare is not None and cliente is not None
-    post: get_ticket_adozione(cliente.id).get(alveare) is not None 
+    post: get_ticket_adozione(cliente.id).get(alveare) is not None
 """
 
 
@@ -138,7 +138,7 @@ def get_alveari_from_apicoltore(apicoltore_id):
 
 """
     Restituisce gli alveari adottati da un cliente
-    pre: get_cliente_by_id(cliente_id) is not None 
+    pre: get_cliente_by_id(cliente_id) is not None
 """
 
 
@@ -148,7 +148,7 @@ def get_ticket_adozione(cliente_id):
 
 """
     Restituisce i ticket di adozione di un alveare
-    pre: get_alvearee_by_id(id_alveare) is not None 
+    pre: get_alvearee_by_id(id_alveare) is not None
 """
 
 
