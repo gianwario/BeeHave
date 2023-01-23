@@ -1,0 +1,11 @@
+
+input[type=button], input[type=submit], input[type=reset] {
+     background-color: orange;
+     opacity: 70%;
+     border: none;
+     color: white;
+     padding: 7px 50px;
+     text-decoration: none;
+     margin: 4px 2px;
+     cursor: pointer;
+     }
