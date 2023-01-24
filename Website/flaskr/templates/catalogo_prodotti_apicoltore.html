@@ -15,10 +15,10 @@
 <body>
 
 {% block content %}
-<br><br><br>
+
 <!--For Page-->
 <div class="page">
-    <br>
+
     {% if prodotti_in_vendita | length < 1 %}
     <section class="pageerror">
 
@@ -27,7 +27,7 @@
                 <div class="col-sm-12">
                     <div class="col-sm-100 col-sm-offset-1  text-center">
                         <div class="four_zero_four_bg">
-                            <h1 class="text-center ">500</h1>
+                            <h1 class="text-center ">I Tuoi Prodotti</h1>
 
                         </div>
 
@@ -48,7 +48,8 @@
         </div>
     </section>
     {% else %}
-    <h1 style="text-align: center">I tuoi Prodotti</h1>
+    <br><br>
+    <h1 style="text-align: center">I Tuoi Prodotti</h1>
     {% endif %}
     <div class="row">
         <div class="product-container ">
@@ -76,7 +77,11 @@
                         <button class="btn btn-danger" style="margin-top: 20px;">Elimina Prodotto</button>
                     </a>
                 </form>
+                {%else%}
+                <br>
+                <p style="color: red">Prodotto non disponibile alla vendita.</p>
                 {% endif %}
+
 
             </div>
 
