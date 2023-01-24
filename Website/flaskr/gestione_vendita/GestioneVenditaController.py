@@ -29,7 +29,7 @@ def inserimento_prodotto():
 def elimina_prodotto():
     if request.method == 'POST' and session['isApicoltore']:
         id_apicoltore = request.form.get("id_apicoltore")
-        if not id_apicoltore == current_user.id:
+        if id_apicoltore != current_user.id:
             id_prodotto = request.form.get("id_prodotto")
             cancella_prodotto(id_prodotto)
     return mostra_articoli_in_vendita(current_user.id)
