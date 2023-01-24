@@ -23,7 +23,7 @@
 
                 <!--Card image-->
                 <div class="view view-cascade overlay text-center">
-                    <img class="card-img-top" src="../static/images/honey_pot.jpg"
+                    <img class="card-img-top" src="https://images.unsplash.com/photo-1508432116762-1f883098ed41?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTJ8fGFsdmVhcmV8ZW58MHx8MHx8&auto=format&fit=crop&w=900&q=60"
                          alt="">
                     <a>
                         <div class="mask rgba-white-slight"></div>
@@ -34,8 +34,8 @@
                     <a style="text-decoration: none;color: black"href="{{url_for('views.informazioni_alveare',alveare_id=elemento.Alveare.id)}}"><h5 class="card-title">{{elemento.Alveare.nome}}</h5></a>
                     <br>
                     <p class="card-text">Tempo adozione: {{elemento.TicketAdozione.tempo_adozione}} Mesi</p>
-                    <p class="card-text">Data Inizio: {{elemento.TicketAdozione.data_inizio_adozione}}</p>
-                    <p class="card-text">Data Scadenza: {{elemento.TicketAdozione.data_fine_adozione()}}</p>
+                    <p class="card-text">Data Inizio: {{elemento.TicketAdozione.data_inizio_adozione.strftime("%m-%d-%Y, %H:%M:%S") }}</p>
+                    <p class="card-text">Data Scadenza: {{elemento.TicketAdozione.data_fine_adozione().strftime("%m-%d-%Y, %H:%M:%S")}}</p>
                     <br>
                     <div class="progress">
                         <div class="progress-bar progress-bar-striped progress-bar-animated  bg-warning"
