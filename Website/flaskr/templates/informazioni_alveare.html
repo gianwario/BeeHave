@@ -2,6 +2,7 @@
 <html lang="it">
 <head>
 
+    <link rel="stylesheet" href="{{url_for('static', filename='css/e-commerce_card.css')}}">
     <link rel="stylesheet" href="{{url_for('static', filename='css/info_prod.css')}}">
     {% extends "base.html"%}
     <title>
@@ -41,6 +42,8 @@
                         <br>
                         {% if alveare.popolazione != None %}
                         <br><br>
+                         <span style="margin: 0">  Covata Compatta: <i style="color: orange">{%if alveare.covata_compatta %} si {%else%}no {%endif%}</i></span><br>
+
                             <span style="margin: 0">  Popolazione: <i style="color: orange">{{alveare.popolazione}}</i></span><br>
                             <span style="margin: 0">  Polline:<i style="color: orange"> {{alveare.polline}}</i></span><br>
                             <span style="margin: 0">  Stato Cellette: <i style="color: orange">{{alveare.stato_cellette}}</i></span><br>
@@ -96,26 +99,42 @@
                                                                                   color: white;
                                                                                   font-size: 0.875rem;
                                                                                   cursor: pointer;">Adotta</button>
-                                     <div class="form-outline mb-4">
+
+
+
+                                </form>
+
+                            </div>
+                            {% endif %}
+                     <div class="form-outline mb-4">
                                 {% with messages = get_flashed_messages(category_filter=["success"]) %}
                                     {% if messages %}
                                         <p style="color:green">{{ messages[0] }}</p>
                                     {% endif %}
                                 {% endwith %}
-                            </div>
-                                </form>
-
-                            </div>
-                            {% endif %}
+ </div>
                         {% else %}
+
                         <br><br>
                         <form action="{{url_for('views.modifica_stato', alveare_id=alveare.id)}}">
-                              <button type="submit">
-                                Aggiorna Stato
+                              <button class="add-to-cart-button"><a style="text-decoration: none;color:white">
+                               Aggiorna Stato</a>
                               </button>
                             </form>
                         {% endif %}
-                    {% endif %}
+
+                    {%else%}
+
+                                         <div class="buttons d-flex flex-row mt-5 gap-3">
+                                             <button type="submit" value="acquista" class="btn" style="padding: 10px 20px;
+                                                                                  background-color: orange;
+                                                                                  border: none;
+                                                                                  border-radius: 5px;
+                                                                                  color: white;
+                                                                                  font-size: 0.875rem;
+                                                                                  cursor: pointer;"><a href="{{url_for('views.login_page')}}" style="text-decoration: none;color: white">Adotta</a> </button>
+                                         </div>
+              {%endif%}
                 </div>
             </div>
         </div>

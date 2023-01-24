@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="{{url_for('static', filename='css/stile_catalogo.css')}}">
+        <link rel="stylesheet" href="{{url_for('static', filename='css/500page.css')}}">
     {% extends "base.html"%}
     <title>
         {% block title %}Catalogo Alveari{% endblock %}
@@ -11,8 +12,37 @@
 <body>
 {% block content %}
 <br><br>
-<h1 style="text-align: center">I Tuoi Alveari</h1>
 <div class="container">
+    {% if alveari_adottati | length < 1 %}
+    <section class="pageerror">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="col-sm-100 col-sm-offset-1  text-center">
+                        <div class="four_zero_four_bg">
+                            <h1 class="text-center ">500</h1>
+
+
+                        </div>
+
+                        <div class="contant_box_500">
+                            <h3 class="h2">
+                                OPS!
+                                Sembra che non ci siano alveari adottati!
+                            </h3>
+
+                            <p>Vai ad adottare qualche alveare!</p>
+
+                            <a href="{{url_for('views.mostra_alveari')}}" class="link_500">Mostra alveari</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    {% else %}
+<h1 style="text-align: center">I Tuoi Alveari</h1>
+
 
     <div class="row">
         {% for elemento in alveari_adottati %}
@@ -50,6 +80,7 @@
         </div>
         {% endfor %}
     </div>
+    {% endif %}
 </div>
 {% endblock %}
 </body>

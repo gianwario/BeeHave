@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="{{url_for('static', filename='css/ticket_assistenza.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/500page.css')}}">
       {% extends "base.html"%}
 
         {% block title %}
@@ -14,9 +15,46 @@
 <body>
 
 {% block content %}
-<br><br><br>
+<br>
 
+    {% if tickets_assistenza | length < 1 %}
+    <section class="pageerror">
 
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="col-sm-100 col-sm-offset-1  text-center">
+                        <div class="four_zero_four_bg">
+                            <h1 class="text-center ">I Tuoi Ticket assistenza</h1>
+
+                        </div>
+
+                        <div class="contant_box_500">
+                            <h3 class="h2">
+                                OPS!
+                                Non ci sono ticket assistenza.
+                            </h3>
+{%if session['isApicoltore']%}
+                            {%if not current_user.assistenza%}
+                            <p>Crea la tua area assistenza e fatti conoscere dai tuoi clienti</p>
+                            <a href="{{url_for('views.crea_area_assistenza_page')}}" class="link_500">Crea la tua area assistenza</a>
+                      {%else%}
+                            <p>Nessuno dei clienti ha richiesto assistenza</p>
+                            <a href="{{url_for('views.home')}}" class="link_500">Torna alla home </a>
+                            {%endif%}
+                            {%else%}
+                            <p>Hai bisogno di aiuto? Contatta i tuoi apicoltori preferiti!</p>
+
+                            <a href="{{url_for('views.mostra_lista_assistenti')}}" class="link_500">Mostra lista assistenti</a>
+                       {%endif%}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    {% else %}
+<br><br>
  <h1 style="text-align: center"> I tuoi ticket assistenza</h1>
 
 
@@ -57,6 +95,7 @@
      </div>
     {% endfor %}
             </div>
+{%endif%}
 <br><br><br><br><br>
 {% endblock %}
 </body>
