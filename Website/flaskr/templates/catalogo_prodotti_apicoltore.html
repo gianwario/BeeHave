@@ -54,7 +54,7 @@
         <div class="product-container ">
             {% for prodotto in prodotti_in_vendita %}
             <div class="product-card shadow-lg">
-                <img class="product-image" src="../static/images/honey_pot.jpg"
+                <img class="product-image" src="https://images.unsplash.com/photo-1558642452-9d2a7deb7f62?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Nnx8bWllbGV8ZW58MHx8MHx8&auto=format&fit=crop&w=900&q=60"
                      alt="">
                 <h3 class="product-name"><strong> {{prodotto.nome}}</strong>
                 </h3>
@@ -69,10 +69,13 @@
                     Visualizza Prodotto</a></button>
                 {% if prodotto.quantita>0 %}
                 <br>
-
-                <a href="{{url_for('gv.elimina_prodotto', id_prodotto=prodotto.id, id_apicoltore=current_user.id)}}">
-                    <button class="btn btn-danger" style="margin-top: 20px;">Elimina Prodotto</button>
-                </a>
+                <form action="{{url_for('gv.elimina_prodotto')}}" method="post">
+                    <input hidden name="id_apicoltore" value="{{prodotto.id_apicoltore}}">
+                    <input hidden name="id_prodotto" value="{{prodotto.id}}">
+                    <a>
+                        <button class="btn btn-danger" style="margin-top: 20px;">Elimina Prodotto</button>
+                    </a>
+                </form>
                 {% endif %}
 
             </div>

@@ -10,7 +10,7 @@ from ..model.TicketAssistenza import TicketAssistenza
 """
     Gestisce la creazione dell'area di assistenza da parte di un apicoltore
     pre: apicoltore is not None
-    post: context apicoltore::assistenza==True
+    post: apicoltore.assistenza==True
 """
 
 
@@ -73,6 +73,7 @@ def richiedi_assistenza(nome, descrizione, id_apicoltore, cliente):
 
 """
     Restituisce il numero di ticket di assistenza di un apicoltore
+    pre: get_apicoltore_by_id(id_apicoltore) is not None
 """
 
 
@@ -82,6 +83,7 @@ def get_numero_ticket_assistenza_apicoltore(id_apicoltore):
 
 """
     Restituisce il numero di ticket di assistenza di un cliente
+    pre: get_cliente_by_id(id_acliente) is not None
 """
 
 
@@ -91,6 +93,7 @@ def get_numero_ticket_assistenza_cliente(id_cliente):
 
 """
     Restituisce tutti i ticket di assistenza di un apicoltore
+    pre: get_apicoltore_by_id(id_apicoltore) is not None
 """
 
 
@@ -100,6 +103,7 @@ def get_ticket_assistenza_by_apicoltore(id_apicoltore):
 
 """
     Restituisce tutti i ticket di assistenza di un cliente
+    pre: get_cliente_by_id(id_cliente) is not None
 """
 
 
