@@ -31,9 +31,9 @@
                     </li>
                     <li class="nav-item">{% if current_user.assistenza%}<a class="nav-link"
                                                                            href="{{url_for('views.visualizza_richieste_assistenza')}}">
-                        <i class="fa fa-calendar"></i> Visualizza le tue richieste di assistenza <span
+                        <i class="fa fa-calendar"></i> Visualizza le tue richieste di assistenza <p
                             class="badge text-bg-warning pull-right r-activity"
-                            style="text-align: center; ">{{ticket}} </span></a>{%else%}<a class="nav-link"
+                            style="text-align: center; ">{{ticket}} </p></a>{%else%}<a class="nav-link"
                                                                                           href="{{url_for('views.crea_area_assistenza_page')}}">
                         <i class="fa fa-calendar"></i> Crea area
                         assistenza</a>{%endif%}
@@ -111,7 +111,7 @@
             <div class="single_advisor_profile wow fadeInUp" data-wow-delay="0.2s"
                  style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;">
                 <!-- Team Thumb-->
-                <div class="advisor_thumb"><img src="../static/images/alveare.jpg" alt="">
+                <div class="advisor_thumb"><img src="https://images.unsplash.com/photo-1508432116762-1f883098ed41?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTJ8fGFsdmVhcmV8ZW58MHx8MHx8&auto=format&fit=crop&w=900&q=60" alt="" style=" margin-left: -150% " >
                     <!-- Social Info-->
 
                 </div>
