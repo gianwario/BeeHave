@@ -17,9 +17,9 @@
     <br>
 <div class="product-card shadow-lg ">
     <div class="row">
-        <div class="col">
-            <form class="well form-horizontal " action="/crea_area_assistenza" method="POST" id="contact_form">
 
+        <div class="col">
+        <form class="well form-horizontal " action="/crea_area_assistenza" method="POST" id="contact_form">
             <br>
             <input type="hidden" value='{{id_apicoltore}}' name="id_apicoltore">
             <div class="form-group">
@@ -33,12 +33,10 @@
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-md-15 control-label" for="assistenza">Dichiaro di apparire nella lista degli apicoltori
-                    che forniscono assistenza
+                <label class="col-md-15 control-label" for="assistenza">Dichiaro il mio consenso per l'utilizzo dei miei dati personali
+                    ai fini della risoluzione delle richieste di assistenza.
                         <input type="checkbox" id="assistenza" name="assistenza" required/>
                 </label>
-
-
             </div>
 
             <div class="form-outline mb-4">
@@ -52,7 +50,7 @@
         </div>
             <div class="form-group col" >
                 <label class="col-md-4 control-label"></label>
-                <div class="col-md-4n "style="position:relative;top:20%;color:white;text-align: center;vertical-align:middle  " ><br>
+                <div class="col-md-4n" style="position:relative;top:20%;color:white;text-align: center;vertical-align:middle  " ><br>
                     <button  type="button" class="annullabtn btn btn-secondary btn-md" style="padding: 9px 20px;border: none;
   border-radius: 5px;"><a style="text-decoration: none; color:white "
                                                                 href="{{url_for('views.area_personale')}}">Annulla<span
@@ -68,9 +66,8 @@
     </div>
 </div>
 </div>
-</div>
 <br><br>
-</section>
+
 {% endblock %}
 
 </body>

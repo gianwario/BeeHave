@@ -69,6 +69,7 @@
                     Visualizza Prodotto</a></button>
                 {% if prodotto.quantita>0 %}
                 <br>
+
                 <a href="{{url_for('gv.elimina_prodotto', id_prodotto=prodotto.id, id_apicoltore=current_user.id)}}">
                     <button class="btn btn-danger" style="margin-top: 20px;">Elimina Prodotto</button>
                 </a>
