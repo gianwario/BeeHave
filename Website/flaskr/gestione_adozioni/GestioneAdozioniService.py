@@ -148,7 +148,7 @@ def get_ticket_adozione(cliente_id):
 
 """
     Restituisce i ticket di adozione di un alveare
-    pre: get_alvearee_by_id(id_alveare) is not None
+    pre: get_alveare_by_id(id_alveare) is not None
 """
 
 
