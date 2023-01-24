@@ -32,6 +32,10 @@
 
 /* --- dishes grid with five dishes --- */
 
+.dishes-title {
+  font-size: 20px;
+}
+
 .dishes h2 {
   margin-bottom: 40px;
   text-align: center;
@@ -46,6 +50,32 @@
   gap: 24px;
   justify-content: center;
 }
+
+@media screen and (max-width: 700px) {
+  .dishes-grid {
+    display: flex;
+    flex-direction: column;
+  }
+  
+}
+
+@media screen and (max-width: 900px) {
+  .dishes-content {
+    font-size: 14px !important;
+    top: 30% !important;
+  }
+  
+}
+
+@media screen and (max-width: 500px) {
+  .dishes-content {
+    font-size: 12px !important;
+    top:15% !important;
+    padding-left: 6% !important;
+  }
+  
+}
+
 
 .dishes-item-1__big {
   grid-area: 1 / 1 / 3 / 3;
@@ -99,9 +129,6 @@
     display: none;
   }
 
-  .dishes-grid {
-    grid-template-columns: repeat(auto-fit, minmax(75px, 120px));
-  }
 
   .plates {
     margin: 0 14%;
@@ -183,10 +210,10 @@ header .video-container::after {
 
 @media (max-width: 500px) {
   header .container .showcase h1 {
-    font-size: 2.1rem;
+    font-size: 14px;
   }
   header .container .showcase p {
-    font-size: 0.85rem;
+    font-size: 12px;
     width: 300px;
   }
 }
@@ -310,7 +337,7 @@ a, a:hover {
     flex-wrap: inherit;
   }
   .postcard .postcard__title {
-    font-size: 2rem;
+    font-size: 12px;
   }
   .postcard .postcard__tagbox {
     justify-content: start;
@@ -508,7 +535,7 @@ body {
 .projcard {
 	position: relative;
 	width: 100%;
-	height: 400px;
+  min-height: 400px;
 	margin-bottom: 40px;
 	border-radius: 10px;
 	background-color: #fff;
@@ -537,42 +564,92 @@ body {
 	background-image: linear-gradient(-250deg, #424242, transparent 50%);
 }
 .projcard-innerbox {
-	position: absolute;
-	top: 0;
-	right: 0;
-	bottom: 0;
-	left: 0;
+  display: flex;
+  flex-direction: row;
+}
+.projcard:nth-child(3n) .projcard-bar {
+  margin-left: 402px;
+  }
+.projcard:nth-child(1n) .projcard-bar {
+    margin-left: 402px;
+}
+.projcard:nth-child(2n) .projcard-bar {
+      margin-left: 0px;
 }
 .projcard-img {
-	position: absolute;
 	height: 400px;
 	width: 400px;
 	top: 0;
 	left: 0;
 	transition: transform 0.2s ease;
 }
-.projcard:nth-child(2n) .projcard-img {
-	left: initial;
-	right: 0;
+.projcard:nth-child(2n) .projcard-innerbox {
+display: flex;
+flex-direction: row-reverse;
 }
 .projcard:hover .projcard-img {
+  z-index: 7;
 	transform: scale(1.05) rotate(1deg);
 }
 .projcard:hover .projcard-bar {
+  z-index: 0;
 	width: 600px;
 }
 .projcard-textbox {
-	position: absolute;
-	top: 7%;
-	bottom: 7%;
-	left: 430px;
-	width: calc(100% - 600px);
-	font-size: 17px;
+	padding: 30px 30px;
+	width: 90%;
+	font-size: 15px;
 }
-.projcard:nth-child(2n) .projcard-textbox {
-	left: initial;
-	right: 490px;
+.carousel-inner button {
+  margin-top: 1rem;
+  background-color: black;
+  opacity: 70%;
+  color: #fff;
+  border: none;
+  outline: none;
+  padding: 1rem 1.5rem;
+  font-size: 1rem;
+  border-radius: 6px;
+  cursor: pointer;
 }
+@media screen and (max-width:800px) {
+  .carousel-caption p{
+padding-top: -200%;
+   font-size: 0.7rem;
+
+ }
+  
+  .carousel-caption {
+    top: 30%;
+    position: absolute;
+  }
+  .carousel-caption h1{
+    top:100%;
+    position: absolute;
+    padding-top: -80%;
+  }
+  .projcard-innerbox {
+    display: flex;
+    flex-direction: column;
+  }
+  .projcard:nth-child(2n) .projcard-innerbox {
+    display: flex;
+    flex-direction: column;
+    }
+    .projcard-img {
+      width: 100%;
+    }
+    .projcard:nth-child(3n) .projcard-bar {
+      margin-left: 0px;
+      }
+    .projcard:nth-child(1n) .projcard-bar {
+        margin-left: 0px;
+    }
+    .projcard:nth-child(2n) .projcard-bar {
+          margin-left: 0px;
+    }
+}
+
 .projcard-textbox::before,
 .projcard-textbox::after {
 	content: "";
@@ -602,11 +679,12 @@ body {
 }
 .projcard-title {
 	font-family: 'Voces', 'Open Sans', arial, sans-serif;
-	font-size: 40px;
+	font-size: 30px;
 color: black;
 }
 
 .projcard-bar {
+  position: absolute;
 	left: -2px;
 	width: 50px;
 	height: 5px;
@@ -626,6 +704,7 @@ color: black;
 .projcard-customcolor::before { background-image: linear-gradient(-70deg, var(--projcard-color), transparent 50%); }
 .projcard-customcolor:nth-child(2n)::before { background-image: linear-gradient(-250deg, var(--projcard-color), transparent 50%); }
 .projcard-description {
+  margin-top: 20px;
 	z-index: 10;
 	font-size: 16px;
 	color: #424242;
@@ -674,7 +753,6 @@ color: black;
 	right: -10px;
 	top: 0;
 }
-
 
 
 
