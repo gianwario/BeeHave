@@ -24,12 +24,15 @@ def inserimento_prodotto():
     return mostra_articoli_in_vendita(current_user.id)
 
 
-@gv.route('/elimina_prodotto/<int:id_prodotto>/<int:id_apicoltore>', methods=['POST', 'GET'])
+@gv.route('/elimina_prodotto', methods=['POST', 'GET'])
 @login_required
-def elimina_prodotto(id_prodotto, id_apicoltore):
-    if session['isApicoltore'] and id_apicoltore == current_user.id:
-        cancella_prodotto(id_prodotto)
-        return mostra_articoli_in_vendita(current_user.id)
+def elimina_prodotto():
+    if request.method == 'POST' and session['isApicoltore']:
+        id_apicoltore = request.form.get("id_apicoltore")
+        if id_apicoltore != current_user.id:
+            id_prodotto = request.form.get("id_prodotto")
+            cancella_prodotto(id_prodotto)
+    return mostra_articoli_in_vendita(current_user.id)
 
 
 @gv.route('/acquista_prodotto', methods=['POST', 'GET'])

@@ -75,20 +75,21 @@ def registra_utente(nome, cognome, indirizzo, citta, cap, telefono, email, passw
         elif controlla_password(password, conferma_password):
             if not isinstance(is_apicoltore, str) or not is_apicoltore.isdigit():
                 flash("is_apicoltore non è valido")
-            elif int(is_apicoltore):
-                user = Apicoltore(nome=nome, cognome=cognome, indirizzo=indirizzo, citta=citta, cap=cap,
-                                  telefono=telefono,
-                                  email=email, assistenza=0, password=generate_password_hash(password, method='sha256'))
             else:
-                user = Cliente(nome=nome, cognome=cognome, indirizzo=indirizzo, citta=citta, cap=cap,
-                               telefono=telefono,
-                               email=email, password=generate_password_hash(password, method='sha256'))
-            db.session.add(user)
-            db.session.commit()
-            session['isApicoltore'] = is_apicoltore
-            login_user(user)
-            flash('Registrazione avvenuta con successo!', category='success')
-            return True
+                if int(is_apicoltore):
+                    user = Apicoltore(nome=nome, cognome=cognome, indirizzo=indirizzo, citta=citta, cap=cap,
+                                      telefono=telefono, email=email, assistenza=0,
+                                      password=generate_password_hash(password, method='sha256'))
+                else:
+                    user = Cliente(nome=nome, cognome=cognome, indirizzo=indirizzo, citta=citta, cap=cap,
+                                   telefono=telefono,
+                                   email=email, password=generate_password_hash(password, method='sha256'))
+                db.session.add(user)
+                db.session.commit()
+                login_user(user)
+                session['isApicoltore'] = bool(int(is_apicoltore))
+                flash('Registrazione avvenuta con successo!', category='success')
+                return True
     return False
 
 
