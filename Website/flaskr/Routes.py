@@ -164,3 +164,4 @@ def visualizza_info_ticket(ticket_id):
 @login_required
 def mostra_lista_ticket_assistenza():
     return render_template('ticket_assistenza.html')
+
