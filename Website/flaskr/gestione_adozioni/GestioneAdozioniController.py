@@ -3,6 +3,7 @@ from email.message import EmailMessage
 
 from flask import Blueprint, request, session
 from flask_login import login_required, current_user
+from smtplib import *
 
 from Website.flaskr.Routes import mostra_alveari, modifica_stato, home, informazioni_alveare, inserimento_alveare_page
 from Website.flaskr.gestione_adozioni.GestioneAdozioniService import inserisci_alveare, adozione_alveare, \
@@ -84,18 +85,22 @@ def adotta_alveare(id_apicoltore, id_cliente):
             smtp.starttls()
             smtp.ehlo()
             smtp.login(email_sender, email_password)
-            smtp.sendmail(email_sender, apicoltore.email, em.as_string())
-
-            smtp.quit()
-            em.clear()
+            try:
+                smtp.sendmail(email_sender, cliente.email, em.as_string())
+                smtp.quit()
+                em.clear()
+            except SMTPResponseException:
+                print("Errore in una delle e-mail di apicoltore o cliente.")
+                smtp.quit()
+                em.clear()
             """
                 Email Cliente              
             """
             subject_client = 'Alveare adottato con successo!'
             body_client = ('Grazie per l\'acquisto!\nEcco un resoconto della tua adozione di "' + alveare.nome
-                           + ":\nPrezzo: " + prezzo + " €\nPercentuale: " + percentuale
+                           + '":\nPrezzo: ' + prezzo + " €\nPercentuale: " + percentuale
                            + "%\nTempo: " + tempo_adozione
-                           + " mesi\n\n Acquistato da: " + apicoltore.nome + "(" + apicoltore.email + ")" +
+                           + " mesi\n\n Adottato da: " + apicoltore.nome + "(" + apicoltore.email + ")" +
                            "\n Grazie per aver supportato questo apicoltore e le sue api!")
             em['From'] = email_sender
             em['To'] = cliente.email
@@ -109,10 +114,14 @@ def adotta_alveare(id_apicoltore, id_cliente):
             smtp.starttls()
             smtp.ehlo()
             smtp.login(email_sender, email_password)
-            smtp.sendmail(email_sender, cliente.email, em.as_string())
-
-            smtp.quit()
-            em.clear()
+            try:
+                smtp.sendmail(email_sender, cliente.email, em.as_string())
+                smtp.quit()
+                em.clear()
+            except SMTPResponseException:
+                print("Errore in una delle e-mail di apicoltore o cliente.")
+                smtp.quit()
+                em.clear()
 
             return informazioni_alveare(id_alveare)
     return mostra_alveari()
