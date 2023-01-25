@@ -54,9 +54,30 @@ margin: 0;
   width: 90%;
 }
 
+@media screen and (min-width:801px) {
+  #navbar {
+    display: block;
+  }
+}
+
+@media screen and (max-width:800px) {
+  #navbar {
+    display: none;
+  }
+}
 
 
 
+@media screen and (min-width:801px) {
+  #mobile-navbar {
+    display: none;
+  }
+}
 
+@media screen and (max-width:800px) {
+  #mobile-navbar {
+    display: block;
+  }
+}
 
 

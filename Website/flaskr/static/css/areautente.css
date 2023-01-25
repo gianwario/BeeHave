@@ -415,6 +415,9 @@ background:#eee;
         height: 160px;
         bottom: -90px;
     }
+    .advisor_thumb img{
+        padding-left: 90%;
+    }
 }
 .single_advisor_profile .advisor_thumb .social-info {
     position: absolute;

@@ -35,9 +35,9 @@
                <i class="bi bi-bookmark text-success-m2 text-110 mr-2 mt-1"></i>
                <span>
                    {% if session['isApicoltore'] %}
-                   <span class="ml-n15 align-text-bottom"> Contatti cliente: <br>{{cliente.telefono}} / {{cliente.email}} <br></span>
+                   <span class="ml-n15 align-text-bottom"> Contatto cliente: {{cliente.email}}</span><br>
                    {% else %}
-                   <span class="ml-n15 align-text-bottom"> Contatti apicoltore: <br>{{apicoltore.telefono}} / {{apicoltore.email}}<br></span>
+                   <span class="ml-n15 align-text-bottom"> Contatto apicoltore: {{apicoltore.email}}</span><br>
                    {% endif %}
 
                </span>
