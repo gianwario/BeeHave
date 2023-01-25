@@ -60,7 +60,7 @@ def acquista_prodotto(id_apicoltore, id_cliente):
             if not session['isApicoltore']:
                 subject = 'Prodotto venduto!'
                 body = ('Ciao ' + apicoltore.nome + ',\nIl tuo articolo "' + prodotto.nome + '" è stato venduto.\n'
-                                                                                             'I dati dell\'acquirente sono:\n' + cliente.nome + ", " + cliente.cognome + "\n" + cliente.email
+                        'I dati dell\'acquirente sono:\n' + cliente.nome + ", " + cliente.cognome + "\n" + cliente.email
                         + "\n" + cliente.telefono + "\n\nTi invitiamo a contattare il Cliente per accordarvi "
                                                     "sulle modalità di pagamento.")
                 invia_email(subject, body, apicoltore.email)
@@ -71,7 +71,7 @@ def acquista_prodotto(id_apicoltore, id_cliente):
                 body_client = ('Grazie per l\'acquisto!\nEcco un resoconto del tuo acquisto di ' + prodotto.nome
                                + ":\nPrezzo: " + prezzo + " €\nQuantità: " + quantita + "\nTotale: " + str(totale)
                                + " €\n\n Acquistato da: " + apicoltore.nome + "(" + apicoltore.email + ")" +
-                               "\n Grazie per aver supportato questo apicoltore e le sue api!"
+                               "\n Grazie per aver supportato questo apicoltore e le sue api!")
 
                 invia_email(subject_client, body_client, cliente.email)
                 return info_articolo(id_prodotto)
