@@ -11,10 +11,6 @@ from Website.flaskr.gestione_vendita.GestioneVenditaService import inserisci_pro
 
 gv = Blueprint('gv', __name__)
 
-email_sender = 'beehaveofficial@gmail.com'
-email_password = "aosryhipaiuafdev"
-em = EmailMessage()
-
 
 @gv.route('/inserimento_prodotto', methods=['GET', 'POST'])
 @login_required
@@ -58,6 +54,9 @@ def acquista_prodotto():
 
         if acquisto_prodotto(id_prodotto=id_prodotto, quantita=quantita, cliente=current_user):
             if not session['isApicoltore']:
+                """
+                    Email Apicoltore
+                """
                 subject = 'Prodotto venduto!'
                 body = ('Ciao ' + apicoltore.nome + ',\nIl tuo articolo "' + prodotto.nome + '" è stato venduto.\n'
                         'I dati dell\'acquirente sono:\n' + cliente.nome + ", " + cliente.cognome + "\n" + cliente.email
