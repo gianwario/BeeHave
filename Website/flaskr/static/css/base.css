@@ -1,0 +1,83 @@
+body{
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Track */
+::-webkit-scrollbar {
+  width: 7px;
+}
+
+::-webkit-scrollbar-track {
+  background: hsl(25, 100%, 55%);
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #33383c;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: #fff;
+  margin: 0 20px;
+  font-weight: 600;
+  font-size: 1.05rem;
+
+
+  position: relative;
+}
+.navitm{
+  width: 100%;
+margin: 0;
+}
+.nav-link span::after {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  background-color: hsl(25, 100%, 55%);
+  width: 0%;
+  content: "";
+  height: 4px;
+  transition: all 0.5s;
+}
+
+.nav-link span:hover::after {
+  width: 90%;
+}
+
+@media screen and (min-width:801px) {
+  #navbar {
+    display: block;
+  }
+}
+
+@media screen and (max-width:800px) {
+  #navbar {
+    display: none;
+  }
+}
+
+
+
+@media screen and (min-width:801px) {
+  #mobile-navbar {
+    display: none;
+  }
+}
+
+@media screen and (max-width:800px) {
+  #mobile-navbar {
+    display: block;
+  }
+}
+
+

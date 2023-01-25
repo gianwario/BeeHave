@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="{{url_for('static', filename='css/e-commerce_card.css')}}">
+        <link rel="stylesheet" href="{{url_for('static', filename='css/500page.css')}}">
+        {% extends "base.html"%}
+        <title>
+            {% block title %}
+            Catalogo Prodotti
+            {% endblock %}
+        </title>
+    </head>
+<body>
+
+{% block content %}
+
+<!--For Page-->
+<div class="page">
+
+    {% if prodotti_in_vendita | length < 1 %}
+    <section class="pageerror">
+
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="col-sm-100 col-sm-offset-1  text-center">
+                        <div class="four_zero_four_bg">
+                            <h1 class="text-center ">I Tuoi Prodotti</h1>
+
+                        </div>
+
+                        <div class="contant_box_500">
+                            <h3 class="h2">
+                                OPS!
+                                Sembra che non ci siano prodotti disponibili!
+                            </h3>
+
+                            <p>Inizia subito, metti in vendita del miele!</p>
+
+                            <a href="{{url_for('views.inserimento_prodotto_page')}}" class="link_500">Inserisci
+                                Prodotti</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    {% else %}
+    <br><br>
+    <h1 style="text-align: center">I Tuoi Prodotti</h1>
+    {% endif %}
+    <div class="row">
+        <div class="product-container ">
+            {% for prodotto in prodotti_in_vendita %}
+            <div class="product-card shadow-lg">
+                <img class="product-image" src="https://images.unsplash.com/photo-1558642452-9d2a7deb7f62?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Nnx8bWllbGV8ZW58MHx8MHx8&auto=format&fit=crop&w=900&q=60"
+                     alt="">
+                <h3 class="product-name"><strong> {{prodotto.nome}}</strong>
+                </h3>
+                <p class="product-description"> {{prodotto.descrizione}}
+                </p>
+
+
+                <p class="product-price">{{'%0.2f'|format(prodotto.prezzo|float)}}€</p>
+
+                <button class="add-to-cart-button"><a style="text-decoration: none;color:white"
+                                                      href="{{url_for('views.info_articolo',prodotto_id=prodotto.id)}}">
+                    Visualizza Prodotto</a></button>
+                {% if prodotto.quantita>0 %}
+                <br>
+                <form action="{{url_for('gv.elimina_prodotto')}}" method="post">
+                    <input hidden name="id_apicoltore" value="{{prodotto.id_apicoltore}}">
+                    <input hidden name="id_prodotto" value="{{prodotto.id}}">
+                    <a>
+                        <button class="btn btn-danger" style="margin-top: 20px;">Elimina Prodotto</button>
+                    </a>
+                </form>
+                {%else%}
+                <br>
+                <p style="color: red">Prodotto non disponibile alla vendita.</p>
+                {% endif %}
+
+
+            </div>
+
+
+            {% endfor %}
+        </div>
+    </div>
+</div>
+<br>
+{% endblock %}
+</body>
+</html>
+    

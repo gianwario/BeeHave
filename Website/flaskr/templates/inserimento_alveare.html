@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {%extends "base.html" %}
+    <title>
+        {%block title%}Inserimento Alveare{%endblock%}
+    </title>
+</head>
+<body>
+{% block content%}
+<section class="background-radial-gradient overflow-hidden">
+    <style>
+
+        .background-radial-gradient {
+            background-image: url("https://images.unsplash.com/photo-1498936178812-4b2e558d2937?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80");
+            background-size: cover;
+        }
+
+        .bg-glass {
+
+            background-color: hsla(0, 0%, 100%, 0.9) !important;
+            backdrop-filter: saturate(600%) blur(25px);
+        }
+
+        input[type=button], input[type=submit], input[type=reset], input[type=file] {
+            background-color: orange;
+            opacity: 70%;
+            border: none;
+            border-radius: 10px 10px 10px 10px;
+            color: black;
+            padding: 7px 40px;
+            text-decoration: none;
+            margin: 4px 2px;
+            cursor: pointer;
+        }
+
+    </style>
+
+    <div class="container px-4 py-5 px-md-5 text-center text-lg-start my-5">
+        <div class="row gx-lg-5 align-items-high mb-5">
+            <div class="col-lg-6 mb-5 mb-lg-0" style="z-index: 10">
+                <h1 class="my-5 display-3 fw-bold ls-tight" style="color: black">
+                    Inserisci qui <br/>
+                    <span style="color: orange">il tuo alveare!</span>
+                </h1>
+            </div>
+
+
+            <div class="col-lg-6 mb-5 mb-lg-0 position-relative">
+                <div id="radius-shape-1" class="position-absolute rounded-circle shadow-5-strong"></div>
+                <div id="radius-shape-2" class="position-absolute shadow-5-strong"></div>
+
+                <div class="card bg-glass">
+                    <div class="card-body px-4 py-5 px-md-5">
+
+                        <form action="/inserimento_alveare" enctype="multipart/form-data" method="post">
+                            <div class="row">
+                                <div class="col-md-6 mb-4">
+                                    <div class="form-outline">
+                                        <label class="form-label" for="nome">Inserire nome alveare: </label><br>
+                                        <input
+                                                id="nome"
+                                                name="nome"
+                                                type="text"
+                                                placeholder="Alveare Daisy"
+                                                required
+                                        />
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-4">
+                                    <div class="form-outline">
+                                        <label for="produzione">Inserire quantit&#224 di miele in grammi prodotto
+                                            dall'alveare:</label>
+                                        <input type="radio" id="produzione" name="produzione" value="500">
+                                        <label for="produzione">500</label>
+                                        <input type="radio" id="produzione2" name="produzione" value="1000">
+                                        <label for="produzione">1000</label>
+                                        <input type="radio" id="produzione3" name="produzione" value="1500">
+                                        <label for="produzione">1500</label>
+                                        <input type="radio" id="produzione4" name="produzione" value="2000">
+                                        <label for="produzione">2000</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 mb-4">
+                                    <div class="form-outline">
+                                        <label for="numero_api">Inserire il numero di api:</label><br>
+                                        <input
+                                                type="number"
+                                                id="numero_api"
+                                                name="numero_api"
+                                                min="500"
+                                                max="4000"
+                                                step="500"
+                                                required/>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-4">
+                                    <div class="form-outline">
+                                        <label for="tipo_miele">Inserire tipo miele: </label>
+                                        <input
+                                                id="tipo_miele"
+                                                name="tipo_miele"
+                                                type="text"
+                                                placeholder="Millefiori"
+                                                required
+                                        />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 mb-4">
+                                    <div class="form-outline">
+                                        <label for="prezzo">Inserire prezzo: </label><br>
+                                        <input
+                                                id="prezzo"
+                                                min="0"
+                                                name="prezzo"
+                                                type="number"
+                                                step="0.01"
+                                                placeholder="25.40"
+                                                required
+                                        />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 mb-4">
+                                    <div class="form-outline">
+                                        <label for="tipo_fiore">Inserire il nome del fiore impollinato: </label>
+                                        <input
+                                                id="tipo_fiore"
+                                                name="tipo_fiore"
+                                                type="text"
+                                                placeholder="Fiore di Calendula"
+                                                required
+                                        />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-outline mb-4">
+                                {% with messages = get_flashed_messages(category_filter=["error"]) %}
+                                {% if messages %}
+                                <p style="color:red">{{ messages[0] }}</p>
+                                {% endif %}
+                                {% endwith %}
+                            </div>
+                            <div style="text-align:center;">
+                                <br>
+                                <input type="submit" value="Conferma Inserimento"/> <input type="reset"
+                                                                                           value="Cancella">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+</body>
+</html>

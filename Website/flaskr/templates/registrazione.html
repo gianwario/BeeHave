@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/form.css')}}">
+    {% extends "base.html"%}
+    <title>
+        {% block title %}Registrazione{% endblock %}
+    </title>
+</head>
+<body>
+{% block content %}
+<!-- Section: Design Block -->
+<section class="background-radial-gradient overflow-hidden "
+         style="background-image: url('https://www.3bee.com/static/e151143c0597c5b57e0cb57fe694605d/4806c/Apicoltore_sensore_mano.jpg')">
+    <div class="container px-4 py-5 px-md-5 text-hight text-lg-start my-5">
+        <div class="row gx-lg-5 align-items-high mb-5">
+            <div class="col-lg-6 mb-5 mb-lg-0" style="z-index: 10">
+                <h1 class="my-5 display-5 fw-bold ls-tight" style="color:black">
+                    Vuoi entrare a far parte del team di BeeHave? <br/>
+
+                </h1>
+                <p class="mb-4 opacity-70" style="color: white">
+                    Ti diamo la possibilità di partecipare attivamente al nostro movimento
+                    mettendo a disposizione della comunità le tue competenze.
+                    <p style="color:white">Diventa nostro partner e
+proteggi la biodiversità del nostro pianeta. <p>
+                </p>
+            </div>
+            <div class="col-lg-6 mb-5 mb-lg-0 position-relative">
+                <div class="card bg-glass">
+                    <div class="card-body px-4 py-5 px-md-5">
+
+                        <form id="form" method="post" enctype="multipart/form-data" action="/registrazione">
+
+                            <div class="row">
+                                <div class="col-md-6 mb-4">
+                                    <div class="form-outline">
+                                        <input type="text" name="nome" id="nome" class="form-control "
+                                               placeholder="Nome" required/>
+                                        <label class="form-label" for="nome"></label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-4">
+                                    <div class="form-outline">
+                                        <input type="text" name="cognome" id="cognome" class="form-control"
+                                               placeholder="Cognome" required/>
+                                        <label class="form-label" for="cognome"></label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 mb-4">
+                                    <div class="form-outline">
+                                        <input type="text" name="citta" id="citta" class="form-control"
+                                               placeholder="Città" required/>
+                                        <label class="form-label" for="citta"></label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-4">
+                                    <div class="form-outline">
+                                        <input type="text" name="indirizzo" id="indirizzo" class="form-control"
+                                               placeholder="Indirizzo" required/>
+                                        <label class="form-label" for="indirizzo"></label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 mb-4">
+                                    <div class="form-outline">
+                                        <input type="text" name="cap" id="cap" class="form-control" placeholder="CAP"
+                                               required/>
+                                        <label class="form-label" for="cap"></label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-4">
+                                    <div class="form-outline">
+                                        <input type="text" name="telefono" id="telefono" class="form-control"
+                                               placeholder="Numero di telefono" required/>
+                                        <label class="form-label" for="telefono"> </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Email input -->
+                            <div class="form-outline mb-4">
+                                <input type="email" name="email" id="email" class="form-control"
+                                       placeholder="Email address" required/>
+                                <label class="form-label" for="email"></label>
+                            </div>
+
+                            <!-- Password input -->
+                            <div class="form-outline mb-4">
+                                <input type="password" name="password" id="password" class="form-control"
+                                       placeholder="Password" required/>
+                                <label class="form-label" for="password"></label>
+                            </div>
+                            <div class="form-outline mb-4">
+                                <input type="password" name="cpwd" id="cpwd" class="form-control"
+                                       placeholder="Confirm password" required/>
+                                <label class="form-label" for="cpwd"></label>
+                            </div>
+                            <div class="form-outline mb-4">
+                                <label class="form-label" for="apicoltore">Apicoltore</label>
+                                <input type="radio" name="isApicoltore" id="apicoltore" value="1" checked/>
+                                <label class="form-label" for="cliente" style="padding-left: 10px">Cliente</label>
+                                <input type="radio" name="isApicoltore" value="0" id="cliente"/>
+
+                            </div>
+                            <div class="form-outline mb-4">
+                                <p>Se sei un apicoltore, registrandoti, accetti di rispettare la legge sulla disciplina dell’apicoltura 2004/313.</p>
+                                {% with messages = get_flashed_messages(category_filter=["error"]) %}
+                                    {% if messages %}
+                                        <p style="color:red">{{ messages[0] }}</p>
+                                    {% endif %}
+                                {% endwith %}
+                            </div>
+                            <div class="form-footer" style="text-align: center">
+                                <p>Hai già un account? <a class="form-link" style="color: darkorange"
+                                                          href="{{url_for('views.login_page')}}">Login</a></p>
+                            </div>
+                        </form>
+                        <div style="text-align: center">
+
+                            <input form="form" type="submit" name="register" id="register" value="REGISTRATI">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Section: Design Block -->
+{% endblock %}
+</body>
+
+
+</html>

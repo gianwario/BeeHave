@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+
+    <link rel="stylesheet" href="{{url_for('static', filename='css/e-commerce_card.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/info_prod.css')}}">
+    {% extends "base.html"%}
+    <title>
+        {% block title %}Informazioni Alveare {% endblock %}
+    </title>
+</head>
+<body>
+<style>
+    .btn:hover{
+          background-color: darkorange;
+    }
+</style>
+{% block content %}
+<br><br><br>
+ <h1 style="text-align: center">Informazioni Alveare</h1>
+<br>
+    <div class="card shadow-lg "style="width: 80%;margin-left: 8%">
+        <div class="row g-0">
+            <div class="col-md-6 border-end">
+                <div class="d-flex flex-column justify-content-center">
+                    <div class="main_image"><img src="https://images.unsplash.com/photo-1508432116762-1f883098ed41?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTJ8fGFsdmVhcmV8ZW58MHx8MHx8&auto=format&fit=crop&w=900&q=60" id="main_product_image"
+                                                 width="350" alt=""></div>
+
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="p-3 right-side">
+                    <br>
+                    <div class="d-flex justify-content-between align-items-center"><h3>{{alveare.nome}}</h3></div>
+                    <div class="mt-2 pr-3 content" ><p>Numero Api: {{alveare.numero_api}}</p></div>
+                    <p>Tipo miele: {{alveare.tipo_miele}}</p>
+                    <h3 style="color: orange">€{{'%0.2f'|format(alveare.prezzo|float)}}</h3>
+                    <div class="ratings  align-items-center">
+
+                        <span style="margin: 0">Email Apicoltore: {{apicoltore.email}}</span><br>
+                        <span style="margin: 0"> Percentuale disponibile all'adozione: {{alveare.percentuale_disponibile}}%</span>
+                        <br>
+                        {% if alveare.popolazione != None %}
+                        <br><br>
+                         <span style="margin: 0">  Covata Compatta: <i style="color: orange">{%if alveare.covata_compatta %} si {%else%}no {%endif%}</i></span><br>
+
+                            <span style="margin: 0">  Popolazione: <i style="color: orange">{{alveare.popolazione}}</i></span><br>
+                            <span style="margin: 0">  Polline:<i style="color: orange"> {{alveare.polline}}</i></span><br>
+                            <span style="margin: 0">  Stato Cellette: <i style="color: orange">{{alveare.stato_cellette}}</i></span><br>
+                            <span style="margin: 0">  Stato Larve: <i style="color: orange">{{alveare.stato_larve}}</i></span><br><br>
+                        {% else %}
+<br>
+                            <span style="margin: 0; color:darkorange"> Stato Alveare non disponibile</span>
+                        {% endif %}
+                    </div>
+                    {% if current_user.is_authenticated %}
+                        {%if not session['isApicoltore'] %}
+                            {% if alveare.percentuale_disponibile >= 25 %}
+
+                            <div class=" buttons d-flex flex-row mt-5 gap-3">
+                                <form action="/adotta_alveare" method="post" >
+
+                                    <label for="percentuale">Scegliere percentuale da adottare: </label> <br>
+                                    <input type="radio" id="percentuale" name="disp" value="25" required>
+                                    <label for="percentuale2">25%</label><br>
+                                    {% if alveare.percentuale_disponibile >= 50 %}
+                                    <input type="radio" id="percentuale2" name="disp" value="50" required>
+                                    <label for="percentuale3">50%</label><br>
+                                    {% if alveare.percentuale_disponibile >= 75 %}
+                                    <input type="radio" id="percentuale3" name="disp" value="75" required>
+                                    <label for="percentuale4">75%</label><br>
+                                    {% if alveare.percentuale_disponibile > 75 %}
+                                    <input type="radio" id="percentuale4" name="disp" value="100" required>
+                                    <label for="percentuale4">100%</label>
+                                    <br>
+                                    <br>
+                                    {% endif %}
+                                    {% endif %}
+                                    {% endif %}
+
+                                    <label class="d-flex flex-row " for="tempo">Scegliere Tempo di adozione: </label> <br>
+                                    <input type="radio"  id="tempo" name="tempo_adozione" value="3" required>
+                                    <label for="tempo">3 Mesi</label><br>
+                                    <input type="radio" id="tempo2" name="tempo_adozione" value="6" required>
+                                    <label for="tempo">6 Mesi</label><br>
+                                    <input type="radio" id="tempo3" name="tempo_adozione" value="9" required>
+                                    <label for="tempo">9 Mesi</label><br>
+                                    <input type="radio" id="tempo4" name="tempo_adozione" value="12" required>
+                                    <label for="tempo">12 Mesi</label>
+                                    <br>
+                                    <br>
+                                    <input type="hidden" name="percentuale_residua" value="{{alveare.percentuale_disponibile}}">
+                                    <input type="hidden" name="id_alv" value="{{alveare.id}}">
+                                    <input type="hidden" name="id_client" value="{{current_user.id}}">
+                                    <button type="submit" value="acquista" class="btn" style="padding: 10px 20px;
+                                                                                  background-color: orange;
+                                                                                  border: none;
+                                                                                  border-radius: 5px;
+                                                                                  color: white;
+                                                                                  font-size: 0.875rem;
+                                                                                  cursor: pointer;">Adotta</button>
+
+
+
+                                </form>
+
+                            </div>
+                            {% endif %}
+                     <div class="form-outline mb-4">
+                                {% with messages = get_flashed_messages(category_filter=["success"]) %}
+                                    {% if messages %}
+                                        <p style="color:green">{{ messages[0] }}</p>
+                                    {% endif %}
+                                {% endwith %}
+ </div>
+                        {% else %}
+
+                        <br><br>
+                        <form action="{{url_for('views.modifica_stato', alveare_id=alveare.id)}}">
+                              <button class="add-to-cart-button"><a style="text-decoration: none;color:white">
+                               Aggiorna Stato</a>
+                              </button>
+                            </form>
+                        {% endif %}
+
+                    {%else%}
+
+                                         <div class="buttons d-flex flex-row mt-5 gap-3">
+                                             <button type="submit" value="acquista" class="btn" style="padding: 10px 20px;
+                                                                                  background-color: orange;
+                                                                                  border: none;
+                                                                                  border-radius: 5px;
+                                                                                  color: white;
+                                                                                  font-size: 0.875rem;
+                                                                                  cursor: pointer;"><a href="{{url_for('views.login_page')}}" style="text-decoration: none;color: white">Adotta</a> </button>
+                                         </div>
+              {%endif%}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<br>
+{% endblock %}
+</body>
+</html>

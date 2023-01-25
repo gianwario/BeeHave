@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <link rel="stylesheet" href="{{url_for('static', filename='css/e-commerce_card.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/500page.css')}}">
+    {% extends "base.html"%}
+    <title>
+        {% block title %}Catalogo Alveari{% endblock %}
+    </title>
+</head>
+<body>
+
+{% block content %}
+<br><br><br>
+
+<div class="page">
+
+    {% if alveari_disponibili | length < 1 %}
+    <section class="pageerror">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="col-sm-100 col-sm-offset-1  text-center">
+                        <div class="four_zero_four_bg">
+                            <h1 class="text-center ">500</h1>
+
+
+                        </div>
+
+                        <div class="contant_box_500">
+                            <h3 class="h2">
+                                OPS!
+                                Sembra che non ci siano alveari disponibili!
+                            </h3>
+
+                            <p>Aspetta che qualcuno metta in affitto delle arnie!</p>
+
+                            <a href="{{url_for('views.home')}}" class="link_500">Torna alla Home</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    {% else %}
+    <h1 style="text-align: center">Catalogo Alveari</h1>
+    <br>
+    <div class="row">
+        <div class="product-container">
+        {% for alveare in alveari_disponibili %}
+            {% if alveare.percentuale_disponibile!=0%}
+
+            <!--Card 1-->
+                <div class="product-card shadow-lg">
+
+                <img class="product-image" src="https://images.unsplash.com/photo-1508432116762-1f883098ed41?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTJ8fGFsdmVhcmV8ZW58MHx8MHx8&auto=format&fit=crop&w=900&q=60"
+                     alt="" >
+
+
+                <h3 class="product-name"><strong> {{alveare.nome}}</strong></h3>
+
+                    <p class="product-price">Prezzo:{{'%0.2f'|format(alveare.prezzo|float)}}€</p>
+
+
+
+                {% if session['isApicoltore'] %}
+                <form action="{{url_for('views.modifica_stato', alveare_id=alveare.id)}}">
+                    <button class="add-to-cart-button"><a style="text-decoration: none;color:white"
+                                                          href="{{url_for('views.modifica_stato',alveare_id=alveare.id)}}">
+                        Modifica Alveare</a></button>
+                </form>
+                {% else %}
+                <form action="{{url_for('views.informazioni_alveare', alveare_id=alveare.id)}}">
+                    <button class="add-to-cart-button"><a style="text-decoration: none;color:white"
+                                                          href="{{url_for('views.informazioni_alveare',alveare_id=alveare.id)}}">
+                        Visualizza Alveare</a></button>
+                </form>
+                {% endif %}
+                </div>
+            {% endif %}
+        {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+
+</div>
+
+
+{% endblock %}
+</body>
+</html>

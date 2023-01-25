@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <link rel="stylesheet" href="{{url_for('static', filename='css/home.css')}}">
+    {% extends "base.html"%}
+    <title>
+        {% block title %}Home{% endblock %}
+    </title>
+
+</head>
+<body>
+{% block content %}
+<style>
+
+    .carousel {
+
+        width: 100%;
+        height: 100%;
+        position: center;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 0px;
+        text-align: center;
+
+
+ font-size: 1.7rem;
+        vertical-align:middle ;
+
+    }
+
+.carousel-inner button {
+  margin-top: 1rem;
+  background-color: black;
+  opacity: 70%;
+  color: #fff;
+  border: none;
+  outline: none;
+  padding: 1rem 1.5rem;
+  font-size: 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+</style>
+<br>
+<header>
+
+    <div class="container">
+
+        <section class="showcase">
+            <h1>Come Proteggere le Api?</h1>
+            <p>Le api sono in pericolo estinzione? C'è un modo per proteggere le api concretamente? Le api sono gli
+                unici impollinatori?</p>
+            <p>Queste ed altre domande sono state affrontate dai nostri esperti. Le api sono effettivamente l'anello
+                fondamentale della nostra catena alimentare.</p>
+            <button><a href="#qui"style="text-decoration: none;color: white" >Leggi l'articolo</a> </button>
+        </section>
+    </div>
+
+    <div class="video-container">
+        <video src="../static/images/video1.mp4" autoplay loop muted></video>
+    </div>
+
+</header>
+
+
+<br><br><br><br><br>
+
+<br><br><br>
+<br>
+
+
+ <section class="dishes">
+    <h2>Community BeeHave</h2>
+    <br>
+
+    <div class="dishes-grid">
+
+
+         <div class="dishes-item dishes-item-1__big"style="position: relative;">
+        <section class="dishes-content" style="position:absolute;z-index: 50;color:white;text-align: center;vertical-align: middle;top: 40%;padding-left: 12%">
+            <h1>Conosci e fatti conoscere</h1>
+              <h1>  dai nostri apicoltori esperti</h1>
+            <br>
+            <p >Resta in contatto con i tuoi apicoltori preferiti</p>
+            <p>Richiedi assistenza comodamente da casa!</p>
+
+             <button style="margin-top: 1rem;background-color: black;opacity: 70%;color: #fff;border: none;outline: none;padding: 1rem 1.5rem;font-size: 0.9rem;border-radius: 6px;cursor: pointer;" ><a href="{{url_for('views.mostra_lista_assistenti')}}"style="text-decoration: none;color: white" >Scopri di più</a> </button>
+
+        </section>
+
+        <img style="filter: brightness(50%); "
+             src="https://images.unsplash.com/photo-1593844848769-c725b9f47908?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjZ8fGFwaWN1bHR1cmF8ZW58MHx8MHx8&auto=format&fit=crop&w=900&q=60"
+             alt="Video of three dishes on a table"/>
+
+
+            </div>
+
+        <img class="dishes-item dishes-item-2"
+             src="https://images.unsplash.com/photo-1619522893151-bb5138b60292?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OXx8YXBpY3VsdHVyYXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=900&q=60"
+             alt="Dish of vegetables"/>
+        <img class="dishes-item dishes-item-3"
+             src="https://images.unsplash.com/photo-1620032599268-c822dd1c3076?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mzl8fGFwaWN1bHR1cmF8ZW58MHx8MHx8&auto=format&fit=crop&w=900&q=60"
+             alt="Dish of vegetables"/>
+        <div  class="dishes-item dishes-item-4"style=" grid-column:3/span 4;grid-row:2/3; text-align: center;vertical-align: middle;top:90%">
+        <blockquote style="width:93%;height:100%;border-radius: 5px;">
+        <p class="dishes-title" style=" font-style:italic;padding-top:15%;margin-bottom: 0;position:relative;height: 50%;padding-bottom:0;display: flex;flex-direction: column;justify-content: center;
+    width: 100%;">"Oggi, ogni terzo cucchiaio di cibo dipende dall'impollinazione e i prodotti delle api sono una ricca fonte di nutrienti essenziali"</p>
+    <br><br>
+        <cite style="margin-top: 50%;" >20 Maggio - World's Bee Day</cite></blockquote>
+        </div>
+    </div>
+
+  </section>
+
+<br><br><br><br><br><br><br>
+<div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
+    <div class="carousel-indicators" >
+        <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active"
+                aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1" aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2" aria-label="Slide 3"></button>
+    </div>
+    <div class="carousel-inner">
+        <div class="carousel-item active" data-bs-interval="10000">
+            <img src="https://www.3bee.com/static/2df350a7824039de5c4da9391ba4cb1e/9c4c3/api_sfondo_scuro.webp" class="d-block w-100" alt="...">
+            <div class="carousel-caption ">
+                <h5 style="color: white;" >Scegli il tuo alveare e proteggilo a distanza</h5>
+                <p style="color: white;">Scegli l'apicoltore che preferisci, supporta la sua attività e scegli uno dei suoi alveari . Seleziona il tuo miele e ricevilo direttamente a casa tua una volta pronto! Potrai seguire da remoto la crescita e lo sviluppo del tuo alveare.</p>
+                <button style="margin-top: 3rem"><a href="{{url_for('views.mostra_alveari')}}" style="text-decoration: none;color: white">Mostra alveari disponibili all'adozione</a></button>
+            </div>
+        </div>
+        <div class="carousel-item" data-bs-interval="2000">
+
+            <img src="https://www.3bee.com/static/c100fd947f5090f86b75340892bdcadd/ef898/beeoncherry.jpg" class="d-block w-100" alt="...">
+            <div class="carousel-caption ">
+                <h5>Fai scoprire il tuo miele unico</h5>
+                <p>Fai conoscere la tua realtà apistica in tutta Italia tramite BeeHave. Entra nel network degli apicoltori . Spedisci il tuo miele unico direttamente ai tuoi clienti.</p>
+            <button><a href="{{url_for('views.login_page')}}" style="text-decoration: none;color: white"> Sono un apicoltore</a></button>
+            </div>
+        </div>
+        <div class="carousel-item">
+            <img src="https://www.3bee.com/static/b1e453deeacc9925f6c3bb1784c4d433/aee1a/apired.webp" class="d-block w-100" alt="...">
+            <div class="carousel-caption ">
+                <h5 style="color: white;" >Mostra catalogo prodotti</h5>
+                <p style="color: white;">Scegli la qualità e la professionalità dei nostri apicoltori esperti.</p>
+                <button><a href="{{url_for('views.mostra_prodotti')}}" style="text-decoration: none;color: white">Acquista i nostri prodotti</a></button>
+            </div>
+        </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+</div>
+
+
+<br><br><div id="qui"></div><br>
+
+<div class="projcard-container">
+
+    	<div class="projcard projcard-orange">
+		<div class="projcard-innerbox">
+			<img class="projcard-img" src="../static/images/img2.jpg" />
+			<div class="projcard-textbox">
+				<div class="projcard-title">Le cause che minacciano la sopravvivenza delle api</div>
+				<div class="projcard-bar"></div>
+				<div class="projcard-description">Ma quali sono le cause di questo declino che sembra essere inarrestabile? In realtà sono molte,
+          ma possiamo comunque individuare le principali. Malattie e parassiti, come la Varroa Destructor, cambiamenti climatici,
+          impoverimento degli habitat naturali, pratiche di agricoltura intensiva, uso massiccio di pesticidi, erbicidi e fungicidi.
+          Ognuno di questi fenomeni segna giorno dopo giorno il lento declino della popolazione delle api, che si trovano ormai
+          in una situazione di alto pericolo.</div>
+			</div>
+		</div>
+	</div>
+	<div class="projcard projcard-yellow">
+		<div class="projcard-innerbox">
+			<img class="projcard-img" src="../static/images/img3.jpeg" />
+			<div class="projcard-textbox">
+				<div class="projcard-title">Un preziosissimo lavoro</div>
+				<div class="projcard-bar"></div>
+				<div class="projcard-description">Il ruolo che rivestono le api nel nostro ecosistema
+          è centrale, soprattutto in virtù del loro inestimabile lavoro
+          di impollinazione. Volando di fiore in fiore alla ricerca del nettare,
+          api e altri insetti impollinatori diventano dei veri e propri agenti di
+          biodiversità. Le piante che si affidano all’impollinazione entomofila
+          (ovvero resa possibile dagli insetti) sono tantissime. Le stime parlando
+          di quasi il 90% delle piante selvatiche e il 75% delle colture a scopo alimentare.
+          Non è quindi un’esagerazione dire che, se non ci fossero più le api, non potremmo più
+          mangiare la maggior parte del cibo che troviamo tutti i giorni sulla nostra tavola. Anche la produzione
+          i carne e dei prodotti derivanti dal latte subirebbe un calo significativo. Come mai? In realtà la risposta
+          è semplicissima. Una gran parte delle piante foraggere, ovvero utilizzate per nutrire le bestie da allevamento,
+          sono impollinate dalle api.</div>
+			</div>
+		</div>
+	</div>
+
+
+    <div class="projcard projcard-orange">
+		<div class="projcard-innerbox">
+			<img class="projcard-img" src="../static/images/img4.jpg" />
+			<div class="projcard-textbox">
+				<div class="projcard-title">Adotta un alveare e proteggi le sue api</div>
+				<div class="projcard-bar"></div>
+				<div class="projcard-description">Adotta un alveare e proteggi le sue api
+                    Una delle iniziative più alla portata di tutti è sicuramente l’adozione di un alveare.
+                    Ma in cosa consiste? Grazie alla tecnologia BeeHave, potrai scegliere un alveare monitorato a distanza
+                    e adottarlo per un anno interno. In questo modo potrai sempre seguire lo sviluppo
+                    e la crescita delle api. Non solo,
+                    potrai anche vedere come si preparano all’inverno e come l’apicoltore se ne prende cura nel caso non
+                    avessero abbastanza nutrimento per sopravvivere fino alla primavera. Proprio per poterti avvicinare ancora
+                    di più alla realtà dell’alveare, a fine stagione apistica, riceverai a casa tua
+                    il miele prodotto dalle “tue” api. Potrai sceglierlo in base alle tipologie che vengono prodotte
+                    in ciascun luogo.</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+{% endblock %}
+
+
+</body>
+</html>

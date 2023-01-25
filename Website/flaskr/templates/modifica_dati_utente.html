@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/form.css')}}">
+<link rel="stylesheet" href="{{url_for('static', filename='css/modifica_user.css')}}">
+    {% extends "base.html"%}
+    <title>
+        {% block title %}Modifica Informazioni Personali{% endblock %}
+    </title>
+</head>
+
+<body>
+{% block content %}
+
+<section class="background-radial-gradient overflow-hidden"
+         style="background-image: url('https://www.3bee.com/static/b1e453deeacc9925f6c3bb1784c4d433/aee1a/apired.webp')">
+    <div class="container px-4 py-5 px-md-5 text-hight text-lg-start my-5">
+        <div class="row gx-lg-5 align-items-high mb-5">
+            <div class="col-lg-6 mb-5 mb-lg-0" style="z-index: 10">
+                <br><br><br><br><br><br><br><br><br>
+                <h1 class="my-5 display-5 fw-bold ls-tight" style="color:black">
+                    Modifica i tuoi dati <br/>
+
+                </h1>
+                <p class="mb-4 opacity-70" style="color: white">
+                    Aggiorna le tue informazioni personali e modifica il tuo account!
+
+                </p>
+            </div>
+            <div class="col-lg-6 mb-5 mb-lg-0 position-relative">
+                <div class="card bg-glass">
+                    <div class="card-body px-4 py-5 px-md-5">
+
+
+
+        <div class="col-12 ">
+            <div class="text-center " style="position: center" >
+                <img   src="../static/images/beekeeper.png" class="avatar img-circle  rounded-circle justify-content-center"
+                     alt="../static/images/beekeeper.png" style="width: 90px; height: 90px"
+                                    >
+            </div>
+        </div>
+
+        <!-- edit form column -->
+
+<br>
+            <form class="form-horizontal" enctype="multipart/form-data" action="/modifica_dati_utente" method="POST">
+
+
+                            <div class="row">
+                                <div class="col-md-6 mb-4">
+                                    <div class="form-group">
+                                        <label class=" control-label">Nome:</label>
+                                        <input name="nuovo_nome" value='{{current_user.nome}}' class="form-control" type="text">
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-4">
+                                    <div class="form-group">
+                                        <label class=" control-label">Cognome:</label>
+                                         <input name="nuovo_cognome" value='{{current_user.cognome}}' class="form-control" type="text">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 mb-4">
+                                    <div class="form-group">
+                                        <label class=" control-label">Citt&#224:</label>
+                                        <input name="nuova_citta" value='{{current_user.citta}}' class="form-control" type="text">
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-4">
+                                    <div class="form-group">
+                                        <label class=" control-label">Indirizzo:</label>
+                                        <input name="nuovo_indirizzo" value='{{current_user.indirizzo}}' class="form-control"
+                               type="text">
+
+                                           </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 mb-4">
+                                    <div class="form-group">
+                                        <label class=" control-label">Cap:</label>
+                                        <input name="nuovo_cap" value='{{current_user.cap}}' class="form-control" type="text">
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-4">
+                                    <div class="form-group">
+                                         <label class=" control-label">Telefono:</label>
+                                        <input name="nuovo_numtelefono" value='{{current_user.telefono}}' class="form-control"
+                               type="text">
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Email input -->
+                            <div class="form-group mb-4">
+                                 <label class="control-label">Email:</label>
+
+                        <input name="nuova_email" value='{{current_user.email}}' class="form-control" type="text">
+
+                            </div>
+
+                            <!-- Password input -->
+                            <div class="form-group mb-4">
+                               <label class="control-label">Password:</label>
+
+                        <input name="nuova_psw" placeholder="Password" class="form-control" type="password">
+                            </div>
+
+                <div class="form-group mb-4">
+                    <label class=" control-label">Conferma Password:</label>
+
+                        <input name="nuova_ripeti_psw" placeholder="Conferma password" class="form-control"
+                               type="password">
+
+                </div>
+
+                <div class="form-outline mb-4">
+                    {% with messages = get_flashed_messages(category_filter=["error"]) %}
+                        {% if messages %}
+                            <p style="color:red">{{ messages[0] }}</p>
+                        {% endif %}
+                    {% endwith %}
+                </div>
+                <br>
+                <div class="form-group" style="text-align: center">
+
+                        <button type="button" class="btn btn-secondary btn-md"><a style="text-decoration: none; color:white"
+                                    href="{{url_for('views.area_personale')}}">Annulla <span
+                                    class="glyphicon glyphicon-remove"></span></a></button>
+                        <button type="submit" class="btn btn-warning" style="background-color: orange;
+     opacity: 70%;
+    text-align: center;
+     border: none;
+     color: white;
+     padding: 7px 20px;
+     text-decoration: none;
+     margin: 4px 2px;
+     cursor: pointer;">Conferma Modifiche <span
+                                class="glyphicon glyphicon-ok-sign"></span></button>
+                    </div>
+
+            </form>
+        </div>
+
+</div>
+                    </div>
+                </div>
+            </div>
+</section>
+
+{% endblock %}
+</body>
+</html>

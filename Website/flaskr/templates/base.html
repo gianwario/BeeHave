@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<!-- template di base per front end -->
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/x-icon" href="{{url_for('static', filename='images/Bee-trasparente (1).png')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/base.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/footer.css')}}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+            crossorigin="anonymous"></script>
+    <script src="{{url_for('static', filename='js/homepage.js')}}"></script>
+    <title>{% block title %}Base{% endblock %}</title>
+
+</head>
+<body style="overflow-x:hidden; padding:0 0; margin: 0 0;">
+
+<nav id="navbar" style="width:100%; z-index: 100; position: fixed; top:0; transition: all 200ms linear;"
+     class="navbar navbar-expand-sm ">
+    <div class="full-nav container-fluid d-flex flex-row justify-content-between" style="max-width: 1200px">
+        <div>
+            <a href="{{url_for('views.home')}}" class="navbar-brand" style="color:white">BeeHave</a>
+        </div>
+        <div class="d-flex flex-row">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" style="color:white" href="{{url_for('views.home')}}"><span>Home</span></a></li>
+
+                <li class="nav-item dropdown">
+
+                    <a aria-expanded="false" style="color:white" role="button" href="#" class="nav-link dropdown-toggle"
+                       data-bs-toggle="dropdown"><span class="glyphicon glyphicon-user">Alveari </span></a>
+                    <ul aria-labelledby="navbarDropdown" class="dropdown-menu">
+                        <li class="nav-item "><a class="nav-link navitm" href="{{url_for('views.mostra_alveari')}}">Catalogo
+                            Alveari</a></li>
+
+                        {% if current_user.is_authenticated and session['isApicoltore'] %}
+                        <li class="nav-item "><a class="nav-link navitm"
+                                                 href="{{url_for('views.inserimento_alveare_page')}}">Inserisci
+                            Alveare</a></li>
+
+                        {% else%}
+                        {%if current_user.is_authenticated and not session['isApicoltore'] %}
+                        <li class="nav-item "><a class="nav-link navitm"
+                                                 href="{{url_for('views.mostra_alveari_adottati', cliente_id=current_user.id)}}">Visualizza
+                            Alveari Adottati</a></li>
+                        {% endif %}
+                        {% endif %}
+
+                    </ul>
+
+                </li>
+                <li class="nav-item dropdown">
+
+                    <a aria-expanded="false" style="color:white" role="button" href="#" class="nav-link dropdown-toggle"
+                       data-bs-toggle="dropdown"><span class="glyphicon glyphicon-user">Prodotti</span></a>
+                    <ul aria-labelledby="navbarDropdown" class="dropdown-menu">
+                        <li class="nav-item  "><a class="nav-link navitm" href="{{url_for('views.mostra_prodotti')}}">
+                            Catalogo Prodotti</a></li>
+
+                        {% if current_user.is_authenticated and session['isApicoltore'] %}
+                        <li class="nav-item "><a class="nav-link navitm"
+                                                 href="{{url_for('views.inserimento_prodotto_page')}}">Inserisci
+                            Prodotto</a></li>
+                        <li class="nav-item "><a class="nav-link navitm"
+                                                 href="{{url_for('views.mostra_articoli_in_vendita', apicoltore_id=current_user.id)}}">Mostra
+                            i tuoi Prodotti</a></li>
+
+                        {% endif %}
+
+                    </ul>
+                </li>
+                {%if current_user.is_authenticated and not session['isApicoltore']%}
+                <li class="nav-item"><a class="nav-link navitm" style="color:white"
+                                        href="{{url_for('views.mostra_lista_assistenti')}}"><span>Assistenza </span></a>
+                </li>
+                {%else%}
+                <li class="nav-item"><a class="nav-link navitm" style="color:white"
+                                        href="{{url_for('views.visualizza_richieste_assistenza')}}"><span>Assistenza </span></a>
+                </li>
+                {%endif%}
+            </ul>
+
+            <ul class="navbar-nav">
+                <li class="nav-item dropdown">
+                    <a aria-expanded="false" id="navbarDropdown" style="color:white" role="button" href="#"
+                       class="nav-link dropdown-toggle "
+                       data-bs-toggle="dropdown"><span class="glyphicon glyphicon-user">Area Utente</span></a>
+                    <ul aria-labelledby="navbarDropdown" class="dropdown-menu">
+                        {% if not current_user.is_authenticated %}
+                        <li class="nav-item"><a class="nav-link navitm" href="{{url_for('views.login_page')}}">Login</a>
+                        </li>
+                        <li class="nav-item"><a class="nav-link navitm" href="{{url_for('views.registrazione_page')}}">Registrati</a>
+                        </li>
+
+                        {% else %}
+                        <li class="nav-item"><a class="nav-link navitm" href="{{url_for('views.area_personale')}}">Area
+                            Personale</a></li>
+
+                        <li class="nav-item"><a class="nav-link navitm" href="{{url_for('gu.logout')}}">Logout</a></li>
+                        {% endif %}
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+</nav>
+
+<nav id="mobile-navbar" style="width:100%; z-index: 100; position: fixed; top:0; transition: all 200ms linear;background-color: #33383c; "
+     class="navbar navbar-expand-sm ">
+    <div class="d-flex flex-row justify-content-between" >
+        <div style="margin-left: 20px;">
+            <a href="{{url_for('views.home')}}" class="navbar-brand" style="color:white">BeeHave</a>
+        </div>
+        
+        <ul class="navbar-nav" >
+            <li class="nav-item dropdown" style="width: 120px;" >
+                <a id="navbarDropdown" style="color:white" role="button" href="#"
+                class="nav-link dropdown-toggle "
+                data-bs-toggle="dropdown"><span>Menù</span></a>
+                <ul aria-labelledby="navbarDropdown" class="dropdown-menu" style="padding-left:5px;position: absolute; left: -50px;" >
+
+                    <li class="nav-item "><a class="nav-link navitm" href="{{url_for('views.mostra_alveari')}}">Catalogo
+                        Alveari</a></li>
+
+                    {% if current_user.is_authenticated and session['isApicoltore'] %}
+                    <li class="nav-item "><a class="nav-link navitm"
+                                             href="{{url_for('views.inserimento_alveare_page')}}">Inserisci
+                        Alveare</a></li>
+
+                    {% else%}
+                    {%if current_user.is_authenticated and not session['isApicoltore'] %}
+                    <li class="nav-item "><a class="nav-link navitm"
+                                             href="{{url_for('views.mostra_alveari_adottati', cliente_id=current_user.id)}}">Visualizza
+                        Alveari Adottati</a></li>
+                    {% endif %}
+                    {% endif %}
+
+                    <li class="nav-item  "><a class="nav-link navitm" href="{{url_for('views.mostra_prodotti')}}">
+                        Catalogo Prodotti</a></li>
+
+                    {% if current_user.is_authenticated and session['isApicoltore'] %}
+                    <li class="nav-item "><a class="nav-link navitm"
+                                             href="{{url_for('views.inserimento_prodotto_page')}}">Inserisci
+                        Prodotto</a></li>
+                    <li class="nav-item "><a class="nav-link navitm"
+                                             href="{{url_for('views.mostra_articoli_in_vendita', apicoltore_id=current_user.id)}}">Mostra
+                        i tuoi Prodotti</a></li>
+
+                    {% endif %}
+                    {%if current_user.is_authenticated and not session['isApicoltore']%}
+                    <li class="nav-item"><a class="nav-link navitm"
+                                            href="{{url_for('views.mostra_lista_assistenti')}}"><span>Assistenza </span></a>
+                    </li>
+                    {%else%}
+                    <li class="nav-item"><a class="nav-link navitm"
+                                            href="{{url_for('views.visualizza_richieste_assistenza')}}"><span>Assistenza </span></a>
+                    </li>
+                    {%endif%}
+                    {% if not current_user.is_authenticated %}
+                    <li class="nav-item"><a class="nav-link navitm" href="{{url_for('views.login_page')}}">Login</a>
+                    </li>
+                    <li class="nav-item"><a class="nav-link navitm" href="{{url_for('views.registrazione_page')}}">Registrati</a>
+                    </li>
+
+                    {% else %}
+                    <li class="nav-item"><a class="nav-link navitm" href="{{url_for('views.area_personale')}}">Area
+                        Personale</a></li>
+
+                    <li class="nav-item"><a class="nav-link navitm" href="{{url_for('gu.logout')}}">Logout</a></li>
+                    {% endif %}
+                </ul>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<div style="margin-top:50px">
+    {% block content %}
+
+    {% endblock %}
+</div>
+
+<footer style="width: 100vw;" class="section bg-footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="">
+                    <br><br>
+                    <h6 class="footer-heading text-uppercase text-white">Informazioni</h6>
+                    <ul class="list-unstyled footer-link mt-4">
+                        <li><a href="{{url_for('views.home')}}">Home</a></li>
+                        <li><a href="{{url_for('views.mostra_alveari')}}">Alveari</a></li>
+                        <li><a href="{{url_for('views.mostra_prodotti')}}"> Prodotti</a></li>
+
+                        {%if current_user.is_authenticated and not session['isApicoltore']%}
+                        <li><a href="{{url_for('views.mostra_lista_assistenti')}}"> Assistenza</a></li>
+                        {%else%}
+                        <li><a href="{{url_for('views.visualizza_richieste_assistenza')}}"> Assistenza</a></li>
+                        {%endif%}
+                    </ul>
+                </div>
+
+            </div>
+
+            <div class="col-lg-3">
+                <div class="">
+                    <br><br>
+                    <h6 class="footer-heading text-uppercase text-white">Risorse</h6>
+                    <ul class="list-unstyled footer-link mt-4">
+                        <li><a href="{{url_for('views.registrazione_page')}}">Registrati</a></li>
+                        <li><a href="{{url_for('views.login_page')}}">Login</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="col-lg-3">
+                <div class="">
+                    <br><br>
+                    <h6 class="footer-heading text-uppercase text-white">Aiuto</h6>
+                    <ul class="list-unstyled footer-link mt-4">
+                        <li><a href="https://github.com/gianwario/BeeHave">GitHub</a></li>
+                        <li><a href="https://www.gazzettaufficiale.it/eli/id/2004/12/31/004G0346/sg">Terms of
+                            Services</a></li>
+                        <li>
+                            <a href="https://www.cookiebot.com/it/privacy-policy-gdpr/?utm_source=google&utm_medium=cpc&utm_campaign=it-generic&utm_device=c&utm_term=politica%20privacy&utm_content=it-it-privacy-policy&matchtype=e&gclid=Cj0KCQiA_P6dBhD1ARIsAAGI7HBmgt-xMUuZZb6V8G_ZevCzkvKQtg_b-H69vA8JZ9nfBTle1nXuAukaAg3SEALw_wcB">Privacy
+                                Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="col-lg-3">
+                <div class="">
+                    <img src="../static/images/Bee-trasparente%20(1).png" style="width: 90% ;height: 90%" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="text-center mt-5">
+        <p class="footer-alt mb-0 f-14">2023 ©BeeHave, All Rights Reserved</p>
+    </div>
+</footer>
+
+</body>
+
+</html>
