@@ -15,7 +15,7 @@
 <body>
 
 {% block content %}
-
+<br><br>
 <!--For Page-->
 <div class="page">
 
@@ -27,7 +27,7 @@
                 <div class="col-sm-12">
                     <div class="col-sm-100 col-sm-offset-1  text-center">
                         <div class="four_zero_four_bg">
-                            <h1 class="text-center " style="font-weight: 600">I Tuoi Prodotti</h1>
+                            <h1 class="text-center " style="font-weight: 600">Errore 500</h1>
 
                         </div>
 
@@ -48,8 +48,8 @@
         </div>
     </section>
     {% else %}
-    <br><br>
-    <h1 style="text-align: center">I Tuoi Prodotti</h1>
+    <h1 style="text-align:center; font-weight: bold">I TUOI <span style="color:#faa500">PRODOTTI</span></h1>
+
     {% endif %}
     <div class="row">
         <div class="product-container ">
@@ -91,7 +91,6 @@
         </div>
     </div>
 </div>
-<br>
 {% endblock %}
 </body>
 </html>
