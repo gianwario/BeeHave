@@ -11,7 +11,7 @@
 <body>
 
 {% block content %}
-<br><br><br>
+<br><br>
 
 <div class="page">
 
@@ -22,9 +22,7 @@
                 <div class="col-sm-12">
                     <div class="col-sm-100 col-sm-offset-1  text-center">
                         <div class="four_zero_four_bg">
-                            <h1 class="text-center ">500</h1>
-
-
+                            <h1 class="text-center" style="font-weight: 600">Errore 500</h1>
                         </div>
 
                         <div class="contant_box_500">
@@ -43,24 +41,24 @@
         </div>
     </section>
     {% else %}
-    <h1 style="text-align: center">Catalogo Alveari</h1>
+    <h1 style="text-align:center; font-weight: bold">CATALOGO <span style="color:#faa500">ALVEARI</span></h1>
     <br>
     <div class="row">
         <div class="product-container">
-        {% for alveare in alveari_disponibili %}
+            {% for alveare in alveari_disponibili %}
             {% if alveare.percentuale_disponibile!=0%}
 
             <!--Card 1-->
-                <div class="product-card shadow-lg">
+            <div class="product-card shadow-lg">
 
-                <img class="product-image" src="https://images.unsplash.com/photo-1508432116762-1f883098ed41?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTJ8fGFsdmVhcmV8ZW58MHx8MHx8&auto=format&fit=crop&w=900&q=60"
-                     alt="" >
+                <img class="product-image"
+                     src="https://images.unsplash.com/photo-1508432116762-1f883098ed41?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTJ8fGFsdmVhcmV8ZW58MHx8MHx8&auto=format&fit=crop&w=900&q=60"
+                     alt="">
 
 
                 <h3 class="product-name"><strong> {{alveare.nome}}</strong></h3>
 
-                    <p class="product-price">Prezzo:{{'%0.2f'|format(alveare.prezzo|float)}}€</p>
-
+                <p class="product-price">Prezzo:{{'%0.2f'|format(alveare.prezzo|float)}}€</p>
 
 
                 {% if session['isApicoltore'] %}
@@ -76,9 +74,9 @@
                         Visualizza Alveare</a></button>
                 </form>
                 {% endif %}
-                </div>
+            </div>
             {% endif %}
-        {% endfor %}
+            {% endfor %}
         </div>
     </div>
     {% endif %}

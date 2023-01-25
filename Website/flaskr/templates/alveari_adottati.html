@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="{{url_for('static', filename='css/stile_catalogo.css')}}">
-        <link rel="stylesheet" href="{{url_for('static', filename='css/500page.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/500page.css')}}">
     {% extends "base.html"%}
     <title>
         {% block title %}Catalogo Alveari{% endblock %}
@@ -20,11 +20,8 @@
                 <div class="col-sm-12">
                     <div class="col-sm-100 col-sm-offset-1  text-center">
                         <div class="four_zero_four_bg">
-                            <h1 class="text-center ">500</h1>
-
-
+                            <h1 class="text-center" style="font-weight: 600">Errore 500</h1>
                         </div>
-
                         <div class="contant_box_500">
                             <h3 class="h2">
                                 OPS!
@@ -41,7 +38,7 @@
         </div>
     </section>
     {% else %}
-<h1 style="text-align: center">I Tuoi Alveari</h1>
+    <h1 style="text-align:center; font-weight: bold">I TUOI <span style="color:#faa500">ALVEARI</span></h1>
 
 
     <div class="row">
@@ -53,7 +50,8 @@
 
                 <!--Card image-->
                 <div class="view view-cascade overlay text-center">
-                    <img class="card-img-top" src="https://images.unsplash.com/photo-1508432116762-1f883098ed41?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTJ8fGFsdmVhcmV8ZW58MHx8MHx8&auto=format&fit=crop&w=900&q=60"
+                    <img class="card-img-top"
+                         src="https://images.unsplash.com/photo-1508432116762-1f883098ed41?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTJ8fGFsdmVhcmV8ZW58MHx8MHx8&auto=format&fit=crop&w=900&q=60"
                          alt="">
                     <a>
                         <div class="mask rgba-white-slight"></div>
@@ -61,11 +59,15 @@
                 </div>
                 <div class="card-body pt-0" style="text-align: center">
                     <br>
-                    <a style="text-decoration: none;color: black"href="{{url_for('views.informazioni_alveare',alveare_id=elemento.Alveare.id)}}"><h5 class="card-title">{{elemento.Alveare.nome}}</h5></a>
+                    <a style="text-decoration: none;color: black"
+                       href="{{url_for('views.informazioni_alveare',alveare_id=elemento.Alveare.id)}}"><h5
+                            class="card-title">{{elemento.Alveare.nome}}</h5></a>
                     <br>
                     <p class="card-text">Tempo adozione: {{elemento.TicketAdozione.tempo_adozione}} Mesi</p>
-                    <p class="card-text">Data Inizio: {{elemento.TicketAdozione.data_inizio_adozione.strftime("%m-%d-%Y, %H:%M:%S") }}</p>
-                    <p class="card-text">Data Scadenza: {{elemento.TicketAdozione.data_fine_adozione().strftime("%m-%d-%Y, %H:%M:%S")}}</p>
+                    <p class="card-text">Data Inizio: {{elemento.TicketAdozione.data_inizio_adozione.strftime("%m-%d-%Y,
+                        %H:%M:%S") }}</p>
+                    <p class="card-text">Data Scadenza:
+                        {{elemento.TicketAdozione.data_fine_adozione().strftime("%m-%d-%Y, %H:%M:%S")}}</p>
                     <br>
                     <div class="progress">
                         <div class="progress-bar progress-bar-striped progress-bar-animated  bg-warning"

@@ -15,15 +15,18 @@
         background-color: darkorange;
     }
 </style>
-<br><br><br>
-<h1 style="text-align: center">Informazioni Prodotto</h1>
+<div style="margin-bottom: 50px">
+<br><br>
+    <h1 style="text-align:center; font-weight: bold">INFORMAZIONI <span style="color:#faa500">PRODOTTO</span></h1>
 <br>
 <div class="card shadow-lg " style="width: 80%;margin-left: 8%">
     <div class="row g-0">
         <div class="col-md-6 border-end">
             <div class="  justify-content-center">
-                <div class="main_image"><img src="https://images.unsplash.com/photo-1558642452-9d2a7deb7f62?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Nnx8bWllbGV8ZW58MHx8MHx8&auto=format&fit=crop&w=900&q=60" id="main_product_image"
-                                             width="350" alt=""></div>
+                <div class="main_image"><img
+                        src="https://images.unsplash.com/photo-1558642452-9d2a7deb7f62?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Nnx8bWllbGV8ZW58MHx8MHx8&auto=format&fit=crop&w=900&q=60"
+                        id="main_product_image"
+                        width="350" alt=""></div>
 
             </div>
         </div>
@@ -43,7 +46,8 @@
                 </div>
                 {% if not current_user.is_authenticated or not session['isApicoltore'] %}
                 <div class="buttons d-flex flex-row mt-5 gap-3">
-                    <form action="{{url_for('gv.acquista_prodotto')}}" method="post">
+                    <form action="{{url_for('gv.acquista_prodotto', id_apicoltore=apicoltore.id, id_cliente=current_user.id, id_prodotto=prodotto.id)}}"
+                          method="post">
                         <label for="seleziona_qnt">Inserire Quantitá</label>
                         <input style="padding: 5px 5px;border-color: orange;border-radius:5px"
                                required="true"
@@ -81,7 +85,7 @@
     </div>
 </div>
 </div>
-<br><br>
+
 {% endblock %}
 </body>
 </html>

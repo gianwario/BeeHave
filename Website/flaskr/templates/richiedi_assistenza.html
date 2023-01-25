@@ -8,66 +8,67 @@
         {% block title %}Richiesta Assistenza{% endblock %}
     </title>
 </head>
-<body >
+<body>
 {% block content %}
 <br><br><br>
- <h1 style="text-align: center">Invia la tua richiesta di assistenza</h1>
+<h1 style="text-align: center">Invia la tua richiesta di assistenza</h1>
 <br>
 <div class="product-container" style="margin-left:5%">
     <br>
-<div class="product-card shadow-lg ">
-    <div class="row">
-
-        <div class="col">
-            <form class="well form-horizontal " action="/richiesta_assistenza" method="POST" id="contact_form">
-            <br>
-            <input type="hidden" value='{{id_apicoltore}}' name="id_apicoltore">
-            <div class="form-group">
-                <label class="col-md-4 control-label" for="nome">Oggetto</label>
-                <div class="col-md-4 inputGroupContainer" style="width: 90%">
-                    <div class="input-group">
-                        <input type="text" name="nome" id="nome" class="form-control" required
-                               placeholder="Inserisci l'oggetto del ticket assistenza"/>
+    <div class="product-card shadow-lg ">
+        <div class="row">
+            <div class="col">
+                <form class="well form-horizontal " action="/richiesta_assistenza" method="POST" id="contact_form">
+                    <br>
+                    <input type="hidden" value='{{id_apicoltore}}' name="id_apicoltore">
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="nome">Oggetto</label>
+                        <div class="col-md-4 inputGroupContainer" style="width: 90%">
+                            <div class="input-group">
+                                <input type="text" name="nome" id="nome" class="form-control" required
+                                       placeholder="Inserisci l'oggetto del ticket assistenza"/>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
-            <div class="form-group">
-                <br>
-                <label class="col-md-4 control-label" for="descrizione">Descrizione</label>
-                <div class="col-md-4 inputGroupContainer">
-                    <div class="input-group" style="width: 270%;height: 250%">
+                    <div class="form-group">
+                        <br>
+                        <label class="col-md-4 control-label" for="descrizione">Descrizione</label>
+                        <div class="col-md-4 inputGroupContainer">
+                            <div class="input-group" style="width: 270%;height: 250%">
                         <textarea name="descrizione" id="descrizione" class="form-control" required
                                   placeholder="Inserisci la descrizione della tua richiesta"></textarea>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
 
-            <div class="form-outline mb-4">
-                {% with messages = get_flashed_messages(category_filter=["error"]) %}
-                    {% if messages %}
+                    <div class="form-outline mb-4">
+                        {% with messages = get_flashed_messages(category_filter=["error"]) %}
+                        {% if messages %}
                         <p style="color:red">{{ messages[0] }}</p>
-                    {% endif %}
-                {% endwith %}
-            </div>
-          
-        </div>
-            <div class="form-group col" >
-                <label class="col-md-4 control-label"></label>
-                <div class="col-md-4n " style="position:relative;top:20%;color:white;text-align: center;vertical-align:middle  " ><br>
-                    <button  type="button" class="annullabtn btn btn-secondary btn-md" style="padding: 9px 20px;border: none;
+                        {% endif %}
+                        {% endwith %}
+                    </div>
+
+
+                    <div class="form-group col">
+                        <label class="col-md-4 control-label"></label>
+                        <div class="col-md-4n "
+                             style="position:relative;top:20%;color:white;text-align: center;vertical-align:middle  ">
+                            <br>
+                            <button type="button" class="annullabtn btn btn-secondary btn-md" style="padding: 9px 20px;border: none;
   border-radius: 5px;"><a style="text-decoration: none; color:white "
-                                                                href="{{url_for('views.mostra_lista_assistenti')}}">Annulla<span
-                            class="glyphicon glyphicon-remove"></span></a>
-                    </button>
-                    <button type="submit" class="add-to-cart-button">Richiedi<span class="glyphicon glyphicon-send"></span>
-                    </button>
-                </div>
+                          href="{{url_for('views.mostra_lista_assistenti')}}">Annulla<span
+                                    class="glyphicon glyphicon-remove"></span></a>
+                            </button>
+                            <button type="submit" class="add-to-cart-button">Richiedi<span
+                                    class="glyphicon glyphicon-send"></span>
+                            </button>
+                        </div>
+                    </div>
+                </form>
             </div>
-
-
-    </form>
+        </div>
     </div>
-</div>
 </div>
 
 <br><br>
