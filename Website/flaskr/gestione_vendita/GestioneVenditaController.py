@@ -43,9 +43,9 @@ def elimina_prodotto():
     return mostra_articoli_in_vendita(current_user.id)
 
 
-@gv.route('/acquista_prodotto/<int:id_apicoltore>/<int:id_cliente>', methods=['POST', 'GET'])
+@gv.route('/acquista_prodotto', methods=['POST', 'GET'])
 @login_required
-def acquista_prodotto(id_apicoltore, id_cliente):
+def acquista_prodotto():
     if request.method == 'POST' and not session['isApicoltore']:
         quantita = request.form.get('quantita_prod')
         id_prodotto = request.form.get('id_prd')
