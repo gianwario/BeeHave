@@ -44,13 +44,17 @@ In this section we introduce technical informations and installing guides!
 
 Follow these steps:
 
-1. 
+1. Clone this repository locally;
+2. Create a virtual environment and install the libraries contained in the "requirements.txt" file;
+3. Install MySQL locally and setup the root user with "root" password;
+4. Run the "main.py" file and open the web application available at the URL "http://localhost:5000"
 
 ## Built With
 
-* [HTML5](https://www.w3schools.com/html/default.asp) - The programming language used for the front-end development.
+* [Python](https://www.python.org/) - The programming language used for the back-end development.
+* [Flask](https://flask.palletsprojects.com/en/2.2.x/) - The framework used to build and develop the web application.
+* [HTML5](https://www.w3schools.com/html/default.asp) - Used for the front-end development.
 * [Bootstrap](https://getboostrap.com/) - Front-end framework.
-tmp
 
 # Contributors
 
