@@ -66,7 +66,6 @@ def richiedi_assistenza(nome, descrizione, id_apicoltore, cliente):
                                   descrizione=descrizione, data_inizio=datetime.datetime.now(), stato='Creato')
         db.session.add(ticket)
         db.session.commit()
-        flash('Richiesta assistenza avvenuta con successo!', category='success')
         return True
     return False
 
