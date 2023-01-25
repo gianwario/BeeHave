@@ -12,21 +12,17 @@
 <body>
 
 {% block content %}
-<br><br><br>
+<br><br>
 <!--For Page-->
 <div class="page">
-<br>
     {% if prodotti | length < 1 %}
     <section class="pageerror">
-<br>
         <div class="container">
             <div class="row">
                 <div class="col-sm-12">
                     <div class="col-sm-100 col-sm-offset-1  text-center">
                         <div class="four_zero_four_bg">
-                            <br><br><br>
-                            <h1 class="text-center ">I Tuoi Prodotti</h1>
-
+                            <h1 class="text-center " style="font-weight: 600">Errore 500</h1>
                         </div>
 
                         <div class="contant_box_500">
@@ -45,7 +41,7 @@
         </div>
     </section>
     {% else %}
-    <h1 style="text-align: center">Catalogo Prodotti</h1>
+    <h1 style="text-align:center; font-weight: bold">CATALOGO <span style="color:#faa500">PRODOTTI</span></h1>
     {% endif %}
 
     <!--For Row containing all card-->
@@ -58,7 +54,8 @@
             {% if prodotto.quantita>0 %}
 
             <div class="product-card shadow-lg">
-                <img class="product-image" src="https://images.unsplash.com/photo-1558642452-9d2a7deb7f62?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Nnx8bWllbGV8ZW58MHx8MHx8&auto=format&fit=crop&w=900&q=60"
+                <img class="product-image"
+                     src="https://images.unsplash.com/photo-1558642452-9d2a7deb7f62?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Nnx8bWllbGV8ZW58MHx8MHx8&auto=format&fit=crop&w=900&q=60"
                      alt="">
                 <h3 class="product-name"><strong> {{prodotto.nome}}</strong>
                 </h3>
@@ -75,8 +72,6 @@
             </div>
 
 
-                   
-  
             {% endif %}
             {% endfor %}
 
@@ -84,7 +79,6 @@
         </div>
     </div>
 </div>
-<br>
 {% endblock %}
 </body>
 </html>
