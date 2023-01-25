@@ -7,7 +7,7 @@ from flask_login import current_user, login_required
 from Website.flaskr.Routes import mostra_prodotti, mostra_articoli_in_vendita, info_articolo, inserimento_prodotto_page
 from Website.flaskr.gestione_utente.GestioneUtenteService import get_apicoltore_by_id, get_cliente_by_id
 from Website.flaskr.gestione_vendita.GestioneVenditaService import inserisci_prodotto, cancella_prodotto, \
-    acquisto_prodotto
+    acquisto_prodotto, get_prodotto_by_id
 
 gv = Blueprint('gv', __name__)
 
@@ -49,12 +49,20 @@ def acquista_prodotto(id_apicoltore, id_cliente):
     if request.method == 'POST' and not session['isApicoltore']:
         quantita = request.form.get('quantita_prod')
         id_prodotto = request.form.get('id_prd')
+        prodotto = get_prodotto_by_id(id_prodotto)
+        apicoltore = get_apicoltore_by_id(id_apicoltore)
+        cliente = get_cliente_by_id(id_cliente)
+        prezzo = str(prodotto.prezzo)
+        totale = float(quantita) * float(prezzo)
 
         if acquisto_prodotto(id_prodotto=id_prodotto, quantita=quantita, cliente=current_user):
             if not session['isApicoltore']:
-                apicoltore = get_apicoltore_by_id(id_apicoltore)
-                subject = 'Acquisto Effettuato!'
-                body = "Qualcuno ha comprato la tua merda!"
+                subject = 'Prodotto venduto!'
+                body = ('Ciao ' + apicoltore.nome + ',\nIl tuo articolo "' + prodotto.nome + '" è stato venduto.\n'
+                        'I dati dell\'acquirente sono:\n' + cliente.nome + ", " + cliente.cognome + "\n" + cliente.email
+                        + "\n" + cliente.telefono + "\n\nTi invitiamo a contattare il Cliente per accordarvi "
+                        "sulle modalità di pagamento.")
+
                 em['From'] = email_sender
                 em['To'] = apicoltore.email
                 em['Subject'] = subject
@@ -74,11 +82,14 @@ def acquista_prodotto(id_apicoltore, id_cliente):
                 """
                     Email Cliente              
                 """
-                cliente = get_cliente_by_id(id_cliente)
-                body_client = "Hai speso soldi!"
+                subject_client = 'Prodotto acquistato!'
+                body_client = ('Grazie per l\'acquisto!\nEcco un resoconto del tuo acquisto di ' + prodotto.nome
+                               + ":\nPrezzo: " + prezzo + " €\nQuantità: " + quantita + "\nTotale: " + str(totale)
+                               + " €\n\n Acquistato da: " + apicoltore.nome + "(" + apicoltore.email + ")" +
+                               "\n Grazie per aver supportato questo apicoltore e le sue api!")
                 em['From'] = email_sender
                 em['To'] = cliente.email
-                em['Subject'] = subject
+                em['Subject'] = subject_client
                 em.set_content(body_client)
 
                 smtp = smtplib.SMTP('smtp.gmail.com', 587)
