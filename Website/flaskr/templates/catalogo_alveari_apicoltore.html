@@ -12,14 +12,14 @@
 
 <!--For Page-->
 <div class="page">
-  {% if alveari_disponibili | length < 1 %}
+    {% if alveari_disponibili | length < 1 %}
     <section class="pageerror">
         <div class="container">
             <div class="row">
                 <div class="col-sm-12">
                     <div class="col-sm-100 col-sm-offset-1  text-center">
                         <div class="four_zero_four_bg" style="font-family: 'Open Sans', sans-serif;   font-size: 13px;">
-                            <h1 class="text-center ">I Tuoi Alveari</h1>
+                            <h1 class="text-center " style="font-weight: 600">I Tuoi Alveari</h1>
 
 
                         </div>
@@ -32,7 +32,8 @@
 
                             <p>Inizia subito, metti in affitto delle arnie!</p>
 
-                            <a href="{{url_for('views.inserimento_alveare_page')}}" class="link_500">Inserisci alveare</a>
+                            <a href="{{url_for('views.inserimento_alveare_page')}}" class="link_500">Inserisci
+                                alveare</a>
                         </div>
                     </div>
                 </div>
@@ -51,7 +52,8 @@
             {% for alveare in alveari_disponibili %}
 
             <div class="product-card shadow-lg">
-                <img class="product-image" src="https://images.unsplash.com/photo-1508432116762-1f883098ed41?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTJ8fGFsdmVhcmV8ZW58MHx8MHx8&auto=format&fit=crop&w=900&q=60"
+                <img class="product-image"
+                     src="https://images.unsplash.com/photo-1508432116762-1f883098ed41?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTJ8fGFsdmVhcmV8ZW58MHx8MHx8&auto=format&fit=crop&w=900&q=60"
                      alt="">
 
 
@@ -59,13 +61,12 @@
                 </h3>
 
 
-                    <p class="product-price">Prezzo:{{'%0.2f'|format(alveare.prezzo|float)}}€</p>
+                <p class="product-price">Prezzo:{{'%0.2f'|format(alveare.prezzo|float)}}€</p>
 
 
-                    <button class="add-to-cart-button"><a style="text-decoration: none;color:white"
-                                                          href="{{url_for('views.informazioni_alveare',alveare_id=alveare.id)}}">
-                        Visualizza Alveare</a></button>
-
+                <button class="add-to-cart-button"><a style="text-decoration: none;color:white"
+                                                      href="{{url_for('views.informazioni_alveare',alveare_id=alveare.id)}}">
+                    Visualizza Alveare</a></button>
 
 
             </div>

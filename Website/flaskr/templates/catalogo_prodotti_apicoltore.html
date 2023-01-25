@@ -27,7 +27,7 @@
                 <div class="col-sm-12">
                     <div class="col-sm-100 col-sm-offset-1  text-center">
                         <div class="four_zero_four_bg">
-                            <h1 class="text-center ">I Tuoi Prodotti</h1>
+                            <h1 class="text-center " style="font-weight: 600">I Tuoi Prodotti</h1>
 
                         </div>
 
@@ -55,7 +55,8 @@
         <div class="product-container ">
             {% for prodotto in prodotti_in_vendita %}
             <div class="product-card shadow-lg">
-                <img class="product-image" src="https://images.unsplash.com/photo-1558642452-9d2a7deb7f62?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Nnx8bWllbGV8ZW58MHx8MHx8&auto=format&fit=crop&w=900&q=60"
+                <img class="product-image"
+                     src="https://images.unsplash.com/photo-1558642452-9d2a7deb7f62?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Nnx8bWllbGV8ZW58MHx8MHx8&auto=format&fit=crop&w=900&q=60"
                      alt="">
                 <h3 class="product-name"><strong> {{prodotto.nome}}</strong>
                 </h3>
