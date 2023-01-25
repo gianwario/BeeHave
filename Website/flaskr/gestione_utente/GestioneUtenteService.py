@@ -88,7 +88,7 @@ def registra_utente(nome, cognome, indirizzo, citta, cap, telefono, email, passw
                 db.session.commit()
                 login_user(user)
                 session['isApicoltore'] = bool(int(is_apicoltore))
-                flash('Registrazione avvenuta con successo!', category='success')
+
                 return True
     return False
 
@@ -121,7 +121,7 @@ def modifica_profilo_personale(nome, cognome, email, telefono, citta, cap, indir
             current_user.password = utente.password = generate_password_hash(password, method='sha256')
 
         db.session.commit()
-        flash('Modifica dati avvenuta con successo!', category='success')
+
         return True
     return False
 

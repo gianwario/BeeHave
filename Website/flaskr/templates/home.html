@@ -78,7 +78,7 @@
 
 
          <div class="dishes-item dishes-item-1__big"style="position: relative;">
-        <section style="position:absolute;z-index: 50;color:white;text-align: center;vertical-align: middle;top: 40%;padding-left: 12%">
+        <section class="dishes-content" style="position:absolute;z-index: 50;color:white;text-align: center;vertical-align: middle;top: 40%;padding-left: 12%">
             <h1>Conosci e fatti conoscere</h1>
               <h1>  dai nostri apicoltori esperti</h1>
             <br>
@@ -87,7 +87,7 @@
 
              <button style="margin-top: 1rem;background-color: black;opacity: 70%;color: #fff;border: none;outline: none;padding: 1rem 1.5rem;font-size: 0.9rem;border-radius: 6px;cursor: pointer;" ><a href="{{url_for('views.mostra_lista_assistenti')}}"style="text-decoration: none;color: white" >Scopri di più</a> </button>
 
-            </section>
+        </section>
 
         <img style="filter: brightness(50%); "
              src="https://images.unsplash.com/photo-1593844848769-c725b9f47908?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjZ8fGFwaWN1bHR1cmF8ZW58MHx8MHx8&auto=format&fit=crop&w=900&q=60"
@@ -102,13 +102,13 @@
         <img class="dishes-item dishes-item-3"
              src="https://images.unsplash.com/photo-1620032599268-c822dd1c3076?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mzl8fGFwaWN1bHR1cmF8ZW58MHx8MHx8&auto=format&fit=crop&w=900&q=60"
              alt="Dish of vegetables"/>
-    <div  class="dishes-item dishes-item-4"style=" grid-column:3/span 4;grid-row:2/3; text-align: center;vertical-align: middle;top:90%">
-    <blockquote style="width:93%;height:100%;border-radius: 5px;">
-    <p style=" font-style:italic;padding-top:15%;margin-bottom: 0;position:relative;font-size: 2rem;height: 50%;padding-bottom:0;display: flex;flex-direction: column;justify-content: center;
-  width: 100%;">"Oggi, ogni terzo cucchiaio di cibo dipende dall'impollinazione e i prodotti delle api sono una ricca fonte di nutrienti essenziali"</p>
-   <br><br>
-    <cite style="margin-top: 50%;" >20 Maggio - World's Bee Day</cite></blockquote>
-    </div>
+        <div  class="dishes-item dishes-item-4"style=" grid-column:3/span 4;grid-row:2/3; text-align: center;vertical-align: middle;top:90%">
+        <blockquote style="width:93%;height:100%;border-radius: 5px;">
+        <p class="dishes-title" style=" font-style:italic;padding-top:15%;margin-bottom: 0;position:relative;height: 50%;padding-bottom:0;display: flex;flex-direction: column;justify-content: center;
+    width: 100%;">"Oggi, ogni terzo cucchiaio di cibo dipende dall'impollinazione e i prodotti delle api sono una ricca fonte di nutrienti essenziali"</p>
+    <br><br>
+        <cite style="margin-top: 50%;" >20 Maggio - World's Bee Day</cite></blockquote>
+        </div>
     </div>
 
   </section>
@@ -124,16 +124,16 @@
     <div class="carousel-inner">
         <div class="carousel-item active" data-bs-interval="10000">
             <img src="https://www.3bee.com/static/2df350a7824039de5c4da9391ba4cb1e/9c4c3/api_sfondo_scuro.webp" class="d-block w-100" alt="...">
-            <div class="carousel-caption d-none d-md-block"style="font-size: 1.2rem;color:white; top:35rem ;@media screen and (max-width:1024px){top: 1rem}">
-                <h5 >Scegli il tuo alveare e proteggilo a distanza</h5>
-                <p>Scegli l'apicoltore che preferisci, supporta la sua attività e scegli uno dei suoi alveari . Seleziona il tuo miele e ricevilo direttamente a casa tua una volta pronto! Potrai seguire da remoto la crescita e lo sviluppo del tuo alveare.</p>
+            <div class="carousel-caption ">
+                <h5 style="color: white;" >Scegli il tuo alveare e proteggilo a distanza</h5>
+                <p style="color: white;">Scegli l'apicoltore che preferisci, supporta la sua attività e scegli uno dei suoi alveari . Seleziona il tuo miele e ricevilo direttamente a casa tua una volta pronto! Potrai seguire da remoto la crescita e lo sviluppo del tuo alveare.</p>
                 <button style="margin-top: 3rem"><a href="{{url_for('views.mostra_alveari')}}" style="text-decoration: none;color: white">Mostra alveari disponibili all'adozione</a></button>
             </div>
         </div>
         <div class="carousel-item" data-bs-interval="2000">
 
             <img src="https://www.3bee.com/static/c100fd947f5090f86b75340892bdcadd/ef898/beeoncherry.jpg" class="d-block w-100" alt="...">
-            <div class="carousel-caption d-none d-md-block"style="font-size: 1.2rem;color:white;top:35rem ;@media screen and (max-width:1024px){top: 1rem}">
+            <div class="carousel-caption ">
                 <h5>Fai scoprire il tuo miele unico</h5>
                 <p>Fai conoscere la tua realtà apistica in tutta Italia tramite BeeHave. Entra nel network degli apicoltori . Spedisci il tuo miele unico direttamente ai tuoi clienti.</p>
             <button><a href="{{url_for('views.login_page')}}" style="text-decoration: none;color: white"> Sono un apicoltore</a></button>
@@ -141,9 +141,9 @@
         </div>
         <div class="carousel-item">
             <img src="https://www.3bee.com/static/b1e453deeacc9925f6c3bb1784c4d433/aee1a/apired.webp" class="d-block w-100" alt="...">
-            <div class="carousel-caption d-none d-md-block"style="font-size: 1.2rem;color:white;top:35rem ;@media screen and (max-width:1024px){top: 1rem}">
-                <h5>Mostra catalogo prodotti</h5>
-                <p>Scegli la qualità e la professionalità dei nostri apicoltori esperti.</p>
+            <div class="carousel-caption ">
+                <h5 style="color: white;" >Mostra catalogo prodotti</h5>
+                <p style="color: white;">Scegli la qualità e la professionalità dei nostri apicoltori esperti.</p>
                 <button><a href="{{url_for('views.mostra_prodotti')}}" style="text-decoration: none;color: white">Acquista i nostri prodotti</a></button>
             </div>
         </div>
@@ -157,6 +157,7 @@
         <span class="visually-hidden">Next</span>
     </button>
 </div>
+
 
 <br><br><div id="qui"></div><br>
 

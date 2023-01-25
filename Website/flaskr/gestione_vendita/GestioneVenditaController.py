@@ -11,6 +11,10 @@ from Website.flaskr.gestione_vendita.GestioneVenditaService import inserisci_pro
 
 gv = Blueprint('gv', __name__)
 
+email_sender = 'beehaveofficial@gmail.com'
+email_password = "aosryhipaiuafdev"
+em = EmailMessage()
+
 
 @gv.route('/inserimento_prodotto', methods=['GET', 'POST'])
 @login_required
@@ -39,9 +43,9 @@ def elimina_prodotto():
     return mostra_articoli_in_vendita(current_user.id)
 
 
-@gv.route('/acquista_prodotto', methods=['POST', 'GET'])
+@gv.route('/acquista_prodotto/<int:id_apicoltore>/<int:id_cliente>', methods=['POST', 'GET'])
 @login_required
-def acquista_prodotto():
+def acquista_prodotto(id_apicoltore, id_cliente):
     if request.method == 'POST' and not session['isApicoltore']:
         quantita = request.form.get('quantita_prod')
         id_prodotto = request.form.get('id_prd')
@@ -67,7 +71,7 @@ def acquista_prodotto():
                 body_client = ('Grazie per l\'acquisto!\nEcco un resoconto del tuo acquisto di ' + prodotto.nome
                                + ":\nPrezzo: " + prezzo + " €\nQuantità: " + quantita + "\nTotale: " + str(totale)
                                + " €\n\n Acquistato da: " + apicoltore.nome + "(" + apicoltore.email + ")" +
-                               "\n Grazie per aver supportato questo apicoltore e le sue api!")
+                               "\n Grazie per aver supportato questo apicoltore e le sue api!"
 
                 invia_email(subject_client, body_client, cliente.email)
                 return info_articolo(id_prodotto)

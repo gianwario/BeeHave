@@ -9,7 +9,7 @@
 <body>
 
 {% block content %}
-<br><br><br>
+
 <!--For Page-->
 <div class="page">
   {% if alveari_disponibili | length < 1 %}
@@ -18,8 +18,8 @@
             <div class="row">
                 <div class="col-sm-12">
                     <div class="col-sm-100 col-sm-offset-1  text-center">
-                        <div class="four_zero_four_bg">
-                            <h1 class="text-center ">500</h1>
+                        <div class="four_zero_four_bg" style="font-family: 'Open Sans', sans-serif;   font-size: 13px;">
+                            <h1 class="text-center ">I Tuoi Alveari</h1>
 
 
                         </div>
@@ -40,6 +40,7 @@
         </div>
     </section>
     {% else %}
+    <br><br>
     <h1 style="text-align: center">I tuoi alveari</h1>
     {% endif %}
     <!--For Row containing all card-->
@@ -62,8 +63,8 @@
 
 
                     <button class="add-to-cart-button"><a style="text-decoration: none;color:white"
-                                                          href="{{url_for('views.modifica_stato',alveare_id=alveare.id)}}">
-                        Modifica Stato</a></button>
+                                                          href="{{url_for('views.informazioni_alveare',alveare_id=alveare.id)}}">
+                        Visualizza Alveare</a></button>
 
 
 

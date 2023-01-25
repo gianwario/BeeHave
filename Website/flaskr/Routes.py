@@ -79,14 +79,13 @@ def crea_area_assistenza_page():
         return render_template('creazione_area_assistenza.html')
     return home()
 
-
 @views.route('/catalogo_alveari')
 def mostra_alveari():
-    alveari_disponibili = get_alveari()
     if current_user.is_authenticated and session['isApicoltore']:
+        alveari_disponibili = get_alveari_from_apicoltore(current_user.id)
         return render_template('catalogo_alveari_apicoltore.html', alveari_disponibili=alveari_disponibili)
+    alveari_disponibili = get_alveari()
     return render_template('catalogo_alveari.html', alveari_disponibili=alveari_disponibili)
-
 
 @views.route('/richiesta_assistenza_page/<int:id_apicoltore>')
 @login_required
@@ -165,3 +164,4 @@ def visualizza_info_ticket(ticket_id):
 @login_required
 def mostra_lista_ticket_assistenza():
     return render_template('ticket_assistenza.html')
+

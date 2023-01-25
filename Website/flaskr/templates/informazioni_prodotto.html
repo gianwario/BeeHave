@@ -42,7 +42,7 @@
                     <span style="margin: 0">Apicoltore: {{apicoltore.email}}</span><span>  Tipologia: {{prodotto.tipologia}}</span><span>  Peso: {{prodotto.peso}}g</span><span>  Quantitá: {{prodotto.quantita}}</span>
                 </div>
                 {% if not current_user.is_authenticated or not session['isApicoltore'] %}
-                <div class="buttons d-flex flex-row mt-5 gap-3">
+                <div class="buttons d-flex flex-row mt-5 gap-3"
                     <form action="{{url_for('gv.acquista_prodotto')}}" method="post">
                         <label for="seleziona_qnt">Inserire Quantitá</label>
                         <input style="padding: 5px 5px;border-color: orange;border-radius:5px"
@@ -65,6 +65,7 @@
                                                                                   font-size: 0.875rem;
                                                                                   cursor: pointer;">Compra
                         </button>
+
                         <div class="form-outline mb-4">
                             {% with messages = get_flashed_messages(category_filter=["success"]) %}
                             {% if messages %}
