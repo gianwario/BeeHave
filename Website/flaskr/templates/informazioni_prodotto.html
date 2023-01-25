@@ -46,8 +46,8 @@
                 </div>
                 {% if not current_user.is_authenticated or not session['isApicoltore'] %}
                 <div class="buttons d-flex flex-row mt-5 gap-3">
-                    <form action="{{url_for('gv.acquista_prodotto', id_apicoltore=apicoltore.id, id_cliente=current_user.id, id_prodotto=prodotto.id)}}"
-                          method="post">
+
+                    <form action="{{url_for('gv.acquista_prodotto')}}" method="post">
                         <label for="seleziona_qnt">Inserire Quantitá</label>
                         <input style="padding: 5px 5px;border-color: orange;border-radius:5px"
                                required="true"

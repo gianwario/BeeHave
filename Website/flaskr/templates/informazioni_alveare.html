@@ -68,8 +68,7 @@
                     {% if alveare.percentuale_disponibile >= 25 %}
 
                     <div class=" buttons d-flex flex-row mt-5 gap-3">
-                        <form action="{{url_for('ga.adotta_alveare', id_apicoltore=apicoltore.id, id_cliente=current_user.id)}}"
-                              method="post">
+                         <form action="{{url_for('ga.adotta_alveare')}}" method="post" >
 
                             <label for="percentuale">Scegliere percentuale da adottare: </label> <br>
                             <input type="radio" id="percentuale" name="disp" value="25" required>
