@@ -24,8 +24,9 @@
                 <p class="mb-4 opacity-70" style="color: white">
                     Ti diamo la possibilità di partecipare attivamente al nostro movimento
                     mettendo a disposizione della comunità le tue competenze.
-                    <p style="color:white">Diventa nostro partner e
-proteggi la biodiversità del nostro pianeta. <p>
+                <p style="color:white">Diventa nostro partner e
+                    proteggi la biodiversità del nostro pianeta.
+                <p>
                 </p>
             </div>
             <div class="col-lg-6 mb-5 mb-lg-0 position-relative">
@@ -109,11 +110,12 @@ proteggi la biodiversità del nostro pianeta. <p>
 
                             </div>
                             <div class="form-outline mb-4">
-                                <p>Se sei un apicoltore, registrandoti, accetti di rispettare la legge sulla disciplina dell’apicoltura 2004/313.</p>
+                                <p>Se sei un apicoltore, registrandoti, accetti di rispettare la legge sulla disciplina
+                                    dell’apicoltura 2004/313.</p>
                                 {% with messages = get_flashed_messages(category_filter=["error"]) %}
-                                    {% if messages %}
-                                        <p style="color:red">{{ messages[0] }}</p>
-                                    {% endif %}
+                                {% if messages %}
+                                <p style="color:red">{{ messages[0] }}</p>
+                                {% endif %}
                                 {% endwith %}
                             </div>
                             <div class="form-footer" style="text-align: center">

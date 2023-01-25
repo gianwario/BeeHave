@@ -2,49 +2,79 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/500page.css')}}">
     {% extends "base.html"%}
     <title>
         {% block title %}Lista Assistenti{% endblock %}
     </title>
 </head>
 <body>
-{% block content %}<br><br><br>
- <h1 style="text-align: center"> Lista Assistenti </h1>
+{% block content %}
+<br><br>
+{% if assistenti | length < 1 %}
+<section class="pageerror">
     <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="col-sm-100 col-sm-offset-1  text-center">
+                    <div class="four_zero_four_bg">
+                        <h1 class="text-center " style="font-weight: 600">Errore 500</h1>
+                    </div>
+                    <div class="contant_box_500">
+                        <h3 class="h2">
+                            OPS!
+                            Sembra che non ci siano assistenti disponibili!
+                        </h3>
+
+                        <p>Aspetta che un apicoltore invii la sua candidatura!</p>
+
+                        <a href="{{url_for('views.home')}}" class="link_500">Torna alla Home</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% else %}
+<h1 style="text-align:center; font-weight: bold">LISTA <span style="color:#faa500">ASSISTENTI</span></h1>
+
+{% endif %}
+<div class="container">
     {% for assistente in assistenti %}
     <div class="row  justify-content-center" style="width: 100%;margin:5%;margin-left:0;margin-top: 0">
 
-            <div class="mt-5 ">
-                <div class="d-style btn btn-brc-tp  bgc-white  w-100 my-2 py-3 shadow-lg ">
-                    <div class="row align-items-center">
+        <div class="mt-5 ">
+            <div class="d-style btn btn-brc-tp  bgc-white  w-100 my-2 py-3 shadow-lg ">
+                <div class="row align-items-center">
 
 
-                            <div class="col-12 col-md-4">
-                            <img class="avatar rounded-circle" src="../static/images/beekeeper.png"
+                    <div class="col-12 col-md-4">
+                        <img class="avatar rounded-circle" src="../static/images/beekeeper.png"
                              alt="../static/images/beekeeper.png"
-                                    style="width: 80px; height: 80px">
-                        </div>
-                             <div class="mb-0 col-12 col-md-4 text-dark-l1 text-90 text-center my-4 my-md-0">
-                                <p class="fw-bold mb-1">Apicoltore: {{assistente.nome}} {{assistente.cognome}}</p>
-                                <p class="text-muted mb-0">Email: {{assistente.email}}</p>
-                                <p class="text-muted mb-0">{{assistente.descrizione}}</p>
-                            </div>
+                             style="width: 80px; height: 80px">
+                    </div>
+                    <div class="mb-0 col-12 col-md-4 text-dark-l1 text-90 text-center my-4 my-md-0">
+                        <p class="fw-bold mb-1">Apicoltore: {{assistente.nome}} {{assistente.cognome}}</p>
+                        <p class="text-muted mb-0">Email: {{assistente.email}}</p>
+                        <p class="text-muted mb-0">{{assistente.descrizione}}</p>
+                    </div>
 
 
-                 <div class="mb-0 col-12 col-md-4 ">
-                    <a
+                    <div class="mb-0 col-12 col-md-4 ">
+                        <a
 
-                            class="bott" style="z-index: auto;text-decoration:none;padding: 10px 20px;background-color: orange;border: none;border-radius: 5px;color: white;font-size: 0.875rem;cursor: pointer;"
-                            href="{{url_for('views.richiesta_assistenza_page', id_apicoltore=assistente.id)}}"
-                            role="button"
-                            data-ripple-color="primary"
-                    >Messaggia<i class="fas fa-envelope ms-2"></i
-                    ></a>
+                                class="bott"
+                                style="z-index: auto;text-decoration:none;padding: 10px 20px;background-color: orange;border: none;border-radius: 5px;color: white;font-size: 0.875rem;cursor: pointer;"
+                                href="{{url_for('views.richiesta_assistenza_page', id_apicoltore=assistente.id)}}"
+                                role="button"
+                                data-ripple-color="primary"
+                        >Messaggia<i class="fas fa-envelope ms-2"></i
+                        ></a>
+                    </div>
                 </div>
-      </div>
-                </div>
-
             </div>
+
+        </div>
 
     </div>
     {% endfor %}
