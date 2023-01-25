@@ -43,15 +43,16 @@ def elimina_prodotto():
     return mostra_articoli_in_vendita(current_user.id)
 
 
-@gv.route('/acquista_prodotto/<int:id_apicoltore>/<int:id_cliente>', methods=['POST', 'GET'])
+@gv.route('/acquista_prodotto', methods=['POST', 'GET'])
 @login_required
-def acquista_prodotto(id_apicoltore, id_cliente):
+def acquista_prodotto():
     if request.method == 'POST' and not session['isApicoltore']:
         quantita = request.form.get('quantita_prod')
         id_prodotto = request.form.get('id_prd')
-        prodotto = get_prodotto_by_id(id_prodotto)
+        prodotto = get_prodotto_by_id(int(id_prodotto))
+        id_apicoltore = prodotto.id_apicoltore
         apicoltore = get_apicoltore_by_id(id_apicoltore)
-        cliente = get_cliente_by_id(id_cliente)
+        cliente = get_cliente_by_id(current_user.id)
         prezzo = str(prodotto.prezzo)
         totale = float(quantita) * float(prezzo)
 
@@ -61,24 +62,8 @@ def acquista_prodotto(id_apicoltore, id_cliente):
                 body = ('Ciao ' + apicoltore.nome + ',\nIl tuo articolo "' + prodotto.nome + '" è stato venduto.\n'
                         'I dati dell\'acquirente sono:\n' + cliente.nome + ", " + cliente.cognome + "\n" + cliente.email
                         + "\n" + cliente.telefono + "\n\nTi invitiamo a contattare il Cliente per accordarvi "
-                        "sulle modalità di pagamento.")
-
-                em['From'] = email_sender
-                em['To'] = apicoltore.email
-                em['Subject'] = subject
-                em.set_content(body)
-
-                smtp = smtplib.SMTP('smtp.gmail.com', 587)
-                smtp.connect("smtp.gmail.com", 587)
-
-                smtp.ehlo()
-                smtp.starttls()
-                smtp.ehlo()
-                smtp.login(email_sender, email_password)
-                smtp.sendmail(email_sender, apicoltore.email, em.as_string())
-
-                smtp.quit()
-                em.clear()
+                                                    "sulle modalità di pagamento.")
+                invia_email(subject, body, apicoltore.email)
                 """
                     Email Cliente              
                 """
@@ -87,23 +72,31 @@ def acquista_prodotto(id_apicoltore, id_cliente):
                                + ":\nPrezzo: " + prezzo + " €\nQuantità: " + quantita + "\nTotale: " + str(totale)
                                + " €\n\n Acquistato da: " + apicoltore.nome + "(" + apicoltore.email + ")" +
                                "\n Grazie per aver supportato questo apicoltore e le sue api!")
-                em['From'] = email_sender
-                em['To'] = cliente.email
-                em['Subject'] = subject_client
-                em.set_content(body_client)
 
-                smtp = smtplib.SMTP('smtp.gmail.com', 587)
-                smtp.connect("smtp.gmail.com", 587)
-
-                smtp.ehlo()
-                smtp.starttls()
-                smtp.ehlo()
-                smtp.login(email_sender, email_password)
-                smtp.sendmail(email_sender, cliente.email, em.as_string())
-
-                smtp.quit()
-                em.clear()
-
-            return info_articolo(id_prodotto)
+                invia_email(subject_client, body_client, cliente.email)
+                return info_articolo(id_prodotto)
 
     return mostra_prodotti()
+
+
+def invia_email(oggetto, corpo, email):
+    email_sender = 'beehaveofficial@gmail.com'
+    email_password = "aosryhipaiuafdev"
+    em = EmailMessage()
+    em['From'] = email_sender
+    em['To'] = email
+    em['Subject'] = oggetto
+
+    em.set_content(corpo)
+
+    smtp = smtplib.SMTP('smtp.gmail.com', 587)
+    smtp.connect("smtp.gmail.com", 587)
+
+    smtp.ehlo()
+    smtp.starttls()
+    smtp.ehlo()
+    smtp.login(email_sender, email_password)
+    smtp.sendmail(email_sender, email, em.as_string())
+
+    smtp.quit()
+    em.clear()
